@@ -1,2 +1,2 @@
 # Orbit-NTNU
-Sacit er kjekk
+PID controller and GUI
