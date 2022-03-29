@@ -1,7 +1,10 @@
 #PID Controller
 import time
 import threading
-
+import time
+import os.path
+#import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
 #Definitions
 #e      - error
@@ -9,7 +12,6 @@ import threading
 #SP     - Setpoint 
 #PV     - Process sensor value
 #dt sampling
-
 
 #Global parameters
 SP = 120
@@ -23,6 +25,7 @@ min_windup = 0
 max_output = 100
 min_output = 0
 
+PWM_pin = 33 # PWM pin on Raspberry Pi
 
 class PID(): 
     def __init__(self, SP, PV, Kp, Ki, Kd, dt, max_windup, min_windup, max_output, min_output):   
@@ -48,16 +51,12 @@ class PID():
         self.max_output = max_output
         self.min_output = min_output
         
-        
-        
         #Initial condition parameters
         self.e = 0
         self.e_prev = 0
         self.P = 0
         self.I = 0
         self.D = 0
-     
-        
     
     def Compute(self):  
         #Error term
@@ -68,7 +67,6 @@ class PID():
             
         #Integral term
         self.I += self.Ki * self.e * self.dt
-        
         
         #Saturation Integral term
         if self.I >= self.max_windup:
@@ -91,8 +89,6 @@ class PID():
             self.output = self.max_output
         elif self.output <= self.min_output:
             self.output = self.min_output
-            
-    
                    
         return self.output
     
@@ -132,17 +128,43 @@ class PID():
         
     def setmin_output(self, min_output):
         self.min_output = min_output
-
+        
+    def setup(PWM_pin):
+        global pwm
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(PWM_pin, GPIO.OUT)
+        pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
+        pwm.start(0) # Set the starting Duty Cycle
+        
+    def destroy():
+        pwm.stop()
+        GPIO.cleanup()
+        
+    def FTTR_PID_output(self.output):
+        Output_PID = self.output
+        pwm.ChangeDutyCycle(Output_PID)
+        
+    def createConfig():
+    os.remove("pid.conf")
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s'%(SP,K_p,T_i,T_d,Auto))
+            
+    def readConfig():
+        global SP, K_p, T_i, T_d, Auto
+        with open ('pid.conf', 'r+') as f:
+            config = f.readline().split(',')
+            self.SP = float(config[0])
+            self.Kp = float(config[1])
+            self.Ki = float(config[2])
+            self.Kd = float(config[3])
+        
 PID = PID(SP, PV, Kp, Ki, Kd, dt, max_windup, min_windup, max_output, min_output)
-
 
 def PID_output():
     while True:
         print('\nPID output value is: ', PID.Compute())
+        #FTTR_PID_output(U_total)
         time.sleep(PID.dt)   
 
 thread_PID = threading.Thread(target=PID_output)
 thread_PID.start()
-   
-
-    
