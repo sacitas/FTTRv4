@@ -1,40 +1,43 @@
 from PIL import ImageTk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
+import matplotlib.pyplot as plt 
+from matplotlib.animation import FuncAnimation
 import tkinter as tk
+import pandas as pd
 import numpy as np
 import time
 
 
-#-----Plot data------
-def plot_data():
-    global cond
-
-
-
 #------Main GUI code-----
 root = tk.Tk()
-root.title('Real Time Plot')
+root.title("Real Time Plot")
 root.configure(background = 'light grey')
 root.geometry("900x600") # Window size
 
-#------Create Plot object on GUI------
-# Add figure canvas
-fig = Figure()
-ax = fig.add_subplot(111)
+plt.style.use('fivethirtyeight')
 
-ax.set_title('FTTRv4 test')
-ax.set_xlabel('Time')
-ax.set_ylabel('Temperature C')
-ax.set_xlim(0, 100)
-ax.set_ylim(0, 150)
-ax.grid()
-lines = ax.plot([],[])[0]
+#-------Animate plot-------
+def animate(i):
+    data = pd.read_csv('data.csv')
+    x = data['x_value']
+    y1 = data['total_1']
+    y2 = data['total_2']
 
+    plt.cla()
 
-canvas = FigureCanvasTkAgg(fig, master=root)
+    plt.plot(x, y1,  linewidth = 1.5, label='Channel 1')
+    plt.plot(x, y2, linewidth = 1.5, label='Channel 2')
+    plt.xticks(rotation=45, ha='right')
+    plt.xticks(np.arange(0, len(x)+1, 10))
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+
+#------Draw plot------
+canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
 canvas.get_tk_widget().place(x = 10, y = 10, width = 600, height = 400)
 canvas.draw()
+
+ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 
 #------Create buttons------
 root.update()
