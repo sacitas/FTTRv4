@@ -5,7 +5,7 @@ Created on Tue Mar  8 09:13:05 2022
 @author: Martin
 """
 #import RPi.GPIO as GPIO
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import os.path
 
@@ -136,7 +136,7 @@ user_input = int(input("Enter Auto (1) or Manual (0): "))
 if user_input == 1:
     Auto = 1
     createConfig()
-    #setup(PWM_pin)
+    setup(PWM_pin)
 else:
     Auto = 0
     
@@ -144,8 +144,9 @@ try:
     while Auto == 1:
         readConfig()
         FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
-        #FTTR_PID_output(U_total)
+        FTTR_PID_output(U_total)
     print("done!")
 
 except:
     KeyboardInterrupt
+    destroy()
