@@ -21,23 +21,17 @@ import threading
 #### Startup parameters ####
 #Setpoint
 SP = 100
-
 #Proportional gain
 Kp = 1
-
 #Integral time
 Ti = 0
-
 #Serivative time and filter coefficient
 Td = 0
 N = 10
-
 #Sampling time
 dt = 1
-
 #Process value readings
 PV = 0
-
 PWM_pin = 33 # PWM pin on Raspberry Pi
  
 
