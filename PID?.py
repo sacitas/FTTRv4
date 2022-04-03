@@ -90,6 +90,9 @@ class PID():
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(PWM_pin, GPIO.OUT)
         
+        self.pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
+        self.pwm.start(0) # Set the starting Duty Cycle
+        
     def Compute(self, PV): 
         if self.stop == False:
             #Error term
@@ -157,12 +160,7 @@ class PID():
         
     def setstop(self, stop):
         self.stop = stop
-        
-    # Setup of the PWM pin on the Raspberry Pi
-    def setup(self, PWM_pin):
-        self.pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-        self.pwm.start(0) # Set the starting Duty Cycle
-        
+      
     # Destroy PWM pin
     def destroy(self):
         self.pwm.stop()
@@ -174,7 +172,6 @@ class PID():
     
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
-PID.setup(PWM_pin)
 
 def run():
     while True:
