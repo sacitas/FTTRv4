@@ -40,7 +40,11 @@ def FTTR_PID_output(U_total):
     pwm.ChangeDutyCycle(Output_PID)
     
 def createConfig():
-    os.remove("pid.conf")
+    file_exists = os.path.exists('pid.conf')
+    if file_exists == True:
+        os.remove("pid.conf")
+    else:
+        pass
     with open ('pid.conf', 'w') as f:
         f.write("#######################\n")
         f.write("PID-controller settings\n")
@@ -160,4 +164,3 @@ if  __name__ == '__main__':
         PID_loop()
     except KeyboardInterrupt:
         destroy()
-        pass
