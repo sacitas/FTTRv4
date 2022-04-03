@@ -15,15 +15,15 @@ import threading
 #e_prev - error value previous
 
 #Startup parameters
-SP = 100
-PV = 50
-Kp = 2
-Ki = 3
-Kd = 5
+SP = 120
+PV = 0
+Kp = 1
+Ki = 0
+Kd = 0
 dt = 0.5
-max_windup = 1000
+max_windup = 100
 min_windup = 0
-max_output = 1000
+max_output = 100
 min_output = 0
 
 #Startup flag to stop/pause the controller
