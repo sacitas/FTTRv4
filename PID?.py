@@ -182,7 +182,6 @@ def run():
             pass
          
         elif PID.Compute(PV) != None:
-            print('\nPID output value is: ', PID.Compute(PV))
             PID.FTTR_PID_output()
             time.sleep(PID.dt)  
  
