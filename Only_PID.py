@@ -125,6 +125,7 @@ class PID():
                     self.output = self.min_output
         
                 return self.output
+                print(self.output)
 
         elif self.stop == True:
             pass
