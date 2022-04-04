@@ -121,7 +121,7 @@ class PID():
                 self.PV_prev = PV
 
                 #Computed value
-                output = self.P + self.I + self.D
+                self.output = self.P + self.I + self.D
 
                 #Saturation output 
                 if self.output >= self.max_output:
@@ -130,7 +130,7 @@ class PID():
                     self.output = self.min_output
                     
                 
-                self.pwm.ChangeDutyCycle(output)
+                self.pwm.ChangeDutyCycle(self.output)
                 time.sleep(self.dt)  
 
         elif self.stop == True:
@@ -169,3 +169,4 @@ class PID():
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt, PWM_pin)
 PID.run()
+
