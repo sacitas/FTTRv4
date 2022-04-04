@@ -24,7 +24,7 @@ Kp = 1   #Proportional gain
 Ti = 0   #Integral time
 Td = 0   #Derivative time  
 N = 10   #filter coefficient
-dt = 10  #Sampling time
+dt = 5  #Sampling time
 PV = 0   #Process value readings
 
 
@@ -124,18 +124,20 @@ class PID():
                 elif self.output <= self.min_output:
                     self.output = self.min_output
                 
+            
                 try: 
                     pwm.ChangeDutyCycle(self.output) 
                 except KeyboardInterrupt:
                     pwm.stop()
                     GPIO.cleanup() # cleanup all GPIO 
-
+    
         elif self.stop == True:
             pass
         
     def run(self):
         #Thread the function over to let it run in the background
-        threading.Thread(target = self.Compute,  args=(PV,)).start()    
+        threading.Thread(target = self.Compute,  args=(PV,)).start()   
+   
     
     def setstop(self, stop):
         self.stop = stop
@@ -160,6 +162,5 @@ class PID():
         
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
-PID.Compute(PV)
 PID.run()
               
