@@ -30,13 +30,15 @@ PV = 0   #Process value readings
 
 PWM_pin = 33 # PWM pin on Raspberry Pi
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(PWM_pin, GPIO.OUT)
-pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-pwm.start(0) # Set the starting Duty Cycle
 
 class PID(): 
     def __init__(self, SP, Kp, Ti, Td, N, dt): 
+        
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(PWM_pin, GPIO.OUT)
+        self.pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
+        self.pwm.start(0) # Set the starting Duty Cycle
+
         #Setpoint
         self.SP = SP
     
@@ -82,52 +84,51 @@ class PID():
         self.stop = False
   
     def Compute(self, PV):
-        while True:
-            if self.stop == False:
-                #Error term
-                self.e = self.SP - PV
-                
-                #Proportional term
-                self.P = self.Kp * self.e
-                    
-                #Integral term
-                if self.Ti == 0:
-                     self.Ki = 0
-                     self.I = 0
-                else:
-                    self.Ki = self.Kp / self.Ti
-                    self.I += self.Ki * self.e * self.dt
+        if self.stop == False:
+            #Error term
+            self.e = self.SP - PV
             
-                #Saturation Integral term
-                if self.I >= self.max_windup:
-                    self.I = self.max_windup
-                elif self.I <= self.min_windup:
-                    self.I = self.min_windup
+            #Proportional term
+            self.P = self.Kp * self.e
                 
-                #Derivative term and Beta
-                if (self.Td + self.dt * self.N) > 0:
-                    self.Beta = self.Td/(self.Td + self.dt * self.N)
-                else:
-                    self.Beta = 0
-                    
-                self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
-                
-                #update stored data for next calculation
-                self.PV_prev = PV
-                    
-                #Computed value
-                self.output = self.P + self.I + self.D
-                
-                #Saturation output 
-                if self.output >= self.max_output:
-                    self.output = self.max_output
-                elif self.output <= self.min_output:
-                    self.output = self.min_output
-                    
-                return self.output
+            #Integral term
+            if self.Ti == 0:
+                 self.Ki = 0
+                 self.I = 0
+            else:
+                self.Ki = self.Kp / self.Ti
+                self.I += self.Ki * self.e * self.dt
         
-            elif self.stop == True:
-                return None
+            #Saturation Integral term
+            if self.I >= self.max_windup:
+                self.I = self.max_windup
+            elif self.I <= self.min_windup:
+                self.I = self.min_windup
+            
+            #Derivative term and Beta
+            if (self.Td + self.dt * self.N) > 0:
+                self.Beta = self.Td/(self.Td + self.dt * self.N)
+            else:
+                self.Beta = 0
+                
+            self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
+            
+            #update stored data for next calculation
+            self.PV_prev = PV
+                
+            #Computed value
+            self.output = self.P + self.I + self.D
+            
+            #Saturation output 
+            if self.output >= self.max_output:
+                self.output = self.max_output
+            elif self.output <= self.min_output:
+                self.output = self.min_output
+                
+            return self.output
+    
+        elif self.stop == True:
+            return None
            
     def setSP(self, Setpoint):
         self.SP = Setpoint
@@ -149,29 +150,23 @@ class PID():
         
     def setstop(self, stop):
         self.stop = stop
+        
+    def destroy(self):
+        self.pwm.stop()
+        GPIO.cleanup() # cleanup all GPIO 
+        
+    def run(self):
+        if self.Compute == None:
+            self.pwm.ChangeDutyCycle(0)
+            
+        elif self.Compute != None:
+            self.pwm.ChangeDutyCycle(self.output)
+            time.sleep(PID.dt)     
+            
+    #Thread the function over to let it run in the background
+    thread_PID = threading.Thread(target=run)
+    thread_PID.start()
+
       
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
-
-def run():
-    while True:
-        try: 
-            if PID.Compute(PV) == None:
-                pwm.ChangeDutyCycle(0)
-                thread_PID.start()
-            
-             
-            elif PID.Compute(PV) != None:
-                output = PID.Compute(PV)
-                pwm.ChangeDutyCycle(output)
-                time.sleep(PID.dt)  
-        except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
-            print("Keyboard interrupt")
-
-        finally:
-            print("clean up") 
-            GPIO.cleanup() # cleanup all GPIO 
-            
-#Thread the function over to let it run in the background
-thread_PID = threading.Thread(target=run)
-thread_PID.start()
