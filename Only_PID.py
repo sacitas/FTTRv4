@@ -164,7 +164,7 @@ def run():
         elif PID.Compute(PV) != None:
             print('\nPID output value is: ', PID.Compute(PV))
             time.sleep(PID.dt)  
-# 
+           
 #Thread the function over to let it run in the background
 thread_PID = threading.Thread(target=run)
 thread_PID.start()
