@@ -1,7 +1,6 @@
 #PID Controller
 
 #Import necessary packages
-import RPi.GPIO as GPIO
 import time
 import threading
 
@@ -26,13 +25,6 @@ Td = 0   #Derivative time
 N = 10   #filter coefficient
 dt = 5  #Sampling time
 PV = 0   #Process value readings
-PWM_pin = 33 # PWM pin on Raspberry Pi
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(PWM_pin, GPIO.OUT)
-pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-pwm.start(0) # Set the starting Duty Cycle
 
 class PID():
     def __init__(self, SP, Kp, Ti, Td, N, dt): 
@@ -151,15 +143,17 @@ class PID():
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
 
-def main():
-    global pwm
+def run():
     while True:
         if PID.Compute(PV) == None:
             pass
         
         else:
-            pwm.ChangeDutyCycle(PID.Compute(PV))
+            print(PID.Compute(PV))
+            time.sleep(PID.dt)
             
-Thread_PID = threading.Thread(target = main)
+Thread_PID = threading.Thread(target = run)
 Thread_PID.start()
         
+
+
