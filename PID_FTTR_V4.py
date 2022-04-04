@@ -150,6 +150,7 @@ def ManVal_loop():
     while Auto == 0:
         readConfig()
         print(ManVal)
+        pwm.ChangeDutyCycle(ManVal)
         # Samplingtime 
         time.sleep(Ts)
         
