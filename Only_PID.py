@@ -24,7 +24,7 @@ Kp = 1   #Proportional gain
 Ti = 0   #Integral time
 Td = 0   #Derivative time  
 N = 10   #filter coefficient
-dt = 1   #Sampling time
+dt = 10  #Sampling time
 PV = 0   #Process value readings
 
 
@@ -125,16 +125,18 @@ class PID():
                     self.output = self.max_output
                 elif self.output <= self.min_output:
                     self.output = self.min_output
-
+                    
+                
                 self.pwm.ChangeDutyCycle(self.output)
                 time.sleep(self.dt)  
 
         elif self.stop == True:
             self.pwm.ChangeDutyCycle(0)
             
+            
     def run(self):
         #Thread the function over to let it run in the background
-        threading.Thread(target = self.Compute).start()
+        threading.Thread(target = self.Compute,  args=(PV,)).start()
     
     def setstop(self, stop):
         self.stop = stop
