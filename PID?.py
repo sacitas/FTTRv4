@@ -156,13 +156,17 @@ class PID():
         GPIO.cleanup() # cleanup all GPIO 
         
     def run(self):
-        if self.Compute == None:
-            self.pwm.ChangeDutyCycle(0)
-            
-        elif self.Compute != None:
-            self.pwm.ChangeDutyCycle(self.output)
-            time.sleep(self.dt)     
-            
+        while True:
+            if self.Compute == None:
+                self.pwm.ChangeDutyCycle(0)
+
+            elif self.Compute != None:
+                self.pwm.ChangeDutyCycle(self.output)
+                time.sleep(self.dt)  
+                
+             
+
       
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
+PID.run()
