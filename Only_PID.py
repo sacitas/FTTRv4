@@ -30,13 +30,16 @@ PV = 0   #Process value readings
 
 PWM_pin = 33 # PWM pin on Raspberry Pi
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(PWM_pin, GPIO.OUT)
-pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-pwm.start(0) # Set the starting Duty Cycle
+
         
 class PID(): 
-    def __init__(self, SP, Kp, Ti, Td, N, dt): 
+    def __init__(self, SP, Kp, Ti, Td, N, dt, PWM_pin): 
+        
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(PWM_pin, GPIO.OUT)
+        self.pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
+        self.pwm.start(0) # Set the starting Duty Cycle
+        
         #Setpoint
         self.SP = SP
     
@@ -125,7 +128,6 @@ class PID():
                     self.output = self.min_output
         
                 return self.output
-                print(self.output)
 
         elif self.stop == True:
             pass
@@ -156,14 +158,15 @@ class PID():
         self.dt = dt
         
 #Call the class to start the PID controller            
-PID = PID(SP, Kp, Ti, Td, N, dt)
+PID = PID(SP, Kp, Ti, Td, N, dt, PWM_pin)
 PID.run()
 
 while True:
     PWM_output = PID.Compute(PV)
     try:
-        pwm.ChangeDutyCycle(PWM_output)
+        PID.pwm.ChangeDutyCycle(PWM_output)
         time.sleep(PID.dt)
     except KeyboardInterrupt:
-        pwm.stop()
+        PID.pwm.stop()
         GPIO.cleanup() # cleanup all GPIO 
+          
