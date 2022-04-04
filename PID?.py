@@ -35,12 +35,6 @@ GPIO.setup(PWM_pin, GPIO.OUT)
 pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
 pwm.start(0) # Set the starting Duty Cycle
 
-#Destroy PWM pin
-def destroy():
-    pwm.stop()
-    GPIO.cleanup()
-
-
 class PID(): 
     def __init__(self, SP, Kp, Ti, Td, N, dt): 
         #Setpoint
@@ -161,15 +155,22 @@ PID = PID(SP, Kp, Ti, Td, N, dt)
 
 def run():
     while True:
-        if PID.Compute(PV) == None:
-            pwm.ChangeDutyCycle(0)
-            thread_PID.start()
+        try: 
+            if PID.Compute(PV) == None:
+                pwm.ChangeDutyCycle(0)
+                thread_PID.start()
             
-         
-        elif PID.Compute(PV) != None:
-            output = PID.Compute(PV)
-            pwm.ChangeDutyCycle(output)
-            time.sleep(PID.dt)  
+             
+            elif PID.Compute(PV) != None:
+                output = PID.Compute(PV)
+                pwm.ChangeDutyCycle(output)
+                time.sleep(PID.dt)  
+        except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
+            print("Keyboard interrupt")
+
+        finally:
+            print("clean up") 
+            GPIO.cleanup() # cleanup all GPIO 
             
 #Thread the function over to let it run in the background
 thread_PID = threading.Thread(target=run)
