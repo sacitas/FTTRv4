@@ -144,3 +144,4 @@ plt.plot(t, zTemp_al, label='temp aluminium l', linewidth=1)
 plt.grid()
 plt.legend(loc = 'upper right')
 plt.xlabel('time evolution')
+#
