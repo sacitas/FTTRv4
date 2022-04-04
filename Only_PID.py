@@ -163,11 +163,6 @@ while True:
     try:
         pwm.ChangeDutyCycle(PWM_output)
         time.sleep(PID.dt)
-    finally:
+    except KeyboardInterrupt:
         pwm.stop()
         GPIO.cleanup() # cleanup all GPIO 
-           
-        
-
-
-
