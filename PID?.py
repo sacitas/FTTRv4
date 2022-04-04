@@ -37,7 +37,7 @@ class PID():
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(PWM_pin, GPIO.OUT)
         self.pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-        self.pwm.start(100) # Set the starting Duty Cycle
+        self.pwm.start(0) # Set the starting Duty Cycle
 
         #Setpoint
         self.SP = SP
