@@ -30,6 +30,7 @@ PV = 0   #Process value readings
 
 PWM_pin = 33 # PWM pin on Raspberry Pi
 
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(PWM_pin, GPIO.OUT)
 pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
