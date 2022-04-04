@@ -18,24 +18,13 @@ import threading
 #PV_prev - Process value value previous
 
 #### Startup parameters ####
-#Setpoint
-SP = 100
-
-#Proportional gain
-Kp = 1
-
-#Integral time
-Ti = 0
-
-#Serivative time and filter coefficient
-Td = 0
-N = 10
-
-#Sampling time
-dt = 1
-
-#Process value readings
-PV = 0
+SP = 100 #Setpoint
+Kp = 1   #Proportional gain
+Ti = 0   #Integral time
+Td = 0   #Derivative time 
+N = 10   #Filter coefficient
+dt = 1   #Sampling time
+PV = 0   #Process value readings
 
 class PID(): 
     def __init__(self, SP, Kp, Ti, Td, N, dt): 
