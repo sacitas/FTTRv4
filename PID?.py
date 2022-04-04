@@ -26,6 +26,8 @@ Td = 0   #Derivative time
 N = 10   #filter coefficient
 dt = 1   #Sampling time
 PV = 0   #Process value readings
+
+
 PWM_pin = 33 # PWM pin on Raspberry Pi
 
 GPIO.setmode(GPIO.BOARD)
@@ -85,52 +87,53 @@ class PID():
         #Startup flag to stop/pause or continue the controller
         self.stop = False
   
-    def Compute(self, PV): 
-        if self.stop == False:
-            #Error term
-            self.e = self.SP - PV
-            
-            #Proportional term
-            self.P = self.Kp * self.e
+    def Compute(self, PV):
+        while True:
+            if self.stop == False:
+                #Error term
+                self.e = self.SP - PV
                 
-            #Integral term
-            if self.Ti == 0:
-                 self.Ki = 0
-                 self.I = 0
-            else:
-                self.Ki = self.Kp / self.Ti
-                self.I += self.Ki * self.e * self.dt
+                #Proportional term
+                self.P = self.Kp * self.e
+                    
+                #Integral term
+                if self.Ti == 0:
+                     self.Ki = 0
+                     self.I = 0
+                else:
+                    self.Ki = self.Kp / self.Ti
+                    self.I += self.Ki * self.e * self.dt
+            
+                #Saturation Integral term
+                if self.I >= self.max_windup:
+                    self.I = self.max_windup
+                elif self.I <= self.min_windup:
+                    self.I = self.min_windup
+                
+                #Derivative term and Beta
+                if (self.Td + self.dt * self.N) > 0:
+                    self.Beta = self.Td/(self.Td + self.dt * self.N)
+                else:
+                    self.Beta = 0
+                    
+                self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
+                
+                #update stored data for next calculation
+                self.PV_prev = PV
+                    
+                #Computed value
+                self.output = self.P + self.I + self.D
+                
+                #Saturation output 
+                if self.output >= self.max_output:
+                    self.output = self.max_output
+                elif self.output <= self.min_output:
+                    self.output = self.min_output
+                    
+                return self.output
         
-            #Saturation Integral term
-            if self.I >= self.max_windup:
-                self.I = self.max_windup
-            elif self.I <= self.min_windup:
-                self.I = self.min_windup
-            
-            #Derivative term and Beta
-            if (self.Td + self.dt * self.N) > 0:
-                self.Beta = self.Td/(self.Td + self.dt * self.N)
-            else:
-                self.Beta = 0
-                
-            self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
-            
-            #update stored data for next calculation
-            self.PV_prev = PV
-                
-            #Computed value
-            self.output = self.P + self.I + self.D
-            
-            #Saturation output 
-            if self.output >= self.max_output:
-                self.output = self.max_output
-            elif self.output <= self.min_output:
-                self.output = self.min_output
-                   
-            return self.output
-    
-        elif self.stop == True:
-            return None
+            elif self.stop == True:
+                return None
            
     def setSP(self, Setpoint):
         self.SP = Setpoint
@@ -160,12 +163,14 @@ def run():
     while True:
         if PID.Compute(PV) == None:
             pwm.ChangeDutyCycle(0)
+            thread_PID.start()
+            
          
         elif PID.Compute(PV) != None:
             output = PID.Compute(PV)
             pwm.ChangeDutyCycle(output)
             time.sleep(PID.dt)  
- 
+            
 #Thread the function over to let it run in the background
 thread_PID = threading.Thread(target=run)
 thread_PID.start()
