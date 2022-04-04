@@ -121,7 +121,7 @@ class PID():
                 self.PV_prev = PV
 
                 #Computed value
-                self.output = self.P + self.I + self.D
+                output = self.P + self.I + self.D
 
                 #Saturation output 
                 if self.output >= self.max_output:
@@ -130,7 +130,7 @@ class PID():
                     self.output = self.min_output
                     
                 
-                self.pwm.ChangeDutyCycle(self.output)
+                self.pwm.ChangeDutyCycle(output)
                 time.sleep(self.dt)  
 
         elif self.stop == True:
