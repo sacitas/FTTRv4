@@ -27,7 +27,17 @@ N = 10   #filter coefficient
 dt = 1   #Sampling time
 PV = 0   #Process value readings
 PWM_pin = 33 # PWM pin on Raspberry Pi
- 
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(PWM_pin, GPIO.OUT)
+pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
+pwm.start(0) # Set the starting Duty Cycle
+
+#Destroy PWM pin
+def destroy():
+    pwm.stop()
+    GPIO.cleanup()
+
 
 class PID(): 
     def __init__(self, SP, Kp, Ti, Td, N, dt): 
@@ -74,14 +84,7 @@ class PID():
         
         #Startup flag to stop/pause or continue the controller
         self.stop = False
-        
-        
-        GPIO.cleanup()
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(PWM_pin, GPIO.OUT)
-        self.pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-        self.pwm.start(0) # Set the starting Duty Cycle
-        
+  
     def Compute(self, PV): 
         if self.stop == False:
             #Error term
@@ -123,10 +126,7 @@ class PID():
                 self.output = self.max_output
             elif self.output <= self.min_output:
                 self.output = self.min_output
-                
-                
-            self.pwm.ChangeDutyCycle(self.output)
-                
+                   
             return self.output
     
         elif self.stop == True:
@@ -153,21 +153,17 @@ class PID():
     def setstop(self, stop):
         self.stop = stop
       
-    # Destroy PWM pin
-    def destroy(self):
-        self.pwm.stop()
-        GPIO.cleanup()
-
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
 
 def run():
     while True:
         if PID.Compute(PV) == None:
-            pass
+            pwm.ChangeDutyCycle(0)
          
         elif PID.Compute(PV) != None:
-            PID.Compute(PV)
+            output = PID.Compute(PV)
+            pwm.ChangeDutyCycle(output)
             time.sleep(PID.dt)  
  
 #Thread the function over to let it run in the background
