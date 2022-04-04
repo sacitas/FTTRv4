@@ -35,13 +35,8 @@ GPIO.setup(PWM_pin, GPIO.OUT)
 pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
 pwm.start(0) # Set the starting Duty Cycle
         
-
-
 class PID(): 
-    def __init__(self, SP, Kp, Ti, Td, N, dt, pwm): 
-        
-        self.pwm = pwm
-
+    def __init__(self, SP, Kp, Ti, Td, N, dt): 
         #Setpoint
         self.SP = SP
     
@@ -128,26 +123,19 @@ class PID():
                     self.output = self.max_output
                 elif self.output <= self.min_output:
                     self.output = self.min_output
-                    
-                
-                self.pwm.ChangeDutyCycle(self.output)
-                time.sleep(self.dt)  
+        
+                return self.output
 
         elif self.stop == True:
-            self.pwm.ChangeDutyCycle(0)
-            
-            
+            pass
+        
     def run(self):
         #Thread the function over to let it run in the background
         threading.Thread(target = self.Compute,  args=(PV,)).start()    
     
     def setstop(self, stop):
         self.stop = stop
-        
-    def destroy(self):
-        self.pwm.stop()
-        GPIO.cleanup() # cleanup all GPIO 
-           
+
     def setSP(self, Setpoint):
         self.SP = Setpoint
         
@@ -167,6 +155,19 @@ class PID():
         self.dt = dt
         
 #Call the class to start the PID controller            
-PID = PID(SP, Kp, Ti, Td, N, dt, PWM_pin)
+PID = PID(SP, Kp, Ti, Td, N, dt)
 PID.run()
+
+while True:
+    PWM_output = PID.Compute(PV)
+    try:
+        pwm.ChangeDutyCycle(PWM_output)
+        time.sleep(PID.dt)
+    finally:
+        pwm.stop()
+        GPIO.cleanup() # cleanup all GPIO 
+           
+        
+
+
 
