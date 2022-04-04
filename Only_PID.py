@@ -30,15 +30,18 @@ PV = 0   #Process value readings
 
 PWM_pin = 33 # PWM pin on Raspberry Pi
 
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(PWM_pin, GPIO.OUT)
+pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
+pwm.start(0) # Set the starting Duty Cycle
+        
+
 
 class PID(): 
-    def __init__(self, SP, Kp, Ti, Td, N, dt, PWM_pin): 
+    def __init__(self, SP, Kp, Ti, Td, N, dt, pwm): 
         
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(PWM_pin, GPIO.OUT)
-        self.pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-        self.pwm.start(0) # Set the starting Duty Cycle
-        
+        self.pwm = pwm
+
         #Setpoint
         self.SP = SP
     
@@ -136,7 +139,7 @@ class PID():
             
     def run(self):
         #Thread the function over to let it run in the background
-        threading.Thread(target = self.Compute,  args=(PV,)).start()
+        threading.Thread(target = self.Compute,  args=(PV,)).start()    
     
     def setstop(self, stop):
         self.stop = stop
