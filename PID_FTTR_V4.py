@@ -138,21 +138,18 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
     # Samplingtime 
     time.sleep(Ts)
     
-
     return U_total
     
 def PID_loop():
-    while Auto == 1:
-        readConfig()
-        FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
+    readConfig()
+    FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
     
 def ManVal_loop():
-    while Auto == 0:
-        readConfig()
-        print(ManVal)
-        pwm.ChangeDutyCycle(ManVal)
-        # Samplingtime 
-        time.sleep(Ts)
+    readConfig()
+    man_output = ManVal
+    print(man_output)
+    pwm.ChangeDutyCycle(man_output)
+    time.sleep(Ts)
         
 # default mode    
 Auto = 0
