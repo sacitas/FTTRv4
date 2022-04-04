@@ -161,12 +161,8 @@ class PID():
             
         elif self.Compute != None:
             self.pwm.ChangeDutyCycle(self.output)
-            time.sleep(PID.dt)     
+            time.sleep(self.dt)     
             
-    #Thread the function over to let it run in the background
-    thread_PID = threading.Thread(target=run)
-    thread_PID.start()
-
       
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
