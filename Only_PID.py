@@ -34,7 +34,6 @@ GPIO.setup(PWM_pin, GPIO.OUT)
 pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
 pwm.start(0) # Set the starting Duty Cycle
 
-
 class PID():
     def __init__(self, SP, Kp, Ti, Td, N, dt): 
         #Setpoint
@@ -81,55 +80,52 @@ class PID():
         #Startup flag to stop/pause or continue the controller
         self.stop = False
 
-    def Compute(self, PV):
-        global pwm
+    def Compute(self, PV): 
+        if self.stop == False:
+                #Error term
+                self.e = self.SP - PV
         
-        while True:
-            if self.stop == False:
-                    #Error term
-                    self.e = self.SP - PV
-            
-                    #Proportional term
-                    self.P = self.Kp * self.e
-            
-                    #Integral term
-                    if self.Ti == 0:
-                         self.Ki = 0
-                         self.I = 0
-                    else:
-                        self.Ki = self.Kp / self.Ti
-                        self.I += self.Ki * self.e * self.dt
-            
-                    #Saturation Integral term
-                    if self.I >= self.max_windup:
-                        self.I = self.max_windup
-                    elif self.I <= self.min_windup:
-                        self.I = self.min_windup
-            
-                    #Derivative term and Beta
-                    if (self.Td + self.dt * self.N) > 0:
-                        self.Beta = self.Td/(self.Td + self.dt * self.N)
-                    else:
-                        self.Beta = 0
-            
-                    self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
-            
-                    #update stored data for next calculation
-                    self.PV_prev = PV
-            
-                    #Computed value
-                    self.output = self.P + self.I + self.D
-            
-                    #Saturation output 
-                    if self.output >= self.max_output:
-                        self.output = self.max_output
-                    elif self.output <= self.min_output:
-                        self.output = self.min_output
-                        
-                    pwm.ChangeDutyCycle(self.output)
+                #Proportional term
+                self.P = self.Kp * self.e
+        
+                #Integral term
+                if self.Ti == 0:
+                     self.Ki = 0
+                     self.I = 0
+                else:
+                    self.Ki = self.Kp / self.Ti
+                    self.I += self.Ki * self.e * self.dt
+        
+                #Saturation Integral term
+                if self.I >= self.max_windup:
+                    self.I = self.max_windup
+                elif self.I <= self.min_windup:
+                    self.I = self.min_windup
+        
+                #Derivative term and Beta
+                if (self.Td + self.dt * self.N) > 0:
+                    self.Beta = self.Td/(self.Td + self.dt * self.N)
+                else:
+                    self.Beta = 0
+        
+                self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
+        
+                #update stored data for next calculation
+                self.PV_prev = PV
+        
+                #Computed value
+                self.output = self.P + self.I + self.D
+        
+                #Saturation output 
+                if self.output >= self.max_output:
+                    self.output = self.max_output
+                elif self.output <= self.min_output:
+                    self.output = self.min_output
                     
-            elif self.stop == True:
-                pwm.ChangeDutyCycle(0)
+                return self.output
+            
+        elif self.stop == True:
+            return None
         
     def setstop(self, stop):
         self.stop = stop
@@ -155,6 +151,15 @@ class PID():
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
 
-#Thread
-Thread_PID = threading.Thread(target = PID.Compute(PV))
+def main():
+    global pwm
+    while True:
+        if PID.Compute(PV) == None:
+            pass
+        
+        else:
+            pwm.ChangeDutyCycle(PID.Compute(PV))
+            
+Thread_PID = threading.Thread(target = main)
 Thread_PID.start()
+        
