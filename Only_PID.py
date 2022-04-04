@@ -28,17 +28,15 @@ dt = 5  #Sampling time
 PV = 0   #Process value readings
 PWM_pin = 33 # PWM pin on Raspberry Pi
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(PWM_pin, GPIO.OUT)
+pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
+pwm.start(0) # Set the starting Duty Cycle
+
 
 class PID():
-    def __init__(self, SP, Kp, Ti, Td, N, dt, PWM_pin): 
-        
-        self.PWM_pin = PWM_pin
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(self.PWM_pin, GPIO.OUT)
-        self.pwm = GPIO.PWM(self.PWM_pin, 1000) # Set Frequency to 1 KHz
-        self.pwm.start(0) # Set the starting Duty Cycle
-
+    def __init__(self, SP, Kp, Ti, Td, N, dt): 
         #Setpoint
         self.SP = SP
     
@@ -82,12 +80,10 @@ class PID():
         
         #Startup flag to stop/pause or continue the controller
         self.stop = False
-        
-        #Thread
-        threading.Thread(target = self.Compute, args=(PV,)).start()
-        
-        
+
     def Compute(self, PV):
+        global pwm
+        
         while True:
             if self.stop == False:
                     #Error term
@@ -129,12 +125,11 @@ class PID():
                         self.output = self.max_output
                     elif self.output <= self.min_output:
                         self.output = self.min_output
-                    
-                 
-                    self.pwm.ChangeDutyCycle(self.output)
+                        
+                    pwm.ChangeDutyCycle(self.output)
                     
             elif self.stop == True:
-                pass
+                pwm.ChangeDutyCycle(0)
         
     def setstop(self, stop):
         self.stop = stop
@@ -158,4 +153,8 @@ class PID():
         self.dt = dt
                
 #Call the class to start the PID controller            
-PID = PID(SP, Kp, Ti, Td, N, dt, PWM_pin)
+PID = PID(SP, Kp, Ti, Td, N, dt)
+
+#Thread
+Thread_PID = threading.Thread(target = PID.Compute(PV))
+Thread_PID.start()
