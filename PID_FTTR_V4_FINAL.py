@@ -131,7 +131,7 @@ class PID():
                         self.output = self.min_output
                     
                     try:
-                        self.pwm.ChangeDutyCycle(output)
+                        self.pwm.ChangeDutyCycle(self.output)
                     except KeyboardInterrupt:
                         self.pwm.stop()
                         GPIO.cleanup() # cleanup all GPIO 
