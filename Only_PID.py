@@ -26,18 +26,19 @@ Td = 0   #Derivative time
 N = 10   #filter coefficient
 dt = 5  #Sampling time
 PV = 0   #Process value readings
-
-
 PWM_pin = 33 # PWM pin on Raspberry Pi
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(PWM_pin, GPIO.OUT)
-pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-pwm.start(0) # Set the starting Duty Cycle
-            
-class PID(): 
-    def __init__(self, SP, Kp, Ti, Td, N, dt): 
+
+class PID():
+    def __init__(self, SP, Kp, Ti, Td, N, dt, PWM_pin): 
+        
+        self.PWM_pin = PWM_pin
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.PWM_pin, GPIO.OUT)
+        self.pwm = GPIO.PWM(self.PWM_pin, 1000) # Set Frequency to 1 KHz
+        self.pwm.start(0) # Set the starting Duty Cycle
+
         #Setpoint
         self.SP = SP
     
@@ -81,54 +82,60 @@ class PID():
         
         #Startup flag to stop/pause or continue the controller
         self.stop = False
-  
+        
+        #Thread
+        threading.Thread(target = self.Compute, args=(PV,)).start()
+        
+        
     def Compute(self, PV):
-        if self.stop == False:
-            #Error term
-            self.e = self.SP - PV
-    
-            #Proportional term
-            self.P = self.Kp * self.e
-    
-            #Integral term
-            if self.Ti == 0:
-                 self.Ki = 0
-                 self.I = 0
-            else:
-                self.Ki = self.Kp / self.Ti
-                self.I += self.Ki * self.e * self.dt
-    
-            #Saturation Integral term
-            if self.I >= self.max_windup:
-                self.I = self.max_windup
-            elif self.I <= self.min_windup:
-                self.I = self.min_windup
-    
-            #Derivative term and Beta
-            if (self.Td + self.dt * self.N) > 0:
-                self.Beta = self.Td/(self.Td + self.dt * self.N)
-            else:
-                self.Beta = 0
-    
-            self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
-    
-            #update stored data for next calculation
-            self.PV_prev = PV
-    
-            #Computed value
-            self.output = self.P + self.I + self.D
-    
-            #Saturation output 
-            if self.output >= self.max_output:
-                self.output = self.max_output
-            elif self.output <= self.min_output:
-                self.output = self.min_output
+        while True:
+            if self.stop == False:
+                    #Error term
+                    self.e = self.SP - PV
             
-            return self.output
-    
-        elif self.stop == True:
-            pass
-    
+                    #Proportional term
+                    self.P = self.Kp * self.e
+            
+                    #Integral term
+                    if self.Ti == 0:
+                         self.Ki = 0
+                         self.I = 0
+                    else:
+                        self.Ki = self.Kp / self.Ti
+                        self.I += self.Ki * self.e * self.dt
+            
+                    #Saturation Integral term
+                    if self.I >= self.max_windup:
+                        self.I = self.max_windup
+                    elif self.I <= self.min_windup:
+                        self.I = self.min_windup
+            
+                    #Derivative term and Beta
+                    if (self.Td + self.dt * self.N) > 0:
+                        self.Beta = self.Td/(self.Td + self.dt * self.N)
+                    else:
+                        self.Beta = 0
+            
+                    self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
+            
+                    #update stored data for next calculation
+                    self.PV_prev = PV
+            
+                    #Computed value
+                    self.output = self.P + self.I + self.D
+            
+                    #Saturation output 
+                    if self.output >= self.max_output:
+                        self.output = self.max_output
+                    elif self.output <= self.min_output:
+                        self.output = self.min_output
+                    
+                 
+                    self.pwm.ChangeDutyCycle(self.output)
+                    
+            elif self.stop == True:
+                pass
+        
     def setstop(self, stop):
         self.stop = stop
 
@@ -149,20 +156,6 @@ class PID():
        
     def setdt(self, dt):
         self.dt = dt
-        
+               
 #Call the class to start the PID controller            
-PID = PID(SP, Kp, Ti, Td, N, dt)
-
-
-
-def main():   
-    while True:              
-        try: 
-            pwm.ChangeDutyCycle(PID.Compute(PV)) 
-        except KeyboardInterrupt:
-            pwm.stop()
-            GPIO.cleanup() # cleanup all GPIO 
-    
-#Thread the function over to let it run in the background
-threading.Thread(target = main).start()   
-              
+PID = PID(SP, Kp, Ti, Td, N, dt, PWM_pin)
