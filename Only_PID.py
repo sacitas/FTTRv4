@@ -124,7 +124,7 @@ class PID():
                 elif self.output <= self.min_output:
                     self.output = self.min_output
         
-                return self.output
+                pwm.ChangeDutyCycle(self.output) 
 
         elif self.stop == True:
             pass
@@ -158,14 +158,9 @@ class PID():
 PID = PID(SP, Kp, Ti, Td, N, dt, PWM_pin)
 PID.run()
 
-def main():
-    while True:
-        try:
-            pwm.ChangeDutyCycle(PID.Compute(PV))
-            time.sleep(PID.dt)
-        except KeyboardInterrupt:
-            pwm.stop()
-            GPIO.cleanup() # cleanup all GPIO 
-        
-threading.Thread(target = main).start()
+
+#        except KeyboardInterrupt:
+#            pwm.stop()
+#            GPIO.cleanup() # cleanup all GPIO 
+
               
