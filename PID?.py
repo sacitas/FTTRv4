@@ -37,7 +37,7 @@ class PID():
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(PWM_pin, GPIO.OUT)
         self.pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
-        self.pwm.start(0) # Set the starting Duty Cycle
+        self.pwm.start(100) # Set the starting Duty Cycle
 
         #Setpoint
         self.SP = SP
@@ -85,50 +85,52 @@ class PID():
   
     def Compute(self, PV):
         if self.stop == False:
-            #Error term
-            self.e = self.SP - PV
-            
-            #Proportional term
-            self.P = self.Kp * self.e
-                
-            #Integral term
-            if self.Ti == 0:
-                 self.Ki = 0
-                 self.I = 0
-            else:
-                self.Ki = self.Kp / self.Ti
-                self.I += self.Ki * self.e * self.dt
-        
-            #Saturation Integral term
-            if self.I >= self.max_windup:
-                self.I = self.max_windup
-            elif self.I <= self.min_windup:
-                self.I = self.min_windup
-            
-            #Derivative term and Beta
-            if (self.Td + self.dt * self.N) > 0:
-                self.Beta = self.Td/(self.Td + self.dt * self.N)
-            else:
-                self.Beta = 0
-                
-            self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
-            
-            #update stored data for next calculation
-            self.PV_prev = PV
-                
-            #Computed value
-            self.output = self.P + self.I + self.D
-            
-            #Saturation output 
-            if self.output >= self.max_output:
-                self.output = self.max_output
-            elif self.output <= self.min_output:
-                self.output = self.min_output
-                
-            return self.output
-    
+            while True:
+                #Error term
+                self.e = self.SP - PV
+
+                #Proportional term
+                self.P = self.Kp * self.e
+
+                #Integral term
+                if self.Ti == 0:
+                     self.Ki = 0
+                     self.I = 0
+                else:
+                    self.Ki = self.Kp / self.Ti
+                    self.I += self.Ki * self.e * self.dt
+
+                #Saturation Integral term
+                if self.I >= self.max_windup:
+                    self.I = self.max_windup
+                elif self.I <= self.min_windup:
+                    self.I = self.min_windup
+
+                #Derivative term and Beta
+                if (self.Td + self.dt * self.N) > 0:
+                    self.Beta = self.Td/(self.Td + self.dt * self.N)
+                else:
+                    self.Beta = 0
+
+                self.D = self.Beta * self.D - self.Kd/dt * (1 - self.Beta)*(PV - self.PV_prev)
+
+                #update stored data for next calculation
+                self.PV_prev = PV
+
+                #Computed value
+                self.output = self.P + self.I + self.D
+
+                #Saturation output 
+                if self.output >= self.max_output:
+                    self.output = self.max_output
+                elif self.output <= self.min_output:
+                    self.output = self.min_output
+
+                self.pwm.ChangeDutyCycle(self.output)
+                time.sleep(self.dt)  
+
         elif self.stop == True:
-            return None
+            self.pwm.ChangeDutyCycle(0)
            
     def setSP(self, Setpoint):
         self.SP = Setpoint
@@ -155,18 +157,5 @@ class PID():
         self.pwm.stop()
         GPIO.cleanup() # cleanup all GPIO 
         
-    def run(self):
-        while True:
-            if self.Compute == None:
-                self.pwm.ChangeDutyCycle(0)
-
-            elif self.Compute != None:
-                self.pwm.ChangeDutyCycle(self.output)
-                time.sleep(self.dt)  
-                
-             
-
-      
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
-PID.run()
