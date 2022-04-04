@@ -123,8 +123,12 @@ class PID():
                     self.output = self.max_output
                 elif self.output <= self.min_output:
                     self.output = self.min_output
-        
-                pwm.ChangeDutyCycle(self.output) 
+                
+                try: 
+                    pwm.ChangeDutyCycle(self.output) 
+                except KeyboardInterrupt:
+                    pwm.stop()
+                    GPIO.cleanup() # cleanup all GPIO 
 
         elif self.stop == True:
             pass
@@ -155,12 +159,7 @@ class PID():
         self.dt = dt
         
 #Call the class to start the PID controller            
-PID = PID(SP, Kp, Ti, Td, N, dt, PWM_pin)
+PID = PID(SP, Kp, Ti, Td, N, dt)
+PID.Compute(PV)
 PID.run()
-
-
-#        except KeyboardInterrupt:
-#            pwm.stop()
-#            GPIO.cleanup() # cleanup all GPIO 
-
               
