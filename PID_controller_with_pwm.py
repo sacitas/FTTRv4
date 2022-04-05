@@ -80,6 +80,8 @@ class PID():
         
         #Startup flag to stop/pause or continue the controller
         self.stop = False
+        
+        self.run()
 
     def Compute(self, PV): 
         if self.stop == False:
@@ -127,6 +129,9 @@ class PID():
             
         elif self.stop == True:
             return None
+     
+    def run(self):
+        threading.Thread(target = self.Compute, args = (PV,)).start()
         
     def setstop(self, stop):
         self.stop = stop
@@ -152,21 +157,7 @@ class PID():
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
 
-def run():
-    global pwm 
-    while True:
-        if PID.Compute(PV) == None:
-            pass
-        
-        else:
-            pwm.ChangeDutyCycle(PID.Compute(PV))
-
-#Thread the function over to let it run in the background             
-Thread_PID = threading.Thread(target = run)
-Thread_PID.start()
-
 #Call the function to destroy the pin
 def destroy():
     pwm.stop()
     GPIO.cleanup()
-        
