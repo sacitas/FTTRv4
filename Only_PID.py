@@ -13,6 +13,7 @@ import threading
 #Td      - Derivative time 
 #N       - Filter coefficient
 #dt      - Sampling time
+#Beta    - Beta?
 #e       - error value
 #PV_prev - Process value value previous
 
@@ -22,7 +23,7 @@ Kp = 1   #Proportional gain
 Ti = 0   #Integral time
 Td = 0   #Derivative time  
 N = 10   #filter coefficient
-dt = 5  #Sampling time
+dt = 20   #Sampling time
 PV = 0   #Process value readings
 
 class PID():
@@ -70,9 +71,12 @@ class PID():
         
         #Startup flag to stop/pause or continue the controller
         self.stop = False
+        
+        self.run()
 
-    def Compute(self, PV): 
-        if self.stop == False:
+    def Compute(self, PV):
+        while True:
+            if self.stop == False:
                 #Error term
                 self.e = self.SP - PV
         
@@ -113,11 +117,16 @@ class PID():
                 elif self.output <= self.min_output:
                     self.output = self.min_output
                     
-                return self.output
-            
-        elif self.stop == True:
-            return None
         
+                print(self.output)
+                time.sleep(self.dt)
+                
+            elif self.stop == True:
+                return None
+            
+    def run(self):
+        threading.Thread(target = self.Compute, args = (PV,)).start()
+           
     def setstop(self, stop):
         self.stop = stop
 
@@ -140,17 +149,4 @@ class PID():
         self.dt = dt
                
 #Call the class to start the PID controller            
-PID = PID(SP, Kp, Ti, Td, N, dt)
-
-def run():
-    while True:
-        if PID.Compute(PV) == None:
-            pass
-        
-        else:
-            print(PID.Compute(PV))
-            time.sleep(PID.dt)
-
-#Thread the function over to let it run in the background 
-Thread_PID = threading.Thread(target = run)
-Thread_PID.start()
+#PID = PID(SP, Kp, Ti, Td, N, dt)
