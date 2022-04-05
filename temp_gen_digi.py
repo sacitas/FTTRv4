@@ -41,7 +41,6 @@ def convert_temp(n):
         return temp_c
 
 
-
 def read_temp():
     temps = []
 
