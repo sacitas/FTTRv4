@@ -1,2 +1,2 @@
 # Orbit-NTNU
-Mathematical model, PID controller and GUI for thermal vacuum chamber
+Mathematical model, PID controller, temperaturesensor reading and GUI for thermal vacuum chamber
