@@ -37,7 +37,6 @@ while True:
         csv_writer.writerow(info)
         print(x, temp1, temp2)
 
-
         x = dt.datetime.now().strftime('%H:%M:%S')
         
         chan0 = AnalogIn(ads, ADS.P0)
