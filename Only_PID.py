@@ -13,7 +13,6 @@ import threading
 #Td      - Derivative time 
 #N       - Filter coefficient
 #dt      - Sampling time
-#Beta    - Beta?
 #e       - error value
 #PV_prev - Process value value previous
 
@@ -151,9 +150,7 @@ def run():
         else:
             print(PID.Compute(PV))
             time.sleep(PID.dt)
-            
+
+#Thread the function over to let it run in the background 
 Thread_PID = threading.Thread(target = run)
 Thread_PID.start()
-        
-
-
