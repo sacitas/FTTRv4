@@ -29,14 +29,16 @@ PV = 0   #Process value readings
 
 pwm_pin = 33  
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(pwm_pin, GPIO.OUT)
-pwm = GPIO.PWM(pwm_pin, 1000)
-pwm.start(0)
         
 class PID():
     def __init__(self, SP, Kp, Ti, Td, N, dt):
+        
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setwarnings(False)
+        GPIO.setup(pwm_pin, GPIO.OUT)
+        self.pwm = GPIO.PWM(pwm_pin, 1000)
+        self.pwm.start(0)
+        
         #Setpoint
         self.SP = SP
     
@@ -153,11 +155,11 @@ class PID():
        
     def setdt(self, dt):
         self.dt = dt
+        
+    #Call the function to destroy the pin
+    def destroy(self):
+        self.pwm.stop()
+        GPIO.cleanup()
                
 #Call the class to start the PID controller            
 PID = PID(SP, Kp, Ti, Td, N, dt)
-
-#Call the function to destroy the pin
-def destroy():
-    pwm.stop()
-    GPIO.cleanup()
