@@ -87,7 +87,7 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
         beta = 0
     
     PV[0] = tmp.read_temp()
-    print("Sensor0: " + PV[0])
+    print("Sensor0: " + str(PV[0]))
     
     # Calculate error from setpoint
     e[0] = SP - PV[0]
