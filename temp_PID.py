@@ -50,34 +50,7 @@ def read_temp():
         print("Temp_sensor{} = {}*C.".format(i, temp))
 
     return temps
-
-
-
-with open('test_data.csv', 'w') as data_csv:
-    csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
-    csv_writer.writeheader()
-
 	
-while True:	
-    temps = read_temp()
-
-    with open('test_data.csv', 'a') as data_csv:
-        csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
-        
-        info = {
-            "x": x,
-            "temp0": temps[0],
-            "temp1": temps[1],
-            "temp2": temps[2],
-	    "temp3": temps[3],
-	    "temp4": temps[4]
-        }
-        csv_writer.writerow(info)
-        data_csv.close()
-        
-        x = dt.datetime.now().strftime('%H:%M:%S')
-
-    sleep(0.1)
 
 def temp_main():
     read_temp()
