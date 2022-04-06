@@ -44,7 +44,7 @@ def convert_temp(n):
 def read_temp():
     temps = []
 
-    for i in range (0, 3):
+    for i in range (0, 5):
         temp = convert_temp(i)
         temps.append(temp)
         print("Temp_sensor{} = {}*C.".format(i, temp))
@@ -68,7 +68,9 @@ while True:
             "x": x,
             "temp0": temps[0],
             "temp1": temps[1],
-            "temp2": temps[2]
+            "temp2": temps[2],
+	    "temp3": temps[3],
+	    "temp4": temps[4]
         }
         csv_writer.writerow(info)
         data_csv.close()
