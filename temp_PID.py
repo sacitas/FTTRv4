@@ -47,7 +47,7 @@ def read_temp():
     for i in range (0, 1):
         temp = convert_temp(i)
         temps.append(temp)
-        print("Temp_sensor{} = {}*C.".format(i, temp))
+#       print("Temp_sensor{} = {}*C.".format(i, temp))
 
     return temps[0]
 
