@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import os.path
+import temp_PID as tmp
 
 # Parameters
 Ts = float(input("Enter a samplingtime: "))
@@ -84,6 +85,7 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
         beta = T_d/(T_d+Ts*N)
     else:
         beta = 0
+   
     
     # Calculate error from setpoint
     e[0] = SP - PV[0]
@@ -158,6 +160,7 @@ def PID_main():
     setup()
     try:
         while True:
+            tmp.read_temp()
             if Auto == 1:
                 PID_loop()
             elif Auto == 0:
