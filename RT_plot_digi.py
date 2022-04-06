@@ -21,12 +21,16 @@ def animate(i):
     temp0 = data["temp0"]
     temp1 = data["temp1"]
     temp2 = data["temp2"]
+    temp3 = data["temp3"]
+    temp4 = data["temp4"]
 
     plt.cla()
 
     plt.plot(x, temp0,  linewidth = 1.5, label='Sensor 0')
     plt.plot(x, temp1, linewidth = 1.5, label='Sensor 1')
     plt.plot(x, temp2, linewidth = 1.5, label='Sensor 2')
+    plt.plot(x, temp3, linewidth = 1.5, label='Sensor 3')
+    plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
     plt.xticks(rotation=90, ha='right', fontsize=12)
     plt.xticks(np.arange(0, len(x)+1, 20))
     plt.legend(loc='upper left')
