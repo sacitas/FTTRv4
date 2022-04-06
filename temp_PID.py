@@ -51,3 +51,7 @@ def read_temp():
 
     return temps
 
+def send_tmp():
+    temp0 = temps[0]
+  
+    return temp0
