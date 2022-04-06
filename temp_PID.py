@@ -52,6 +52,11 @@ def read_temp():
     return temps[0]
 
 def write_tmp():
+    with open('PID_temp.csv', 'w') as data_csv:
+        csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
+        csv_writer.writeheader()
+  
+  
     while True:	
         temps = read_temp()
 
