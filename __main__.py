@@ -1,8 +1,8 @@
 import PID_test as PID
-import temp_PID as temp
+import temp_PID as tmp
 
 def main():
     PID.PID_main()
-    temp.temp_main()
+    tmp.temp_main()
 
 main()
