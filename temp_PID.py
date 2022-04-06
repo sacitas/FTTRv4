@@ -51,25 +51,24 @@ def read_temp():
 
     return temps[0]
 
-def write_tmp():
+def create_tmpFile():
     with open('PID_temp.csv', 'w') as data_csv:
         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
         csv_writer.writeheader()
-  
-  
-    while True:	
-        temps = read_temp()
 
-        with open('PID_temp.csv', 'a') as data_csv:
-            csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
-        
-            info = {
-                "x": x,
-                "temp0": temps[0]
-        }
-            csv_writer.writerow(info)
-            data_csv.close()
-        
-            x = dt.datetime.now().strftime('%H:%M:%S')
+def write_tmp():
+    temps = read_temp()
 
-        sleep(0.1)
+    with open('PID_temp.csv', 'a') as data_csv:
+         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
+        
+         info = {
+             "x": x,
+             "temp0": temps[0]
+         }
+         csv_writer.writerow(info)
+         data_csv.close()
+        
+         x = dt.datetime.now().strftime('%H:%M:%S')
+
+         sleep(0.1)
