@@ -44,7 +44,7 @@ def convert_temp(n):
 def read_temp():
     temps = []
 
-    for i in range (0, 5):
+    for i in range (0, 1):
         temp = convert_temp(i)
         temps.append(temp)
         print("Temp_sensor{} = {}*C.".format(i, temp))
@@ -80,7 +80,5 @@ while True:
     sleep(0.1)
 
 def temp_main():
-  PID_temps = read_temp()
-  print("Temp0: " + PID_temps[0])
-  
+    read_temp()
   
