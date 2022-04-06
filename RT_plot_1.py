@@ -30,7 +30,6 @@ def animate(i):
     plt.legend(loc='upper left')
     plt.tight_layout()
 
-
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
 canvas.get_tk_widget().place(x = 10, y = 10, width = 600, height = 400)
 canvas.draw()
