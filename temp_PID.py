@@ -12,7 +12,7 @@ base_dir = '/sys/bus/w1/devices/'
 
 x = dt.datetime.now().strftime('%H:%M:%S')
 
-fieldnames = ["x", "temp0", "temp1", "temp2"]
+fieldnames = ["x", "temp0"]
  
 def read_temp_raw(n):
     device_folder = glob.glob(base_dir + '28*')[n]
