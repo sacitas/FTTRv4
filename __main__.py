@@ -1,7 +1,7 @@
-import PID_FTTR_V4_FINAL as PID
+import PID_test as PID
 #import temp_gen_digi as temp
 
 def main():
-    PID.
+    PID.PID_main()
 
 main()
