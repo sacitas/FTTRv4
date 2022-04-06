@@ -159,10 +159,12 @@ def ManVal_loop():
 
 def PID_main():
     createConfig()
+    tmp.create_tmpFile()
     setup()
     try:
         while True:
             tmp.read_temp()
+            tmp.write_tmp()
             if Auto == 1:
                 PID_loop()
             elif Auto == 0:
