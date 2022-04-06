@@ -10,8 +10,6 @@ os.system('modprobe w1-therm')
  
 base_dir = '/sys/bus/w1/devices/'
 
-x = dt.datetime.now().strftime('%H:%M:%S')
-
 fieldnames = ["x", "temp0"]
  
 def read_temp_raw(n):
@@ -57,6 +55,7 @@ def create_tmpFile():
         csv_writer.writeheader()
 
 def write_tmp():
+    x = dt.datetime.now().strftime('%H:%M:%S')
     temps = read_temp()
 
     with open('PID_temp.csv', 'a') as data_csv:
