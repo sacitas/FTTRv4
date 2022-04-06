@@ -50,3 +50,6 @@ def read_temp():
         print("Temp_sensor{} = {}*C.".format(i, temp))
 
     return temps
+
+def send_tmp():
+    temp0 = temps[0] 
