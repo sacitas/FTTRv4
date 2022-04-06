@@ -1,5 +1,5 @@
 import PID_test as PID
-import temp_gen_digi as temp
+import temp_PID as temp
 
 def main():
     PID.PID_main()
