@@ -51,5 +51,5 @@ def read_temp():
 
     return temps
 
-def send_tmp():
+def send_tmp(temp0):
     temp0 = temps[0] 
