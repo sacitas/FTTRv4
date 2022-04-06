@@ -60,15 +60,15 @@ def write_tmp():
     temps = read_temp()
 
     with open('PID_temp.csv', 'a') as data_csv:
-         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
+        csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
         
-         info = {
-             "x": x,
-             "temp0": temps[0]
-         }
-         csv_writer.writerow(info)
-         data_csv.close()
+        info = {
+            "x": x,
+            "temp0": temps[0]
+        }
+        csv_writer.writerow(info)
+        data_csv.close()
         
-         x = dt.datetime.now().strftime('%H:%M:%S')
+        x = dt.datetime.now().strftime('%H:%M:%S')
 
-     sleep(0.1)
+    sleep(0.1)
