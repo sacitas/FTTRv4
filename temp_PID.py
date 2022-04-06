@@ -63,7 +63,7 @@ def write_tmp():
         
         info = {
             "x": x,
-            "temp0": temps[0]
+            "temp0": read_temp()
         }
         csv_writer.writerow(info)
         data_csv.close()
