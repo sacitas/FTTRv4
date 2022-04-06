@@ -50,8 +50,3 @@ def read_temp():
         print("Temp_sensor{} = {}*C.".format(i, temp))
 
     return temps
-	
-
-def temp_main():
-    read_temp()
-  
