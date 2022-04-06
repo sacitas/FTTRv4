@@ -49,9 +49,5 @@ def read_temp():
         temps.append(temp)
         print("Temp_sensor{} = {}*C.".format(i, temp))
 
-    return temps
+    return temps[0]
 
-def send_tmp():
-    temp0 = temps[0]
-  
-    return temp0
