@@ -66,5 +66,4 @@ PID = tk.Button(root, text = "PID", font = ('calibri', 12), command = lambda: co
 PID.place(x = PD.winfo_x()+PD.winfo_reqwidth() + 10, y = 90)
 
 
-
 root.mainloop()
