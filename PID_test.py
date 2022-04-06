@@ -137,7 +137,7 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
     U_i[1] = U_i[0]
     U_d[1] = U_d[0]
     
-    print(round(U_total,2))
+    print(round(U_total,1))
     
     pwm.ChangeDutyCycle(U_total)
 
