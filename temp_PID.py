@@ -3,6 +3,7 @@ import glob
 from time import sleep
 import csv
 import datetime as dt
+import RT_plot_PID_btn as RT
 
 
 os.system('modprobe w1-gpio')
@@ -10,7 +11,7 @@ os.system('modprobe w1-therm')
  
 base_dir = '/sys/bus/w1/devices/'
 
-fieldnames = ["x", "temp0"]
+fieldnames = ["x", "temp0", "SP"]
  
 def read_temp_raw(n):
     device_folder = glob.glob(base_dir + '28*')[n]
@@ -57,13 +58,15 @@ def create_tmpFile():
 def write_tmp():
     x = dt.datetime.now().strftime('%H:%M:%S')
     temps = read_temp()
+    SP = RT.setSP()
 
     with open('PID_temp.csv', 'a') as data_csv:
         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
         
         info = {
             "x": x,
-            "temp0": read_temp()
+            "temp0": temps,
+            "SP": SP
         }
         csv_writer.writerow(info)
         data_csv.close()
