@@ -29,6 +29,7 @@ def animate(i):
     plt.cla()
 
     plt.plot(x, temp0,  linewidth = 1.5, label='Sensor 0')
+    plt.plot(x, SP, linewidth = 1.5, label='Setpoint')
     plt.xticks(rotation=90, ha='right', fontsize=12)
     plt.xticks(np.arange(0, len(x)+1, 20))
     plt.legend(loc='upper left')
