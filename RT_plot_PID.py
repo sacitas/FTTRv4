@@ -19,7 +19,7 @@ def animate(i):
     x = data["x"]
     temp0 = data["temp0"]
     
-    with open ('pid_conf.csv', 'r+') as f:
+    f = pd.read_csv('pid_conf.csv')
         for i in range(4):
             f.readline()
         SP_read = f.readline().split(':')
