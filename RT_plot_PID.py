@@ -14,22 +14,15 @@ root.geometry("900x600") # Window size
 
 plt.style.use('fivethirtyeight')
 
-SP = 0
-
-def getSP():
+def animate(i):
+    data = pd.read_csv('PID_temp.csv')
+    x = data["x"]
+    temp0 = data["temp0"]
     with open ('pid.conf', 'r+') as f:
         for i in range(4):
             f.readline()
         SP_read = f.readline().split(':')
         SP = float(SP_read[1])
-    
-    return SP
-
-def animate(i):
-    SP = getSP()
-    data = pd.read_csv('PID_temp.csv')
-    x = data["x"]
-    temp0 = data["temp0"]
     
     plt.cla()
 
