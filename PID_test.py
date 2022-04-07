@@ -49,6 +49,7 @@ def createConfig():
         f.write("PID-controller settings\n")
         f.write("#######################\n\n")
         f.write('SP: %s\nK_p: %s\nT_i: %s\nT_d: %s\nAuto (0 or 1): %s\nManual value (0 - 100): %s'%(SP,K_p,T_i,T_d,Auto,ManVal))
+        f.close()
             
 def readConfig():
     global SP, K_p, T_i, T_d, Auto, ManVal
@@ -67,6 +68,7 @@ def readConfig():
         Auto = int(Auto_read[1])
         ManVal_read = f.readline().split(':')
         ManVal = int(ManVal_read[1])
+        f.close()
         
 # PID-controller
 def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
