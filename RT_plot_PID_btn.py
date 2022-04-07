@@ -68,14 +68,11 @@ STOP.place(x = S_P.winfo_x()+S_P.winfo_reqwidth() + 10, y = 90)
 
 root.update()
 SSP = tk.Button(root, text = "Set SP", font = ('calibri', 12), command = lambda: SetSP())
-S_P.place(x = 650, y = 160)
+SSP.place(x = 650, y = 160)
 
 root.update()
 SP_ent = tk.Entry(root)
 SP_ent.place(x = 650, y = 140)
-kp = tk.Entry(root)
-ti = tk.Entry(root)
-td = tk.Entry(root)
 
 
 def SetSP():
