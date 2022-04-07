@@ -8,10 +8,10 @@ import numpy as np
 import csv
 
 
-fn = ["sp"]
+fieldnames = ["sp"]
 
 with open('SP_val.csv', 'w') as data_csv:
-    csv_writer = csv.DictWriter(data_csv, fieldnames=fn)
+    csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
     csv_writer.writeheader()
 
 
@@ -78,12 +78,12 @@ SP_ent.place(x = 650, y = 140)
 def SetSP():
     sp = SP_ent.get()
 
-    with open('SP_val.csv', 'w') as SP_csv:
+    with open('SP_val.csv', 'a') as SP_csv:
         csv_writer = csv.DictWriter(SP_csv, sp)
-        i = {
+        info = {
             "sp": sp
         }
-        csv_writer.writerow(i)
+        csv_writer.writerow(info)
         SP_csv.close()
     
 root.mainloop()
