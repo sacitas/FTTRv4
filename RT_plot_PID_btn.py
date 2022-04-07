@@ -5,14 +5,6 @@ from matplotlib.animation import FuncAnimation
 import tkinter as tk
 import pandas as pd
 import numpy as np
-import csv
-
-
-fieldnames = ["sp"]
-
-with open('SP_val.csv', 'w') as data_csv:
-    csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
-    csv_writer.writeheader()
 
 
 #------Main GUI code-----
@@ -29,9 +21,8 @@ def animate(i):
     x = data["x"]
     temp0 = data["temp0"]
 
-    getSP = pd.read_csv('SP_val.csv')
-    SP = getSP["sp"]
-
+    SP = setSP()
+    
     plt.cla()
 
     plt.plot(x, temp0,  linewidth = 1.5, label='Sensor 0')
@@ -74,16 +65,9 @@ root.update()
 SP_ent = tk.Entry(root)
 SP_ent.place(x = 650, y = 140)
 
-
-def SetSP():
-    sp = SP_ent.get()
-
-    with open('SP_val.csv', 'a') as SP_csv:
-        csv_writer = csv.DictWriter(SP_csv, sp)
-        info = {
-            "sp": sp
-        }
-        csv_writer.writerow(info)
-        SP_csv.close()
+def setSP():
+    SP = SP_ent.get()
+    
+    return SP
     
 root.mainloop()
