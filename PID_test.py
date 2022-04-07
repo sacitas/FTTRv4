@@ -29,7 +29,7 @@ def setup():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(PWM_pin, GPIO.OUT)
     GPIO.output(PWM_pin, GPIO.LOW)
-    pwm = GPIO.PWM(PWM_pin, 1000) # Set Frequency to 1 KHz
+    pwm = GPIO.PWM(PWM_pin, 100) # Set Frequency to 100 Hz
     pwm.start(0) # Set the starting Duty Cycle
         
 # Destroy PWM pin
