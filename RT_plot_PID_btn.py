@@ -10,7 +10,7 @@ import numpy as np
 def setSP():
     SP = SP_ent.get()
     
-    with open ('pid_conf.csv', 'w') as f:
+    with open ('pid_conf.csv', 'a+') as f:
         f.write("#######################\n")
         f.write("PID-controller settings\n")
         f.write("#######################\n\n")
