@@ -19,7 +19,7 @@ def animate(i):
     x = data["x"]
     temp0 = data["temp0"]
     
-    with open ('~/Documents/FTTRv4/Orbit-NTNU/pid.conf', 'r+') as f:
+    with open ('pid.conf', 'r+') as f:
         for i in range(4):
             f.readline()
         SP_read = f.readline().split(':')
