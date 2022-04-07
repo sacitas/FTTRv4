@@ -19,9 +19,16 @@ def animate(i):
     x = data["x"]
     temp0 = data["temp0"]
     
+    with open ('pid.conf', 'r+') as f:
+        for i in range(4):
+            f.readline()
+        SP_read = f.readline().split(':')
+        SP = float(SP_read[1])
+    
     plt.cla()
 
     plt.plot(x, temp0,  linewidth = 1.5, label='Sensor 0')
+    plt.plot(x, SP,  linewidth = 1.5, label='Setpoint')
     plt.xticks(rotation=90, ha='right', fontsize=12)
     plt.xticks(np.arange(0, len(x)+1, 20))
     plt.legend(loc='upper left')
