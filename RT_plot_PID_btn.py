@@ -16,13 +16,12 @@ root.geometry("900x600") # Window size
 plt.style.use('fivethirtyeight')
 
 def animate(i):
-
+    
+    SP = setSP()
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
     temp0 = data["temp0"]
 
-    SP = setSP()
-    
     plt.cla()
 
     plt.plot(x, temp0,  linewidth = 1.5, label='Sensor 0')
@@ -65,7 +64,7 @@ root.update()
 SP_ent = tk.Entry(root)
 SP_ent.place(x = 650, y = 140)
 
-def setSP():
+def setSP(SP):
     SP = SP_ent.get()
     
     return SP
