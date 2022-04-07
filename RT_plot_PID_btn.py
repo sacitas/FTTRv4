@@ -10,7 +10,13 @@ import numpy as np
 def setSP():
     SP = SP_ent.get()
     
-    return SP
+    with open ('pid_conf.csv', 'w') as f:
+        f.write("#######################\n")
+        f.write("PID-controller settings\n")
+        f.write("#######################\n\n")
+        f.write('SP: %s'%(SP))
+        f.close()
+    
 
 #------Main GUI code-----
 root = tk.Tk()
@@ -20,9 +26,14 @@ root.geometry("900x600") # Window size
 
 plt.style.use('fivethirtyeight')
 
-def animate(i, SP):
+def animate(i):
     
-    SP = setSP()
+    with open ('pid_conf.csv', 'r+') as f:
+        for n in range(4):
+            f.readline()
+        SP_read = f.readline().split(':')
+        SP = float(SP_read[1])
+    
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
     temp0 = data["temp0"]
