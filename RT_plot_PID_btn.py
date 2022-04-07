@@ -28,7 +28,7 @@ plt.style.use('fivethirtyeight')
 
 def animate(i):
     
-    with open ('pid_conf.csv', 'r+') as f:
+    with open ('pid_conf.csv', 'a+') as f:
         for n in range(4):
             f.readline()
         SP_read = f.readline().split(':')
