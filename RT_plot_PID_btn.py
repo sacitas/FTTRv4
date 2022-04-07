@@ -57,7 +57,7 @@ STOP = tk.Button(root, text = "STOP", font = ('calibri', 12), command = lambda: 
 STOP.place(x = S_P.winfo_x()+S_P.winfo_reqwidth() + 10, y = 90)
 
 root.update()
-SSP = tk.Button(root, text = "Set SP", font = ('calibri', 12), command = lambda: SetSP())
+SSP = tk.Button(root, text = "Set SP", font = ('calibri', 12), command = lambda: setSP())
 SSP.place(x = 650, y = 160)
 
 root.update()
