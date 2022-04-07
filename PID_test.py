@@ -154,6 +154,8 @@ def ManVal_loop():
     readConfig()
     man_output = ManVal
     print(man_output)
+    temp_read = tmp.read_temp()
+    print("Sensor0: " + str(temp_read))
     pwm.ChangeDutyCycle(man_output)
     time.sleep(Ts)
 
