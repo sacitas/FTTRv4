@@ -22,6 +22,7 @@ plt.style.use('fivethirtyeight')
 
 def animate(i, SP):
     
+    SP = setSP()
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
     temp0 = data["temp0"]
