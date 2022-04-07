@@ -7,6 +7,11 @@ import pandas as pd
 import numpy as np
 
 
+def setSP(SP):
+    SP = SP_ent.get()
+    
+    return SP
+
 #------Main GUI code-----
 root = tk.Tk()
 root.title("Real Time Plot")
@@ -15,9 +20,8 @@ root.geometry("900x600") # Window size
 
 plt.style.use('fivethirtyeight')
 
-def animate(i):
+def animate(i, SP):
     
-    SP = setSP()
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
     temp0 = data["temp0"]
@@ -64,9 +68,5 @@ root.update()
 SP_ent = tk.Entry(root)
 SP_ent.place(x = 650, y = 140)
 
-def setSP(SP):
-    SP = SP_ent.get()
-    
-    return SP
     
 root.mainloop()
