@@ -19,8 +19,7 @@ def animate(i):
     x = data["x"]
     temp0 = data["temp0"]
     
-    f = pd.read_csv('pid_conf.csv', sep=': ')
-    
+    f = pd.read_csv('pid_conf.csv', skiprows=4, sep=':')
     SP = float(f[1])
     
     plt.cla()
