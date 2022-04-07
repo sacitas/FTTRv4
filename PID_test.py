@@ -39,12 +39,12 @@ def destroy():
     GPIO.cleanup()
     
 def createConfig():
-    file_exists = os.path.exists('pid.conf')
+    file_exists = os.path.exists('pid_conf.csv')
     if file_exists == True:
-        os.remove("pid.conf")
+        os.remove("pid_conf.csv")
     else:
         pass
-    with open ('pid.conf', 'w') as f:
+    with open ('pid_conf.csv', 'w') as f:
         f.write("#######################\n")
         f.write("PID-controller settings\n")
         f.write("#######################\n\n")
@@ -52,7 +52,7 @@ def createConfig():
             
 def readConfig():
     global SP, K_p, T_i, T_d, Auto, ManVal
-    with open ('pid.conf', 'r+') as f:
+    with open ('pid_conf.csv', 'r+') as f:
         for i in range(4):
             f.readline()
         SP_read = f.readline().split(':')
