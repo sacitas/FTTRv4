@@ -20,10 +20,10 @@ def animate(i):
     temp0 = data["temp0"]
     
     f = pd.read_csv('pid_conf.csv')
-        for i in range(4):
-            f.readline()
-        SP_read = f.readline().split(':')
-        SP = float(SP_read[1])
+    for i in range(4):
+        f.readline()
+    SP_read = f.readline().split(':')
+    SP = float(SP_read[1])
     
     plt.cla()
 
