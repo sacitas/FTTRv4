@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 
 
-def setSP(SP):
+def setSP():
     SP = SP_ent.get()
     
     return SP
