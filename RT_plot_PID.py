@@ -14,6 +14,8 @@ root.geometry("900x600") # Window size
 
 plt.style.use('fivethirtyeight')
 
+SP = 0
+
 def getSP(SP):
     with open ('pid.conf', 'r+') as f:
         for i in range(4):
