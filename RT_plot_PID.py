@@ -16,7 +16,7 @@ plt.style.use('fivethirtyeight')
 
 SP = 0
 
-def getSP(SP):
+def getSP():
     with open ('pid.conf', 'r+') as f:
         for i in range(4):
             f.readline()
@@ -26,7 +26,7 @@ def getSP(SP):
     return SP
 
 def animate(i):
-
+    SP = getSP()
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
     temp0 = data["temp0"]
