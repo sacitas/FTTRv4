@@ -74,16 +74,16 @@ def SetSP():
 
     sp = SP_ent.get()
 
-    fieldnames = ["sp"]
+    fieldnames = ["SP"]
 
-    with open('SP_val.csv', 'w') as SP_csv:
+    with open('pid_conf.csv', 'w') as SP_csv:
         csv_writer = csv.DictWriter(SP_csv, fieldnames=fieldnames)
         csv_writer.writeheader()
     
-    with open('SP_val.csv', 'a') as SP_csv:
+    with open('pid_conf.csv', 'a') as SP_csv:
         csv_writer = csv.DictWriter(SP_csv, fieldnames=fieldnames)
         info = {
-            "sp": sp
+            "SP": sp
         }
         csv_writer.writerow(info)
         SP_csv.close()
