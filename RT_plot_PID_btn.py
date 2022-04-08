@@ -105,10 +105,10 @@ auto_ent.place(x = 670, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 10)
 
 root.update()
 man_label = tk.Label(root, text = 'Manual:', font = ('calibre', 10))
-man_label.place(x = 610, y = auto_label.winfo_y()+auto_label.winfo_reqwidth() + 10)
+man_label.place(x = 610, y = 330)
 man_ent = tk.Entry(root)
 man_ent.insert(0, "0")
-man_ent.place(x = 670, y = auto_label.winfo_y()+auto_label.winfo_reqwidth() + 10)
+man_ent.place(x = 670, y = 330)
 
 
 def SetRegVals():
