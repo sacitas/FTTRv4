@@ -71,7 +71,7 @@ def writeConfig():
         }
         csv_writer.writerow(pinfo)
 
-def readConfig():
+def readConfig(SP, K_p, T_i, T_d, Auto, ManVal):
 #   with open ('pid_conf.csv', 'r+') as f:
 #       for i in range(4):
 #           f.readline()
@@ -96,7 +96,7 @@ def readConfig():
     Auto = vals["Auto"]
     ManVal = vals["ManVal"]
     
-    return SP, K_p, T_i, T_d, Auto, ManVal
+    
         
 # PID-controller
 def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
@@ -177,11 +177,11 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
     return U_total
     
 def PID_loop():
-    readConfig()
+    readConfig(SP, K_p, T_i, T_d, Auto, ManVal)
     FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
     
 def ManVal_loop():
-    readConfig()
+    readConfig(SP, K_p, T_i, T_d, Auto, ManVal)
     man_output = ManVal
     print(man_output)
     temp_read = tmp.read_temp()
