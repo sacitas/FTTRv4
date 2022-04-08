@@ -94,7 +94,9 @@ man_ent.place(x = 650, y = 240)
 
 
 def SetRegVals():
-
+    
+    global sp, kp, ti, td, auto, man
+    
     sp = SP_ent.get()
     sp = float(sp)
     kp = kp_ent.get()
