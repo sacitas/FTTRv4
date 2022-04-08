@@ -3,7 +3,6 @@ import glob
 from time import sleep
 import csv
 import datetime as dt
-import RT_plot_PID_btn as RT
 
 
 os.system('modprobe w1-gpio')
@@ -58,15 +57,13 @@ def create_tmpFile():
 def write_tmp():
     x = dt.datetime.now().strftime('%H:%M:%S')
     temps = read_temp()
-    SP = RT.setSP()
 
     with open('PID_temp.csv', 'a') as data_csv:
         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
         
         info = {
             "x": x,
-            "temp0": temps,
-            "SP": SP
+            "temp0": temps
         }
         csv_writer.writerow(info)
         data_csv.close()
