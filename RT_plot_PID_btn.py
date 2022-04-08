@@ -5,18 +5,7 @@ from matplotlib.animation import FuncAnimation
 import tkinter as tk
 import pandas as pd
 import numpy as np
-
-
-def setSP():
-    SP = SP_ent.get()
-    
-    with open ('pid_conf.csv', 'a+') as f:
-        f.write("#######################\n")
-        f.write("PID-controller settings\n")
-        f.write("#######################\n\n")
-        f.write('SP: %s'%(SP))
-        f.close()
-    
+import csv
 
 #------Main GUI code-----
 root = tk.Tk()
@@ -27,16 +16,13 @@ root.geometry("900x600") # Window size
 plt.style.use('fivethirtyeight')
 
 def animate(i):
-    
-    with open ('pid_conf.csv', 'r+') as f:
-        for n in range(4):
-            f.readline()
-        SP_read = f.readline().split(':')
-        SP = float(SP_read[1])
-    
+
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
     temp0 = data["temp0"]
+
+    getSP = pd.read_csv('SP_val.csv')
+    SP = getSP["sp"]
 
     plt.cla()
 
@@ -73,12 +59,33 @@ STOP = tk.Button(root, text = "STOP", font = ('calibri', 12), command = lambda: 
 STOP.place(x = S_P.winfo_x()+S_P.winfo_reqwidth() + 10, y = 90)
 
 root.update()
-SSP = tk.Button(root, text = "Set SP", font = ('calibri', 12), command = lambda: setSP())
+SSP = tk.Button(root, text = "Set SP", font = ('calibri', 12), command = lambda: SetSP())
 SSP.place(x = 650, y = 160)
 
 root.update()
 SP_ent = tk.Entry(root)
 SP_ent.place(x = 650, y = 140)
+kp = tk.Entry(root)
+ti = tk.Entry(root)
+td = tk.Entry(root)
 
+
+def SetSP():
+
+    sp = SP_ent.get()
+
+    fieldnames = ["sp"]
+
+    with open('SP_val.csv', 'w') as SP_csv:
+        csv_writer = csv.DictWriter(SP_csv, fieldnames=fieldnames)
+        csv_writer.writeheader()
     
+    with open('SP_val.csv', 'a') as SP_csv:
+        csv_writer = csv.DictWriter(SP_csv, fieldnames=fieldnames)
+        info = {
+            "sp": sp
+        }
+        csv_writer.writerow(info)
+        SP_csv.close()
+
 root.mainloop()
