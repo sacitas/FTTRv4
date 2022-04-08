@@ -82,11 +82,17 @@ man_ent.place(x = 650, y = 240)
 def SetRegVals():
 
     sp = SP_ent.get()
+    sp = float(sp)
     kp = kp_ent.get()
+    kp = float(kp)
     ti = ti_ent.get()
+    ti = float(ti)
     td = td_ent.get()
+    td = float(td)
     auto = auto_ent.get()
+    auto = int(auto)
     man = man_ent.get()
+    man = int(man)
     
 
     with open ('pid_conf.csv', 'w') as f:
