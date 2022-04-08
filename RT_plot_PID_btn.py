@@ -110,11 +110,7 @@ def SetRegVals():
     man = man_ent.get()
     man = int(man)
     
-
-    with open ('pid_conf.csv', 'w') as f:
-        f.write("#######################\n")
-        f.write("PID-controller settings\n")
-        f.write("#######################\n\n")
-        f.write('SP: %\nK_p: %s\nT_i: %s\nT_d: %s\nAuto (0 or 1): %s\nManual value (0 - 100): %s'%(sp,kp,ti,td,auto,man))
-
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,ti,auto,man))
+   
 root.mainloop()
