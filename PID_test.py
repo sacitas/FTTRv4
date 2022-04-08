@@ -88,14 +88,15 @@ def readConfig(SP, K_p, T_i, T_d, Auto, ManVal):
 #       ManVal_read = f.readline().split(':')
 #       ManVal = int(ManVal_read[1])
 #       f.close()
-    vals = pd.read_csv('pid_conf.csv', sep = ',')
-    SP = vals["SP"]
-    K_p = vals["K_p"]
-    T_i = vals["T_i"]
-    T_d = vals["T_d"]
-    Auto = vals["Auto"]
-    ManVal = vals["ManVal"]
+    vals = pd.read_csv('pid_conf.csv', skiprows=1, sep = ',')
+    SP = vals[0]
+    K_p = vals[1]
+    T_i = vals[2]
+    T_d = vals[3]
+    Auto = vals[4]
+    ManVal = vals[5]
     
+    return SP, K_p, T_i, T_d, Auto, ManVal
     
         
 # PID-controller
