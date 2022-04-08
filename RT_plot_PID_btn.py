@@ -59,22 +59,40 @@ STOP = tk.Button(root, text = "STOP", font = ('calibri', 12), command = lambda: 
 STOP.place(x = S_P.winfo_x()+S_P.winfo_reqwidth() + 10, y = 90)
 
 root.update()
-SSP = tk.Button(root, text = "Set SP", font = ('calibri', 12), command = lambda: SetSP())
-SSP.place(x = 650, y = 160)
+SV = tk.Button(root, text = "Set", font = ('calibri', 12), command = lambda: SetRegVals())
+SV.place(x = 650, y = 260)
 
 root.update()
 SP_ent = tk.Entry(root)
 SP_ent.place(x = 650, y = 140)
-kp = tk.Entry(root)
-ti = tk.Entry(root)
-td = tk.Entry(root)
+
+kp_ent = tk.Entry(root)
+kp_ent.place(x = 650, y = 160)
+
+ti_ent = tk.Entry(root)
+ti_ent.place(x = 650, y = 180)
+
+td_ent = tk.Entry(root)
+td_ent.place(x = 650, y = 200)
+
+auto_ent = tk.Entry(root)
+auto_ent.place(x = 650, y = 220)
+
+man_ent = tk.Entry(root)
+man_ent.place(x = 650, y = 240)
 
 
-def SetSP():
+def SetRegVals():
 
     sp = SP_ent.get()
+    kp = kp_ent.get()
+    ti = ti_ent.get()
+    td = td_ent.get()
+    auto = auto_ent.get()
+    man = man_ent.get()
+    
 
-    fieldnames = ["SP"]
+    fieldnames = ["SP", "K_p", "T_i", "T_d", "Auto", "ManVal"]
 
     with open('pid_conf.csv', 'w') as SP_csv:
         csv_writer = csv.DictWriter(SP_csv, fieldnames=fieldnames)
@@ -83,7 +101,12 @@ def SetSP():
     with open('pid_conf.csv', 'a') as SP_csv:
         csv_writer = csv.DictWriter(SP_csv, fieldnames=fieldnames)
         info = {
-            "SP": sp
+            "SP": sp,
+            "K_p": kp,
+            "T_i": ti,
+            "T_d": td,
+            "Auto": auto,
+            "ManVal": man
         }
         csv_writer.writerow(info)
         SP_csv.close()
