@@ -70,7 +70,6 @@ def writeConfig():
             "ManVal": ManVal
         }
         csv_writer.writerow(pinfo)
-        f.close()
 
 def readConfig():
 #   with open ('pid_conf.csv', 'r+') as f:
