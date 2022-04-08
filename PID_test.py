@@ -58,7 +58,7 @@ def createConfig():
         csv_writer. writeheader()
 
 def writeConfig():
-    with open('pid_conf.csv', 'a') as f:
+    with open('pid_conf.csv', 'a+') as f:
         csv_writer = csv.DictWriter(f, fieldnames=PID_vals)
         
         pinfo = {
