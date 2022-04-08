@@ -73,7 +73,7 @@ def writeConfig():
         f.close()
             
 def readConfig():
-    global SP, K_p, T_i, T_d, Auto, ManVal
+#   global SP, K_p, T_i, T_d, Auto, ManVal
 #   with open ('pid_conf.csv', 'r+') as f:
 #       for i in range(4):
 #           f.readline()
