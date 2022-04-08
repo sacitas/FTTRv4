@@ -77,10 +77,10 @@ SP_ent.place(x = 670, y = 140)
 
 root.update()
 kp_label = tk.Label(root, text = 'Kp:', font = ('calibre', 10))
-kp_label.place(x = 640, y = 165)
+kp_label.place(x = 640, y = 175)
 kp_ent = tk.Entry(root)
 kp_ent.insert(0, "1")
-kp_ent.place(x = 670, y = 165)
+kp_ent.place(x = 670, y = 175)
 
 root.update()
 ti_label = tk.Label(root, text = 'Ti:', font = ('calibre', 10))
