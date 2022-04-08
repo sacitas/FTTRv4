@@ -52,7 +52,7 @@ def createConfig():
 
 def readConfig():
     global SP, K_p, T_i, T_d, Auto
-    with open ('pid_conf.csv', 'r+') as f:
+    with open ('pid.conf', 'r+') as f:
         config = f.readline().split(',')
         SP = float(config[0])
         K_p = float(config[1])
