@@ -21,8 +21,8 @@ def animate(i):
     x = data["x"]
     temp0 = data["temp0"]
 
-    getSP = pd.read_csv('SP_val.csv')
-    SP = getSP["sp"]
+    getSP = pd.read_csv('pid_conf.csv')
+    SP = getSP["SP"]
 
     plt.cla()
 
