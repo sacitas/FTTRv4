@@ -2,6 +2,8 @@ import RPi.GPIO as GPIO
 import time
 import os.path
 import temp_PID as tmp
+import csv
+import pandas as pd
 
 # Parameters
 Ts = float(input("Enter a samplingtime: "))
@@ -37,38 +39,64 @@ def destroy():
     pwm.stop()
     GPIO.output(PWM_pin, GPIO.LOW)
     GPIO.cleanup()
+
+PID_vals = ["SP", "K_p", "T_i", "T_d", "Auto", "ManVal"]    
     
 def createConfig():
-    file_exists = os.path.exists('pid_conf.csv')
-    if file_exists == True:
-        os.remove("pid_conf.csv")
-    else:
-        pass
+#   file_exists = os.path.exists('pid_conf.csv')
+#   if file_exists == True:
+#       os.remove("pid_conf.csv")
+#   else:
+#       pass
     with open ('pid_conf.csv', 'w') as f:
-        f.write("#######################\n")
-        f.write("PID-controller settings\n")
-        f.write("#######################\n\n")
-        f.write('SP: %s\nK_p: %s\nT_i: %s\nT_d: %s\nAuto (0 or 1): %s\nManual value (0 - 100): %s'%(SP,K_p,T_i,T_d,Auto,ManVal))
+#       f.write("#######################\n")
+#       f.write("PID-controller settings\n")
+#       f.write("#######################\n\n")
+#       f.write('SP: %\nK_p: %s\nT_i: %s\nT_d: %s\nAuto (0 or 1): %s\nManual value (0 - 100): %s'%(SP,K_p,T_i,T_d,Auto,ManVal))
+#       f.close()
+        csv_writer = csv.DictWriter(f, fieldnames=PID_vals)
+        csv_writer. writeheader()
+
+def writeConfig():
+    with open('pid_conf.csv', 'a') as f:
+        csv_writer = csv.DictWriter(f, fieldnames=PID_vals)
+        
+        pinfo = {
+            "SP": SP,
+            "K_p": K_p,
+            "T_i": T_i,
+            "T_d": T_d,
+            "Auto": Auto,
+            "ManVal": ManVal
+        }
+        csv_writer.writerow(pinfo)
         f.close()
             
 def readConfig():
     global SP, K_p, T_i, T_d, Auto, ManVal
-    with open ('pid_conf.csv', 'r+') as f:
-        for i in range(4):
-            f.readline()
-        SP_read = f.readline().split(':')
-        SP = float(SP_read[1])
-        K_p_read = f.readline().split(':')
-        K_p = float(K_p_read[1])
-        T_i_read = f.readline().split(':')
-        T_i = float(T_i_read[1])
-        T_d_read = f.readline().split(':')
-        T_d = float(T_d_read[1])
-        Auto_read = f.readline().split(':')
-        Auto = int(Auto_read[1])
-        ManVal_read = f.readline().split(':')
-        ManVal = int(ManVal_read[1])
-        f.close()
+#   with open ('pid_conf.csv', 'r+') as f:
+#       for i in range(4):
+#           f.readline()
+#       SP_read = f.readline().split(':')
+#       SP = float(SP_read[1])
+#       K_p_read = f.readline().split(':')
+#       K_p = float(K_p_read[1])
+#       T_i_read = f.readline().split(':')
+#       T_i = float(T_i_read[1])
+#       T_d_read = f.readline().split(':')
+#       T_d = float(T_d_read[1])
+#       Auto_read = f.readline().split(':')
+#       Auto = int(Auto_read[1])
+#       ManVal_read = f.readline().split(':')
+#       ManVal = int(ManVal_read[1])
+#       f.close()
+    vals = pd.read_csv('pid_conf.csv')
+    SP = vals["SP"]
+    K_p = vals["K_p"]
+    T_i = vals["T_i"]
+    T_d = vals["T_d"]
+    Auto = vals["Auto"]
+    ManVal = vals["ManVal"]
         
 # PID-controller
 def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
@@ -163,6 +191,7 @@ def ManVal_loop():
 
 def PID_main():
     createConfig()
+    writeConfig()
     tmp.create_tmpFile()
     setup()
     try:
