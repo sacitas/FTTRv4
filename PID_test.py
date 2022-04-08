@@ -71,7 +71,6 @@ def readConfig():
         Auto = int(Auto_read[1])
         ManVal_read = f.readline().split(':')
         ManVal = int(ManVal_read[1])
-        f.close()
 
         
 # PID-controller
