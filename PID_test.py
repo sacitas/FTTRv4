@@ -88,7 +88,7 @@ def readConfig(SP, K_p, T_i, T_d, Auto, ManVal):
 #       ManVal_read = f.readline().split(':')
 #       ManVal = int(ManVal_read[1])
 #       f.close()
-    vals = pd.read_csv('pid_conf.csv')
+    vals = pd.read_csv('pid_conf.csv', sep = ',')
     SP = vals["SP"]
     K_p = vals["K_p"]
     T_i = vals["T_i"]
