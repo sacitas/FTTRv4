@@ -7,6 +7,15 @@ import pandas as pd
 import numpy as np
 import csv
 
+sp = 0
+kp = 0
+ti = 0
+td = 0
+auto = 0
+man = 0
+
+
+
 #------Main GUI code-----
 root = tk.Tk()
 root.title("Real Time Plot")
