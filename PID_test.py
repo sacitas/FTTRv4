@@ -42,7 +42,11 @@ def destroy():
     
     
 def createConfig():
-    os.remove("pid.conf")
+    file_exists = os.path.exists('pid.conf')
+    if file_exists == True:
+        os.remove("pid.conf")
+    else:
+        pass
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,K_p,T_i,T_d,Auto,ManVal))
 
