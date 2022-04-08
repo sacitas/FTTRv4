@@ -42,35 +42,20 @@ def destroy():
     
     
 def createConfig():
-    file_exists = os.path.exists('pid_conf.csv')
-    if file_exists == True:
-        os.remove("pid_conf.csv")
-    else:
-        pass
-    with open ('pid_conf.csv', 'w') as f:
-        f.write("#######################\n")
-        f.write("PID-controller settings\n")
-        f.write("#######################\n\n")
-        f.write('SP: %s\nK_p: %s\nT_i: %s\nT_d: %s\nAuto (0 or 1): %s\nManual value (0 - 100): %s'%(SP,K_p,T_i,T_d,Auto,ManVal))        
+    os.remove("pid.conf")
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(SP,K_p,T_i,T_d,Auto,ManVal))
 
 def readConfig():
-    global SP, K_p, T_i, T_d, Auto, ManVal
+    global SP, K_p, T_i, T_d, Auto
     with open ('pid_conf.csv', 'r+') as f:
-        for i in range(4):
-            f.readline()
-        SP_read = f.readline().split(':')
-        SP = float(SP_read[1])
-        K_p_read = f.readline().split(':')
-        K_p = float(K_p_read[1])
-        T_i_read = f.readline().split(':')
-        T_i = float(T_i_read[1])
-        T_d_read = f.readline().split(':')
-        T_d = float(T_d_read[1])
-        Auto_read = f.readline().split(':')
-        Auto = int(Auto_read[1])
-        ManVal_read = f.readline().split(':')
-        ManVal = int(ManVal_read[1])
-
+        config = f.readline().split(',')
+        SP = float(config[0])
+        K_p = float(config[1])
+        T_i = float(config[2])
+        T_d = float(config[3])
+        Auto = int(config[4])
+        ManVal = int(config[5])
         
 # PID-controller
 def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
