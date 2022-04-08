@@ -63,18 +63,23 @@ root.update()
 SP_ent = tk.Entry(root)
 SP_ent.place(x = 650, y = 140)
 
+root.update()
 kp_ent = tk.Entry(root)
 kp_ent.place(x = 650, y = 160)
 
+root.update()
 ti_ent = tk.Entry(root)
 ti_ent.place(x = 650, y = 180)
 
+root.update()
 td_ent = tk.Entry(root)
 td_ent.place(x = 650, y = 200)
 
+root.update()
 auto_ent = tk.Entry(root)
 auto_ent.place(x = 650, y = 220)
 
+root.update()
 man_ent = tk.Entry(root)
 man_ent.place(x = 650, y = 240)
 
@@ -100,6 +105,5 @@ def SetRegVals():
         f.write("PID-controller settings\n")
         f.write("#######################\n\n")
         f.write('SP: %\nK_p: %s\nT_i: %s\nT_d: %s\nAuto (0 or 1): %s\nManual value (0 - 100): %s'%(sp,kp,ti,td,auto,man))
-        f.close()
 
 root.mainloop()
