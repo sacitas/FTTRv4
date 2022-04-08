@@ -71,7 +71,7 @@ def writeConfig():
         }
         csv_writer.writerow(pinfo)
         f.close()
-global SP, K_p, T_i, T_d, Auto, ManVal
+
 def readConfig():
 #   global SP, K_p, T_i, T_d, Auto, ManVal
 #   with open ('pid_conf.csv', 'r+') as f:
