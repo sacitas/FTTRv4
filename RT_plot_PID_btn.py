@@ -92,23 +92,11 @@ def SetRegVals():
     man = man_ent.get()
     
 
-    fieldnames = ["SP", "K_p", "T_i", "T_d", "Auto", "ManVal"]
-
-    with open('pid_conf.csv', 'w') as SP_csv:
-        csv_writer = csv.DictWriter(SP_csv, fieldnames=fieldnames)
-        csv_writer.writeheader()
-    
-    with open('pid_conf.csv', 'a') as SP_csv:
-        csv_writer = csv.DictWriter(SP_csv, fieldnames=fieldnames)
-        info = {
-            "SP": sp,
-            "K_p": kp,
-            "T_i": ti,
-            "T_d": td,
-            "Auto": auto,
-            "ManVal": man
-        }
-        csv_writer.writerow(info)
-        SP_csv.close()
+    with open ('pid_conf.csv', 'w') as f:
+        f.write("#######################\n")
+        f.write("PID-controller settings\n")
+        f.write("#######################\n\n")
+        f.write('SP: %\nK_p: %s\nT_i: %s\nT_d: %s\nAuto (0 or 1): %s\nManual value (0 - 100): %s'%(sp,kp,ti,td,auto,man))
+        f.close()
 
 root.mainloop()
