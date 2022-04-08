@@ -111,6 +111,6 @@ def SetRegVals():
     man = int(man)
     
     with open ('pid.conf', 'w') as f:
-        f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,ti,auto,man))
+        f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
    
 root.mainloop()
