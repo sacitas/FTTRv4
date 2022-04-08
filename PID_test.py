@@ -73,7 +73,6 @@ def writeConfig():
         f.close()
 
 def readConfig():
-    global SP, K_p, T_i, T_d, Auto, ManVal
 #   with open ('pid_conf.csv', 'r+') as f:
 #       for i in range(4):
 #           f.readline()
@@ -97,6 +96,8 @@ def readConfig():
     T_d = vals["T_d"]
     Auto = vals["Auto"]
     ManVal = vals["ManVal"]
+    
+    return SP, K_p, T_i, T_d, Auto, ManVal
         
 # PID-controller
 def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
