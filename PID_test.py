@@ -39,8 +39,7 @@ def destroy():
     pwm.stop()
     GPIO.output(PWM_pin, GPIO.LOW)
     GPIO.cleanup()
-
-PID_vals = ["SP", "K_p", "T_i", "T_d", "Auto", "ManVal"]    
+    
     
 def createConfig():
     file_exists = os.path.exists('pid_conf.csv')
@@ -53,10 +52,10 @@ def createConfig():
         f.write("PID-controller settings\n")
         f.write("#######################\n\n")
         f.write('SP: %\nK_p: %s\nT_i: %s\nT_d: %s\nAuto (0 or 1): %s\nManual value (0 - 100): %s'%(SP,K_p,T_i,T_d,Auto,ManVal))
-        f.close()
         
 
-def readConfig(SP, K_p, T_i, T_d, Auto, ManVal):
+def readConfig():
+    global SP, K_p, T_i, T_d, Auto, ManVal
     with open ('pid_conf.csv', 'r+') as f:
         for i in range(4):
             f.readline()
