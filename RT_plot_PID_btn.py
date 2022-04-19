@@ -128,7 +128,13 @@ def SetRegVals():
     man = man_ent.get()
     man = int(man)
     
-    with open ('pid.conf', 'w') as f:
+    path = r"~/Documents/FTTRv4/Orbit-NTNU/pid.conf"
+    assert os.path.isfile(path)
+
+    with open (path, 'r') as f:
+        pass
+
+    with open (path, 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
    
 root.mainloop()
