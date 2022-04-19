@@ -36,36 +36,35 @@ def animate():
 
     plt.cla()
 
-    t0, = plt.plot(x, temp0, linewidth = 1.5, label='Sensor 0')
-    t1, = plt.plot(x, temp1, linewidth = 1.5, label='Sensor 1')
-    t2, = plt.plot(x, temp2, linewidth = 1.5, label='Sensor 2')
-    t3, = plt.plot(x, temp3, linewidth = 1.5, label='Sensor 3')
-    t4, = plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
+    if (var0.get()==1):
+        t0, = plt.plot(x, temp0, linewidth = 1.5, label='Sensor 0')
+    else:
+        t0.remove()
+        
+    if (var1.get()==1):
+        t1, = plt.plot(x, temp1, linewidth = 1.5, label='Sensor 1')
+    else:
+        t1.remove()
+        
+    if (var2.get()==1):
+        t2, = plt.plot(x, temp2, linewidth = 1.5, label='Sensor 2')
+    else:
+        t2.remove()
+        
+    if (var3.get()==1):
+        t3, = plt.plot(x, temp3, linewidth = 1.5, label='Sensor 3')
+    else:
+        t3.remove()    
+        
+    if (var4.get()==1):
+        t4, = plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
+    else:
+        t4.remove()
+    
     plt.xticks(rotation=90, ha='right', fontsize=12)
     plt.xticks(np.arange(0, len(x)+1, 20))
     plt.legend(loc='upper left')
     plt.tight_layout()
-
-    if (var0.get()==0):
-        t0.remove()
-    else:
-        t0.show()
-    if (var1.get()==0):
-        t1.remove()
-    else:
-        t1.show()
-    if (var2.get()==0):
-        t2.remove()
-    else:
-        t2.show()
-    if (var3.get()==0):
-        t3.remove()
-    else:
-        t3.show()    
-    if (var4.get()==0):
-        t4.remove()
-    else:
-        t4.show()
 
 
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
