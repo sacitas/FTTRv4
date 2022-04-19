@@ -10,7 +10,7 @@ os.system('modprobe w1-therm')
  
 base_dir = '/sys/bus/w1/devices/'
 
-fieldnames = ["x", "temp0", "SP"]
+fieldnames = ["x", "temp0", "temp1", "temp2", "temp3", "temp4"]
  
 def read_temp_raw(n):
     device_folder = glob.glob(base_dir + '28*')[n]
@@ -42,7 +42,7 @@ def convert_temp(n):
 def read_temp():
     temps = []
 
-    for i in range (0, 1):
+    for i in range (0, 5):
         temp = convert_temp(i)
         temps.append(temp)
 #       print("Temp_sensor{} = {}*C.".format(i, temp))
@@ -63,7 +63,11 @@ def write_tmp():
         
         info = {
             "x": x,
-            "temp0": temps
+            "temp0": temps[0]
+            "temp1": temps[1]
+            "temp2": temps[2]
+            "temp3": temps[3]
+            "temp4": temps[4]
         }
         csv_writer.writerow(info)
         data_csv.close()
