@@ -150,7 +150,7 @@ man_ent.place(x = 670, y = 300)
 
 
 var0 = tk.IntVar()
-M0 = tk.Checkbutton(root, text='Manual', variable=var0, onvalue=1, offvalue=0, command = lambda: )
+M0 = tk.Checkbutton(root, text='Manual', variable=var0, onvalue=1, offvalue=0, command = lambda: mode_manual())
 M0.place(x = 50, y = 420)
 
 
