@@ -43,8 +43,9 @@ def animate(i):
     t4, = plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
     
     
-plt.xticks(rotation=90, ha='right', fontsize=12)
-plt.xticks(np.arange(0, len(x)+1, 20))
+    plt.xticks(rotation=90, ha='right', fontsize=12)
+    plt.xticks(np.arange(0, len(x)+1, 20))
+    
 legend = plt.legend(loc='upper left')
 t0_legend, t1_legend, t2_legend, t3_legend, t4_legend = legend.get_lines()
 t0_legend.set_picker(True)
