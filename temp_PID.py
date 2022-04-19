@@ -63,10 +63,10 @@ def write_tmp():
         
         info = {
             "x": x,
-            "temp0": temps[0]
-            "temp1": temps[1]
-            "temp2": temps[2]
-            "temp3": temps[3]
+            "temp0": temps[0],
+            "temp1": temps[1],
+            "temp2": temps[2],
+            "temp3": temps[3],
             "temp4": temps[4]
         }
         csv_writer.writerow(info)
