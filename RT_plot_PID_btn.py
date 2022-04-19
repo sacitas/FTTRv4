@@ -6,6 +6,8 @@ import tkinter as tk
 import pandas as pd
 import numpy as np
 import csv
+import pwd
+import grp
 import os
 
 sp = 0
@@ -129,11 +131,10 @@ def SetRegVals():
     man = man_ent.get()
     man = int(man)
     
-    path = r"/Documents/FTTRv4/Orbit-NTNU/pid.conf"
-    assert os.path.isfile(path)
-
-    with open (path, 'r') as f:
-        pass
+    uid = pwd.getpwnam("pi").pw_uid
+    gid = grp.getgrnam("pi").gr_gid
+    path = r"~/Documents/FTTRv4/Orbit-NTNU/pid.conf"
+    os.chown(path, uid, gid)
 
     with open (path, 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
