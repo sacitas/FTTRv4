@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import os.path
-import temp_PID as tmp
+import temp_gen_digi as tmp
 import csv
 import pandas as pd
 
