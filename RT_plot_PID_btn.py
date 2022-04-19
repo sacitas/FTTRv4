@@ -137,10 +137,8 @@ def SetRegVals():
     man = man_ent.get()
     man = int(man)
     
-    path = '/home/pi/Documents/FTTRv4/Orbit-NTNU/pid.conf'
-    shutil.chown(path, user="pi", group="pi")
 
-    with open (path, 'w') as f:
+    with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
    
 root.mainloop()
