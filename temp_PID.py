@@ -47,7 +47,7 @@ def read_temp():
         temps.append(temp)
 #       print("Temp_sensor{} = {}*C.".format(i, temp))
 
-    return temps[0]
+    return temps
 
 def create_tmpFile():
     with open('PID_temp.csv', 'w') as data_csv:
