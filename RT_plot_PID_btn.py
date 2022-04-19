@@ -129,7 +129,7 @@ def SetRegVals():
     man = man_ent.get()
     man = int(man)
     
-    path = r"~/Documents/FTTRv4/Orbit-NTNU/pid.conf"
+    path = r"/Documents/FTTRv4/Orbit-NTNU/pid.conf"
     assert os.path.isfile(path)
 
     with open (path, 'r') as f:
