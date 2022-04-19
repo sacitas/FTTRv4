@@ -24,7 +24,7 @@ root.geometry("900x600") # Window size
 
 plt.style.use('fivethirtyeight')
 
-def animate():
+def animate(i):
     
     global t0, t1, t2, t3, t4
     
