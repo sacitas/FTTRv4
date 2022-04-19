@@ -79,7 +79,7 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
     else:
         beta = 0
     
-    PV[0] = tmp.read_temp(0)
+    PV[0] = tmp.temps[0]
     print("Sensor0: " + str(PV[0]))
     
     # Calculate error from setpoint
@@ -147,7 +147,7 @@ def ManVal_loop():
     readConfig()
     man_output = ManVal
     print(man_output)
-    temp_read = tmp.read_temp(0)
+    temp_read = tmp.temps[0]
     print("Sensor0: " + str(temp_read))
     pwm.ChangeDutyCycle(man_output)
     time.sleep(Ts)
@@ -158,7 +158,7 @@ def PID_main():
     setup()
     try:
         while True:
-            tmp.read_temp(0)
+            tmp.temps[0]
             tmp.write_tmp()
             if Auto == 1:
                 PID_loop()
