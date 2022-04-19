@@ -133,7 +133,7 @@ def SetRegVals():
     
     uid = pwd.getpwnam("pi").pw_uid
     gid = grp.getgrnam("pi").gr_gid
-    path = r"~/Documents/FTTRv4/Orbit-NTNU/pid.conf"
+    path = '~/Documents/FTTRv4/Orbit-NTNU/pid.conf'
     os.chown(path, uid, gid)
 
     with open (path, 'w') as f:
