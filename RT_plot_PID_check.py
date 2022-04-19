@@ -50,32 +50,8 @@ def animate():
     plt.legend(loc='upper left')
     plt.tight_layout()
 
-    if (var0.get()==1):
-        t0.set_visible(True)
-    else:
-        t0.set_visible(False)
-        
-    if (var1.get()==1):
-        t1.set_visible(True)
-    else:
-        t1.set_visible(False)
-        
-    if (var2.get()==1):
-        t2.set_visible(True)
-    else:
-        t2.set_visible(False)
-        
-    if (var3.get()==1):
-        t3.set_visible(True)
-    else:
-        t3.set_visible(False)    
-        
-    if (var4.get()==1):
-        t4.set_visible(True)
-    else:
-        t4.set_visible(False)
+   
     
-
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
 canvas.get_tk_widget().place(x = 10, y = 10, width = 600, height = 400)
 canvas.draw()
@@ -163,7 +139,36 @@ c3.place(x = 50, y = 480)
 c4 = tk.Checkbutton(root, text='Sensor 4', variable=var4, onvalue=1, offvalue=0, command = lambda: animate())
 c4.place(x = 50, y = 500)
 
+def shows0():
+    if (var0.get()==1):
+        t0.set_visible(True)
+    else:
+        t0.set_visible(False)    
+        
+def shows1():
+    if (var1.get()==1):
+        t1.set_visible(True)
+    else:
+        t1.set_visible(False)
+        
+def shows2():
+    if (var2.get()==1):
+        t2.set_visible(True)
+    else:
+        t2.set_visible(False)
+def shows3():
+    if (var3.get()==1):
+        t3.set_visible(True)
+    else:
+        t3.set_visible(False)
+        
+def shows4():
+    if (var4.get()==1):
+        t4.set_visible(True)
+    else:
+        t4.set_visible(False)
 
+        
 def SetRegVals():
     
     global sp, kp, ti, td, auto, man
