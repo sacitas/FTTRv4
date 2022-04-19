@@ -43,37 +43,40 @@ def animate(i):
     t4, = plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
     
     
-    plt.xticks(rotation=90, ha='right', fontsize=12)
-    plt.xticks(np.arange(0, len(x)+1, 20))
-    plt.legend(loc='upper left')
-    plt.tight_layout()
-    
-    if (var0.get()==1):
-        t0.set_visible(True)
-    else:
-        t0.set_visible(False)  
-        
-    if (var1.get()==1):
-        t1.set_visible(True)
-    else:
-        t1.set_visible(False)
-        
-    if (var2.get()==1):
-        t2.set_visible(True)
-    else:
-        t2.set_visible(False)
-        
-    if (var3.get()==1):
-        t3.set_visible(True)
-    else:
-        t3.set_visible(False)
-    
-    if (var4.get()==1):
-        t4.set_visible(True)
-    else:
-        t4.set_visible(False)
+plt.xticks(rotation=90, ha='right', fontsize=12)
+plt.xticks(np.arange(0, len(x)+1, 20))
+legend = plt.legend(loc='upper left')
+t0_legend, t1_legend, t2_legend, t3_legend, t4_legend = legend.get_lines()
+t0_legend.set_picker(True)
+t0_legend.set_pickradius(10)
+t1_legend.set_picker(True)
+t1_legend.set_pickradius(10)
+t2_legend.set_picker(True)
+t2_legend.set_pickradius(10)
+t3_legend.set_picker(True)
+t3_legend.set_pickradius(10)
+t4_legend.set_picker(True)
+t4_legend.set_pickradius(10)
 
-   
+plt.tight_layout()
+
+graphs = {}
+graphs[t0_legend] = t0
+graphs[t1_legend] = t1
+graphs[t2_legend] = t2
+graphs[t3_legend] = t3
+graphs[t4_legend] = t4
+
+    
+def on_pick(event):
+    legend = event.artist
+    isVisible = legend.get_visible()
+    
+    graphs[legend].set_visible(not isVisible)
+    legend.set_visible(not isVisible)
+    
+    
+plt.connect('pick_event', on_pick)
     
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
 canvas.get_tk_widget().place(x = 10, y = 10, width = 600, height = 400)
@@ -147,20 +150,9 @@ man_ent.place(x = 670, y = 300)
 
 
 var0 = tk.IntVar()
-var1 = tk.IntVar()
-var2 = tk.IntVar()
-var3 = tk.IntVar()
-var4 = tk.IntVar()
-c0 = tk.Checkbutton(root, text='Sensor 0', variable=var0, onvalue=1, offvalue=0, command = lambda: animate(i))
-c0.place(x = 50, y = 420)
-c1 = tk.Checkbutton(root, text='Sensor 1', variable=var1, onvalue=1, offvalue=0, command = lambda: animate(i))
-c1.place(x = 50, y = 440)
-c2 = tk.Checkbutton(root, text='Sensor 2', variable=var2, onvalue=1, offvalue=0, command = lambda: animate(i))
-c2.place(x = 50, y = 460)
-c3 = tk.Checkbutton(root, text='Sensor 3', variable=var3, onvalue=1, offvalue=0, command = lambda: animate(i))
-c3.place(x = 50, y = 480)
-c4 = tk.Checkbutton(root, text='Sensor 4', variable=var4, onvalue=1, offvalue=0, command = lambda: animate(i))
-c4.place(x = 50, y = 500)
+M0 = tk.Checkbutton(root, text='Manual', variable=var0, onvalue=1, offvalue=0, command = lambda: )
+M0.place(x = 50, y = 420)
+
 
 
         
