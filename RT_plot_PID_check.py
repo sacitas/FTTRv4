@@ -25,7 +25,9 @@ root.geometry("900x600") # Window size
 plt.style.use('fivethirtyeight')
 
 def animate():
-
+    
+    global t0, t1, t2, t3, t4
+    
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
     temp0 = data["temp0"]
@@ -35,37 +37,44 @@ def animate():
     temp4 = data["temp4"]
 
     plt.cla()
-
-    if (var0.get()==1):
-        t0, = plt.plot(x, temp0, linewidth = 1.5, label='Sensor 0')
-    else:
-        t0.remove()
-        
-    if (var1.get()==1):
-        t1, = plt.plot(x, temp1, linewidth = 1.5, label='Sensor 1')
-    else:
-        t1.remove()
-        
-    if (var2.get()==1):
-        t2, = plt.plot(x, temp2, linewidth = 1.5, label='Sensor 2')
-    else:
-        t2.remove()
-        
-    if (var3.get()==1):
-        t3, = plt.plot(x, temp3, linewidth = 1.5, label='Sensor 3')
-    else:
-        t3.remove()    
-        
-    if (var4.get()==1):
-        t4, = plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
-    else:
-        t4.remove()
+    
+    t0, = plt.plot(x, temp0, linewidth = 1.5, label='Sensor 0')
+    t1, = plt.plot(x, temp1, linewidth = 1.5, label='Sensor 1')
+    t2, = plt.plot(x, temp2, linewidth = 1.5, label='Sensor 2')
+    t3, = plt.plot(x, temp3, linewidth = 1.5, label='Sensor 3')
+    t4, = plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
+    
     
     plt.xticks(rotation=90, ha='right', fontsize=12)
     plt.xticks(np.arange(0, len(x)+1, 20))
     plt.legend(loc='upper left')
     plt.tight_layout()
 
+    if (var0.get()==1):
+        t0.set_visible(True)
+    else:
+        t0.set_visible(False)
+        
+    if (var1.get()==1):
+        t1.set_visible(True)
+    else:
+        t1.set_visible(False)
+        
+    if (var2.get()==1):
+        t2.set_visible(True)
+    else:
+        t2.set_visible(False)
+        
+    if (var3.get()==1):
+        t3.set_visible(True)
+    else:
+        t3.set_visible(False)    
+        
+    if (var4.get()==1):
+        t4.set_visible(True)
+    else:
+        t4.set_visible(False)
+    
 
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
 canvas.get_tk_widget().place(x = 10, y = 10, width = 600, height = 400)
