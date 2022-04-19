@@ -26,8 +26,6 @@ plt.style.use('fivethirtyeight')
 
 def animate(i):
     
-    global t0, t1, t2, t3, t4
-    
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
     temp0 = data["temp0"]
@@ -49,6 +47,31 @@ def animate(i):
     plt.xticks(np.arange(0, len(x)+1, 20))
     plt.legend(loc='upper left')
     plt.tight_layout()
+    
+    if (var0.get()==1):
+        t0.set_visible(True)
+    else:
+        t0.set_visible(False)  
+        
+    if (var1.get()==1):
+        t1.set_visible(True)
+    else:
+        t1.set_visible(False)
+        
+    if (var2.get()==1):
+        t2.set_visible(True)
+    else:
+        t2.set_visible(False)
+        
+    if (var3.get()==1):
+        t3.set_visible(True)
+    else:
+        t3.set_visible(False)
+    
+    if (var4.get()==1):
+        t4.set_visible(True)
+    else:
+        t4.set_visible(False)
 
    
     
@@ -128,45 +151,17 @@ var1 = tk.IntVar()
 var2 = tk.IntVar()
 var3 = tk.IntVar()
 var4 = tk.IntVar()
-c0 = tk.Checkbutton(root, text='Sensor 0', variable=var0, onvalue=1, offvalue=0, command = lambda: shows0())
+c0 = tk.Checkbutton(root, text='Sensor 0', variable=var0, onvalue=1, offvalue=0, command = lambda: amimate())
 c0.place(x = 50, y = 420)
-c1 = tk.Checkbutton(root, text='Sensor 1', variable=var1, onvalue=1, offvalue=0, command = lambda: shows1())
+c1 = tk.Checkbutton(root, text='Sensor 1', variable=var1, onvalue=1, offvalue=0, command = lambda: animate())
 c1.place(x = 50, y = 440)
-c2 = tk.Checkbutton(root, text='Sensor 2', variable=var2, onvalue=1, offvalue=0, command = lambda: shows2())
+c2 = tk.Checkbutton(root, text='Sensor 2', variable=var2, onvalue=1, offvalue=0, command = lambda: animate())
 c2.place(x = 50, y = 460)
-c3 = tk.Checkbutton(root, text='Sensor 3', variable=var3, onvalue=1, offvalue=0, command = lambda: shows3())
+c3 = tk.Checkbutton(root, text='Sensor 3', variable=var3, onvalue=1, offvalue=0, command = lambda: animate())
 c3.place(x = 50, y = 480)
-c4 = tk.Checkbutton(root, text='Sensor 4', variable=var4, onvalue=1, offvalue=0, command = lambda: shows4())
+c4 = tk.Checkbutton(root, text='Sensor 4', variable=var4, onvalue=1, offvalue=0, command = lambda: animate())
 c4.place(x = 50, y = 500)
 
-def shows0():
-    if (var0.get()==1):
-        t0.set_visible(True)
-    else:
-        t0.set_visible(False)    
-        
-def shows1():
-    if (var1.get()==1):
-        t1.set_visible(True)
-    else:
-        t1.set_visible(False)
-        
-def shows2():
-    if (var2.get()==1):
-        t2.set_visible(True)
-    else:
-        t2.set_visible(False)
-def shows3():
-    if (var3.get()==1):
-        t3.set_visible(True)
-    else:
-        t3.set_visible(False)
-        
-def shows4():
-    if (var4.get()==1):
-        t4.set_visible(True)
-    else:
-        t4.set_visible(False)
 
         
 def SetRegVals():
