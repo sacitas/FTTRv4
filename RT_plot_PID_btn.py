@@ -6,8 +6,7 @@ import tkinter as tk
 import pandas as pd
 import numpy as np
 import csv
-import pwd
-import grp
+import shutil
 import os
 
 sp = 0
@@ -131,10 +130,8 @@ def SetRegVals():
     man = man_ent.get()
     man = int(man)
     
-    uid = pwd.getpwnam("pi").pw_uid
-    gid = grp.getgrnam("pi").gr_gid
     path = '/home/pi/Documents/FTTRv4/Orbit-NTNU/pid.conf'
-    os.chown(path, uid, gid)
+    shutil.chown(path, user="pi", group="pi")
 
     with open (path, 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
