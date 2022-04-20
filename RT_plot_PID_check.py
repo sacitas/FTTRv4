@@ -56,6 +56,31 @@ canvas.draw()
 
 ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
+def SetRegVals():
+    
+    global sp, kp, ti, td, auto, man
+    
+    sp = SP_ent.get()
+    sp = float(sp)
+    kp = kp_ent.get()
+    kp = float(kp)
+    ti = ti_ent.get()
+    ti = float(ti)
+    td = td_ent.get()
+    td = float(td)
+    
+    if (var0.get() == 1):
+        auto = 1
+    else:
+        auto = 0
+    
+    man = man_ent.get()
+    man = float(man)
+    
+
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
+
 #------Create buttons------
 
 var0 = tk.IntVar()
@@ -111,29 +136,5 @@ SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: Set
 SV.place(x = 670, y = 350)
         
     
-def SetRegVals():
-    
-    global sp, kp, ti, td, auto, man
-    
-    sp = SP_ent.get()
-    sp = float(sp)
-    kp = kp_ent.get()
-    kp = float(kp)
-    ti = ti_ent.get()
-    ti = float(ti)
-    td = td_ent.get()
-    td = float(td)
-    
-    if (var0.get() == 1):
-        auto = 1
-    else:
-        auto = 0
-    
-    man = man_ent.get()
-    man = float(man)
-    
-
-    with open ('pid.conf', 'w') as f:
-        f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
    
 root.mainloop()
