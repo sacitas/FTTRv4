@@ -122,13 +122,15 @@ def SetRegVals():
     ti = float(ti)
     td = td_ent.get()
     td = float(td)
-    man = man_ent.get()
-    man = float(man)
     
     if (var0.get() == 1):
         auto = 0
     else:
         auto = 1
+    
+    man = man_ent.get()
+    man = float(man)
+    
 
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
