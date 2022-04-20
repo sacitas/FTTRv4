@@ -67,7 +67,7 @@ def setMode():
 def SetRegVals():  
     setMode()
     
-    global sp, kp, ti, td, auto, man
+    global sp, kp, ti, td, man
     
     sp = SP_ent.get()
     sp = float(sp)
@@ -89,7 +89,7 @@ def SetRegVals():
 
 root.update()
 var0 = tk.IntVar()
-MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0, command = lambda: setMode())
+MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0, command = setMode())
 MA.place(x = 670, y = 50)
 
 root.update()
