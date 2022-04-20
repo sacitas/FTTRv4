@@ -12,7 +12,6 @@ K_p = float(input("Enter a K_p value: "))
 T_i = float(input("Enter a T_i value: "))
 T_d = float(input("Enter a T_d value: "))
 N = float(input("Enter a filter (N) value: "))
-ManVal = 50
 T_t = 0
 Tr_gain = 0
 U_total = 0
