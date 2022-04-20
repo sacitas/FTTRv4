@@ -42,10 +42,10 @@ def animate(i):
     plt.plot(x, temp3, linewidth = 1.5, label='Sensor 3')
     plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
     
-    
-    plt.xticks(rotation=90, ha='right', fontsize=12)
-    plt.xticks(np.arange(0, len(x)+1, 20))
-    plt.legend(loc='upper left')
+    plt.ylim([0, 200])
+    plt.xticks(rotation=90, ha='right', fontsize=8)
+    plt.xticks(np.arange(0, len(x)+1, 30))
+    plt.legend(loc='upper left', prop={'size':10})
     plt.tight_layout()
 
     
