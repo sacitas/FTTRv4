@@ -59,7 +59,7 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 #------Create buttons------
 
 var0 = tk.IntVar()
-MA = tk.Checkbutton(root, text='Manual', variable=var0, onvalue=1, offvalue=0)
+MA = tk.Checkbutton(root, text='MANUAL', variable=var0, onvalue=1, offvalue=0)
 MA.place(x = 670, y = 50)
 
 root.update()
@@ -71,7 +71,7 @@ STOP = tk.Button(root, text = "STOP", font = ('calibri', 12), command = lambda: 
 STOP.place(x = S_P.winfo_x()+S_P.winfo_reqwidth() + 10, y = 90)
 
 root.update()
-SV = tk.Button(root, text = "Set", font = ('calibri', 12), command = lambda: SetRegVals())
+SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: SetRegVals())
 SV.place(x = 670, y = 350)
 
 root.update()
@@ -102,7 +102,14 @@ td_ent = tk.Entry(root)
 td_ent.insert(0, "0")
 td_ent.place(x = 670, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 10)
 
+root.update()
+man_label = tk.Label(root, text = 'Manual:', font = ('calibre', 10))
+man_label.place(x = 640, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 10)
+man_ent = tk.Entry(root)
+man_ent.insert(0, "0")
+man_ent.place(x = 670, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 10)
         
+    
 def SetRegVals():
     
     global sp, kp, ti, td, auto, man
@@ -115,13 +122,13 @@ def SetRegVals():
     ti = float(ti)
     td = td_ent.get()
     td = float(td)
-    auto = auto_ent.get()
-    auto = int(auto)
+    man = man_ent.get()
+    man = float(man)
     
     if (var0.get() == 1):
-        man = 1
+        auto = 0
     else:
-        man = 0
+        auto = 1
 
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
