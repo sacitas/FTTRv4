@@ -59,7 +59,7 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 #------Create buttons------
 
 var0 = tk.IntVar()
-MA = tk.Checkbutton(root, text='MANUAL', variable=var0, onvalue=1, offvalue=0)
+MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0)
 MA.place(x = 670, y = 50)
 
 root.update()
@@ -67,17 +67,10 @@ S_P = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lamb
 S_P.place(x = 670, y = 90)
 
 root.update()
-STOP = tk.Button(root, text = "STOP", font = ('calibri', 12), command = lambda: stop_plot())
-STOP.place(x = S_P.winfo_x()+S_P.winfo_reqwidth() + 10, y = 90)
-
-root.update()
-SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: SetRegVals())
-SV.place(x = 670, y = 350)
-
-root.update()
 SP_label = tk.Label(root, text = 'SP:', font = ('calibre', 10))
 SP_label.place(x = 640, y = 140)
 SP_ent = tk.Entry(root)
+SP_ent.bind('<Return>', SetRegVals)
 SP_ent.insert(0, "25")
 SP_ent.place(x = 670, y = 140)
 
@@ -85,6 +78,7 @@ root.update()
 kp_label = tk.Label(root, text = 'Kp:', font = ('calibre', 10))
 kp_label.place(x = 640, y = SP_label.winfo_y()+SP_label.winfo_reqwidth() + 10)
 kp_ent = tk.Entry(root)
+kp_ent.bind('<Return>', SetRegVals)
 kp_ent.insert(0, "1")
 kp_ent.place(x = 670, y = SP_label.winfo_y()+SP_label.winfo_reqwidth() + 10)
 
@@ -92,6 +86,7 @@ root.update()
 ti_label = tk.Label(root, text = 'Ti:', font = ('calibre', 10))
 ti_label.place(x = 640, y = kp_label.winfo_y()+kp_label.winfo_reqwidth() + 10)
 ti_ent = tk.Entry(root)
+ti_ent.bind('<Return>', SetRegVals)
 ti_ent.insert(0, "0")
 ti_ent.place(x = 670, y = kp_label.winfo_y()+kp_label.winfo_reqwidth() + 10)
 
@@ -99,6 +94,7 @@ root.update()
 td_label = tk.Label(root, text = 'Td:', font = ('calibre', 10))
 td_label.place(x = 640, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 10)
 td_ent = tk.Entry(root)
+td_ent.bind('<Return>', SetRegVals)
 td_ent.insert(0, "0")
 td_ent.place(x = 670, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 10)
 
@@ -106,8 +102,13 @@ root.update()
 man_label = tk.Label(root, text = 'Manual:', font = ('calibre', 10))
 man_label.place(x = 640, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 10)
 man_ent = tk.Entry(root)
+man_ent.bind('<Return>', SetRegVals)
 man_ent.insert(0, "0")
 man_ent.place(x = 670, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 10)
+
+root.update()
+SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: SetRegVals())
+SV.place(x = 670, y = 350)
         
     
 def SetRegVals():
@@ -124,9 +125,9 @@ def SetRegVals():
     td = float(td)
     
     if (var0.get() == 1):
-        auto = 0
-    else:
         auto = 1
+    else:
+        auto = 0
     
     man = man_ent.get()
     man = float(man)
