@@ -58,9 +58,8 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
 
 def SetRegVals():  
-    setMode()
     
-    global sp, kp, ti, td, man
+    global sp, kp, ti, td, auto, man
     
     sp = SP_ent.get()
     sp = float(sp)
