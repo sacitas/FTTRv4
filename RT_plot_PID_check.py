@@ -56,7 +56,16 @@ canvas.draw()
 
 ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
-def SetRegVals():
+
+def setMode():
+    if (var0.get() == 1):
+        auto = 1
+    else:
+        auto = 0
+    return auto
+
+def SetRegVals():  
+    setMode()
     
     global sp, kp, ti, td, auto, man
     
@@ -69,11 +78,6 @@ def SetRegVals():
     td = td_ent.get()
     td = float(td)
     
-    if (var0.get() == 1):
-        auto = 1
-    else:
-        auto = 0
-    
     man = man_ent.get()
     man = float(man)
     
@@ -83,6 +87,7 @@ def SetRegVals():
 
 #------Create buttons------
 
+root.update()
 var0 = tk.IntVar()
 MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0)
 MA.place(x = 670, y = 50)
