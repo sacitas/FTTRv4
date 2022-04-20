@@ -60,7 +60,7 @@ def readConfig():
         T_i = float(config[2])
         T_d = float(config[3])
         Auto = int(config[4])
-        ManVal = int(config[5])
+        ManVal = float(config[5])
         
 # PID-controller
 def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
