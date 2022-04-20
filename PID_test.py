@@ -13,6 +13,7 @@ T_i = float(input("Enter a T_i value: "))
 T_d = float(input("Enter a T_d value: "))
 N = float(input("Enter a filter (N) value: "))
 T_t = 0
+ManVal = 0
 Tr_gain = 0
 U_total = 0
 PV = [0,0]
@@ -51,7 +52,7 @@ def createConfig():
         f.write('%s,%s,%s,%s,%s,%s'%(SP,K_p,T_i,T_d,Auto,ManVal))
 
 def readConfig():
-    global SP, K_p, T_i, T_d, Auto
+    global SP, K_p, T_i, T_d, Auto, ManVal
     with open ('pid.conf', 'r+') as f:
         config = f.readline().split(',')
         SP = float(config[0])
