@@ -89,7 +89,7 @@ def SetRegVals():
 
 root.update()
 var0 = tk.IntVar()
-MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0)
+MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0, command = lambda: setMode())
 MA.place(x = 670, y = 50)
 
 root.update()
