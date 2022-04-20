@@ -22,7 +22,8 @@ U_i = [0, 0]
 U_d = [0, 0]
 
 # user input
-Auto = int(input("Enter Auto (1) or Manual (0): "))
+#Auto = int(input("Enter Auto (1) or Manual (0): "))
+Auto = 0
 PWM_pin = 33 # PWM pin on Raspberry Pi
  
 # Setup of the PWM pin on the Raspberry Pi
