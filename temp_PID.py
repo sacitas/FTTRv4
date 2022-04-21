@@ -10,9 +10,7 @@ from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_ads1x15.ads1115 import Mode
 
 i2c = busio.I2C(board.SCL, board.SDA)
-
 ads = ADS.ADS1115(i2c)
-
 #ads.mode = Mode.CONTINUOUS
 
 
@@ -22,7 +20,11 @@ os.system('modprobe w1-therm')
 base_dir = '/sys/bus/w1/devices/'
 
 fieldnames = ["x", "dtemp0", "dtemp1", "dtemp2", "dtemp3", "dtemp4", "atemp0", "atemp1"]
- 
+
+atemp0 = 23
+atemp1 = 23
+
+
 def read_temp_raw(n):
     device_folder = glob.glob(base_dir + '28*')[n]
     device_file = device_folder + '/w1_slave'
