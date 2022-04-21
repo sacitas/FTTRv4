@@ -1,6 +1,7 @@
-import PID_test as PID
+import PLT_plot as plot
+import PLT_config as config
 
 def main():
-    PID.PID_main()
+    plot.plot(config.filename)
 
 main()
