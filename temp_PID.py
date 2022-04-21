@@ -21,8 +21,6 @@ base_dir = '/sys/bus/w1/devices/'
 
 fieldnames = ["x", "dtemp0", "dtemp1", "dtemp2", "dtemp3", "dtemp4", "atemp0", "atemp1"]
 
-atemp0 = 23
-atemp1 = 23
 
 
 def read_temp_raw(n):
