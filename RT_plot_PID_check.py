@@ -24,6 +24,10 @@ root.geometry("900x600") # Window size
 
 plt.style.use('fivethirtyeight')
 
+def savePlot():
+    plt.savefig("sacitErKjekk.png")
+    
+
 def animate(i):
     
     data = pd.read_csv('PID_temp.csv')
@@ -90,7 +94,7 @@ MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0)
 MA.place(x = 670, y = 50)
 
 root.update()
-S_P = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: save_plot())
+S_P = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
 S_P.place(x = 670, y = 90)
 
 root.update()
