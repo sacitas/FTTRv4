@@ -29,7 +29,7 @@ PWM_pin = 33 # PWM pin on Raspberry Pi
 # Setup of the PWM pin on the Raspberry Pi
 def setup():
     global pwm
-    GPIO.setmode(GPIO.BCM)
+    GPIO.setmode(GPIO.BOARD)
     GPIO.setup(PWM_pin, GPIO.OUT)
     GPIO.output(PWM_pin, GPIO.LOW)
     pwm = GPIO.PWM(PWM_pin, 100) # Set Frequency to 100 Hz
