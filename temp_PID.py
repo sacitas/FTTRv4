@@ -78,8 +78,7 @@ def create_tmpFile():
 
 def write_tmp():
     x = dt.datetime.now().strftime('%H:%M:%S')
-    atemp0 = 22
-    atemp1 = 22
+
     temps = read_temp()
 
     with open('PID_temp.csv', 'a') as data_csv:
