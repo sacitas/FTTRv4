@@ -28,19 +28,19 @@ def animate(i):
     
     data = pd.read_csv('PID_temp.csv')
     x = data["x"]
-    temp0 = data["temp0"]
-    temp1 = data["temp1"]
-    temp2 = data["temp2"]
-    temp3 = data["temp3"]
-    temp4 = data["temp4"]
+    dtemp0 = data["dtemp0"]
+    dtemp1 = data["dtemp1"]
+    dtemp2 = data["dtemp2"]
+    dtemp3 = data["dtemp3"]
+    dtemp4 = data["dtemp4"]
 
     plt.cla()
     
-    plt.plot(x, temp0, linewidth = 1.5, label='Sensor 0')
-    plt.plot(x, temp1, linewidth = 1.5, label='Sensor 1')
-    plt.plot(x, temp2, linewidth = 1.5, label='Sensor 2')
-    plt.plot(x, temp3, linewidth = 1.5, label='Sensor 3')
-    plt.plot(x, temp4, linewidth = 1.5, label='Sensor 4')
+    plt.plot(x, dtemp0, linewidth = 1.5, label='Sensor 0')
+    plt.plot(x, dtemp1, linewidth = 1.5, label='Sensor 1')
+    plt.plot(x, dtemp2, linewidth = 1.5, label='Sensor 2')
+    plt.plot(x, dtemp3, linewidth = 1.5, label='Sensor 3')
+    plt.plot(x, dtemp4, linewidth = 1.5, label='Sensor 4')
     
     plt.ylim([0, 200])
     plt.xticks(rotation=90, ha='right', fontsize=8)
