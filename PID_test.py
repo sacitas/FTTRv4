@@ -154,6 +154,7 @@ def ManVal_loop():
     time.sleep(Ts)
 
 def PID_main():
+    destroy()
     createConfig()
     tmp.create_tmpFile()
     setup()
