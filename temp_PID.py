@@ -89,7 +89,7 @@ def write_tmp():
     atemp0 = float(round(atemp0, 1))
     S2 = chan1.value
     V2 = chan1.voltage
-    atemp0 = V2 / (11/1000)
+    atemp1 = V2 / (11/1000)
     atemp1 = float(round(atemp1, 1))
   
     temps = read_temp()
