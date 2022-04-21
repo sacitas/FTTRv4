@@ -24,12 +24,12 @@ U_d = [0, 0]
 # user input
 #Auto = int(input("Enter Auto (1) or Manual (0): "))
 Auto = 0
-PWM_pin = 33 # PWM pin on Raspberry Pi
+PWM_pin = 13 # PWM pin on Raspberry Pi
  
 # Setup of the PWM pin on the Raspberry Pi
 def setup():
     global pwm
-    GPIO.setmode(GPIO.BOARD)
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(PWM_pin, GPIO.OUT)
     GPIO.output(PWM_pin, GPIO.LOW)
     pwm = GPIO.PWM(PWM_pin, 100) # Set Frequency to 100 Hz
