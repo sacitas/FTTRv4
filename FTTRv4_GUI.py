@@ -15,7 +15,7 @@ ti = 0
 td = 0
 auto = 0
 man = 0
-is_man = True
+#is_man = True
 
 #------Main GUI code-----
 root = tk.Tk()
