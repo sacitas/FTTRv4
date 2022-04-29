@@ -59,7 +59,7 @@ def animate(i):
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
-canvas.get_tk_widget().place(x = 10, y = 10, width = 820, height = 550)
+canvas.get_tk_widget().place(x = 10, y = 10, width = 720, height = 450)
 canvas.draw()
 
 #------------------Animate function------------------
