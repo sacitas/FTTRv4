@@ -70,7 +70,7 @@ def SetRegVals():
     global sp, kp, ti, td, auto, man
     
     if (var0.get() == 0):
-    SP_ent.config(state='disabled')
+        SP_ent.config(state='disabled')
     
     #-----Gets values from input fields-----
     sp = SP_ent.get()
