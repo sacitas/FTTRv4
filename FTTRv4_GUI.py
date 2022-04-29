@@ -149,8 +149,8 @@ SV.place(x = 900, y = 360)
 
 
 with open ('pid.conf', 'r+') as g:
-    config = f.readline().split(',')
-    SP = float(config[0])
+    setp = g.readline().split(',')
+    SP = float(setp[0])
 
 
 root.update()
