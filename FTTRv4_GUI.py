@@ -69,6 +69,7 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 def switch():
     global is_on
     if is_on:
+        auto = 1
         MA.config(image = off)
         SP_ent.config(state='readonly')
         kp_ent.config(state='readonly')
@@ -78,6 +79,7 @@ def switch():
         
         is_on = False
     else:
+        auto = 0
         MA.config(image = on)
         SP_ent.config(state='normal')
         kp_ent.config(state='normal')
