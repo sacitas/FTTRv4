@@ -142,12 +142,12 @@ SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: Set
 SV.place(x = 900, y = 360)
 
 
-#data1 = pd.read_csv('PID_temp.csv')
-#dtemp0 = data1["dtemp0"]
+data1 = pd.read_csv('PID_temp.csv')
+dtemp0 = data1["dtemp0"]
 
-#with open ('pid.conf', 'r+') as f:
-#    config = f.readline().split(',')
-#    SP = float(config[0])
+with open ('pid.conf', 'r+') as f:
+    config = f.readline().split(',')
+    SP = float(config[0])
 
 
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
