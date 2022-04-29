@@ -148,6 +148,11 @@ SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: Set
 SV.place(x = 900, y = 360)
 
 
+with open ('pid.conf', 'r+') as g:
+    config = f.readline().split(',')
+    SP = float(config[0])
+
+
 root.update()
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
 temp_label.place(x = 10, y = 570)
@@ -156,7 +161,7 @@ temp.place(x = 100, y = 570)
 
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
 S_P_label.place(x = 10, y = 600)
-S_P = tk.Label(root, text = sp, font = ('calibre', 10))
+S_P = tk.Label(root, text = SP, font = ('calibre', 10))
 S_P.place(x = 100, y = 600)
 
 root.update()
