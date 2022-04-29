@@ -53,6 +53,13 @@ def animate(i):
     plt.xticks(np.arange(0, len(x)+1, 30))
     plt.legend(loc='upper left', prop={'size':10})
     plt.tight_layout()
+    
+    
+    root.update()
+    temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
+    temp_label.place(x = 10, y = 570)
+    temp = tk.Label(root, text = dtemp0, font = ('calibre', 10))
+    temp.place(x = 100, y = 570)
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
@@ -142,19 +149,12 @@ SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: Set
 SV.place(x = 900, y = 360)
 
 
-data1 = pd.read_csv('PID_temp.csv')
-dtemp0 = data1["dtemp0"]
-
 with open ('pid.conf', 'r+') as f:
     config = f.readline().split(',')
     SP = float(config[0])
     
 
-root.update()
-temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
-temp_label.place(x = 10, y = 570)
-temp = tk.Label(root, text = dtemp0, font = ('calibre', 10))
-temp.place(x = 100, y = 570)
+
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
