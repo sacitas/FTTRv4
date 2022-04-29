@@ -15,12 +15,11 @@ td = 0
 auto = 0
 man = 0
 
-
 #------Main GUI code-----
 root = tk.Tk()
 root.title("Real Time Plot")
 root.configure(background = 'light grey')
-root.geometry("900x600") # Window size
+root.geometry("1000x700") # Window size
 
 plt.style.use('fivethirtyeight')
 
@@ -43,11 +42,11 @@ def animate(i):
 
     plt.cla()
     
-    plt.plot(x, dtemp0, linewidth = 1.5, label='Sensor 0')
-    plt.plot(x, dtemp1, linewidth = 1.5, label='Sensor 1')
-    plt.plot(x, dtemp2, linewidth = 1.5, label='Sensor 2')
-    plt.plot(x, dtemp3, linewidth = 1.5, label='Sensor 3')
-    plt.plot(x, dtemp4, linewidth = 1.5, label='Sensor 4')
+    plt.plot(x, dtemp0, linewidth = 1.5, label='Sensor d0')
+    plt.plot(x, dtemp1, linewidth = 1.5, label='Sensor d1')
+    plt.plot(x, dtemp2, linewidth = 1.5, label='Sensor d2')
+    plt.plot(x, dtemp3, linewidth = 1.5, label='Sensor d3')
+    plt.plot(x, dtemp4, linewidth = 1.5, label='Sensor d4')    
     
     plt.ylim([0, 200])
     plt.xticks(rotation=90, ha='right', fontsize=8)
@@ -57,7 +56,7 @@ def animate(i):
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
-canvas.get_tk_widget().place(x = 10, y = 10, width = 600, height = 400)
+canvas.get_tk_widget().place(x = 10, y = 10, width = 820, height = 550)
 canvas.draw()
 
 #------------------Animate function------------------
@@ -94,53 +93,84 @@ def SetRegVals():
 root.update()
 var0 = tk.IntVar()
 MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0)
-MA.place(x = 670, y = 50)
+MA.place(x = 870, y = 30)
 
 #-------Creates button-------
 root.update()
-S_P = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
-S_P.place(x = 670, y = 90)
+S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
+S.place(x = 730, y = 570)
 
 #-------Create input fields--------
 root.update()
 SP_label = tk.Label(root, text = 'SP:', font = ('calibre', 10))
-SP_label.place(x = 640, y = 140)
-SP_ent = tk.Entry(root)
+SP_label.place(x = 870, y = 100)
+SP_ent = tk.Entry(root, width=7)
 SP_ent.insert(0, "25")
-SP_ent.place(x = 670, y = 140)
+SP_ent.place(x = 900, y = 100)
 
 root.update()
 kp_label = tk.Label(root, text = 'Kp:', font = ('calibre', 10))
-kp_label.place(x = 640, y = SP_label.winfo_y()+SP_label.winfo_reqwidth() + 10)
-kp_ent = tk.Entry(root)
+kp_label.place(x = 870, y = SP_label.winfo_y()+SP_label.winfo_reqwidth() + 30)
+kp_ent = tk.Entry(root, width=7)
 kp_ent.insert(0, "1")
-kp_ent.place(x = 670, y = SP_label.winfo_y()+SP_label.winfo_reqwidth() + 10)
+kp_ent.place(x = 900, y = SP_label.winfo_y()+SP_label.winfo_reqwidth() + 30)
 
 root.update()
 ti_label = tk.Label(root, text = 'Ti:', font = ('calibre', 10))
-ti_label.place(x = 640, y = kp_label.winfo_y()+kp_label.winfo_reqwidth() + 10)
-ti_ent = tk.Entry(root)
+ti_label.place(x = 870, y = kp_label.winfo_y()+kp_label.winfo_reqwidth() + 30)
+ti_ent = tk.Entry(root, width=7)
 ti_ent.insert(0, "0")
-ti_ent.place(x = 670, y = kp_label.winfo_y()+kp_label.winfo_reqwidth() + 10)
+ti_ent.place(x = 900, y = kp_label.winfo_y()+kp_label.winfo_reqwidth() + 30)
 
 root.update()
 td_label = tk.Label(root, text = 'Td:', font = ('calibre', 10))
-td_label.place(x = 640, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 10)
-td_ent = tk.Entry(root)
+td_label.place(x = 870, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 30)
+td_ent = tk.Entry(root, width=7)
 td_ent.insert(0, "0")
-td_ent.place(x = 670, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 10)
+td_ent.place(x = 900, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 30)
 
 root.update()
-man_label = tk.Label(root, text = 'Manual:', font = ('calibre', 10))
-man_label.place(x = 640, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 10)
-man_ent = tk.Entry(root)
+man_label = tk.Label(root, text = 'Manual\nvalue:', font = ('calibre', 10))
+man_label.place(x = 845, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 20)
+man_ent = tk.Entry(root, width=7)
 man_ent.insert(0, "0")
-man_ent.place(x = 670, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 10)
+man_ent.place(x = 900, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 30)
 
 #-------Creates button-------
 root.update()
 SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: SetRegVals())
-SV.place(x = 670, y = 350)
-        
+SV.place(x = 900, y = 360)
+
+
+#data1 = pd.read_csv('PID_temp.csv')
+#dtemp0 = data1["dtemp0"]
+
+#with open ('pid.conf', 'r+') as f:
+#    config = f.readline().split(',')
+#    SP = float(config[0])
+
+
+temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
+temp_label.place(x = 10, y = 570)
+temp = tk.Label(root, text = 'atemp0', font = ('calibre', 10))
+temp.place(x = 100, y = 570)
+
+root.update()
+S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
+S_P_label.place(x = 10, y = 600)
+S_P = tk.Label(root, text = 'SP', font = ('calibre', 10))
+S_P.place(x = 100, y = 600)
+
+root.update()
+A0_label = tk.Label(root, text = 'A0: ', font = ('calibre', 10))
+A0_label.place(x = 10, y = 630)
+A0 = tk.Label(root, text = '150', font = ('calibre', 10))
+A0.place(x = 100, y = 630)
+
+root.update()
+A1_label = tk.Label(root, text = 'A1: ', font = ('calibre', 10))
+A1_label.place(x = 10, y = 660)
+A1 = tk.Label(root, text = '150', font = ('calibre', 10))
+A1.place(x = 100, y = 660)
    
 root.mainloop()
