@@ -150,9 +150,9 @@ with open ('pid.conf', 'r+') as f:
 data1 = pd.read_csv('PID_temp.csv')
 temp0 = data1["dtemp0"]
     
-root.update()
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
 temp_label.place(x = 10, y = 570)
+root.update()
 temp = tk.Label(root, text = temp0, font = ('calibre', 10))
 temp.place(x = 100, y = 570)
 
