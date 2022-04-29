@@ -70,7 +70,7 @@ def SetRegVals():
     global sp, kp, ti, td, auto, man
     #-----Gets values from input fields-----
     sp = SP_ent.get()
-    sp = float(sp)
+#   sp = float(sp)
     kp = kp_ent.get()
     kp = float(kp)
     ti = ti_ent.get()
