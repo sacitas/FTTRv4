@@ -90,8 +90,8 @@ def switch():
         
         is_man = True
  
-on = PhotoImage(file = "on.png")
-off = PhotoImage(file = "off.png")
+on = tk.PhotoImage(file = "on.png")
+off = tk.PhotoImage(file = "off.png")
 
 #-------Setting regulator values-------
 def SetRegVals():  
