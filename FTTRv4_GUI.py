@@ -68,9 +68,13 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 def SetRegVals():  
     
     global sp, kp, ti, td, auto, man
+    
+    if (var0.get() == 0):
+    SP_ent.config(state='disabled')
+    
     #-----Gets values from input fields-----
     sp = SP_ent.get()
-#   sp = float(sp)
+    sp = float(sp)
     kp = kp_ent.get()
     kp = float(kp)
     ti = ti_ent.get()
@@ -121,8 +125,6 @@ root.update()
 SP_label = tk.Label(root, text = 'SP:', font = ('calibre', 10))
 SP_label.place(x = 870, y = 100)
 SP_ent = tk.Entry(root, width=7)
-if (var0.get() == 0):
-    SP_ent.config(state='disabled')
 SP_ent.insert(0, SP)
 SP_ent.place(x = 900, y = 100)
 
