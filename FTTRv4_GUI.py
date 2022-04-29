@@ -15,7 +15,7 @@ ti = 0
 td = 0
 auto = 0
 man = 0
-is_man = False
+is_on = True
 
 #------Main GUI code-----
 root = tk.Tk()
@@ -67,8 +67,8 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
 
 def switch():
-    global is_man, auto
-    if is_man:
+    global is_on, auto
+    if is_on:
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
@@ -77,7 +77,7 @@ def switch():
         td_ent.config(state='readonly')
         man_ent.config(state='normal')
         
-        is_man = True
+        is_on = False
     else:
         auto = 1
         MA.config(image = on)
@@ -87,7 +87,7 @@ def switch():
         td_ent.config(state='normal')
         man_ent.config(state='readonly')
         
-        is_man = False
+        is_on = True
  
 on = tk.PhotoImage(file = "on.png")
 off = tk.PhotoImage(file = "off.png")
