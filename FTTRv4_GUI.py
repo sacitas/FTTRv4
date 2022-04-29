@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import csv
 import os
+import FTTRv4_temp as tmp
 
 #---Initial values---
 sp = 0
@@ -32,7 +33,7 @@ def savePlot():
 def animate(i):
     
     #-----Reads csv file & collecting data-----
-    data = pd.read_csv('PID_temp.csv')
+    data = pd.read_csv('f{tmp.temp_filepath}.csv')
     x = data["x"]
     dtemp0 = data["dtemp0"]
     dtemp1 = data["dtemp1"]
