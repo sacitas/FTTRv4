@@ -89,6 +89,11 @@ def SetRegVals():
 #-----------Writes the regulator values to file-------------
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
+        
+    S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
+    S_P_label.place(x = 10, y = 600)
+    S_P = tk.Label(root, text = sp, font = ('calibre', 10))
+    S_P.place(x = 100, y = 600)
 
 #-------Creates checkbutton-------
 root.update()
@@ -143,24 +148,12 @@ SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: Set
 SV.place(x = 900, y = 360)
 
 
-with open ('pid.conf', 'r+') as f:
-    config = f.readline().split(',')
-    SP = float(config[0])
-
-data1 = pd.read_csv('PID_temp.csv')
-temp0 = data1["dtemp0"]
-    
+root.update()
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
 temp_label.place(x = 10, y = 570)
-root.update()
-temp = tk.Label(root, text = temp0, font = ('calibre', 10))
+temp = tk.Label(root, text = 'dtemp0', font = ('calibre', 10))
 temp.place(x = 100, y = 570)
 
-root.update()
-S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 10, y = 600)
-S_P = tk.Label(root, text = SP, font = ('calibre', 10))
-S_P.place(x = 100, y = 600)
 
 root.update()
 A0_label = tk.Label(root, text = 'A0: ', font = ('calibre', 10))
