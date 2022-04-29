@@ -67,7 +67,7 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
 
 def switch():
-    global is_on
+    global sp, kp, ti, td, auto, man, is_on
     if is_on:
         auto = 1
         MA.config(image = off)
@@ -89,7 +89,6 @@ def switch():
         
         is_on = True
         
-    global sp, kp, ti, td, auto, man
 
     #-----Gets values from input fields-----
     sp = SP_ent.get()
