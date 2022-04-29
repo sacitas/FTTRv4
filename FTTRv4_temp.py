@@ -91,6 +91,11 @@ def read_temp0():
     return temps0[0]
 
 
+def create_tmpFile_live():
+    with open('temp_read.csv', 'w') as live_csv:
+        csv_writer = csv.DictWriter(live_csv, fieldnames=fieldnames)
+        csv_writer.writeheader()
+
 def create_tmpFile():
     with open(f'{temp_filepath}.csv', 'w') as data_csv:
         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
@@ -130,6 +135,23 @@ def write_tmp():
         
         x = dt.datetime.now().strftime('%H:%M:%S')
         
-
+    with open('temp_read.csv', 'a') as live_csv:
+        csv_writer = csv.DictWriter(live_csv, fieldnames=fieldnames)
+        
+        info = {
+            "x": x,
+            "dtemp0": temps[0],
+            "dtemp1": temps[1],
+            "dtemp2": temps[2],
+            "dtemp3": temps[3],
+            "dtemp4": temps[4],
+            "atemp0": atemp0,
+            "atemp1": atemp1
+        }
+        csv_writer.writerow(info)
+        data_csv.close()
+        
+        x = dt.datetime.now().strftime('%H:%M:%S')
+   
 
     sleep(0.1)
