@@ -71,8 +71,16 @@ def SetRegVals():
     
     if (var0.get() == 0):
         SP_ent.config(state='readonly')
+        kp_ent.config(state='readonly')
+        ti_ent.config(state='readonly')
+        td_ent.config(state='readonly')
+        
     else:
         SP_ent.config(state='normal')
+        kp_ent.config(state='normal')
+        ti_ent.config(state='normal')
+        td_ent.config(state='normal')
+    
     
     #-----Gets values from input fields-----
     sp = SP_ent.get()
