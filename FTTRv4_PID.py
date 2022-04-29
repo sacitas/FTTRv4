@@ -156,6 +156,7 @@ def ManVal_loop():
 def PID_main():
     createConfig()
     tmp.create_tmpFile()
+    tmp.create_tmpFile_live()
     setup()
     try:
         while True:
