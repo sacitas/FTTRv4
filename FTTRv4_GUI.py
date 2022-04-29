@@ -68,9 +68,8 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
 def switch():
     global is_man, auto
-    
+    SetRegVals()
     if is_man:
-        SetRegVals()
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
@@ -81,7 +80,6 @@ def switch():
         
         is_man = False
     else:
-        SetRegVals()
         auto = 1
         MA.config(image = on)
         SP_ent.config(state='normal')
