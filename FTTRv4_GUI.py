@@ -67,9 +67,8 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
 
 def switch():
-    global is_on, auto
+    global is_on
     if is_on:
-        auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
         kp_ent.config(state='readonly')
@@ -79,7 +78,6 @@ def switch():
         
         is_on = False
     else:
-        auto = 1
         MA.config(image = on)
         SP_ent.config(state='normal')
         kp_ent.config(state='normal')
@@ -88,7 +86,33 @@ def switch():
         man_ent.config(state='readonly')
         
         is_on = True
+        
+    global sp, kp, ti, td, auto, man
+
+    #-----Gets values from input fields-----
+    sp = SP_ent.get()
+    sp = float(sp)
+    kp = kp_ent.get()
+    kp = float(kp)
+    ti = ti_ent.get()
+    ti = float(ti)
+    td = td_ent.get()
+    td = float(td)
+    
+#-----Sets auto/manual mode from checkbox-----
+#   if (var0.get() == 1):
+#       auto = 1
+#   else:
+#       auto = 0
+    #-----Gets value from input field-----
+    man = man_ent.get()
+    man = float(man)
+    
+#-----------Writes the regulator values to file-------------
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
  
+
 on = tk.PhotoImage(file = "on.png")
 off = tk.PhotoImage(file = "off.png")
 
