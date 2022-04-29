@@ -15,7 +15,7 @@ ti = 0
 td = 0
 auto = 0
 man = 0
-is_man = True
+is_man = False
 
 #------Main GUI code-----
 root = tk.Tk()
@@ -77,7 +77,7 @@ def switch():
         td_ent.config(state='readonly')
         man_ent.config(state='normal')
         
-        is_man = False
+        is_man = True
     else:
         auto = 1
         MA.config(image = on)
@@ -87,7 +87,7 @@ def switch():
         td_ent.config(state='normal')
         man_ent.config(state='readonly')
         
-        is_man = True
+        is_man = False
  
 on = tk.PhotoImage(file = "on.png")
 off = tk.PhotoImage(file = "off.png")
