@@ -15,6 +15,7 @@ ti = 0
 td = 0
 auto = 0
 man = 0
+is_man = True
 
 #------Main GUI code-----
 root = tk.Tk()
@@ -64,27 +65,39 @@ canvas.draw()
 #------------------Animate function------------------
 ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
-#-------Setting regulator values-------
-def SetRegVals():  
+
+def switch():
+    global is_man
     
-    global sp, kp, ti, td, auto, man
-    
-    if (var0.get() == 0):
+    if is_man:
+        auto = 0
+        MA.config(image = off)
         SP_ent.config(state='readonly')
         kp_ent.config(state='readonly')
         ti_ent.config(state='readonly')
         td_ent.config(state='readonly')
         man_ent.config(state='normal')
         
+        is_man = False
     else:
+        auto = 1
+        MA.config(image = on)
         SP_ent.config(state='normal')
         kp_ent.config(state='normal')
         ti_ent.config(state='normal')
         td_ent.config(state='normal')
         man_ent.config(state='readonly')
+        
+        is_man = True
+ 
+on = PhotoImage(file = "on.png")
+off = PhotoImage(file = "off.png")
+
+#-------Setting regulator values-------
+def SetRegVals():  
     
-    
-    
+    global sp, kp, ti, td, auto, man
+
     #-----Gets values from input fields-----
     sp = SP_ent.get()
     sp = float(sp)
@@ -96,10 +109,10 @@ def SetRegVals():
     td = float(td)
     
 #-----Sets auto/manual mode from checkbox-----
-    if (var0.get() == 1):
-        auto = 1
-    else:
-        auto = 0
+#   if (var0.get() == 1):
+#       auto = 1
+#   else:
+#       auto = 0
     #-----Gets value from input field-----
     man = man_ent.get()
     man = float(man)
@@ -123,9 +136,13 @@ with open ('pid.conf', 'r+') as g:
 
 
 #-------Creates checkbutton-------
+#root.update()
+#var0 = tk.IntVar()
+#MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0)
+
+
 root.update()
-var0 = tk.IntVar()
-MA = tk.Checkbutton(root, text='AUTO', variable=var0, onvalue=1, offvalue=0)
+MA = tk.Button(root, image = on, bd = 0, command = switch)
 MA.place(x = 870, y = 30)
 
 #-------Creates button-------
