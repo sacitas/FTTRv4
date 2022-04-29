@@ -98,8 +98,11 @@ def SetRegVals():
 
     
 with open ('pid.conf', 'r+') as g:
-    setp = g.readline().split(',')
-    SP = float(setp[0])    
+    conf = g.readline().split(',')
+    SP = float(conf[0])
+    KP = float(conf[1])
+    TI = float(conf[2])
+    TD = float(conf[3])
 
 #-------Creates checkbutton-------
 root.update()
@@ -124,21 +127,21 @@ root.update()
 kp_label = tk.Label(root, text = 'Kp:', font = ('calibre', 10))
 kp_label.place(x = 870, y = SP_label.winfo_y()+SP_label.winfo_reqwidth() + 30)
 kp_ent = tk.Entry(root, width=7)
-kp_ent.insert(0, "1")
+kp_ent.insert(0, KP)
 kp_ent.place(x = 900, y = SP_label.winfo_y()+SP_label.winfo_reqwidth() + 30)
 
 root.update()
 ti_label = tk.Label(root, text = 'Ti:', font = ('calibre', 10))
 ti_label.place(x = 870, y = kp_label.winfo_y()+kp_label.winfo_reqwidth() + 30)
 ti_ent = tk.Entry(root, width=7)
-ti_ent.insert(0, "0")
+ti_ent.insert(0, TI)
 ti_ent.place(x = 900, y = kp_label.winfo_y()+kp_label.winfo_reqwidth() + 30)
 
 root.update()
 td_label = tk.Label(root, text = 'Td:', font = ('calibre', 10))
 td_label.place(x = 870, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 30)
 td_ent = tk.Entry(root, width=7)
-td_ent.insert(0, "0")
+td_ent.insert(0, TD)
 td_ent.place(x = 900, y = ti_label.winfo_y()+ti_label.winfo_reqwidth() + 30)
 
 root.update()
