@@ -160,6 +160,7 @@ temp_label.place(x = 10, y = 570)
 temp = tk.Label(root, text = 'dtemp0', font = ('calibre', 10))
 temp.place(x = 100, y = 570)
 
+root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
 S_P_label.place(x = 10, y = 600)
 S_P = tk.Label(root, text = SP, font = ('calibre', 10))
