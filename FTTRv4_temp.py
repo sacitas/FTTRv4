@@ -112,7 +112,7 @@ def write_tmp():
   
     temps = read_temp()
 
-    with open('f{temp_filepath}.csv', 'a') as data_csv:
+    with open(f'{temp_filepath}.csv', 'a') as data_csv:
         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
         
         info = {
