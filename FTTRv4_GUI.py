@@ -65,8 +65,6 @@ canvas.draw()
 #------------------Animate function------------------
 ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
-if is_man == True:
-    SetRegVals()
 
 def switch():
     global is_man, auto
@@ -143,7 +141,7 @@ with open ('pid.conf', 'r+') as g:
 
 
 root.update()
-MA = tk.Button(root, image = on, bd = 0, command = switch)
+MA = tk.Button(root, image = on, bd = 0, command = lambda: switch())
 MA.place(x = 870, y = 30)
 
 #-------Creates button-------
