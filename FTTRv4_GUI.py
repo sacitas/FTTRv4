@@ -104,10 +104,6 @@ with open ('pid.conf', 'r+') as g:
     TI = float(conf[2])
     TD = float(conf[3])
 
-    
-def hideOptions():
-    if (var0.get() == 0):
-        SP_ent.config(state='disabled')
 
 #-------Creates checkbutton-------
 root.update()
@@ -125,6 +121,8 @@ root.update()
 SP_label = tk.Label(root, text = 'SP:', font = ('calibre', 10))
 SP_label.place(x = 870, y = 100)
 SP_ent = tk.Entry(root, width=7)
+if (var0.get() == 0):
+    SP_ent.config(state='disabled')
 SP_ent.insert(0, SP)
 SP_ent.place(x = 900, y = 100)
 
