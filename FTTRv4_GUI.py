@@ -70,6 +70,7 @@ def switch():
     global is_man, auto
     
     if is_man:
+        SetRegVals()
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
@@ -80,6 +81,7 @@ def switch():
         
         is_man = False
     else:
+        SetRegVals()
         auto = 1
         MA.config(image = on)
         SP_ent.config(state='normal')
