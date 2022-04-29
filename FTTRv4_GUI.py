@@ -71,6 +71,8 @@ def SetRegVals():
     
     if (var0.get() == 0):
         SP_ent.config(state='disabled')
+    else:
+        SP_ent.config(state='enabled')
     
     #-----Gets values from input fields-----
     sp = SP_ent.get()
