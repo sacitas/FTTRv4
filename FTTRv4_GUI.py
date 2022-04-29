@@ -15,7 +15,7 @@ ti = 0
 td = 0
 auto = 0
 man = 0
-#is_man = True
+is_man = True
 
 #------Main GUI code-----
 root = tk.Tk()
@@ -67,7 +67,7 @@ ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
 
 def switch():
-    global is_man
+    global is_man, auto
     
     if is_man:
         auto = 0
