@@ -19,7 +19,27 @@ os.system('modprobe w1-therm')
  
 base_dir = '/sys/bus/w1/devices/'
 
+temp_folder = "temp/"
+temp_filename = ""
+temp_filepath = ""
+
 fieldnames = ["x", "dtemp0", "dtemp1", "dtemp2", "dtemp3", "dtemp4", "atemp0", "atemp1"]
+
+
+def init_time():
+    global ref_time
+    global temp_filename
+    global temp_folder
+    global temp_filepath
+
+    now = dt.datetime.now()
+    t = now.strftime("%H:%M:%S")
+    (h, m, s) = t.split(':')
+    ref_time = int(h) * 3600 + int(m) * 60 + int(s)
+
+    temp_filename = now.strftime("%m_%d_%Y-%H:%M")
+
+    temp_filepath = temp_folder + temp_filename
 
 
 
@@ -72,7 +92,7 @@ def read_temp0():
 
 
 def create_tmpFile():
-    with open('PID_temp.csv', 'w') as data_csv:
+    with open(f'{temp_filepath}.csv', 'w') as data_csv:
         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
         csv_writer.writeheader()
 
@@ -92,7 +112,7 @@ def write_tmp():
   
     temps = read_temp()
 
-    with open('PID_temp.csv', 'a') as data_csv:
+    with open('f{temp_filepath}.csv', 'a') as data_csv:
         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
         
         info = {
