@@ -74,12 +74,15 @@ def SetRegVals():
         kp_ent.config(state='readonly')
         ti_ent.config(state='readonly')
         td_ent.config(state='readonly')
+        man_ent.config(state='normal')
         
     else:
         SP_ent.config(state='normal')
         kp_ent.config(state='normal')
         ti_ent.config(state='normal')
         td_ent.config(state='normal')
+        man_ent.config(state='readonly')
+    
     
     
     #-----Gets values from input fields-----
