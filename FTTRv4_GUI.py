@@ -104,6 +104,11 @@ with open ('pid.conf', 'r+') as g:
     TI = float(conf[2])
     TD = float(conf[3])
 
+    
+def hideOptions():
+    if (var0.get() == 0):
+        SP_ent.config(state='disabled')
+
 #-------Creates checkbutton-------
 root.update()
 var0 = tk.IntVar()
