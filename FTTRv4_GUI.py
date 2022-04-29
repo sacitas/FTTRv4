@@ -33,7 +33,7 @@ def savePlot():
 def animate(i):
     
     #-----Reads csv file & collecting data-----
-    data = pd.read_csv('f{tmp.temp_filepath}.csv')
+    data = pd.read_csv(f'{tmp.temp_filepath}.csv')
     x = data["x"]
     dtemp0 = data["dtemp0"]
     dtemp1 = data["dtemp1"]
