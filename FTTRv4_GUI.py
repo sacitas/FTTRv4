@@ -65,10 +65,11 @@ canvas.draw()
 #------------------Animate function------------------
 ani = FuncAnimation(plt.gcf(), animate, interval=500)
 
+if is_man == True:
+    SetRegVals()
 
 def switch():
     global is_man, auto
-    SetRegVals()
     if is_man:
         auto = 0
         MA.config(image = off)
