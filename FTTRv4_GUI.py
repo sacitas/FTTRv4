@@ -96,6 +96,11 @@ def SetRegVals():
     S_P = tk.Label(root, text = sp, font = ('calibre', 10))
     S_P.place(x = 100, y = 600)
 
+    
+with open ('pid.conf', 'r+') as g:
+    setp = g.readline().split(',')
+    SP = float(setp[0])    
+
 #-------Creates checkbutton-------
 root.update()
 var0 = tk.IntVar()
@@ -112,7 +117,7 @@ root.update()
 SP_label = tk.Label(root, text = 'SP:', font = ('calibre', 10))
 SP_label.place(x = 870, y = 100)
 SP_ent = tk.Entry(root, width=7)
-SP_ent.insert(0, "25")
+SP_ent.insert(0, SP)
 SP_ent.place(x = 900, y = 100)
 
 root.update()
@@ -147,11 +152,6 @@ man_ent.place(x = 900, y = td_label.winfo_y()+td_label.winfo_reqwidth() + 30)
 root.update()
 SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: SetRegVals())
 SV.place(x = 900, y = 360)
-
-
-with open ('pid.conf', 'r+') as g:
-    setp = g.readline().split(',')
-    SP = float(setp[0])
 
 
 root.update()
