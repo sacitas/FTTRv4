@@ -39,6 +39,8 @@ while True:
     lcd.cursor_pos = (1, 0)
     lcd.write_string("Auto/Manual")
     lcd.cursor_pos = (0, 0)
+    time.sleep(5)
+    lcd.clear()
 
     if (auto == 0):
 #       data = pd.read_csv('temp_read.csv')
