@@ -11,7 +11,7 @@ from adafruit_ads1x15.ads1115 import Mode
 
 i2c = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(i2c)
-#ads.mode = Mode.CONTINUOUS
+ads.mode = Mode.CONTINUOUS
 
 
 os.system('modprobe w1-gpio')
