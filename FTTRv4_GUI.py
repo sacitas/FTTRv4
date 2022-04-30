@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import csv
 import os
+import FTTRv4_temp as tmp
 
 #---Initial values---
 sp = 0
@@ -30,7 +31,7 @@ plt.style.use('fivethirtyeight')
 
 #--------Save plot function--------
 def savePlot():
-    plt.savefig(f'{plot_filepath}.png')
+    plt.savefig(f'{tmp.plot_filepath}.png')
     
 #-------Plot function to animate--------
 def animate(i):
