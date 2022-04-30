@@ -43,10 +43,11 @@ while True:
     if (auto == 0):
         data = pd.read_csv('temp_read.csv')
         dtemp0 = data["dtemp0"]
-        dtemp0 = str(dtemp0)
+        dtemp0 = str(round(dtemp0, 1))
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             man = float(conf[5])
+            man = str(man)
         lcd.clear()
         lcd.write_string("Temp: " + dtemp0)
         lcd.cursor_pos(0, 0)
@@ -59,9 +60,10 @@ while True:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             SP = float(conf[0])
+            SP = str(SP)
         data = pd.read_csv('temp_read.csv')
         dtemp0 = data["dtemp0"]
-        dtemp0 = str(dtemp0)
+        dtemp0 = str(round(dtemp0, 1))
         lcd.clear()
         lcd.write_string("SP: " + SP)
         lcd.cursor_pos(0, 0)
