@@ -1,10 +1,18 @@
 from RPLCD import i2c
 import time
 import Adafruit_ADS1x15
+import pandas as pd
 
 adc = Adafruit_ADS1x15.ADS1115()
 
 GAIN = 1
+
+
+sp = 0
+kp = 0
+ti = 0
+td = 0
+auto = 0
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
@@ -29,12 +37,43 @@ time.sleep(5)
 lcd.clear()
 
 while True:
-  
+
     lcd.write_string("Modes: ")
     lcd.cursor_pos = (1, 0)
     lcd.write_string("Auto/Manual")
     lcd.cursor_pos = (0, 0)
+
+    if (auto == 0):
+        data = pd.read_csv('temp_read.csv')
+        dtemp0 = data["dtemp0"]
+        dtemp0 = str(dtemp0)
+        with open ('pid.conf', 'r+') as g:
+            conf = g.readline().split(',')
+            man = float(conf[5])
+        lcd.clear()
+        lcd.write_string("Temp: " + dtemp0)
+        lcd.cursor_pos(0, 0)
+        lcd.write_string("ManVal: " + man)
+        lcd.cursor_pos(1, 0)
+
+        time.sleep(0.5)
     
+    else:
+        with open ('pid.conf', 'r+') as g:
+            conf = g.readline().split(',')
+            SP = float(conf[0])
+        data = pd.read_csv('temp_read.csv')
+        dtemp0 = data["dtemp0"]
+        dtemp0 = str(dtemp0)
+        lcd.clear()
+        lcd.write_string("SP: " + SP)
+        lcd.cursor_pos(0, 0)
+        lcd.write_string("Temp: " + dtemp0)
+        lcd.cursor_pos(1, 0)
+
+        time.sleep(0.5)
+        
+
     time.sleep(0.5)
 
 
