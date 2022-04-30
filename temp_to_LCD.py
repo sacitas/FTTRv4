@@ -13,6 +13,7 @@ kp = 0
 ti = 0
 td = 0
 auto = 0
+man = 0
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
