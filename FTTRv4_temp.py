@@ -23,6 +23,10 @@ temp_folder = "temp/"
 temp_filename = ""
 temp_filepath = ""
 
+plot_folder = "plot/"
+plot_filename = ""
+plot_filepath = ""
+
 fieldnames = ["x", "dtemp0", "dtemp1", "dtemp2", "dtemp3", "dtemp4", "atemp0", "atemp1"]
 
 
@@ -31,6 +35,9 @@ def init_time():
     global temp_filename
     global temp_folder
     global temp_filepath
+    global plot_filename
+    global plot_folder
+    global plot_filepath
 
     now = dt.datetime.now()
     t = now.strftime("%H:%M:%S")
@@ -40,6 +47,10 @@ def init_time():
     temp_filename = now.strftime("%m_%d_%Y-%H:%M")
 
     temp_filepath = temp_folder + temp_filename
+    
+    plot_filename = now.strftime("%m_%d_%Y-%H:%M")
+
+    plot_filepath = plot_folder + plot_filename
 
 
 
