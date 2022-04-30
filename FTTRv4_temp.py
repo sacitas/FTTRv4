@@ -11,7 +11,7 @@ from adafruit_ads1x15.ads1115 import Mode
 
 i2c = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(i2c)
-ads.mode = Mode.CONTINUOUS
+#ads.mode = Mode.CONTINUOUS
 
 
 os.system('modprobe w1-gpio')
@@ -76,7 +76,6 @@ def read_temp():
     for i in range (0, 5):
         temp = convert_temp(i)
         temps.append(temp)
-#       print("Temp_sensor{} = {}*C.".format(i, temp))
 
     return temps
 
@@ -86,7 +85,6 @@ def read_temp0():
     for i in range (0, 1):
         temp0 = convert_temp(i)
         temps0.append(temp0)
-#       print("Temp_sensor{} = {}*C.".format(i, temp))
 
     return temps0[0]
 
