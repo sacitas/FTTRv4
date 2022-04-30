@@ -31,7 +31,7 @@ plt.style.use('fivethirtyeight')
 
 #--------Save plot function--------
 def savePlot():
-    plt.savefig(f'{tmp.plot_filepath}.png')
+    plt.savefig('plot/test.png')
     
 #-------Plot function to animate--------
 def animate(i):
