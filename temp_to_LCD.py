@@ -25,15 +25,15 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
 
 lcd.write_string("Welcome!")
 lcd.cursor_pos = (0, 0)
-time.sleep(2)
+time.sleep(5)
 lcd.clear()
 
 while True:
   
     lcd.write_string("Modes: ")
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("Auto/Manual")
     lcd.cursor_pos = (1, 0)
+    lcd.write_string("Auto/Manual")
+    lcd.cursor_pos = (0, 0)
     
     time.sleep(0.5)
 
