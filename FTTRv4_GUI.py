@@ -32,7 +32,7 @@ root.geometry("1000x640") # Window size
 plt.style.use('fivethirtyeight')
 
 
-def init_time():
+def init_time_plot():
     global ref_time
     global plot_filename
     global plot_folder
