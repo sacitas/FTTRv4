@@ -33,14 +33,15 @@ lcd.cursor_pos = (0, 0)
 time.sleep(5)
 lcd.clear()
 
-while True:
 
-    lcd.write_string("Modes: ")
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("Auto/Manual")
-    lcd.cursor_pos = (0, 0)
-    time.sleep(5)
-    lcd.clear()
+lcd.write_string("Modes: ")
+lcd.cursor_pos = (1, 0)
+lcd.write_string("Auto/Manual")
+lcd.cursor_pos = (0, 0)
+time.sleep(5)
+lcd.clear()
+
+while True:
 
     if (auto == 0):
 #       data = pd.read_csv('temp_read.csv')
@@ -52,7 +53,7 @@ while True:
             man = str(man)
 #       lcd.cursor_pos(0, 0)
 #       lcd.write_string("Temp: " + dtemp0)
-        lcd.cursor_pos(0, 0)
+        lcd.cursor_pos(1, 0)
         lcd.write_string("ManVal: " + man)
 
         time.sleep(0.5)
@@ -74,8 +75,6 @@ while True:
 
         time.sleep(0.5)
         
-
-    time.sleep(0.5)
 
 
 #while True:
