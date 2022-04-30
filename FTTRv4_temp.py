@@ -35,9 +35,7 @@ def init_time():
     global temp_filename
     global temp_folder
     global temp_filepath
-    global plot_filename
-    global plot_folder
-    global plot_filepath
+
 
     now = dt.datetime.now()
     t = now.strftime("%H:%M:%S")
@@ -45,14 +43,24 @@ def init_time():
     ref_time = int(h) * 3600 + int(m) * 60 + int(s)
 
     temp_filename = now.strftime("%m_%d_%Y-%H:%M")
-
     temp_filepath = temp_folder + temp_filename
     
+
+
+def init_time_plot():
+    global ref_time  
+    global plot_filename
+    global plot_folder
+    global plot_filepath
+    
+    now = dt.datetime.now()
+    t = now.strftime("%H:%M:%S")
+    (h, m, s) = t.split(':')
+    ref_time = int(h) * 3600 + int(m) * 60 + int(s)
+    
     plot_filename = now.strftime("%m_%d_%Y-%H:%M")
-
     plot_filepath = plot_folder + plot_filename
-
-
+    
 
 def read_temp_raw(n):
     device_folder = glob.glob(base_dir + '28*')[n]
