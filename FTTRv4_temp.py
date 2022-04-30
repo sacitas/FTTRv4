@@ -3,15 +3,6 @@ import glob
 from time import sleep
 import csv
 import datetime as dt
-import adafruit_ads1x15.ads1115 as ADS
-import board
-import busio
-from adafruit_ads1x15.analog_in import AnalogIn
-from adafruit_ads1x15.ads1115 import Mode
-
-i2c = busio.I2C(board.SCL, board.SDA)
-ads = ADS.ADS1115(i2c)
-#ads.mode = Mode.CONTINUOUS
 
 
 os.system('modprobe w1-gpio')
@@ -24,7 +15,7 @@ temp_filename = ""
 temp_filepath = ""
 
 
-fieldnames = ["x", "dtemp0", "dtemp1", "dtemp2", "dtemp3", "dtemp4", "atemp0", "atemp1"]
+fieldnames = ["x", "dtemp0", "dtemp1", "dtemp2", "dtemp3", "dtemp4"]
 
 
 def init_time():
@@ -102,17 +93,6 @@ def create_tmpFile():
 
 def write_tmp():
     x = dt.datetime.now().strftime('%H:%M:%S')
-
-    chan0 = AnalogIn(ads, ADS.P0)
-    chan1 = AnalogIn(ads, ADS.P1)
-    S1 = chan0.value
-    V1 = chan0.voltage
-    atemp0 = V1 / (11/1000)
-    atemp0 = float(round(atemp0, 1))
-    S2 = chan1.value
-    V2 = chan1.voltage
-    atemp1 = V2 / (11/1000)
-    atemp1 = float(round(atemp1, 1))
   
     temps = read_temp()
 
@@ -125,9 +105,7 @@ def write_tmp():
             "dtemp1": temps[1],
             "dtemp2": temps[2],
             "dtemp3": temps[3],
-            "dtemp4": temps[4],
-            "atemp0": atemp0,
-            "atemp1": atemp1
+            "dtemp4": temps[4]
         }
         csv_writer.writerow(info)
         data_csv.close()
@@ -143,9 +121,7 @@ def write_tmp():
             "dtemp1": temps[1],
             "dtemp2": temps[2],
             "dtemp3": temps[3],
-            "dtemp4": temps[4],
-            "atemp0": atemp0,
-            "atemp1": atemp1
+            "dtemp4": temps[4]
         }
         csv_writer.writerow(info)
         data_csv.close()
