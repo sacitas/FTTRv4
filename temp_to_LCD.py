@@ -48,7 +48,6 @@ while True:
             conf = g.readline().split(',')
             man = float(conf[5])
             man = str(man)
-        lcd.clear()
 #       lcd.cursor_pos(0, 0)
 #       lcd.write_string("Temp: " + dtemp0)
         lcd.cursor_pos(0, 0)
