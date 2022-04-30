@@ -49,10 +49,10 @@ while True:
             man = float(conf[5])
             man = str(man)
         lcd.clear()
-#       lcd.write_string("Temp: " + dtemp0)
 #       lcd.cursor_pos(0, 0)
-        lcd.write_string("ManVal: " + man)
+#       lcd.write_string("Temp: " + dtemp0)
         lcd.cursor_pos(0, 0)
+        lcd.write_string("ManVal: " + man)
 
         time.sleep(0.5)
     
@@ -65,10 +65,11 @@ while True:
 #       dtemp0 = data["dtemp0"]
 #       dtemp0 = str(round(dtemp0, 1))
         lcd.clear()
-        lcd.write_string("SP: " + SP)
         lcd.cursor_pos(0, 0)
-#       lcd.write_string("Temp: " + dtemp0)
+        lcd.write_string("SP: " + SP)
 #       lcd.cursor_pos(1, 0)
+#       lcd.write_string("Temp: " + dtemp0)
+
 
         time.sleep(0.5)
         
