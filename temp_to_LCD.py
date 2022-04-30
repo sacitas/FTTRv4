@@ -8,10 +8,6 @@ adc = Adafruit_ADS1x15.ADS1115()
 GAIN = 1
 
 
-sp = 0
-kp = 0
-ti = 0
-td = 0
 auto = 0
 man = 0
 
