@@ -160,9 +160,9 @@ def SetRegVals():
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
         
     S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-    S_P_label.place(x = 10, y = 600)
-    S_P = tk.Label(root, text = 'sp', font = ('calibre', 10))
-    S_P.place(x = 100, y = 600)
+    S_P_label.place(x = 10, y = 510)
+    S_P = tk.Label(root, text = sp, font = ('calibre', 10))
+    S_P.place(x = 100, y = 510)
 
     
 with open ('pid.conf', 'r+') as g:
