@@ -190,7 +190,7 @@ root.update()
 SP_label = tk.Label(root, text = 'SP:', font = ('calibre', 10))
 SP_label.place(x = 805, y = 100)
 SP_ent = tk.Entry(root, width=7)
-SP_ent.insert(0, 'SP')
+SP_ent.insert(0, SP)
 SP_ent.place(x = 835, y = 100)
 
 root.update()
