@@ -18,11 +18,6 @@ man = 0
 is_on = True
 
 
-plot_folder = "plot/"
-plot_filename = ""
-plot_filepath = ""
-
-
 #------Main GUI code-----
 root = tk.Tk()
 root.title("Real Time Plot")
@@ -31,21 +26,6 @@ root.geometry("1000x640") # Window size
 
 plt.style.use('fivethirtyeight')
 
-
-def init_time_plot():
-    global ref_time
-    global plot_filename
-    global plot_folder
-    global plot_filepath
-
-    now = dt.datetime.now()
-    t = now.strftime("%H:%M:%S")
-    (h, m, s) = t.split(':')
-    ref_time = int(h) * 3600 + int(m) * 60 + int(s)
-
-    plot_filename = now.strftime("%m_%d_%Y-%H:%M")
-
-    plot_filepath = plot_folder + plot_filename
 
 
 #--------Save plot function--------
