@@ -28,6 +28,8 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
 
+
+
 lcd.write_string("Welcome!")
 lcd.cursor_pos = (0, 0)
 time.sleep(5)
@@ -43,6 +45,10 @@ lcd.clear()
 
 while True:
 
+    with open ('pid.conf', 'r+') as g:
+        conf = g.readline().split(',')
+        auto = float(conf[4])
+  
     if (auto == 0):
 #       data = pd.read_csv('temp_read.csv')
 #       dtemp0 = data["dtemp0"]
