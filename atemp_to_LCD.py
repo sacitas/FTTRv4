@@ -28,14 +28,6 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
 
-lcd.clear()
-lcd.cursor_pos = (0, 0)
-lcd.write_string("Welcome!")
-lcd.cursor_pos = (1, 0)
-lcd.write_string("Temperatures:")
-time.sleep(3)
-lcd.clear()
-
 while True:
     S1 = adc.read_adc(0, gain = GAIN)
     V1 = S1*(5.0/65535)
