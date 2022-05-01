@@ -81,7 +81,7 @@ try:
     while True:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
-            auto = conf[4]
+            auto = int(conf[4])
         if (auto == 1):
             auto_mode()
         else:
