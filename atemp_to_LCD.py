@@ -12,9 +12,9 @@ GAIN = 1
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
-cols = 20
+cols = 16
 rows = 2
-charmap = 'A00'
+charmap = 'A02'
 i2c_expander = 'PCF8574'
 
 # Generally 27 is the address;Find yours using: i2cdetect -y 1 
