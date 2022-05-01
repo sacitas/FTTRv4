@@ -229,9 +229,11 @@ SV.place(x = 835, y = 360, width=63, height=40)
 
 
 root.update()
+temp0 = tmp.read_temp0()
+temp0 = str(temp0)
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
 temp_label.place(x = 10, y = 480)
-temp = tk.Label(root, text = 'dtemp0', font = ('calibre', 10))
+temp = tk.Label(root, text = temp0, font = ('calibre', 10))
 temp.place(x = 100, y = 480)
 
 root.update()
