@@ -54,11 +54,12 @@ def man_mode():
 
     time.sleep(0.5)
 
-lcd.clear()
-lcd.write_string("Welcome!")
-time.sleep(3)
+
 
 try:
+    lcd.clear()
+    lcd.write_string("Welcome!")
+    time.sleep(3)
     while True:
 
         with open ('pid.conf', 'r+') as g:
