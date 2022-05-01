@@ -8,6 +8,12 @@ import numpy as np
 import csv
 import os
 import FTTRv4_temp as tmp
+import Adafruit_ADS1x15
+
+
+adc = Adafruit_ADS1x15.ADS1115()
+
+GAIN = 1
 
 #---Initial values---
 sp = 0
@@ -55,7 +61,7 @@ def savePlot():
     
 #-------Plot function to animate--------
 def animate(i):
-    
+
     #-----Reads csv file & collecting data-----
     data = pd.read_csv('temp_read.csv')
     x = data["x"]
@@ -82,6 +88,17 @@ def animate(i):
     plt.legend(loc='upper left', prop={'size':10})
     plt.tight_layout()
     
+    
+    S1 = adc.read_adc(0, gain = GAIN)
+    V1 = S1*(5.0/65535)
+    atemp0 = V1 / (7/1000)
+    atemp0 = str(round(atemp0, 2))
+    S2 = adc.read_adc(1, gain = GAIN)
+    V2 = S2*(5.0/65535)
+    atemp1 = V2 / (7/1000)
+    atemp1 = str(round(atemp1, 2))
+    
+    
     root.update()
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
@@ -89,6 +106,18 @@ def animate(i):
     temp.insert(0, temp0)
     temp.config(state='readonly')
     temp.place(x = 100, y = 480)
+    
+    root.update()
+    A0 = tk.Entry(root, width = 7)
+    A0.insert(0, atemp0)
+    A0.config(state='readonly')
+    A0.place(x = 100, y = 540)
+    
+    root.update()
+    A1 = tk.Entry(root, width = 7)
+    A1.insert(0, atemp1)
+    A1.config(state='readonly')
+    A1.place(x = 100, y = 570)
     
 
 #----------------Plot window in GUI----------------
@@ -169,8 +198,6 @@ def SetRegVals():
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
         
-    S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-    S_P_label.place(x = 10, y = 510)
     S_P = tk.Label(root, text = sp, font = ('calibre', 10))
     S_P.place(x = 100, y = 510)
 
@@ -236,7 +263,7 @@ root.update()
 SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: SetRegVals())
 SV.place(x = 835, y = 360, width=63, height=40)
 
-
+#-------Labels--------
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
 temp_label.place(x = 10, y = 480)
 
@@ -249,13 +276,9 @@ S_P.place(x = 100, y = 510)
 root.update()
 A0_label = tk.Label(root, text = 'A0: ', font = ('calibre', 10))
 A0_label.place(x = 10, y = 540)
-A0 = tk.Label(root, text = '150', font = ('calibre', 10))
-A0.place(x = 100, y = 540)
 
 root.update()
 A1_label = tk.Label(root, text = 'A1: ', font = ('calibre', 10))
 A1_label.place(x = 10, y = 570)
-A1 = tk.Label(root, text = '150', font = ('calibre', 10))
-A1.place(x = 100, y = 570)
    
 root.mainloop()
