@@ -44,7 +44,8 @@ def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.2):
         write_to_lcd(lcd, framebuffer, num_cols)
         time.sleep(delay)
 
-long_string = 'Like and subscribe or I will delete your Minecraft account'
+long_string = 'Goodbye'
+#'Like and subscribe or I will delete your Minecraft account'
 
 
 def auto_mode():
