@@ -29,6 +29,29 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
 
+framebuffer = [
+    'Orbit NTNU',
+    '',
+]
+
+def write_to_lcd(lcd, framebuffer, num_cols):
+    lcd.home()
+    for row in framebuffer:
+        lcd.write_string(row.ljust(num_cols)[:num_cols])
+        lcd.write_string('\r\n')
+
+
+def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.1):
+    padding = ' ' * num_cols
+    s = padding + string + padding
+    for i in range(len(s)- num_cols + 1):
+        framebuffer[row] = s[i:i+num_cols]
+        write_to_lcd(lcd, framebuffer, num_cols)
+        time.sleep(delay)
+
+long_string = 'Like and subscribe or I will delete your Minecraft account'
+
+
 def auto_mode():
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
@@ -56,34 +79,12 @@ def man_mode():
     lcd.write_string("PV: " + temp0 + degree_sign + "C")
     time.sleep(0.5)
 
-framebuffer = [
-    'Orbit NTNU',
-    '',
-]
-
-def write_to_lcd(lcd, framebuffer, num_cols):
-    lcd.home()
-    for row in framebuffer:
-        lcd.write_string(row.ljust(num_cols)[:num_cols])
-        lcd.write_string('\r\n')
-
-
-def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.1):
-    padding = ' ' * num_cols
-    s = padding + string + padding
-    for i in range(len(s)- num_cols + 1):
-        framebuffer[row] = s[i:i+num_cols]
-        write_to_lcd(lcd, framebuffer, num_cols)
-        time.sleep(delay)
-
-long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
     time.sleep(3)
     while True:
-
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = float(conf[4])
