@@ -56,7 +56,27 @@ def man_mode():
     lcd.write_string("PV: " + temp0 + degree_sign + "C")
     time.sleep(0.5)
 
+framebuffer = [
+    'Orbit NTNU',
+    '',
+]
 
+def write_to_lcd(lcd, framebuffer, num_cols):
+    lcd.home()
+    for row in framebuffer:
+        lcd.write_string(row.ljust(num_cols)[:num_cols])
+        lcd.write_string('\r\n')
+
+
+def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.1):
+    padding = ' ' * num_cols
+    s = padding + string + padding
+    for i in range(len(s)- num_cols + 1):
+        framebuffer[row] = s[i:i+num_cols]
+        write_to_lcd(lcd, framebuffer, num_cols)
+        time.sleep(delay)
+
+long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 try:
     lcd.clear()
@@ -73,4 +93,6 @@ try:
             man_mode()
             
 except KeyboardInterrupt:
+    lcd.clear()
+    loop_string(long_string, lcd, framebuffer, 1, 16)
     lcd.close(clear = True)
