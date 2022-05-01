@@ -41,7 +41,7 @@ def write_to_lcd(lcd, framebuffer, num_cols):
         lcd.write_string('\r\n')
 
 
-def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.1):
+def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.2):
     padding = ' ' * num_cols
     s = padding + string + padding
     for i in range(len(s)- num_cols + 1):
