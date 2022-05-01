@@ -8,8 +8,6 @@ adc = Adafruit_ADS1x15.ADS1115()
 GAIN = 1
 
 
-auto = 0
-man = 0
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
