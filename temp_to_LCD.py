@@ -11,7 +11,7 @@ degree_sign = u'\N{DEGREE SIGN}'
 lcdmode = 'i2c'
 cols = 20
 rows = 4
-charmap = 'A00'
+charmap = 'A02'
 i2c_expander = 'PCF8574'
 
 # Generally 27 is the address;Find yours using: i2cdetect -y 1 
@@ -53,6 +53,7 @@ def auto_mode():
         SP = str(conf[0])
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
+    lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + SP + degree_sign + "C")
     lcd.cursor_pos = (1, 0)
@@ -66,6 +67,7 @@ def man_mode():
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         man = str(conf[5])
+    lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man)
     lcd.cursor_pos = (1, 0)
@@ -77,7 +79,6 @@ try:
     lcd.clear()
     lcd.write_string("Welcome!")
     time.sleep(3)
-    lcd.clear()
     while True:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
