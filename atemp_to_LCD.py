@@ -19,7 +19,7 @@ i2c_expander = 'PCF8574'
 
 # Generally 27 is the address;Find yours using: i2cdetect -y 1 
 address = 0x27 
-port = 0 # 0 on an older Raspberry Pi
+port = 1 # 0 on an older Raspberry Pi
 
 
 
@@ -27,19 +27,22 @@ port = 0 # 0 on an older Raspberry Pi
 lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
+lcd.cursor_pos = (0, 0)
+lcd.write_string("Hello!")
 
-while True:
-    S1 = adc.read_adc(0, gain = GAIN)
-    V1 = S1*(5.0/65535)
-    temp1 = V1 / (7/1000)
-    temp1 = str(round(temp1, 1))
-    S2 = adc.read_adc(1, gain = GAIN)
-    V2 = S2*(5.0/65535)
-    temp2 = V2 / (7/1000)
-    temp2 = str(round(temp2, 1))
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("S1 Temp: " + temp1)
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("S2 Temp: " + temp2)
 
-    time.sleep(0.5)
+#while True:
+#    S1 = adc.read_adc(0, gain = GAIN)
+#    V1 = S1*(5.0/65535)
+#    temp1 = V1 / (7/1000)
+#    temp1 = str(round(temp1, 1))
+#    S2 = adc.read_adc(1, gain = GAIN)
+#    V2 = S2*(5.0/65535)
+#    temp2 = V2 / (7/1000)
+#    temp2 = str(round(temp2, 1))
+#    lcd.cursor_pos = (0, 0)
+#    lcd.write_string("S1 Temp: " + temp1)
+#    lcd.cursor_pos = (1, 0)
+#    lcd.write_string("S2 Temp: " + temp2)
+
+#    time.sleep(0.5)
