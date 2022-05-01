@@ -34,9 +34,9 @@ def auto_mode():
     temp0 = str(round(temp0, 2))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
-    lcd.write_string("SP: " + SP + unichr(223) + "C")
+    lcd.write_string("SP: " + SP + chr(223) + "C")
     lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + unichr(223) + "C")
+    lcd.write_string("PV: " + temp0 + chr(223) + "C")
     time.sleep(0.5)
 
 def man_mode():
@@ -50,7 +50,7 @@ def man_mode():
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man)
     lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + unichr(223) + "C")
+    lcd.write_string("PV: " + temp0 + chr(223) + "C")
     time.sleep(0.5)
 
 
