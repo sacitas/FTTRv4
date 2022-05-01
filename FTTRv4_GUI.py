@@ -85,7 +85,9 @@ def animate(i):
     root.update()
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
-    temp = tk.Label(root, text = temp0, font = ('calibre', 10))
+    temp = tk.Entry(root, width = 7)
+    temp.insert(0, temp0)
+    temp.config(state='readonly')
     temp.place(x = 100, y = 480)
     
 
