@@ -7,7 +7,7 @@ adc = Adafruit_ADS1x15.ADS1115()
 
 GAIN = 1
 
-
+auto = 0
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
@@ -64,8 +64,8 @@ try:
 
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
-            auto = conf[4]
-        if (auto == 0):
+            auto = float(conf[4])
+        if (auto == 1):
             auto_mode()
         else:
             man_mode()
