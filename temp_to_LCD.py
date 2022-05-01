@@ -71,7 +71,7 @@ while True:
 #       data = pd.read_csv('temp_read.csv')
 #       dtemp0 = data["dtemp0"]
 #       dtemp0 = str(round(dtemp0, 1))
-        lcd.clear()
+#       lcd.clear()
         lcd.cursor_pos(0, 0)
         lcd.write_string("SP: " + SP)
 #       lcd.cursor_pos(1, 0)
