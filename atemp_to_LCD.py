@@ -12,8 +12,8 @@ GAIN = 1
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
-cols = 20
-rows = 4
+cols = 16
+rows = 2
 charmap = 'A00'
 i2c_expander = 'PCF8574'
 
@@ -29,10 +29,9 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
 
 
 lcd.clear()
-time.sleep(2)
 lcd.cursor_pos = (0, 0)
 lcd.write_string("Welcome!")
-time.sleep(2)
+time.sleep(3)
 lcd.clear()
 lcd.cursor_pos = (0, 0)
 lcd.write_string("Temperature reading in")
@@ -40,15 +39,19 @@ lcd.cursor_pos = (1, 0)
 lcd.write_string("5")
 time.sleep(1)
 lcd.clear()
+lcd.cursor_pos = (1, 0)
 lcd.write_string("4")
 time.sleep(1)
 lcd.clear()
+lcd.cursor_pos = (1, 0)
 lcd.write_string("3")
 time.sleep(1)
 lcd.clear()
+lcd.cursor_pos = (1, 0)
 lcd.write_string("2")
 time.sleep(1)
 lcd.clear()
+lcd.cursor_pos = (1, 0)
 lcd.write_string("1")
 lcd.clear()
 
