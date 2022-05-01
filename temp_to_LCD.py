@@ -2,6 +2,7 @@ from RPLCD import i2c
 import time
 import Adafruit_ADS1x15
 import pandas as pd
+import FTTRv4_temp as tmp
 
 adc = Adafruit_ADS1x15.ADS1115()
 
@@ -29,9 +30,7 @@ def auto_mode():
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = str(conf[0])
-    data = pd.read_csv('temp_read.csv')
-    temp0 = data["dtemp0"]
-    temp0 = str(temp0)
+    temp0 = tmp.read_temp0
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + SP)
@@ -40,9 +39,7 @@ def auto_mode():
     time.sleep(0.5)
 
 def man_mode():
-    data = pd.read_csv('temp_read.csv')
-    temp0 = data["dtemp0"]
-    temp0 = str(temp0)
+    temp0 = tmp.read_temp0
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         man = conf[5]
