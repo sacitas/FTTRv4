@@ -65,7 +65,7 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = conf[4]
-        if (auto == 1):
+        if (auto == 0):
             auto_mode()
         else:
             man_mode()
