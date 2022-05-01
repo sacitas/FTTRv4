@@ -42,41 +42,52 @@ lcd.write_string("Auto/Manual")
 time.sleep(5)
 lcd.clear()
 
-
-with open ('pid.conf', 'r+') as g:
-    conf = g.readline().split(',')
-    auto = float(conf[4])
+while True:
   
-if (auto == 0):
-#   data = pd.read_csv('temp_read.csv')
-#   dtemp0 = data["dtemp0"]
-#   dtemp0 = str(round(dtemp0, 1))
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
-        man = float(conf[5])
-        man = str(man)
-#   lcd.cursor_pos(0, 0)
-#   lcd.write_string("Temp: " + dtemp0)
-    lcd.cursor_pos(1, 0)
-    lcd.write_string("ManVal: " + man)
+        auto = float(conf[4])
+  
+    if (auto == 0):
+#       data = pd.read_csv('temp_read.csv')
+#       dtemp0 = data["dtemp0"]
+#       dtemp0 = str(round(dtemp0, 1))
+        with open ('pid.conf', 'r+') as g:
+            conf = g.readline().split(',')
+            man = float(conf[5])
+            man = str(man)
+#       lcd.cursor_pos(0, 0)
+#       lcd.write_string("Temp: " + dtemp0)
+        lcd.cursor_pos(1, 0)
+        lcd.write_string("ManVal: " + man)
 
-    time.sleep(0.5)
+        time.sleep(0.5)
     
-else:
-    with open ('pid.conf', 'r+') as g:
-        conf = g.readline().split(',')
-        SP = conf[0]
-#   data = pd.read_csv('temp_read.csv')
-#   dtemp0 = data["dtemp0"]
-#   dtemp0 = str(round(dtemp0, 1))
-#   lcd.clear()
-    lcd.cursor_pos(0, 0)
-    lcd.write_string("SP: " + SP)
-#   lcd.cursor_pos(1, 0)
-#   lcd.write_string("Temp: " + dtemp0)
+    else:
+#       with open ('pid.conf', 'r+') as g:
+#           conf = g.readline().split(',')
+#           SP = conf[0]
+#       data = pd.read_csv('temp_read.csv')
+#       dtemp0 = data["dtemp0"]
+#       dtemp0 = str(round(dtemp0, 1))
+#       lcd.clear()
+        S1 = adc.read_adc(0, gain = GAIN)
+        V1 = S1*(5.0/65535)
+        temp1 = V1 / (8/1000)
+        temp1 = str(round(temp1, 1))
+#       S2 = adc.read_adc(1, gain = GAIN)
+#       V2 = S2*(5.0/65535)
+#       temp2 = V2 / (8/1000)
+#       temp2 = str(round(temp2, 1))
+
+        lcd.cursor_pos(0, 0)
+        lcd.write_string("S1 Temp: " + temp1)
+#       lcd.write_string("SP: " + SP)
+#       lcd.cursor_pos(1, 0)
+#       lcd.write_string("Temp: " + dtemp0)
 
 
-    time.sleep(0.5)
+        time.sleep(0.5)
         
 
 
