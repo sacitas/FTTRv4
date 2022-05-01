@@ -15,7 +15,7 @@ man = 0
 lcdmode = 'i2c'
 cols = 20
 rows = 4
-charmap = 'A00'
+charmap = 'A02'
 i2c_expander = 'PCF8574'
 
 # Generally 27 is the address;Find yours using: i2cdetect -y 1 
@@ -29,17 +29,16 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
 
 
 
-
-lcd.write_string("Welcome!")
+lcd.clear()
 lcd.cursor_pos = (0, 0)
+lcd.write_string("Welcome!")
 time.sleep(5)
 lcd.clear()
 
-
+lcd.cursor_pos = (0, 0)
 lcd.write_string("Modes: ")
 lcd.cursor_pos = (1, 0)
 lcd.write_string("Auto/Manual")
-lcd.cursor_pos = (0, 0)
 time.sleep(5)
 lcd.clear()
 
