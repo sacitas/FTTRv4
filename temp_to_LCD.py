@@ -28,12 +28,13 @@ port = 1 # 0 on an older Raspberry Pi
 lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
+
 def auto_mode():
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = str(conf[0])
     temp0 = tmp.read_temp0()
-    temp0 = str(round(temp0, 2))
+    temp0 = str(round(temp0, 1))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + SP + degree_sign + "C")
@@ -41,9 +42,10 @@ def auto_mode():
     lcd.write_string("PV: " + temp0 + degree_sign + "C")
     time.sleep(0.5)
 
+    
 def man_mode():
     temp0 = tmp.read_temp0()
-    temp0 = str(round(temp0, 2))
+    temp0 = str(round(temp0, 1))
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         man = conf[5]
@@ -73,22 +75,3 @@ try:
             
 except KeyboardInterrupt:
     lcd.close(clear = True)
-
-
-
-
-#while True:
-#    S1 = adc.read_adc(0, gain = GAIN)
-#    V1 = S1*(5.0/65535)
-#    temp1 = V1 / (8/1000)
-#    temp1 = str(round(temp1, 1))
-#    S2 = adc.read_adc(1, gain = GAIN)
-#    V2 = S2*(5.0/65535)
-#    temp2 = V2 / (8/1000)
-#    temp2 = str(round(temp2, 1))
-#    lcd.cursor_pos = (0, 0)
-#    lcd.write_string("S1 Temp: " + temp1)
-#    lcd.cursor_pos = (1, 0)
-#    lcd.write_string("S2 Temp: " + temp2)
-
-#    time.sleep(0.5)
