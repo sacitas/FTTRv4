@@ -27,12 +27,49 @@ port = 1 # 0 on an older Raspberry Pi
 lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
+def auto_mode():
+    with open ('pid.conf', 'r+') as g:
+        conf = g.readline().split(',')
+        SP = str(conf[0])
+#   data = pd.read_csv('temp_read.csv')
+#   dtemp0 = data["dtemp0"]
+#   dtemp0 = str(dtemp0)
+    lcd.clear()
+    lcd.write_string("SP: " + SP)
+#   lcd.write_string("Temp: " + dtemp0)
+#   lcd.cursor_pos(1, 0)
+    time.sleep(0.5)
+
+def man_mode():
+#   data = pd.read_csv('temp_read.csv')
+#   dtemp0 = data["dtemp0"]
+#   dtemp0 = str(dtemp0)
+    with open ('pid.conf', 'r+') as g:
+        conf = g.readline().split(',')
+        man = conf[5]
+        man = str(man)
+    lcd.clear()
+#   lcd.write_string("Temp: " + dtemp0)
+#   lcd.cursor_pos(0, 0)
+    lcd.write_string("ManVal: " + man)
+#   lcd.cursor_pos(1, 0)
+
+    time.sleep(0.5)
+
 
 try:
     while True:
         lcd.clear()
         lcd.write_string("Welcome!")
         time.sleep(3)
+        with open ('pid.conf', 'r+') as g:
+            conf = g.readline().split(',')
+            auto = conf[4]
+        if (auto == 1):
+            auto_mode()
+        else:
+            man_mode()
+            
 except KeyboardInterrupt:
     lcd.close(clear = True)
 
