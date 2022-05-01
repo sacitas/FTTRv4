@@ -31,17 +31,17 @@ def auto_mode():
         conf = g.readline().split(',')
         SP = str(conf[0])
     temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
+    temp0 = str(round(temp0, 1))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + SP)
     lcd.cursor_pos = (1, 0)
-    lcd.write_string("Temp: " + temp0)
+    lcd.write_string("PV: " + temp0)
     time.sleep(0.5)
 
 def man_mode():
     temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
+    temp0 = str(round(temp0, 1))
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         man = conf[5]
@@ -50,7 +50,7 @@ def man_mode():
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man)
     lcd.cursor_pos = (1, 0)
-    lcd.write_string("Temp: " + temp0)
+    lcd.write_string("PV: " + temp0)
     time.sleep(0.5)
 
 
