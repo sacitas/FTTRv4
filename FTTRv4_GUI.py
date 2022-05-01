@@ -73,17 +73,18 @@ def animate(i):
     plt.plot(x, dtemp3, linewidth = 1.5, label='Sensor d3')
     plt.plot(x, dtemp4, linewidth = 1.5, label='Sensor d4')    
     
-    plt.ylim([0, 130])
+    plt.ylim([0, 150])
     plt.xlabel("Time [hh:mm:ss]", fontsize=10)
     plt.ylabel("Temperature [*C]", fontsize=10)
     plt.xticks(rotation=90, ha='right', fontsize=8)
     plt.xticks(np.arange(0, len(x)+1, 30))
+    plt.yticks(fontsize=10)
     plt.legend(loc='upper left', prop={'size':10})
     plt.tight_layout()
     
     root.update()
     temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
+    temp0 = str(round(temp0, 2))
     temp = tk.Label(root, text = temp0, font = ('calibre', 10))
     temp.place(x = 100, y = 480)
     
