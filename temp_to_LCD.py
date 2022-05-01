@@ -48,7 +48,7 @@ def man_mode():
     temp0 = str(round(temp0, 2))
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
-        man = conf[5]
+        man = float(conf[5])
         man = str(man)
     lcd.clear()
     lcd.cursor_pos = (0, 0)
