@@ -49,7 +49,7 @@ def man_mode():
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         man = conf[5]
-        man = str(man, 2)
+        man = str(man)
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man)
