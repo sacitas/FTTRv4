@@ -12,7 +12,7 @@ GAIN = 1
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
-cols = 16
+cols = 20
 rows = 2
 charmap = 'A00'
 i2c_expander = 'PCF8574'
