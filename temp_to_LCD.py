@@ -24,47 +24,23 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
 
-framebuffer = [
-    'Orbit NTNU',
-    '',
-]
-
-def write_to_lcd(lcd, framebuffer, num_cols):
-    lcd.home()
-    for row in framebuffer:
-        lcd.write_string(row.ljust(num_cols)[:num_cols])
-        lcd.write_string('\r\n')
-
-
-def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.2):
-    padding = ' ' * num_cols
-    s = padding + string + padding
-    for i in range(len(s)- num_cols + 1):
-        framebuffer[row] = s[i:i+num_cols]
-        write_to_lcd(lcd, framebuffer, num_cols)
-        time.sleep(delay)
-
-long_string = 'Goodbye'
-#'Like and subscribe or I will delete your Minecraft account'
-
-
 def auto_mode():
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = str(conf[0])
     temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
+    temp0 = str(round(temp0, 2))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
-    lcd.write_string("SP: " + SP + " *C")
+    lcd.write_string("SP: " + SP + " " + degree_sign + "C")
     lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " *C")
+    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
 
     
 def man_mode():
     temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
+    temp0 = str(round(temp0, 2))
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         man = str(conf[5])
@@ -72,7 +48,7 @@ def man_mode():
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man)
     lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " *C")
+    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
 
 
@@ -91,5 +67,6 @@ try:
             
 except KeyboardInterrupt:
     lcd.clear()
-    loop_string(long_string, lcd, framebuffer, 1, 16)
+    lcd.write_string("Goodbye")
+    time.sleep(2)
     lcd.close(clear = True)
