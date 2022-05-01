@@ -14,7 +14,7 @@ auto = 0
 lcdmode = 'i2c'
 cols = 20
 rows = 4
-charmap = 'A02'
+charmap = 'A00'
 i2c_expander = 'PCF8574'
 
 # Generally 27 is the address;Find yours using: i2cdetect -y 1 
