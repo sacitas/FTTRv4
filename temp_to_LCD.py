@@ -35,6 +35,7 @@ while True:
   lcd.write_string("Hello!")
   time.sleep(2)
   lcd.clear()
+  time.sleep(2)
   
 
 
