@@ -73,13 +73,19 @@ def animate(i):
     plt.plot(x, dtemp3, linewidth = 1.5, label='Sensor d3')
     plt.plot(x, dtemp4, linewidth = 1.5, label='Sensor d4')    
     
-    plt.ylim([0, 200])
+    plt.ylim([0, 130])
     plt.xlabel("Time [hh:mm:ss]", fontsize=10)
     plt.ylabel("Temperature [*C]", fontsize=10)
     plt.xticks(rotation=90, ha='right', fontsize=8)
     plt.xticks(np.arange(0, len(x)+1, 30))
     plt.legend(loc='upper left', prop={'size':10})
     plt.tight_layout()
+    
+    root.update()
+    temp0 = tmp.read_temp0()
+    temp0 = str(temp0)
+    temp = tk.Label(root, text = temp0, font = ('calibre', 10))
+    temp.place(x = 100, y = 480)
     
 
 #----------------Plot window in GUI----------------
@@ -228,13 +234,8 @@ SV = tk.Button(root, text = "SET", font = ('calibri', 12), command = lambda: Set
 SV.place(x = 835, y = 360, width=63, height=40)
 
 
-root.update()
-temp0 = tmp.read_temp0()
-temp0 = str(temp0)
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
 temp_label.place(x = 10, y = 480)
-temp = tk.Label(root, text = temp0, font = ('calibre', 10))
-temp.place(x = 100, y = 480)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
