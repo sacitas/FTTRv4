@@ -31,7 +31,6 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
 try:
     while True:
         lcd.clear()
-        lcd.cursor_pos = (0, 0)
         lcd.write_string("Welcome!")
         time.sleep(3)
 except KeyboardInterrupt:
