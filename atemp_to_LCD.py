@@ -27,6 +27,8 @@ port = 1 # 0 on an older Raspberry Pi
 lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
+lcd.clear()
+time.sleep(2)
 
 
 while True:
