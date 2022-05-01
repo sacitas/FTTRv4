@@ -32,9 +32,9 @@ lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
 def auto_mode():
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
-        SP = str(conf[0])
+        SP = str(round(conf[0], 2))
     temp0 = tmp.read_temp0()
-    temp0 = str(round(temp0, 1))
+    temp0 = str(round(temp0, 2))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + SP + degree_sign + "C")
@@ -45,11 +45,11 @@ def auto_mode():
     
 def man_mode():
     temp0 = tmp.read_temp0()
-    temp0 = str(round(temp0, 1))
+    temp0 = str(round(temp0, 2))
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         man = conf[5]
-        man = str(man)
+        man = str(round(man, 2))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man)
