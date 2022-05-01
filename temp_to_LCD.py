@@ -42,43 +42,41 @@ lcd.write_string("Auto/Manual")
 time.sleep(5)
 lcd.clear()
 
-while True:
 
+with open ('pid.conf', 'r+') as g:
+    conf = g.readline().split(',')
+    auto = float(conf[4])
+  
+if (auto == 0):
+#   data = pd.read_csv('temp_read.csv')
+#   dtemp0 = data["dtemp0"]
+#   dtemp0 = str(round(dtemp0, 1))
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
-        auto = float(conf[4])
-  
-    if (auto == 0):
-#       data = pd.read_csv('temp_read.csv')
-#       dtemp0 = data["dtemp0"]
-#       dtemp0 = str(round(dtemp0, 1))
-        with open ('pid.conf', 'r+') as g:
-            conf = g.readline().split(',')
-            man = float(conf[5])
-            man = str(man)
-#       lcd.cursor_pos(0, 0)
-#       lcd.write_string("Temp: " + dtemp0)
-        lcd.cursor_pos(1, 0)
-        lcd.write_string("ManVal: " + man)
+        man = float(conf[5])
+        man = str(man)
+#   lcd.cursor_pos(0, 0)
+#   lcd.write_string("Temp: " + dtemp0)
+    lcd.cursor_pos(1, 0)
+    lcd.write_string("ManVal: " + man)
 
-        time.sleep(0.5)
+    time.sleep(0.5)
     
-    else:
-        with open ('pid.conf', 'r+') as g:
-            conf = g.readline().split(',')
-            SP = float(conf[0])
-            SP = str(SP)
-#       data = pd.read_csv('temp_read.csv')
-#       dtemp0 = data["dtemp0"]
-#       dtemp0 = str(round(dtemp0, 1))
-#       lcd.clear()
-        lcd.cursor_pos(0, 0)
-        lcd.write_string("SP: " + SP)
-#       lcd.cursor_pos(1, 0)
-#       lcd.write_string("Temp: " + dtemp0)
+else:
+    with open ('pid.conf', 'r+') as g:
+        conf = g.readline().split(',')
+        SP = conf[0]
+#   data = pd.read_csv('temp_read.csv')
+#   dtemp0 = data["dtemp0"]
+#   dtemp0 = str(round(dtemp0, 1))
+#   lcd.clear()
+    lcd.cursor_pos(0, 0)
+    lcd.write_string("SP: " + SP)
+#   lcd.cursor_pos(1, 0)
+#   lcd.write_string("Temp: " + dtemp0)
 
 
-        time.sleep(0.5)
+    time.sleep(0.5)
         
 
 
