@@ -128,19 +128,19 @@ def animate(i):
     temp = tk.Entry(root, width = 7)
     temp.insert(0, temp0)
     temp.config(state='readonly')
-    temp.place(x = 970, y = 390)
+    temp.place(x = 970, y = 410)
     
     root.update()
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
-    A0.place(x = 970, y = 450)
+    A0.place(x = 970, y = 470)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
-    A1.place(x = 970, y = 480)
+    A1.place(x = 970, y = 500)
     
 
 #----------------Plot window in GUI----------------
@@ -230,7 +230,7 @@ def SetRegVals():
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
         
     S_P = tk.Label(root, text = sp, font = ('calibre', 10))
-    S_P.place(x = 970, y = 420)
+    S_P.place(x = 970, y = 440)
 
     
 with open ('pid.conf', 'r+') as g:
@@ -296,20 +296,20 @@ SV.place(x = 970, y = 330, width=80, height=40)
 
 #-------Labels--------
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
-temp_label.place(x = 890, y = 390)
+temp_label.place(x = 890, y = 410)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 890, y = 420)
+S_P_label.place(x = 890, y = 440)
 S_P = tk.Label(root, text = SP, font = ('calibre', 10))
-S_P.place(x = 970, y = 420)
+S_P.place(x = 970, y = 440)
 
 root.update()
 A0_label = tk.Label(root, text = 'A0: ', font = ('calibre', 10))
-A0_label.place(x = 890, y = 450)
+A0_label.place(x = 890, y = 470)
 
 root.update()
 A1_label = tk.Label(root, text = 'A1: ', font = ('calibre', 10))
-A1_label.place(x = 890, y = 480)
+A1_label.place(x = 890, y = 500)
    
 root.mainloop()
