@@ -95,7 +95,7 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
          
-        if (GPIO.input(23) == 0 and ledState == 0):
+        if (GPIO.input(24) == 0 and ledState == 0):
             GPIO.output(27, True)
             ledState = 1
             time.sleep(0.5)
