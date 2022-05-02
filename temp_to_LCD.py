@@ -11,8 +11,8 @@ degree_sign = u'\N{DEGREE SIGN}'
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(24, GPIO.IN)
-GPIO.setup(17, GPIO.OUT)
-GPIO.setup(27, GPIO.OUT)
+GPIO.setup(15, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
 
 ledState = 0
 
@@ -96,12 +96,12 @@ try:
             auto = int(conf[4])
          
         if (GPIO.input(24) == 0 and ledState == 0):
-            GPIO.output(27, True)
+            GPIO.output(15, True)
             ledState = 1
             time.sleep(0.5)
             auto_mode()  
         else:
-            GPIO.output(27, False)
+            GPIO.output(15, False)
             ledState = 0
             time.sleep(0.5)
             man_mode()
