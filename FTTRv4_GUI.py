@@ -95,7 +95,7 @@ def animate(i):
     plt.xlabel("Time [hh:mm:ss]", fontsize=10)
     plt.ylabel("Temperature " + "[" + degree_sign + "C]", fontsize=10)
     plt.xticks(rotation=90, ha='right', fontsize=8)
-    plt.xticks(np.arange(0, len(x)+1, 40))
+    plt.xticks(np.arange(0, len(x)+1, 70))
     plt.yticks(fontsize=10)
     plt.legend(loc='upper left', prop={'size':10})
     plt.tight_layout()
