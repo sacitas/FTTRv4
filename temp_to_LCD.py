@@ -94,8 +94,8 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        input_state = GPIO.input(23) 
-        if (input_state == True):
+        button_state = GPIO.input(23) 
+        if (button_state == True):
             GPIO.output(17, True)
             GPIO.output(27, False)
             auto_mode()
