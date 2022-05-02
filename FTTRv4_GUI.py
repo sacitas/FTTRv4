@@ -97,7 +97,7 @@ def animate(i):
     plt.xticks(rotation=90, ha='right', fontsize=8)
     plt.xticks(np.arange(0, len(x)+1, 70))
     plt.yticks(fontsize=10)
-    plt.legend(loc='upper left', prop={'size':10})
+    plt.legend(loc='upper right', prop={'size':9})
     plt.tight_layout()
     
     
