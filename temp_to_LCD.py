@@ -23,6 +23,30 @@ port = 1 # 0 on an older Raspberry Pi
 lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
+framebuffer = [
+    'Orbit NTNU',
+    '',
+]
+
+def write_to_lcd(lcd, framebuffer, num_cols):
+    lcd.home()
+    for row in framebuffer:
+        lcd.write_string(row.ljust(num_cols)[:num_cols])
+        lcd.write_string('\r\n')
+
+
+def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.1):
+    padding = ' ' * num_cols
+    s = padding + string + padding
+    for i in range(len(s)- num_cols + 1):
+        framebuffer[row] = s[i:i+num_cols]
+        write_to_lcd(lcd, framebuffer, num_cols)
+        time.sleep(delay)
+
+long_string = 'Like and subscribe or I will delete your Minecraft account'
+
+
+
 
 def auto_mode():
     with open ('pid.conf', 'r+') as g:
@@ -67,6 +91,7 @@ try:
             
 except KeyboardInterrupt:
     lcd.clear()
-    lcd.write_string("Goodbye")
+    loop_string(long_string, lcd, framebuffer, 1, 16)
+#   lcd.write_string("Goodbye")
     time.sleep(2)
     lcd.close(clear = True)
