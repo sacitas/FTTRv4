@@ -230,7 +230,7 @@ def SetRegVals():
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
         
     S_P = tk.Label(root, text = sp, font = ('calibre', 10))
-    S_P.place(x = 100, y = 510)
+    S_P.place(x = 100, y = 590)
 
     
 with open ('pid.conf', 'r+') as g:
