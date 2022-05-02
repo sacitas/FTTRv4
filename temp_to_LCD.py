@@ -94,13 +94,14 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        if (GPIO.input(23) == GPIO.HIGH):
-            GPIO.output(17, GPIO.HIGH)
-            GPIO.output(27, GPIO.LOW)
+        input_state = GPIO.input(23) 
+        if (input_state == True):
+            GPIO.output(17, True)
+            GPIO.output(27, False)
             auto_mode()
         else:
-            GPIO.output(17, GPIO.LOW)
-            GPIO.output(27, GPIO.HIGH)
+            GPIO.output(17, False)
+            GPIO.output(27, True)
             man_mode()
             
 except KeyboardInterrupt:
