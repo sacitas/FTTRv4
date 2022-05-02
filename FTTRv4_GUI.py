@@ -65,14 +65,13 @@ def init_time_plot():
     
     plot_filename = now.strftime("%m_%d_%Y-%H:%M")
     plot_filepath = plot_folder + plot_filename
+    
+    S['text'] = 'Plot saved!'
 
 
 
 #--------Save plot function--------
 def savePlot():
-    S['text'] = 'Plot saved!'
-    time.sleep(3)
-    S['text'] = 'Save plot'
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
     
