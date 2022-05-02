@@ -12,7 +12,7 @@ degree_sign = u'\N{DEGREE SIGN}'
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 
@@ -95,10 +95,12 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
         button_state = GPIO.input(23) 
-        if (button_state == True):
+        if (button_state == False):
             GPIO.output(17, True)
             GPIO.output(27, False)
             auto_mode()
+            while GPIO.input(23) == False:
+                time.sleep(0.2)     
         else:
             GPIO.output(17, False)
             GPIO.output(27, True)
