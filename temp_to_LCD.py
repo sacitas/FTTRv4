@@ -12,9 +12,11 @@ degree_sign = u'\N{DEGREE SIGN}'
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(23, GPIO.INPUT)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
+
+ledState = 0
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
@@ -94,16 +96,16 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        button_state = GPIO.input(23) 
-        if (button_state == False):
+         
+        if (GPIO.input(23) == 0 and ledState == 0):
             GPIO.output(17, True)
-            GPIO.output(27, False)
-            auto_mode()
-            while GPIO.input(23) == False:
-                time.sleep(0.2)     
+            ledState = 1
+            time.sleep(0.5)
+            auto_mode()  
         else:
             GPIO.output(17, False)
-            GPIO.output(27, True)
+            ledState = 0
+            time.sleep(0.5)
             man_mode()
             
 except KeyboardInterrupt:
