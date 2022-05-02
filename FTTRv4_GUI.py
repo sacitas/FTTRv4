@@ -261,8 +261,8 @@ S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda
 S.place(x = 750, y = 580, width=100, heigh=30)
 
 save_label = tk.Label(root, text = 'Plot saved!', font = ('calibre', 10))
-save_label.place(x = 750, y = 610)
 save_label.pack()
+save_label.place(x = 750, y = 610)
 
 #-------Create input fields--------
 root.update()
