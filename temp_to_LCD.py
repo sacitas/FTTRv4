@@ -9,8 +9,8 @@ import FTTRv4_temp as tmp
 degree_sign = u'\N{DEGREE SIGN}'
  
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(23, GPIO.IN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(24, GPIO.IN)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 
@@ -96,12 +96,12 @@ try:
             auto = int(conf[4])
          
         if (GPIO.input(23) == 0 and ledState == 0):
-            GPIO.output(17, True)
+            GPIO.output(27, True)
             ledState = 1
             time.sleep(0.5)
             auto_mode()  
         else:
-            GPIO.output(17, False)
+            GPIO.output(27, False)
             ledState = 0
             time.sleep(0.5)
             man_mode()
