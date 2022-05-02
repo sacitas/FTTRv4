@@ -300,7 +300,7 @@ temp_label.place(x = 888, y = 410)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 890, y = 460)
+S_P_label.place(x = 893, y = 460)
 S_P = tk.Label(root, text = SP, font = ('calibre', 10))
 S_P.place(x = 970, y = 460)
 
