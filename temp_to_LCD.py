@@ -12,7 +12,7 @@ degree_sign = u'\N{DEGREE SIGN}'
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.INPUT)
+GPIO.setup(23, GPIO.IN)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 
