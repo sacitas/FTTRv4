@@ -74,7 +74,8 @@ def savePlot():
     plt.savefig(f'{plot_filepath}.png')
     save_label = tk.Label(root, text = 'Plot saved!', font = ('calibre', 10))
     save_label.place(x = 750, y = 610)
-    time.sleep(2)
+    time.sleep(5)
+    save_label.destroy()
     
 #-------Plot function to animate--------
 def animate(i):
