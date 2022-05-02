@@ -10,9 +10,11 @@ degree_sign = u'\N{DEGREE SIGN}'
  
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(24, GPIO.IN)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(15, GPIO.OUT)
 GPIO.setup(18, GPIO.OUT)
+
+GPIO.add_event_detect(24, GPIO.RISING, callback=button_callback)
 
 ledState = 0
 
@@ -84,7 +86,17 @@ def man_mode():
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
 
-    
+def button_callback(channel):
+    if (GPIO.input(24) == 0 and ledState == 0):
+        GPIO.output(15, True)
+        ledState = 1
+        time.sleep(0.5)
+        auto_mode()  
+    else:
+        GPIO.output(15, False)
+        ledState = 0
+        time.sleep(0.5)
+        man_mode()
 
 try:
     lcd.clear()
@@ -94,17 +106,8 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-         
-        if (GPIO.input(24) == 0 and ledState == 0):
-            GPIO.output(15, True)
-            ledState = 1
-            time.sleep(0.5)
-            auto_mode()  
-        else:
-            GPIO.output(15, False)
-            ledState = 0
-            time.sleep(0.5)
-            man_mode()
+        button_callback() 
+
             
 except KeyboardInterrupt:
     lcd.clear()
