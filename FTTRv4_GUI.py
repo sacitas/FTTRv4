@@ -74,8 +74,7 @@ def savePlot():
     plt.savefig(f'{plot_filepath}.png')
     save_label = tk.Label(root, text = 'Plot saved!', font = ('calibre', 10))
     save_label.place(x = 750, y = 610)
-    time.sleep(3000)
-    save_label.config(text="")
+
     
 #-------Plot function to animate--------
 def animate(i):
@@ -148,6 +147,7 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 540)
     
+    savePlot.save_label.destroy()
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
@@ -155,7 +155,7 @@ canvas.get_tk_widget().place(x = 10, y = 10, width = 840, height = 555)
 canvas.draw()
 
 #------------------Animate function------------------
-ani = FuncAnimation(plt.gcf(), animate, interval=500)
+ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 
 
 def switch():
