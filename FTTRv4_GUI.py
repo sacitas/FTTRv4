@@ -262,28 +262,28 @@ SP_ent.insert(0, SP)
 SP_ent.place(x = 970, y = 90)
 
 root.update()
-kp_label = tk.Label(root, text = 'Proportional\ngain:', font = ('calibre', 10))
+kp_label = tk.Label(root, text = 'Proportional\n       gain:', font = ('calibre', 10))
 kp_label.place(x = 880, y = 130)
 kp_ent = tk.Entry(root, width=7)
 kp_ent.insert(0, KP)
 kp_ent.place(x = 970, y = 140)
 
 root.update()
-ti_label = tk.Label(root, text = 'Integral\ntime:', font = ('calibre', 10))
+ti_label = tk.Label(root, text = 'Integral\n   time:', font = ('calibre', 10))
 ti_label.place(x = 890, y = 180)
 ti_ent = tk.Entry(root, width=7)
 ti_ent.insert(0, TI)
 ti_ent.place(x = 970, y = 190)
 
 root.update()
-td_label = tk.Label(root, text = 'Derivative\ntime:', font = ('calibre', 10))
+td_label = tk.Label(root, text = 'Derivative\n     time:', font = ('calibre', 10))
 td_label.place(x = 880, y = 230)
 td_ent = tk.Entry(root, width=7)
 td_ent.insert(0, TD)
 td_ent.place(x = 970, y = 240)
 
 root.update()
-man_label = tk.Label(root, text = 'Manual\nvalue:', font = ('calibre', 10))
+man_label = tk.Label(root, text = 'Manual\n   value:', font = ('calibre', 10))
 man_label.place(x = 890, y = 280)
 man_ent = tk.Entry(root, width=7)
 man_ent.insert(0, "0")
@@ -295,7 +295,7 @@ SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: S
 SV.place(x = 970, y = 330, width=80, height=40)
 
 #-------Labels--------
-temp_label = tk.Label(root, text = 'Process\n    value: ', font = ('calibre', 10))
+temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
 temp_label.place(x = 890, y = 410)
 
 root.update()
