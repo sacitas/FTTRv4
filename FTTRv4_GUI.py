@@ -67,6 +67,8 @@ def init_time_plot():
     plot_filepath = plot_folder + plot_filename
     
     S['text'] = 'Plot saved!'
+    time.sleep(2)
+    S['text'] = 'Save plot'
 
 
 
