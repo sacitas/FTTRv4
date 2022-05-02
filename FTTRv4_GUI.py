@@ -145,7 +145,7 @@ def animate(i):
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
-canvas.get_tk_widget().place(x = 10, y = 10, width = 720, height = 450)
+canvas.get_tk_widget().place(x = 10, y = 10, width = 760, height = 490)
 canvas.draw()
 
 #------------------Animate function------------------
@@ -235,9 +235,9 @@ with open ('pid.conf', 'r+') as g:
 
 root.update()
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
-MA.place(x = 870, y = 30)
+MA.place(x = 890, y = 30)
 mode_label = tk.Label(root, text = 'Auto on/off', font = ('calibre', 10))
-mode_label.place(x = 870, y = 10)
+mode_label.place(x = 900, y = 10)
 
 
 #-------Creates button-------
