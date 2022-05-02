@@ -74,7 +74,7 @@ def savePlot():
     plt.savefig(f'{plot_filepath}.png')
     save_label.pack_forget()
     time.sleep(3)
-    save_label.pack_pack()
+    save_label.pack()
 
     
     
