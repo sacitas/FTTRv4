@@ -74,9 +74,6 @@ def savePlot():
     plt.savefig(f'{plot_filepath}.png')
     save_label = tk.Label(root, text = 'Plot saved!', font = ('calibre', 10))
     save_label.place(x = 750, y = 610)
-    destroyLabel()
-
-def destroyLabel():
     save_label.after(3000, save_label.root.destroy())
     
 #-------Plot function to animate--------
