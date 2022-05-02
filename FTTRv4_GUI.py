@@ -45,7 +45,7 @@ plot_filepath = ""
 root = tk.Tk()
 root.title("Real Time Plot")
 root.configure(background = 'light grey')
-root.geometry("1200x840") # Window size
+root.geometry("1250x840") # Window size
 
 plt.style.use('fivethirtyeight')
 
