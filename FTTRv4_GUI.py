@@ -72,9 +72,9 @@ def init_time_plot():
 def savePlot():
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
-    save_label.pack_forget()
-    time.sleep(3)
     save_label.pack()
+    time.sleep(4)
+    save_label.pack_forget()
 
     
     
