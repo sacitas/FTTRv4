@@ -1,3 +1,4 @@
+import RPi.GPIO as GPIO
 from RPLCD import i2c
 import time
 import pandas as pd
@@ -6,6 +7,12 @@ import FTTRv4_temp as tmp
 auto = 0
 
 degree_sign = u'\N{DEGREE SIGN}'
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
@@ -84,10 +91,14 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        if (auto == 1):
+        if (GPIO.input(23) == GPIO.HIGH):
             auto_mode()
+            GPIO.output(17, GPIO.HIGH)
+            GPIO.output(27, GPIO.LOW)
         else:
             man_mode()
+            GPIO.output(17, GPIO.LOW)
+            GPIO.output(27, GPIO.HIGH)
             
 except KeyboardInterrupt:
     lcd.clear()
@@ -95,3 +106,4 @@ except KeyboardInterrupt:
 #   lcd.write_string("Goodbye")
     time.sleep(2)
     lcd.close(clear = True)
+    GPIO.cleanup()
