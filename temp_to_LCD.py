@@ -10,7 +10,7 @@ degree_sign = u'\N{DEGREE SIGN}'
  
  
  
-def button_callback(channel):
+def button_callback():
     if (GPIO.input(24) == 0 and ledState == 0):
         GPIO.output(15, True)
         ledState = 1
@@ -109,7 +109,7 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        button_callback(channel) 
+        button_callback() 
 
             
 except KeyboardInterrupt:
