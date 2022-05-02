@@ -128,19 +128,19 @@ def animate(i):
     temp = tk.Entry(root, width = 7)
     temp.insert(0, temp0)
     temp.config(state='readonly')
-    temp.place(x = 970, y = 430)
+    temp.place(x = 970, y = 420)
     
     root.update()
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
-    A0.place(x = 970, y = 490)
+    A0.place(x = 970, y = 500)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
-    A1.place(x = 970, y = 520)
+    A1.place(x = 970, y = 540)
     
 
 #----------------Plot window in GUI----------------
@@ -296,7 +296,7 @@ SV.place(x = 970, y = 330, width=80, height=40)
 
 #-------Labels--------
 temp_label = tk.Label(root, text = 'Process\nvalue: ', font = ('calibre', 10))
-temp_label.place(x = 890, y = 420)
+temp_label.place(x = 890, y = 410)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
@@ -306,10 +306,10 @@ S_P.place(x = 970, y = 460)
 
 root.update()
 A0_label = tk.Label(root, text = 'A0: ', font = ('calibre', 10))
-A0_label.place(x = 890, y = 490)
+A0_label.place(x = 890, y = 500)
 
 root.update()
 A1_label = tk.Label(root, text = 'A1: ', font = ('calibre', 10))
-A1_label.place(x = 890, y = 520)
+A1_label.place(x = 890, y = 540)
    
 root.mainloop()
