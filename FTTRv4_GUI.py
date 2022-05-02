@@ -67,9 +67,6 @@ def init_time_plot():
     plot_filepath = plot_folder + plot_filename
     
     S['text'] = 'Plot saved!'
-    time.sleep(2)
-    S['text'] = 'Save plot'
-
 
 
 #--------Save plot function--------
@@ -104,7 +101,7 @@ def animate(i):
     plt.xticks(rotation=90, ha='right', fontsize=8)
     plt.xticks(np.arange(0, len(x)+1, 70))
     plt.yticks(fontsize=10)
-    plt.legend(loc='upper right', prop={'size':9})
+    plt.legend(loc='lower right', prop={'size':9})
     plt.tight_layout()
     
     
@@ -172,7 +169,7 @@ def switch():
         modeA_ = tk.Entry(root, width=8)
         modeA_.insert(0, "Manual")
         modeA_.config(state='readonly')
-        modeA_.place(x = 900, y = 10)
+        modeA_.place(x = 930, y = 10)
         
         is_on = False
     else:
@@ -186,7 +183,7 @@ def switch():
         modeM_ = tk.Entry(root, width=8)
         modeM_.insert(0, "Auto")
         modeM_.config(state='readonly')
-        modeM_.place(x = 900, y = 10)
+        modeM_.place(x = 930, y = 10)
         
         is_on = True
         
