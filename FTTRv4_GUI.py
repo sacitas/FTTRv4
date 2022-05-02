@@ -73,6 +73,8 @@ def savePlot():
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
     S['text'] = 'Plot saved!'
+    time.sleep(3)
+    S['text'] = 'Save plot'
     
     
 #-------Plot function to animate--------
