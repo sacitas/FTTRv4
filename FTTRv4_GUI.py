@@ -72,7 +72,7 @@ def init_time_plot():
 def savePlot():
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
-    save_label.pack()
+    save_label.pack_forget()
     time.sleep(3)
     
     
@@ -260,7 +260,7 @@ S.place(x = 750, y = 580, width=100, heigh=30)
 
 save_label = tk.Label(root, text = 'Plot saved!', font = ('calibre', 10))
 save_label.place(x = 750, y = 610)
-save_label.pack_forget()
+save_label.pack()
 
 #-------Create input fields--------
 root.update()
