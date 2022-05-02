@@ -295,8 +295,8 @@ SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: S
 SV.place(x = 970, y = 330, width=80, height=40)
 
 #-------Labels--------
-temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
-temp_label.place(x = 890, y = 430)
+temp_label = tk.Label(root, text = 'Process\nvalue: ', font = ('calibre', 10))
+temp_label.place(x = 890, y = 420)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
