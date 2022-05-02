@@ -134,7 +134,7 @@ def animate(i):
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
-    A0.place(x = 920, y = 480)
+    A0.place(x = 920, y = 450)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
