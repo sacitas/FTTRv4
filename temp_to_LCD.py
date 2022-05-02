@@ -109,7 +109,7 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        button_callback() 
+        button_callback(channel) 
 
             
 except KeyboardInterrupt:
