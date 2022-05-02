@@ -237,7 +237,7 @@ root.update()
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
 MA.place(x = 805, y = 30)
 mode_label = tk.Label(root, text = 'Auto on/off', font = ('calibre', 10))
-mode_label.place(x = 890, y = 10)
+mode_label.place(x = 910, y = 10)
 
 
 #-------Creates button-------
@@ -248,43 +248,43 @@ S.place(x = 730, y = 590)
 #-------Create input fields--------
 root.update()
 SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-SP_label.place(x = 810, y = 100)
+SP_label.place(x = 840, y = 100)
 SP_ent = tk.Entry(root, width=7)
 SP_ent.insert(0, SP)
-SP_ent.place(x = 890, y = 100)
+SP_ent.place(x = 920, y = 100)
 
 root.update()
 kp_label = tk.Label(root, text = 'Proportional\ngain:', font = ('calibre', 10))
-kp_label.place(x = 800, y = 130)
+kp_label.place(x = 830, y = 130)
 kp_ent = tk.Entry(root, width=7)
 kp_ent.insert(0, KP)
-kp_ent.place(x = 890, y = 140)
+kp_ent.place(x = 920, y = 140)
 
 root.update()
 ti_label = tk.Label(root, text = 'Integral\ntime:', font = ('calibre', 10))
-ti_label.place(x = 810, y = 180)
+ti_label.place(x = 840, y = 180)
 ti_ent = tk.Entry(root, width=7)
 ti_ent.insert(0, TI)
-ti_ent.place(x = 890, y = 190)
+ti_ent.place(x = 920, y = 190)
 
 root.update()
 td_label = tk.Label(root, text = 'Derivative\ntime:', font = ('calibre', 10))
-td_label.place(x = 800, y = 230)
+td_label.place(x = 830, y = 230)
 td_ent = tk.Entry(root, width=7)
 td_ent.insert(0, TD)
-td_ent.place(x = 890, y = 240)
+td_ent.place(x = 920, y = 240)
 
 root.update()
 man_label = tk.Label(root, text = 'Manual\nvalue:', font = ('calibre', 10))
-man_label.place(x = 810, y = 280)
+man_label.place(x = 840, y = 280)
 man_ent = tk.Entry(root, width=7)
 man_ent.insert(0, "0")
-man_ent.place(x = 890, y = 290)
+man_ent.place(x = 920, y = 290)
 
 #-------Creates button-------
 root.update()
 SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: SetRegVals())
-SV.place(x = 890, y = 340, width=80, height=40)
+SV.place(x = 920, y = 340, width=80, height=40)
 
 #-------Labels--------
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
