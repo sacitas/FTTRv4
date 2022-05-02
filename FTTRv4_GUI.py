@@ -72,11 +72,10 @@ def init_time_plot():
 def savePlot():
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
-    while True:
+    text_ = "Plot saved"
+    for (i in range(len(text_))):
         save_label = tk.Label(root, text = 'Plot saved!', font = ('calibre', 10))
         save_label.place(x = 750, y = 610)
-        time.sleep(2)
-        save_label.destroy()
     
     
 #-------Plot function to animate--------
