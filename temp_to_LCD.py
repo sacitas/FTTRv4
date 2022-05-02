@@ -9,6 +9,7 @@ import FTTRv4_temp as tmp
 degree_sign = u'\N{DEGREE SIGN}'
  
  
+ledState = 0
  
 def button_callback():
     if (GPIO.input(24) == 0 and ledState == 0):
@@ -29,7 +30,6 @@ GPIO.setup(18, GPIO.OUT)
 
 GPIO.add_event_detect(24, GPIO.RISING, callback=button_callback)
 
-ledState = 0
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
