@@ -25,6 +25,8 @@ ads = ADS.ADS1115(i2c)
 
 ads.mode = Mode.CONTINUOUS
 
+degree_sign = u'\N{DEGREE SIGN}'
+
 #---Initial values---
 sp = 0
 kp = 0
@@ -91,7 +93,7 @@ def animate(i):
     
     plt.ylim([0, 150])
     plt.xlabel("Time [hh:mm:ss]", fontsize=10)
-    plt.ylabel("Temperature [*C]", fontsize=10)
+    plt.ylabel("Temperature " + "[" + degree_sign + "C]", fontsize=10)
     plt.xticks(rotation=90, ha='right', fontsize=8)
     plt.xticks(np.arange(0, len(x)+1, 40))
     plt.yticks(fontsize=10)
