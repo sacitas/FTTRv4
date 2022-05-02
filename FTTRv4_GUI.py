@@ -134,13 +134,13 @@ def animate(i):
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
-    A0.place(x = 100, y = 610)
+    A0.place(x = 100, y = 620)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
-    A1.place(x = 100, y = 630)
+    A1.place(x = 100, y = 650)
     
 
 #----------------Plot window in GUI----------------
@@ -248,10 +248,10 @@ S.place(x = 730, y = 590)
 #-------Create input fields--------
 root.update()
 SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-SP_label.place(x = 840, y = 100)
+SP_label.place(x = 840, y = 90)
 SP_ent = tk.Entry(root, width=7)
 SP_ent.insert(0, SP)
-SP_ent.place(x = 920, y = 100)
+SP_ent.place(x = 920, y = 90)
 
 root.update()
 kp_label = tk.Label(root, text = 'Proportional\ngain:', font = ('calibre', 10))
@@ -298,10 +298,10 @@ S_P.place(x = 100, y = 590)
 
 root.update()
 A0_label = tk.Label(root, text = 'A0: ', font = ('calibre', 10))
-A0_label.place(x = 10, y = 610)
+A0_label.place(x = 10, y = 620)
 
 root.update()
 A1_label = tk.Label(root, text = 'A1: ', font = ('calibre', 10))
-A1_label.place(x = 10, y = 630)
+A1_label.place(x = 10, y = 650)
    
 root.mainloop()
