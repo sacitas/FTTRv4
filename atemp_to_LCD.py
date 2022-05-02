@@ -6,7 +6,7 @@ import time
 
 import Adafruit_ADS1x15
 
-adc = Adafruit_ADS1x15.ADS1115()
+adc = Adafruit_ADS1x15.ADS1115(address=0x48, bus=1)
 
 GAIN = 1
 
