@@ -263,7 +263,7 @@ SP_ent.place(x = 970, y = 90)
 
 root.update()
 kp_label = tk.Label(root, text = 'Proportional\n          gain:', font = ('calibre', 10))
-kp_label.place(x = 880, y = 130)
+kp_label.place(x = 870, y = 130)
 kp_ent = tk.Entry(root, width=7)
 kp_ent.insert(0, KP)
 kp_ent.place(x = 970, y = 140)
