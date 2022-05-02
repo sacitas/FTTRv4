@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import datetime as dt
 import tkinter as tk
+from tkinter import ttk
 import pandas as pd
 import numpy as np
 import csv
@@ -250,7 +251,7 @@ MA.place(x = 940, y = 30)
 
 #-------Creates button-------
 root.update()
-S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
+S = ttk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
 S.place(x = 750, y = 580, width=100, heigh=30)
 
 #-------Create input fields--------
