@@ -306,10 +306,10 @@ S_P.place(x = 970, y = 460)
 
 root.update()
 A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
-A0_label.place(x = 890, y = 500)
+A0_label.place(x = 890, y = 490)
 
 root.update()
 A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
-A1_label.place(x = 890, y = 540)
+A1_label.place(x = 890, y = 530)
    
 root.mainloop()
