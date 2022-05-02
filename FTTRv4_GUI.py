@@ -163,7 +163,7 @@ def switch():
         td_ent.config(state='readonly')
         man_ent.config(state='normal')
         modeA_ = tk.Entry(root, width=8)
-        modeA_.insert(0, "Auto")
+        modeA_.insert(0, "Manual")
         modeA_.config(state='readonly')
         modeA_.place(x = 900, y = 10)
         
@@ -177,7 +177,7 @@ def switch():
         td_ent.config(state='normal')
         man_ent.config(state='readonly')
         modeM_ = tk.Entry(root, width=8)
-        modeM_.insert(0, "Manual")
+        modeM_.insert(0, "Auto")
         modeM_.config(state='readonly')
         modeM_.place(x = 900, y = 10)
         
