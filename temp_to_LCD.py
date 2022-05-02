@@ -8,6 +8,19 @@ import FTTRv4_temp as tmp
 
 degree_sign = u'\N{DEGREE SIGN}'
  
+ 
+ 
+def button_callback(channel):
+    if (GPIO.input(24) == 0 and ledState == 0):
+        GPIO.output(15, True)
+        ledState = 1
+        time.sleep(0.5)
+        auto_mode()  
+    else:
+        GPIO.output(15, False)
+        ledState = 0
+        time.sleep(0.5)
+        man_mode()
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -86,17 +99,7 @@ def man_mode():
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
 
-def button_callback(channel):
-    if (GPIO.input(24) == 0 and ledState == 0):
-        GPIO.output(15, True)
-        ledState = 1
-        time.sleep(0.5)
-        auto_mode()  
-    else:
-        GPIO.output(15, False)
-        ledState = 0
-        time.sleep(0.5)
-        man_mode()
+
 
 try:
     lcd.clear()
