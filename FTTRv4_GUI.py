@@ -75,7 +75,7 @@ def savePlot():
     save_label = tk.Label(root, text = 'Plot saved!', font = ('calibre', 10))
     save_label.place(x = 750, y = 610)
     time.sleep(3)
-    save_label.destroy()
+    save_label.after(1000, save_label.destroy())
 
 #-------Plot function to animate--------
 def animate(i):
