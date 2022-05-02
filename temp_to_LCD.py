@@ -92,13 +92,13 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
         if (GPIO.input(23) == GPIO.HIGH):
-            auto_mode()
             GPIO.output(17, GPIO.HIGH)
             GPIO.output(27, GPIO.LOW)
+            auto_mode()
         else:
-            man_mode()
             GPIO.output(17, GPIO.LOW)
             GPIO.output(27, GPIO.HIGH)
+            man_mode()
             
 except KeyboardInterrupt:
     lcd.clear()
