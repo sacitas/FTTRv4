@@ -128,19 +128,19 @@ def animate(i):
     temp = tk.Entry(root, width = 7)
     temp.insert(0, temp0)
     temp.config(state='readonly')
-    temp.place(x = 100, y = 480)
+    temp.place(x = 100, y = 500)
     
     root.update()
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
-    A0.place(x = 100, y = 540)
+    A0.place(x = 100, y = 560)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
-    A1.place(x = 100, y = 570)
+    A1.place(x = 100, y = 590)
     
 
 #----------------Plot window in GUI----------------
@@ -237,71 +237,71 @@ root.update()
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
 MA.place(x = 805, y = 30)
 mode_label = tk.Label(root, text = 'Auto on/off', font = ('calibre', 10))
-mode_label.place(x = 850, y = 10)
+mode_label.place(x = 870, y = 10)
 
 
 #-------Creates button-------
 root.update()
 S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
-S.place(x = 630, y = 470)
+S.place(x = 730, y = 570)
 
 #-------Create input fields--------
 root.update()
 SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-SP_label.place(x = 770, y = 100)
+SP_label.place(x = 790, y = 100)
 SP_ent = tk.Entry(root, width=7)
 SP_ent.insert(0, SP)
-SP_ent.place(x = 850, y = 100)
+SP_ent.place(x = 870, y = 100)
 
 root.update()
 kp_label = tk.Label(root, text = 'Proportional\ngain:', font = ('calibre', 10))
-kp_label.place(x = 760, y = 130)
+kp_label.place(x = 780, y = 130)
 kp_ent = tk.Entry(root, width=7)
 kp_ent.insert(0, KP)
-kp_ent.place(x = 850, y = 140)
+kp_ent.place(x = 870, y = 140)
 
 root.update()
 ti_label = tk.Label(root, text = 'Integral\ntime:', font = ('calibre', 10))
-ti_label.place(x = 770, y = 180)
+ti_label.place(x = 790, y = 180)
 ti_ent = tk.Entry(root, width=7)
 ti_ent.insert(0, TI)
-ti_ent.place(x = 850, y = 190)
+ti_ent.place(x = 870, y = 190)
 
 root.update()
 td_label = tk.Label(root, text = 'Derivative\ntime:', font = ('calibre', 10))
-td_label.place(x = 760, y = 230)
+td_label.place(x = 780, y = 230)
 td_ent = tk.Entry(root, width=7)
 td_ent.insert(0, TD)
-td_ent.place(x = 850, y = 240)
+td_ent.place(x = 870, y = 240)
 
 root.update()
 man_label = tk.Label(root, text = 'Manual\nvalue:', font = ('calibre', 10))
-man_label.place(x = 770, y = 280)
+man_label.place(x = 790, y = 280)
 man_ent = tk.Entry(root, width=7)
 man_ent.insert(0, "0")
-man_ent.place(x = 850, y = 290)
+man_ent.place(x = 870, y = 290)
 
 #-------Creates button-------
 root.update()
 SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: SetRegVals())
-SV.place(x = 850, y = 340, width=80, height=40)
+SV.place(x = 870, y = 340, width=80, height=40)
 
 #-------Labels--------
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
-temp_label.place(x = 10, y = 480)
+temp_label.place(x = 10, y = 500)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 10, y = 510)
+S_P_label.place(x = 10, y = 530)
 S_P = tk.Label(root, text = SP, font = ('calibre', 10))
-S_P.place(x = 100, y = 510)
+S_P.place(x = 100, y = 530)
 
 root.update()
 A0_label = tk.Label(root, text = 'A0: ', font = ('calibre', 10))
-A0_label.place(x = 10, y = 540)
+A0_label.place(x = 10, y = 560)
 
 root.update()
 A1_label = tk.Label(root, text = 'A1: ', font = ('calibre', 10))
-A1_label.place(x = 10, y = 570)
+A1_label.place(x = 10, y = 590)
    
 root.mainloop()
