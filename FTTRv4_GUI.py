@@ -8,12 +8,12 @@ import numpy as np
 import csv
 import os
 import FTTRv4_temp as tmp
-import Adafruit_ADS1x15
+#import Adafruit_ADS1x15
 
 
-adc = Adafruit_ADS1x15.ADS1115()
+#adc = Adafruit_ADS1x15.ADS1115()
 
-GAIN = 1
+#GAIN = 1
 
 #---Initial values---
 sp = 0
@@ -89,14 +89,14 @@ def animate(i):
     plt.tight_layout()
     
     
-    S1 = adc.read_adc(0, gain = GAIN)
-    V1 = S1*(5.0/65535)
-    atemp0 = V1 / (7/1000)
-    atemp0 = str(round(atemp0, 2))
-    S2 = adc.read_adc(1, gain = GAIN)
-    V2 = S2*(5.0/65535)
-    atemp1 = V2 / (7/1000)
-    atemp1 = str(round(atemp1, 2))
+    #S1 = adc.read_adc(0, gain = GAIN)
+    #V1 = S1*(5.0/65535)
+    #atemp0 = V1 / (7/1000)
+    #atemp0 = str(round(atemp0, 2))
+    #S2 = adc.read_adc(1, gain = GAIN)
+    #V2 = S2*(5.0/65535)
+    #atemp1 = V2 / (7/1000)
+    #atemp1 = str(round(atemp1, 2))
     
     
     root.update()
@@ -109,13 +109,13 @@ def animate(i):
     
     root.update()
     A0 = tk.Entry(root, width = 7)
-    A0.insert(0, atemp0)
+    A0.insert(0, 'atemp0')
     A0.config(state='readonly')
     A0.place(x = 100, y = 540)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
-    A1.insert(0, atemp1)
+    A1.insert(0, 'atemp1')
     A1.config(state='readonly')
     A1.place(x = 100, y = 570)
     
