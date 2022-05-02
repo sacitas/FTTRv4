@@ -70,6 +70,9 @@ def init_time_plot():
 
 #--------Save plot function--------
 def savePlot():
+    S['text'] = 'Plot saved!'
+    time.sleep(3)
+    S['text'] = 'Save plot'
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
     S['text'] = 'Plot saved!'
