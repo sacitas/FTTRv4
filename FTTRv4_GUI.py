@@ -235,9 +235,9 @@ with open ('pid.conf', 'r+') as g:
 
 root.update()
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
-MA.place(x = 840, y = 30)
+MA.place(x = 870, y = 30)
 mode_label = tk.Label(root, text = 'Auto on/off', font = ('calibre', 10))
-mode_label.place(x = 840, y = 10)
+mode_label.place(x = 870, y = 10)
 
 
 #-------Creates button-------
