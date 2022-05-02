@@ -4,22 +4,15 @@ import time
 import pandas as pd
 import FTTRv4_temp as tmp
 
-auto = 0
+#auto = 0
 
 degree_sign = u'\N{DEGREE SIGN}'
-
-
-def button_on(channel):
-    GPIO.output(17, GPIO.HIGH)
-    GPIO.output(27, GPIO.LOW)
-    auto_mode()
-    
+ 
 
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.add_event_detect(23, GPIO.RISING, callback=button_on)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 
@@ -102,7 +95,9 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
         if (GPIO.input(23) == GPIO.HIGH):
-            button_on()
+            GPIO.output(17, GPIO.HIGH)
+            GPIO.output(27, GPIO.LOW)
+            auto_mode()
         else:
             GPIO.output(17, GPIO.LOW)
             GPIO.output(27, GPIO.HIGH)
