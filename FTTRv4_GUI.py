@@ -9,11 +9,21 @@ import csv
 import os
 import FTTRv4_temp as tmp
 #import Adafruit_ADS1x15
-
+import adafruit_ads1x15.ads1115 as ADS
+import board
+import busio
+from adafruit_ads1x15.analog_in import AnalogIn
+from adafruit_ads1x15.ads1115 import Mode
 
 #adc = Adafruit_ADS1x15.ADS1115()
 
 #GAIN = 1
+
+i2c = busio.I2C(board.SCL, board.SDA)
+
+ads = ADS.ADS1115(i2c)
+
+ads.mode = Mode.CONTINUOUS
 
 #---Initial values---
 sp = 0
@@ -89,6 +99,17 @@ def animate(i):
     plt.tight_layout()
     
     
+    chan0 = AnalogIn(ads, ADS.P0)
+    chan1 = AnalogIn(ads, ADS.P1)
+    S1 = chan0.value
+    V1 = chan0.voltage
+    atemp0 = V1 / (11/1000)
+    atemp0 = float(round(atemp0, 1))
+    S2 = chan1.value
+    V2 = chan1.voltage
+    atemp1 = V2 / (11/1000)
+    atemp1 = float(round(atemp1, 1))
+    
     #S1 = adc.read_adc(0, gain = GAIN)
     #V1 = S1*(5.0/65535)
     #atemp0 = V1 / (7/1000)
@@ -109,13 +130,13 @@ def animate(i):
     
     root.update()
     A0 = tk.Entry(root, width = 7)
-    A0.insert(0, 'atemp0')
+    A0.insert(0, atemp0)
     A0.config(state='readonly')
     A0.place(x = 100, y = 540)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
-    A1.insert(0, 'atemp1')
+    A1.insert(0, atemp1)
     A1.config(state='readonly')
     A1.place(x = 100, y = 570)
     
