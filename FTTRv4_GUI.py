@@ -284,7 +284,7 @@ td_ent.place(x = 970, y = 240)
 
 root.update()
 man_label = tk.Label(root, text = 'Manual\n   value:', font = ('calibre', 10))
-man_label.place(x = 890, y = 280)
+man_label.place(x = 900, y = 280)
 man_ent = tk.Entry(root, width=7)
 man_ent.insert(0, "0")
 man_ent.place(x = 970, y = 290)
