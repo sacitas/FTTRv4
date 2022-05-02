@@ -77,8 +77,7 @@ def savePlot():
     destroyLabel()
 
 def destroyLabel():
-    time.sleep(3)
-    save_label.destroy()
+    save_label.after(3000, save_label.root.destroy())
     
 #-------Plot function to animate--------
 def animate(i):
