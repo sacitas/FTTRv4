@@ -11,6 +11,8 @@ degree_sign = u'\N{DEGREE SIGN}'
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.add_event_detect(23, GPIO.RISING, callback=button_on)
+GPIO.add_event_detect(23, GPIO.FALLING, callback=button_off)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 
@@ -82,6 +84,16 @@ def man_mode():
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
 
+    
+def button_on(channel):
+    GPIO.output(17, GPIO.HIGH)
+    GPIO.output(27, GPIO.LOW)
+    auto_mode()
+    
+def button_off(channel):
+    GPIO.output(17, GPIO.LOW)
+    GPIO.output(27, GPIO.HIGH)
+    man_mode()
 
 try:
     lcd.clear()
@@ -92,13 +104,9 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
         if (GPIO.input(23) == GPIO.HIGH):
-            GPIO.output(17, GPIO.HIGH)
-            GPIO.output(27, GPIO.LOW)
-            auto_mode()
+            button_on()
         else:
-            GPIO.output(17, GPIO.LOW)
-            GPIO.output(27, GPIO.HIGH)
-            man_mode()
+            button_off()
             
 except KeyboardInterrupt:
     lcd.clear()
