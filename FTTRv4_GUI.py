@@ -251,7 +251,7 @@ MA.place(x = 890, y = 30)
 #-------Creates button-------
 root.update()
 S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
-S.place(x = 730, y = 590)
+S.place(x = 730, y = 620)
 
 #-------Create input fields--------
 root.update()
@@ -292,7 +292,7 @@ man_ent.place(x = 920, y = 290)
 #-------Creates button-------
 root.update()
 SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: SetRegVals())
-SV.place(x = 920, y = 340, width=80, height=40)
+SV.place(x = 920, y = 330, width=80, height=40)
 
 #-------Labels--------
 temp_label = tk.Label(root, text = 'RegTemp: ', font = ('calibre', 10))
