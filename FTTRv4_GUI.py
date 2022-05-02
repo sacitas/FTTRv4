@@ -162,6 +162,8 @@ def switch():
         ti_ent.config(state='readonly')
         td_ent.config(state='readonly')
         man_ent.config(state='normal')
+        modeA_label = tk.Label(root, text = 'Auto', font = ('calibre', 10))
+        modeA_label.place(x = 900, y = 10)
         
         is_on = False
     else:
@@ -172,6 +174,8 @@ def switch():
         ti_ent.config(state='normal')
         td_ent.config(state='normal')
         man_ent.config(state='readonly')
+        modeM_label = tk.Label(root, text = 'Manual', font = ('calibre', 10))
+        modeM_label.place(x = 900, y = 10)
         
         is_on = True
         
@@ -236,8 +240,8 @@ with open ('pid.conf', 'r+') as g:
 root.update()
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
 MA.place(x = 890, y = 30)
-mode_label = tk.Label(root, text = 'Auto on/off', font = ('calibre', 10))
-mode_label.place(x = 900, y = 10)
+#mode_label = tk.Label(root, text = 'Auto on/off', font = ('calibre', 10))
+#mode_label.place(x = 900, y = 10)
 
 
 #-------Creates button-------
