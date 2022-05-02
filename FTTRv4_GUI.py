@@ -251,7 +251,7 @@ MA.place(x = 940, y = 30)
 #-------Creates button-------
 root.update()
 S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
-S.place(x = 730, y = 620)
+S.place(x = 750, y = 580)
 
 #-------Create input fields--------
 root.update()
