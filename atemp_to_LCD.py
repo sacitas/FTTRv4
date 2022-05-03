@@ -40,9 +40,10 @@ try:
         S1 = chan0.value
         S1 = str(S1)
         V1 = chan0.voltage
+        V1 = str(V1)
         lcd.clear()
         lcd.cursor_pos = (0, 0)
-        lcd.write_string("Pot: " + S1)
+        lcd.write_string("Pot: " + V1)
     
         time.sleep(0.5)
 except KeyboardInterrupt:
