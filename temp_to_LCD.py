@@ -10,25 +10,12 @@ degree_sign = u'\N{DEGREE SIGN}'
  
  
 ledState = 0
- 
-def button_callback():
-    if (GPIO.input(24) == 0 and ledState == 0):
-        GPIO.output(15, True)
-        ledState = 1
-        time.sleep(0.5)
-        auto_mode()  
-    else:
-        GPIO.output(15, False)
-        ledState = 0
-        time.sleep(0.5)
-        man_mode()
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(15, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
 
-GPIO.add_event_detect(24, GPIO.RISING, callback=button_callback)
 
 
 # constants to initialise the LCD
@@ -100,7 +87,6 @@ def man_mode():
     time.sleep(0.5)
 
 
-
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
@@ -109,7 +95,14 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        button_callback() 
+        button_state = GPIO.input(23)
+        if(button_state == False):
+            GPIO.output(17, True)
+            time.sleep(0.2)
+            auto_mode()
+        else:
+            GPIO.output(17, False)
+            man_mode()
 
             
 except KeyboardInterrupt:
