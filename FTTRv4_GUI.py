@@ -139,9 +139,9 @@ def animate(i):
     
     data1 = pd.read_csv('u_total.csv')
     U_total = data1["U_total"]
-    U_total = round(U_total, 1)
+    end = U_total[-1]
     control = tk.Entry(root, width = 7)
-    control.insert(0, U_total)
+    control.insert(0, end)
     control.config(state='readonly')
     control.place(x = 970, y = 455)
     
