@@ -11,8 +11,9 @@ degree_sign = u'\N{DEGREE SIGN}'
  
 ledState = 0
 
+
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 
@@ -58,7 +59,6 @@ long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 
 
-
 def auto_mode():
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
@@ -98,11 +98,12 @@ try:
         button_state = GPIO.input(23)
         if(button_state == False and auto == 1):
             GPIO.output(17, True)
-            time.sleep(0.2)
             auto_mode()
+            button_state = True
         else:
             GPIO.output(17, False)
             man_mode()
+            button_state = False
 
             
 except KeyboardInterrupt:
