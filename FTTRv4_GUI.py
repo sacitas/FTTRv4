@@ -144,13 +144,13 @@ def animate(i):
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
-    A0.place(x = 970, y = 560)
+    A0.place(x = 970, y = 550)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
-    A1.place(x = 970, y = 610)
+    A1.place(x = 970, y = 600)
     
 
 #----------------Plot window in GUI----------------
@@ -324,11 +324,11 @@ S_P_.place(x = 970, y = 505)
 
 root.update()
 A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
-A0_label.place(x = 890, y = 560)
+A0_label.place(x = 890, y = 550)
 
 root.update()
 A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
-A1_label.place(x = 890, y = 610)
+A1_label.place(x = 890, y = 600)
 
 sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10, 'bold'), fg = '#4876FF')
 sensord0_c.place(x = 20, y = 580)
