@@ -233,7 +233,7 @@ def SetRegVals():
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
         
     S_P_ = tk.Entry(root, width=7)
-    S_P_.insert(0, SP)
+    S_P_.insert(0, sp)
     S_P_.config(state='readonly')
     S_P_.place(x = 970, y = 460)
 
