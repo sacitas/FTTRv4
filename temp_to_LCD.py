@@ -78,13 +78,6 @@ def readConfig():
 def auto_mode():
 #   global SP, Kp, Ti, Td, auto, man
     readConfig()
-    button_state = GPIO.input(23)
-    if (button_state == False):
-        auto = 1
-        button_state = True
-    else:
-        auto = 0
-        button_state = False
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     temp0 = tmp.read_temp0()
@@ -101,13 +94,6 @@ def auto_mode():
 def man_mode():
 #   global SP, Kp, Ti, Td, auto, man
     readConfig()
-    button_state = GPIO.input(23)
-    if (button_state == True):
-        auto = 0
-        button_state = False
-    else:
-        auto = 1
-        button_state = True
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     temp0 = tmp.read_temp0()
