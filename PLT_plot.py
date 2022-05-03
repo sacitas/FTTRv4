@@ -7,7 +7,7 @@ degree_sign = u'\N{DEGREE SIGN}'
 
 def plot(filename):
 
-    path_to_file = '/..temp/' + filename
+    path_to_file = '../temp/' + filename
 
     data = pd.read_csv(path_to_file)
     x = data["x"]
