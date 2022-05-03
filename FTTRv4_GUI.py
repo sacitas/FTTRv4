@@ -150,7 +150,7 @@ def animate(i):
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
-    A1.place(x = 970, y = 600)
+    A1.place(x = 970, y = 590)
     
 
 #----------------Plot window in GUI----------------
