@@ -138,7 +138,7 @@ def animate(i):
     control = tk.Entry(root, width = 7)
     control.insert(0, 'U_total')
     control.config(state='readonly')
-    control.place(x = 970, y = 460)
+    control.place(x = 970, y = 455)
     
     root.update()
     A0 = tk.Entry(root, width = 7)
@@ -312,7 +312,7 @@ temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 1
 temp_label.place(x = 888, y = 405)
 
 control_label = tk.Label(root, text = 'Control\n     value: ', font = ('calibre', 10))
-control_label.place(x = 888, y = 450)
+control_label.place(x = 888, y = 445)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
