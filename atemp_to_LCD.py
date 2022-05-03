@@ -50,4 +50,3 @@ except KeyboardInterrupt:
     lcd.write_string("Goodbye!")
     time.sleep(2)
     lcd.close(clear = True)
-    GPIO.cleanup()
