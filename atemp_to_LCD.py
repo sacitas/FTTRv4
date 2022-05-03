@@ -4,11 +4,15 @@ from RPLCD import i2c
 # Import sleep library
 import time
 
-import Adafruit_ADS1x15
+import adafruit_ads1x15.ads1115 as ADS
+import board
+import busio
+from adafruit_ads1x15.analog_in import AnalogIn
+from adafruit_ads1x15.ads1115 import Mode
 
-adc = Adafruit_ADS1x15.ADS1115()
-
-GAIN = 1
+i2c = busio.I2C(board.SCL, board.SDA)
+ads = ADS.ADS1115(i2c)
+ads.mode = Mode.CONTINUOUS
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
@@ -32,17 +36,12 @@ time.sleep(2)
 
 
 while True:
-    S1 = adc.read_adc(0, gain = GAIN)
-    V1 = S1*(5.0/65535)
-    temp1 = V1 / (7/1000)
-    temp1 = str(round(temp1, 1))
-    S2 = adc.read_adc(1, gain = GAIN)
-    V2 = S2*(5.0/65535)
-    temp2 = V2 / (7/1000)
-    temp2 = str(round(temp2, 1))
+    chan0 = AnalogIn(ads, ADS.P2)
+    S1 = chan0.value
+    V1 = chan0.voltage
+    
+    lcd.clear()
     lcd.cursor_pos = (0, 0)
-    lcd.write_string("S1 Temp: " + temp1)
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("S2 Temp: " + temp2)
-
+    lcd.write_string("Pot: " + S1)
+    
     time.sleep(0.5)
