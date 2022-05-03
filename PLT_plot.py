@@ -31,11 +31,11 @@ def plot(filename):
 
     data = pd.read_csv(path_to_file)
     x = data["x"]
-    temp0 = data["temp0"]
-    temp1 = data["temp1"]
-    temp2 = data["temp2"]
-    temp3 = data["temp3"]
-    temp4 = data["temp4"]
+    temp0 = data["dtemp0"]
+    temp1 = data["dtemp1"]
+    temp2 = data["dtemp2"]
+    temp3 = data["dtemp3"]
+    temp4 = data["dtemp4"]
 
     
     plt.plot(x, temp0, label = config.sensors['sensor_0'], linewidth = 1.5, color = 'b')
