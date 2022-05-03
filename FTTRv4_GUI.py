@@ -242,7 +242,7 @@ def SetRegVals():
     S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, sp)
     S_P_.config(state='readonly')
-    S_P_.place(x = 970, y = 490)
+    S_P_.place(x = 970, y = 495)
 
     
 with open ('pid.conf', 'r+') as g:
@@ -316,11 +316,11 @@ control_label.place(x = 888, y = 445)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 893, y = 490)
+S_P_label.place(x = 893, y = 495)
 S_P_ = tk.Entry(root, width=7)
 S_P_.insert(0, SP)
 S_P_.config(state='readonly')
-S_P_.place(x = 970, y = 490)
+S_P_.place(x = 970, y = 495)
 
 root.update()
 A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
