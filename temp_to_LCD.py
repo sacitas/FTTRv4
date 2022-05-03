@@ -91,7 +91,7 @@ def man_mode():
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
-    time.sleep(3)
+    time.sleep(2)
     while True:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
