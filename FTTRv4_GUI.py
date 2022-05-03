@@ -309,10 +309,10 @@ SV.place(x = 970, y = 330, width=80, height=40)
 
 #-------Labels--------
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
-temp_label.place(x = 888, y = 410)
+temp_label.place(x = 888, y = 405)
 
 control_label = tk.Label(root, text = 'Control\n     value: ', font = ('calibre', 10))
-control_label.place(x = 888, y = 460)
+control_label.place(x = 888, y = 450)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
