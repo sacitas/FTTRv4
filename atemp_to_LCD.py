@@ -12,7 +12,7 @@ from adafruit_ads1x15.ads1115 import Mode
 
 I2C = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(I2C)
-ads.mode = Mode.CONTINUOUS
+#ads.mode = Mode.CONTINUOUS
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
