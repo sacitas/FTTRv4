@@ -38,8 +38,8 @@ time.sleep(2)
 while True:
     chan0 = AnalogIn(ads, ADS.P2)
     S1 = chan0.value
+    S1 = str(S1)
     V1 = chan0.voltage
-    
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("Pot: " + S1)
