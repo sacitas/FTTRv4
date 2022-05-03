@@ -39,16 +39,6 @@ auto = 0
 man = 0
 is_on = True
 
-Ts = 1
-SP = 120
-K_p = 1
-T_i = 0
-T_d = 0
-N = 10
-Tr_gain = 0
-U_total = 0
-T_t = 0
-PV = [0,0]
 
 plot_folder = "plot/"
 plot_filename = ""
@@ -145,9 +135,8 @@ def animate(i):
     temp.config(state='readonly')
     temp.place(x = 970, y = 420)
     
-    control_v = PID.FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
     control = tk.Entry(root, width = 7)
-    control.insert(0, control_v)
+    control.insert(0, 'U_total')
     control.config(state='readonly')
     control.place(x = 970, y = 460)
     
