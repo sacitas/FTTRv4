@@ -134,7 +134,7 @@ def animate(i):
     temp.config(state='readonly')
     temp.place(x = 970, y = 420)
     
-    control_v = PID.FTTR_PID()
+    control_v = PID.FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
     control = tk.Entry(root, width = 7)
     control.insert(0, control_v)
     control.config(state='readonly')
