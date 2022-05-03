@@ -4,10 +4,10 @@ import time
 import pandas as pd
 import FTTRv4_temp as tmp
 
-sp = 0
-kp = 0
-ti = 0
-td = 0
+SP = 0
+Kp = 0
+Ti = 0
+Td = 0
 auto = 0
 man = 0
 
@@ -75,6 +75,7 @@ def readConfig():
 
 def auto_mode():
     global SP, Kp, Ti, Td, auto, man
+    readConfig()
     auto = 1    
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
@@ -91,6 +92,7 @@ def auto_mode():
     
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
+    readConfig()
     auto = 0
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
