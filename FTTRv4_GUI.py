@@ -270,7 +270,7 @@ frame1 = tk.Frame(root, width=230, height=300, highlightbackground='grey', highl
 frame1.place(x=860, y=80)
 
 
-frame2 = tk.Frame(root, width=230, height=250, highlightbackground='grey', highlightthickness=1)
+frame2 = tk.Frame(root, width=230, height=230, highlightbackground='grey', highlightthickness=1)
 frame2.place(x=860, y=390)
 
 #-------Create input fields--------
