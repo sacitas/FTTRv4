@@ -107,6 +107,7 @@ def man_mode():
     button_state = GPIO.input(23)
     if(button_state == False):
         button_state = True
+        lcd.clear()
         lcd.cursor_pos = (0, 0)
         lcd.write_string("Set ManVal")
        
