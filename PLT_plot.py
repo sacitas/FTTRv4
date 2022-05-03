@@ -39,7 +39,7 @@ def plot(filename):
 
     
     plt.plot(x, temp0, label = config.sensors['sensor_0'], linewidth = 1.5, color = '#4876FF')
-    plt.plot(x, temp1, label = config.sensors['sensor_1'], linewidth = 1.5, color = '#EE0000'')
+    plt.plot(x, temp1, label = config.sensors['sensor_1'], linewidth = 1.5, color = '#EE0000')
     plt.plot(x, temp2, label = config.sensors['sensor_2'], linewidth = 1.5, color = 'orange')
     plt.plot(x, temp3, label = config.sensors['sensor_3'], linewidth = 1.5, color = '#008B45')
     plt.plot(x, temp4, label = config.sensors['sensor_4'], linewidth = 1.5, color = '#708090')
