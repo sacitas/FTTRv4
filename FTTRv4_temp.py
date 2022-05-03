@@ -72,7 +72,7 @@ def read_temp():
     return temps
 
 def read_temp0():
-    temps0 = temps
+    temps0 = read_temp()
 
     return temps0[0]
 
