@@ -48,7 +48,7 @@ plot_filepath = ""
 
 #------Main GUI code-----
 root = tk.Tk()
-root.title("Real Time Plot")
+root.title("FTTRv4 GUI")
 root.configure(background = 'light grey')
 root.geometry("1150x700") # Window size
 
