@@ -120,11 +120,13 @@ try:
             GPIO.output(17, True)
             GPIO.output(27, False)
             auto_mode()
+            button_state = True
             
         elif(auto == 0 or button_state == True):
             GPIO.output(27, True)
             GPIO.output(17, False)
             man_mode()
+            button_state = False
 
             
 except KeyboardInterrupt:
