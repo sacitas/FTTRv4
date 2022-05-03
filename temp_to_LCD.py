@@ -96,9 +96,6 @@ def man_mode():
     auto = 0
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
-    with open ('pid.conf', 'r+') as g:
-        conf = g.readline().split(',')
-        man = str(conf[5])
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man)
@@ -122,13 +119,11 @@ try:
             GPIO.output(17, True)
             GPIO.output(27, False)
             auto_mode()
-            button_state = True
             
         elif(auto == 0 or button_state == True):
             GPIO.output(27, True)
             GPIO.output(17, False)
             man_mode()
-            button_state = False
 
             
 except KeyboardInterrupt:
