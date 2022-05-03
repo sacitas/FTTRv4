@@ -13,6 +13,8 @@ import pandas as pd
 #T_d = float(input("Enter a T_d value: "))
 #N = float(input("Enter a filter (N) value: "))
 
+fieldnames = ["U_total"]
+
 Ts = 1
 SP = 120
 K_p = 1
@@ -34,6 +36,11 @@ U_d = [0, 0]
 Auto = 0
 PWM_pin = 13 # PWM pin on Raspberry Pi
  
+ 
+with open('u_total.csv', 'w') as p:
+    csv_writer = csv.DictWriter(p, fieldnames=fieldnames)
+    csv_writer.writeheader() 
+
 # Setup of the PWM pin on the Raspberry Pi
 def setup():
     global pwm
@@ -146,12 +153,18 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
     # Samplingtime 
     time.sleep(Ts)
     
+    with open('u_total.csv', 'a') as p:
+        csv_writer = csv.DictWriter(p, fieldnames=fieldnames)
+        
+        info = {
+            "U_total": U_total
+        }
+        csv_writer.writerow(info)
+        data_csv.close()
+
+    
     return U_total
 
-def getU_total():
-    U_TOTAL = FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
-  
-    return U_TOTAL
    
 def PID_loop():
     readConfig()
