@@ -175,7 +175,7 @@ def switch():
         modeA_ = tk.Entry(root, width=8)
         modeA_.insert(0, "Manual")
         modeA_.config(state='readonly')
-        modeA_.place(x = 950, y = 10)
+        modeA_.place(x = 940, y = 10)
         
         is_on = False
     else:
@@ -189,7 +189,7 @@ def switch():
         modeM_ = tk.Entry(root, width=8)
         modeM_.insert(0, "Auto")
         modeM_.config(state='readonly')
-        modeM_.place(x = 950, y = 10)
+        modeM_.place(x = 940, y = 10)
         
         is_on = True
         
@@ -255,7 +255,7 @@ with open ('pid.conf', 'r+') as g:
 
 root.update()
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
-MA.place(x = 940, y = 30)
+MA.place(x = 930, y = 30)
 #mode_label = tk.Label(root, text = 'Auto on/off', font = ('calibre', 10))
 #mode_label.place(x = 900, y = 10)
 
