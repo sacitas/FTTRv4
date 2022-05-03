@@ -2,28 +2,8 @@ import PLT_config as config
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import datetime as dt
 
 degree_sign = u'\N{DEGREE SIGN}'
-
-plot_folder = "plot/"
-plot_filename = ""
-plot_filepath = ""
-
-
-def init_time():
-    global ref_time  
-    global plot_folder
-    global plot_filename
-    global plot_filepath
-    
-    now = dt.datetime.now()
-    t = now.strftime("%H:%M:%S")
-    (h, m, s) = t.split(':')
-    ref_time = int(h) * 3600 + int(m) * 60 + int(s)
-    
-    plot_filename = now.strftime("%m_%d_%Y-%H:%M")
-    plot_filepath = plot_folder + plot_filename
 
 
 def plot(filename):
@@ -54,6 +34,4 @@ def plot(filename):
     plt.legend(loc='lower right', prop={'size':10})
     plt.grid()
     plt.tight_layout()
-    plt.show()
-    plt.savefig(f'{plot_filepath}.png')
-    
+    plt.show() 
