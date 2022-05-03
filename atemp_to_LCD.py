@@ -10,8 +10,8 @@ import busio
 from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_ads1x15.ads1115 import Mode
 
-i2c = busio.I2C(board.SCL, board.SDA)
-ads = ADS.ADS1115(i2c)
+I2C = busio.I2C(board.SCL, board.SDA)
+ads = ADS.ADS1115(I2C)
 ads.mode = Mode.CONTINUOUS
 
 # constants to initialise the LCD
