@@ -72,10 +72,11 @@ def readConfig():
         auto = int(conf[4])
         man = float(conf[5])
         man = str(man)
+        SP = str(SP)
 
 
 def auto_mode():
-    global SP, Kp, Ti, Td, auto, man
+#   global SP, Kp, Ti, Td, auto, man
     readConfig()
     auto = 1    
     temp0 = tmp.read_temp0()
