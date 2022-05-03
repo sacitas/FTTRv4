@@ -4,7 +4,12 @@ import time
 import pandas as pd
 import FTTRv4_temp as tmp
 
+sp = 0
+kp = 0
+ti = 0
+td = 0
 auto = 0
+man = 0
 
 degree_sign = u'\N{DEGREE SIGN}'
  
@@ -56,11 +61,21 @@ def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.1):
 long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 
-
-def auto_mode():
+def readConfig():
+    global SP, Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = str(conf[0])
+        Kp = float(conf[1])
+        Ti = float(conf[2])
+        Td = float(conf[3])
+        auto = int(conf[4])
+        man = float(conf[5])
+
+
+def auto_mode():
+    global SP, Kp, Ti, Td, auto, man
+    auto = 1    
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     lcd.clear()
@@ -69,9 +84,13 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+    
 
     
 def man_mode():
+    auto = 0
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     with open ('pid.conf', 'r+') as g:
@@ -84,6 +103,8 @@ def man_mode():
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
 
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     
 try:
     lcd.clear()
