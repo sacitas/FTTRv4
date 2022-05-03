@@ -9,7 +9,7 @@ Kp = 0
 Ti = 0
 Td = 0
 auto = 0
-#man = 0
+man = 0
 
 degree_sign = u'\N{DEGREE SIGN}'
  
@@ -92,9 +92,11 @@ def auto_mode():
 
     
 def man_mode():
-    global SP, Kp, Ti, Td, auto, man
+#   global SP, Kp, Ti, Td, auto, man
     readConfig()
     auto = 0
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     lcd.clear()
@@ -103,9 +105,6 @@ def man_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
-
-    with open ('pid.conf', 'w') as f:
-        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     
 try:
     lcd.clear()
