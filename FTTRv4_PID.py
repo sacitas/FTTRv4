@@ -147,7 +147,12 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
     time.sleep(Ts)
     
     return U_total
-    
+
+def getU_total():
+    U_TOTAL = FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
+  
+    return U_TOTAL
+   
 def PID_loop():
     readConfig()
     FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total)
