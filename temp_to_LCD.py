@@ -78,7 +78,11 @@ def readConfig():
 def auto_mode():
 #   global SP, Kp, Ti, Td, auto, man
     readConfig()
-    auto = 1 
+    button_state = GPIO.input(23)
+    if (button_state == False):
+        auto = 1
+    else:
+        auto = 0    
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     temp0 = tmp.read_temp0()
@@ -89,13 +93,17 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
-    
+     
 
     
 def man_mode():
 #   global SP, Kp, Ti, Td, auto, man
     readConfig()
-    auto = 0
+    button_state = GPIO.input(23)
+    if (button_state == True):
+        auto = 0
+    else:
+        auto = 1  
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     temp0 = tmp.read_temp0()
@@ -115,18 +123,16 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        button_state = GPIO.input(23)
-        if(auto == 1 or button_state == False): 
+
+        if(auto == 1): 
             GPIO.output(17, True)
             GPIO.output(27, False)
             auto_mode()
-            button_state = True
             
-        elif(auto == 0 or button_state == True):
+        elif(auto == 0):
             GPIO.output(27, True)
             GPIO.output(17, False)
             man_mode()
-            button_state = False
 
             
 except KeyboardInterrupt:
