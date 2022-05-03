@@ -232,8 +232,10 @@ def SetRegVals():
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
         
-    S_P = tk.Label(root, text = sp, font = ('calibre', 10))
-    S_P.place(x = 970, y = 460)
+    S_P_ = tk.Entry(root, width=7)
+    S_P_.insert(0, SP)
+    S_P_.config(state='readonly')
+    S_P_.place(x = 970, y = 460)
 
     
 with open ('pid.conf', 'r+') as g:
@@ -305,8 +307,10 @@ temp_label.place(x = 888, y = 410)
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
 S_P_label.place(x = 893, y = 460)
-S_P = tk.Label(root, text = SP, font = ('calibre', 10))
-S_P.place(x = 970, y = 460)
+S_P_ = tk.Entry(root, width=7)
+S_P_.insert(0, SP)
+S_P_.config(state='readonly')
+S_P_.place(x = 970, y = 460)
 
 root.update()
 A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
