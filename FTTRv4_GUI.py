@@ -75,7 +75,7 @@ def init_time_plot():
 def savePlot():
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
-    saved = tk.Label(root, text='File location:\n/home/pi/Orbit-NTNU', font = ('calibre', 10))
+    saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
     
 #-------Plot function to animate--------
