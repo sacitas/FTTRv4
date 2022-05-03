@@ -90,6 +90,7 @@ def auto_mode():
 
     
 def man_mode():
+    global SP, Kp, Ti, Td, auto, man
     auto = 0
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
