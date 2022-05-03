@@ -266,8 +266,8 @@ S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda
 S.place(x = 730, y = 590, width=120, heigh=31)
 
 
-frame1 = tk.Frame(root, width=230, height=300, highlightbackground='grey', highlightthickness=1)
-frame1.place(x=860, y=80)
+frame1 = tk.Frame(root, width=230, height=370, highlightbackground='grey', highlightthickness=1)
+frame1.place(x=860, y=10)
 
 
 frame2 = tk.Frame(root, width=230, height=230, highlightbackground='grey', highlightthickness=1)
