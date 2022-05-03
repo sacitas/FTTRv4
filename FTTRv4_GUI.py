@@ -39,6 +39,16 @@ auto = 0
 man = 0
 is_on = True
 
+Ts = 1
+SP = 120
+K_p = 1
+T_i = 0
+T_d = 0
+N = 10
+Tr_gain = 0
+U_total = 0
+T_t = 0
+
 plot_folder = "plot/"
 plot_filename = ""
 plot_filepath = ""
