@@ -48,6 +48,7 @@ N = 10
 Tr_gain = 0
 U_total = 0
 T_t = 0
+PV = [0,0]
 
 plot_folder = "plot/"
 plot_filename = ""
