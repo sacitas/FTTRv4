@@ -31,17 +31,23 @@ port = 1 # 0 on an older Raspberry Pi
 lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
-lcd.clear()
-time.sleep(2)
-
-
-while True:
-    chan0 = AnalogIn(ads, ADS.P2)
-    S1 = chan0.value
-    S1 = str(S1)
-    V1 = chan0.voltage
+try:
     lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("Pot: " + S1)
+    lcd.write_string("Welcome!")
+    time.sleep(2)
+    while True:
+        chan0 = AnalogIn(ads, ADS.P2)
+        S1 = chan0.value
+        S1 = str(S1)
+        V1 = chan0.voltage
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Pot: " + S1)
     
-    time.sleep(0.5)
+        time.sleep(0.5)
+except KeyboardInterrupt:
+    lcd.clear()
+    lcd.write_string("Goodbye!")
+    time.sleep(2)
+    lcd.close(clear = True)
+    GPIO.cleanup()
