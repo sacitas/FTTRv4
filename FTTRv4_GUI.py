@@ -140,7 +140,7 @@ def animate(i):
     with open('u_total.csv', 'r') as p:
         U_total = p.readlines()[-1]
     control = tk.Entry(root, width = 7)
-    control.insert(0, round(U_total,1))
+    control.insert(0, U_total)
     control.config(state='readonly')
     control.place(x = 970, y = 455)
     
