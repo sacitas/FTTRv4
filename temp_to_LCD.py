@@ -103,7 +103,7 @@ try:
             auto_mode()
             button_state = True
             redLedState = 1
-        else if (button_state == True and auto == 0 and greenLedState == 0):
+        elif (button_state == True and auto == 0 and greenLedState == 0):
             GPIO.output(27, True)
             GPIO.output(17, False)
             man_mode()
