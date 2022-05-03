@@ -186,7 +186,7 @@ def PID_main():
     setup()
     try:
         while True:
-            tmp.read_temp0()
+            #tmp.read_temp0()
             tmp.write_tmp()
             if Auto == 1:
                 PID_loop()
