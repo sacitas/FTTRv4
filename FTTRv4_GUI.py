@@ -137,11 +137,10 @@ def animate(i):
     temp.place(x = 970, y = 415)
     
     
-    data1 = pd.read_csv('u_total.csv')
-    U_total = data1["U_total"]
-    end = U_total[-1]
+    with open('u_total.csv', 'r') as p
+        last_line = p.readlines()[-1] 
     control = tk.Entry(root, width = 7)
-    control.insert(0, end)
+    control.insert(0, last_line)
     control.config(state='readonly')
     control.place(x = 970, y = 455)
     
