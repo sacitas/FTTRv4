@@ -93,13 +93,13 @@ try:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
-        
-        if(auto == 1): 
+        button_state = GPIO.input(23)
+        if(auto == 1 or button_state == False): 
             GPIO.output(17, True)
             GPIO.output(27, False)
             auto_mode()
             
-        else:
+        elif(auto == 0 or button_state == True):
             GPIO.output(27, True)
             GPIO.output(17, False)
             man_mode()
