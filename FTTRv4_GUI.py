@@ -69,18 +69,15 @@ def init_time_plot():
     plot_filename = now.strftime("%m_%d_%Y-%H:%M")
     plot_filepath = plot_folder + plot_filename
     
-    S['text'] = 'Plot saved!'
 
 
 #--------Save plot function--------
 def savePlot():
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
-    saved = tk.Label(root, text='/home/pi/Orbit-NTNU', font = ('calibre', 10))
+    saved = tk.Label(root, text='File location:\n/home/pi/Orbit-NTNU', font = ('calibre', 10))
     saved.place(x=730, y=620)
-    time.sleep(3)
-    saved.destroy()
-
+    
 #-------Plot function to animate--------
 def animate(i):
 
