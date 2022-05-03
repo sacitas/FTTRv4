@@ -136,6 +136,7 @@ def animate(i):
     temp.config(state='readonly')
     temp.place(x = 970, y = 415)
     
+    PID.setup()
     control_v = PID.getU_total()
     control = tk.Entry(root, width = 7)
     control.insert(0, control_v)
