@@ -97,18 +97,19 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
         button_state = GPIO.input(23)
-        if(button_state == False and auto == 1 and redLedState == 0):
+        if(button_state == False and auto == 1 and redLedState == 0 and greenLedState == 0):
+            redLedState = 1  
             GPIO.output(17, True)
             GPIO.output(27, False)
             auto_mode()
             button_state = True
-            redLedState = 1
-        elif (button_state == True and auto == 0 and greenLedState == 0):
+            
+        else:
+            greenLedState = 1
             GPIO.output(27, True)
             GPIO.output(17, False)
             man_mode()
             button_state = False
-            greenLedState = 0
 
             
 except KeyboardInterrupt:
