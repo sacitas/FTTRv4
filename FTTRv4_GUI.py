@@ -305,7 +305,7 @@ man_ent.place(x = 970, y = 290)
 #-------Creates button-------
 root.update()
 SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: SetRegVals())
-SV.place(x = 970, y = 330, width=80, height=40)
+SV.place(x = 970, y = 330, width=75, height=35)
 
 #-------Labels--------
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
