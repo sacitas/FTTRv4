@@ -76,7 +76,7 @@ def savePlot():
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
     saved = tk.Label(root, text='/home/pi/Orbit-NTNU', font = ('calibre', 10))
-    saved.place(x=730, y=610)
+    saved.place(x=730, y=620)
 
 #-------Plot function to animate--------
 def animate(i):
