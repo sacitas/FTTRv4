@@ -133,7 +133,7 @@ def animate(i):
     temp = tk.Entry(root, width = 7)
     temp.insert(0, temp0)
     temp.config(state='readonly')
-    temp.place(x = 970, y = 420)
+    temp.place(x = 970, y = 415)
     
     control = tk.Entry(root, width = 7)
     control.insert(0, 'U_total')
@@ -242,7 +242,7 @@ def SetRegVals():
     S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, sp)
     S_P_.config(state='readonly')
-    S_P_.place(x = 970, y = 510)
+    S_P_.place(x = 970, y = 505)
 
     
 with open ('pid.conf', 'r+') as g:
@@ -316,11 +316,11 @@ control_label.place(x = 888, y = 450)
 
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 893, y = 510)
+S_P_label.place(x = 893, y = 505)
 S_P_ = tk.Entry(root, width=7)
 S_P_.insert(0, SP)
 S_P_.config(state='readonly')
-S_P_.place(x = 970, y = 510)
+S_P_.place(x = 970, y = 505)
 
 root.update()
 A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
