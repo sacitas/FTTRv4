@@ -8,9 +8,6 @@ import FTTRv4_temp as tmp
 
 degree_sign = u'\N{DEGREE SIGN}'
  
- 
-redLedState = 0
-greenLedState = 0
 
 
 GPIO.setmode(GPIO.BCM)
@@ -97,19 +94,17 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
         button_state = GPIO.input(23)
-        if(button_state == False and auto == 1 and redLedState == 0 and greenLedState == 0):
-            redLedState = 1  
+        if(button_state == False and auto == 1): 
             GPIO.output(17, True)
             GPIO.output(27, False)
-            auto_mode()
             button_state = True
+            auto_mode()
             
         else:
-            greenLedState = 1
             GPIO.output(27, True)
             GPIO.output(17, False)
-            man_mode()
             button_state = False
+            man_mode()
 
             
 except KeyboardInterrupt:
