@@ -89,7 +89,7 @@ def animate(i):
 
     plt.cla()
     
-    plt.plot(x, dtemp0, linewidth = 1.5, label='Sensor d0')
+    plt.plot(x, dtemp0, linewidth = 1.5, label='Sensor d0', color = 'blue')
     plt.plot(x, dtemp1, linewidth = 1.5, label='Sensor d1')
     plt.plot(x, dtemp2, linewidth = 1.5, label='Sensor d2')
     plt.plot(x, dtemp3, linewidth = 1.5, label='Sensor d3')
@@ -317,7 +317,7 @@ root.update()
 A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
 A1_label.place(x = 890, y = 530)
 
-sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10), fg = '#00B2EE')
+sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10), fg = 'blue')
 sensord0_c.place(x = 20, y = 600)
    
 root.mainloop()
