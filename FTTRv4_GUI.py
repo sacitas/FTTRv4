@@ -263,7 +263,7 @@ MA.place(x = 930, y = 30)
 #-------Creates button-------
 root.update()
 S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
-S.place(x = 730, y = 575, width=120, heigh=30)
+S.place(x = 730, y = 595, width=120, heigh=30)
 
 
 frame1 = tk.Frame(root, width=230, height=300, highlightbackground='grey', highlightthickness=1)
