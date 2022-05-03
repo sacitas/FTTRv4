@@ -9,7 +9,7 @@ Kp = 0
 Ti = 0
 Td = 0
 auto = 0
-man = 0
+#man = 0
 
 degree_sign = u'\N{DEGREE SIGN}'
  
