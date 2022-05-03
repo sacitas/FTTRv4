@@ -317,7 +317,7 @@ root.update()
 A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
 A1_label.place(x = 890, y = 530)
 
-sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10), fg = 'light blue')
+sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10), fg = 'cyan')
 sensord0_c.place(x = 20, y = 600)
    
 root.mainloop()
