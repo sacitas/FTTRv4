@@ -17,6 +17,7 @@ import busio
 from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_ads1x15.ads1115 import Mode
 import time
+from pathlib import Path
 
 #adc = Adafruit_ADS1x15.ADS1115()
 
@@ -77,7 +78,8 @@ def savePlot():
     plt.savefig(f'{plot_filepath}.png')
     saved = tk.Label(root, text='/home/pi/Orbit-NTNU', font = ('calibre', 10))
     saved.place(x=730, y=620)
-    open(f'{plot_filepath}.png')
+    file_path = Path(f'{plot_filepath}.png')
+    f = open(file_path)
 
 #-------Plot function to animate--------
 def animate(i):
