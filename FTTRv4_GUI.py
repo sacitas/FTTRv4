@@ -77,7 +77,7 @@ def savePlot():
     plt.savefig(f'{plot_filepath}.png')
     saved = tk.Label(root, text='/home/pi/Orbit-NTNU', font = ('calibre', 10))
     saved.place(x=730, y=620)
-    open(r'/home/pi/Orbit-NTNU/plot')
+    open(f'{plot_filepath}.png')
 
 #-------Plot function to animate--------
 def animate(i):
