@@ -160,7 +160,7 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
             "U_total": U_total
         }
         csv_writer.writerow(info)
-        data_csv.close()
+        p.close()
 
     
     return U_total
