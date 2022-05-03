@@ -71,14 +71,14 @@ def read_temp():
 
     return temps
 
-def read_temp0():
-    temps0 = []
+#def read_temp0():
+#    temps0 = []
 
-    for i in range (0, 1):
-        temp0 = convert_temp(i)
-        temps0.append(temp0)
+#    for i in range (0, 1):
+#        temp0 = convert_temp(i)
+#        temps0.append(temp0)
 
-    return temps0[0]
+#    return temps0[0]
 
 
 def create_tmpFile_live():
