@@ -139,7 +139,7 @@ def animate(i):
     
     with open('u_total.csv', 'r') as p:
         U_total = p.readlines()[-1]
-        U_total = round(U_total, 2)
+        U_total = float(round(U_total, 2))
     control = tk.Entry(root, width = 7)
     control.insert(0, last_line)
     control.config(state='readonly')
