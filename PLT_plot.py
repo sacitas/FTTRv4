@@ -38,14 +38,14 @@ def plot(filename):
     temp4 = data["dtemp4"]
 
     
-    plt.plot(x, temp0, label = config.sensors['sensor_0'], linewidth = 1.5, color = 'b')
-    plt.plot(x, temp1, label = config.sensors['sensor_1'], linewidth = 1.5, color = 'g')
-    plt.plot(x, temp2, label = config.sensors['sensor_2'], linewidth = 1.5, color = 'r')
-    plt.plot(x, temp3, label = config.sensors['sensor_3'], linewidth = 1.5, color = 'c')
-    plt.plot(x, temp4, label = config.sensors['sensor_4'], linewidth = 1.5, color = 'm')
+    plt.plot(x, temp0, label = config.sensors['sensor_0'], linewidth = 1.5, color = '#4876FF')
+    plt.plot(x, temp1, label = config.sensors['sensor_1'], linewidth = 1.5, color = '#EE0000'')
+    plt.plot(x, temp2, label = config.sensors['sensor_2'], linewidth = 1.5, color = 'orange')
+    plt.plot(x, temp3, label = config.sensors['sensor_3'], linewidth = 1.5, color = '#008B45')
+    plt.plot(x, temp4, label = config.sensors['sensor_4'], linewidth = 1.5, color = '#708090')
 
     plt.xlabel('Time [hh:mm:ss]')
-    plt.ylabel('Temperature' + '[' + degree_sign + 'C', fontsize=10)
+    plt.ylabel('Temperature' + '[' + degree_sign + 'C]', fontsize=10)
     plt.title(str(x[0]), fontsize = 15)
     plt.ylim([0, 150])
     plt.xticks(rotation=45, ha='right', fontsize=8)
