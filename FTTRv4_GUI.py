@@ -75,7 +75,7 @@ def init_time_plot():
 def savePlot():
     init_time_plot()
     plt.savefig(f'{plot_filepath}.png')
-    
+    saved = tk.Text(root, text='/home/pi/Orbit-NTNU')
 
 #-------Plot function to animate--------
 def animate(i):
