@@ -4,6 +4,15 @@ import time
 import pandas as pd
 import FTTRv4_temp as tmp
 
+import adafruit_ads1x15.ads1115 as ADS
+import board
+import busio
+from adafruit_ads1x15.analog_in import AnalogIn
+from adafruit_ads1x15.ads1115 import Mode
+
+I2C = busio.I2C(board.SCL, board.SDA)
+ads = ADS.ADS1115(I2C)
+
 SP = 0
 Kp = 0
 Ti = 0
@@ -13,7 +22,6 @@ man = 0
 
 degree_sign = u'\N{DEGREE SIGN}'
  
-
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -93,6 +101,16 @@ def auto_mode():
     
 def man_mode():
 #   global SP, Kp, Ti, Td, auto, man
+    chan0 = AnalogIn(ads, ADS.P2)
+    V1 = chan0.voltage
+    V1 = str(round(V1, 1))
+    button_state = GPIO.input(23)
+    if(button_state == False):
+        button_state = True
+        lcd.cursor_pos(0, 0)
+        lcd.write_string("Set ManVal")
+    else:
+        pass
     readConfig()
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
