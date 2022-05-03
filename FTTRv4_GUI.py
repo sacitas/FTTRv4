@@ -137,7 +137,7 @@ def animate(i):
     temp.place(x = 970, y = 415)
     
     
-    with open('u_total.csv', 'r') as p
+    with open('u_total.csv', 'r') as p:
         last_line = p.readlines()[-1] 
     control = tk.Entry(root, width = 7)
     control.insert(0, last_line)
