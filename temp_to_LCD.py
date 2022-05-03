@@ -86,7 +86,8 @@ def man_mode():
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
 
-
+button_state = False
+    
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
@@ -96,14 +97,14 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
         button_state = GPIO.input(23)
-        if(button_state == False and auto == 1):
+        if(button_state == True and auto == 1):
             GPIO.output(17, True)
             auto_mode()
-            button_state = True
+            button_state = False
         else:
             GPIO.output(17, False)
             man_mode()
-            button_state = False
+            button_state = True
 
             
 except KeyboardInterrupt:
