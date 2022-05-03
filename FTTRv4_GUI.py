@@ -168,7 +168,7 @@ def switch():
         modeA_ = tk.Entry(root, width=8)
         modeA_.insert(0, "Manual")
         modeA_.config(state='readonly')
-        modeA_.place(x = 930, y = 10)
+        modeA_.place(x = 950, y = 10)
         
         is_on = False
     else:
@@ -182,7 +182,7 @@ def switch():
         modeM_ = tk.Entry(root, width=8)
         modeM_.insert(0, "Auto")
         modeM_.config(state='readonly')
-        modeM_.place(x = 930, y = 10)
+        modeM_.place(x = 950, y = 10)
         
         is_on = True
         
