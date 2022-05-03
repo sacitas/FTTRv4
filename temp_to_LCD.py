@@ -96,7 +96,7 @@ try:
             conf = g.readline().split(',')
             auto = int(conf[4])
         button_state = GPIO.input(23)
-        if(button_state == False):
+        if(button_state == False and auto == 1):
             GPIO.output(17, True)
             time.sleep(0.2)
             auto_mode()
