@@ -78,7 +78,9 @@ def readConfig():
 def auto_mode():
 #   global SP, Kp, Ti, Td, auto, man
     readConfig()
-    auto = 1    
+    auto = 1 
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     lcd.clear()
@@ -87,8 +89,6 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     time.sleep(0.5)
-    with open ('pid.conf', 'w') as f:
-        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     
 
     
