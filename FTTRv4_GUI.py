@@ -9,6 +9,7 @@ import numpy as np
 import csv
 import os
 import FTTRv4_temp as tmp
+import FTTRv4_PID as PID
 #import Adafruit_ADS1x15
 import adafruit_ads1x15.ads1115 as ADS
 import board
@@ -133,17 +134,23 @@ def animate(i):
     temp.config(state='readonly')
     temp.place(x = 970, y = 420)
     
+    control_v = PID.FTTR_PID()
+    control = tk.Entry(root, width = 7)
+    control.insert(0, control_v)
+    control.config(state='readonly')
+    control.place(x = 970, y = 460)
+    
     root.update()
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
-    A0.place(x = 970, y = 500)
+    A0.place(x = 970, y = 560)
     
     root.update()
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
-    A1.place(x = 970, y = 540)
+    A1.place(x = 970, y = 610)
     
 
 #----------------Plot window in GUI----------------
@@ -235,7 +242,7 @@ def SetRegVals():
     S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, sp)
     S_P_.config(state='readonly')
-    S_P_.place(x = 970, y = 460)
+    S_P_.place(x = 970, y = 510)
 
     
 with open ('pid.conf', 'r+') as g:
@@ -304,21 +311,24 @@ SV.place(x = 970, y = 330, width=80, height=40)
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
 temp_label.place(x = 888, y = 410)
 
+control_label = tk.Label(root, text = 'Control\n     value: ', font = ('calibre', 10))
+control_label.place(x = 888, y = 460)
+
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 893, y = 460)
+S_P_label.place(x = 893, y = 510)
 S_P_ = tk.Entry(root, width=7)
 S_P_.insert(0, SP)
 S_P_.config(state='readonly')
-S_P_.place(x = 970, y = 460)
+S_P_.place(x = 970, y = 510)
 
 root.update()
 A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
-A0_label.place(x = 890, y = 490)
+A0_label.place(x = 890, y = 560)
 
 root.update()
 A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
-A1_label.place(x = 890, y = 530)
+A1_label.place(x = 890, y = 610)
 
 sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10, 'bold'), fg = '#4876FF')
 sensord0_c.place(x = 20, y = 580)
