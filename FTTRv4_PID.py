@@ -155,7 +155,7 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
     
     with open('u_total.csv', 'a') as p:
         csv_writer = csv.DictWriter(p, fieldnames=fieldnames)
-        U_total = round(U_total, 2)
+        U_total = str(round(U_total, 2))
         info = {
             "U_total": U_total
         }
