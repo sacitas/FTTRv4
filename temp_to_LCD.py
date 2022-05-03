@@ -71,6 +71,7 @@ def readConfig():
         Td = float(conf[3])
         auto = int(conf[4])
         man = float(conf[5])
+        man = str(man)
 
 
 def auto_mode():
