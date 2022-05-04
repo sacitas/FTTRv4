@@ -102,7 +102,7 @@ def auto_mode():
     
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
-    chan0 = AnalogIn(ads, ADS.P2)
+    chan0 = AnalogIn(ads, ADS.P0)
     V1 = chan0.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
