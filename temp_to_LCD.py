@@ -143,16 +143,15 @@ def man_mode():
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     else:
-        pass
-    readConfig()
-    temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
-    man = str(man)
-    lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + man + "%")
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")   
+        readConfig()
+        temp0 = tmp.read_temp0()
+        temp0 = str(temp0)
+        man = str(man)
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("ManVal: " + man + "%")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")   
 
     
 try:
