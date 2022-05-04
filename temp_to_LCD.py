@@ -86,17 +86,33 @@ def readConfig():
 
 def auto_mode():
     global SP, Kp, Ti, Td, auto, man
-    readConfig()
-    with open ('pid.conf', 'w') as f:
-        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+    chan0 = AnalogIn(ads, ADS.P0)
+    V1 = chan0.voltage
+    sp = (V1*120.5)/3.3
+    sp = str(round(sp, 0))
+    button_state = GPIO.input(24)
+    if(button_state == False):
+        SP = sp
+        GPIO.output(17, False)
+        time.sleep(0.1)
+        GPIO.output(17, True)
+        time.sleep(0.1)
+        GPIO.output(17, False)
+        time.sleep(0.1)
+        GPIO.output(17, True)
+        time.sleep(0.1)
+        GPIO.output(17, False)
+        with open ('pid.conf', 'w') as f:
+            f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+    else:
+        pass
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + SP + " " + degree_sign + "C")
     lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
-    time.sleep(0.5)
+    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
 
     
@@ -114,11 +130,14 @@ def man_mode():
         GPIO.output(27, True)
         time.sleep(0.1)
         GPIO.output(27, False)
+        time.sleep(0.1)
+        GPIO.output(27, True)
+        time.sleep(0.1)
+        GPIO.output(27, False)
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     else:
         pass
-#       readConfig()
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     lcd.clear()
