@@ -102,7 +102,7 @@ def man_mode():
 #   global SP, Kp, Ti, Td, auto, man  
     chan0 = AnalogIn(ads, ADS.P2)
     V1 = chan0.voltage
-    man = float((V1*100.5)/3.3)
+    man = (V1*100.5)/3.3
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     readConfig() 
