@@ -113,22 +113,21 @@ def man_mode():
         man = float(round(man, 0))
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-        button_state = True
         GPIO.output(27, False)
         time.sleep(0.1)
         GPIO.output(27, True)
         time.sleep(0.1)
         GPIO.output(27, False)
     else:
-        pass 
-    readConfig() 
-    temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
-    lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + man + "%")
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
+        readConfig() 
+        temp0 = tmp.read_temp0()
+        temp0 = str(temp0)
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("ManVal: " + man + "%")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
+        time.sleep(0.5)
     
 try:
     lcd.clear()
