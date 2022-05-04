@@ -103,13 +103,26 @@ def man_mode():
     chan0 = AnalogIn(ads, ADS.P2)
     V1 = chan0.voltage
     man = (V1*100.5)/3.3
-    man = round(man, 0)
-    with open ('pid.conf', 'w') as f:
-        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+    man = str(round(man, 0))
+    lcd.clear()
+    lcd.cursor_pos = (0, 0)
+    lcd.write_string("ManVal: " + man + "%")
+    button_state = GPIO.input(24)
+    if(button_state == False):
+        man = float(round(man, 0))
+        with open ('pid.conf', 'w') as f:
+            f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+        button_state = True
+        GPIO.output(27, False)
+        time.sleep(0.1)
+        GPIO.output(27, True)
+        time.sleep(0.1)
+        GPIO.output(27, False)
+    else:
+        pass 
     readConfig() 
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
-    man = str(round(man, 0))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man + "%")
