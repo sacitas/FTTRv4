@@ -105,13 +105,13 @@ def man_mode():
     chan0 = AnalogIn(ads, ADS.P2)
     V1 = chan0.voltage
     ManVal = (V1*100.5)/3.3
-    ManVal = round(ManVal, 0)
+    ManVal = str(round(ManVal, 0))
+    lcd.clear()
+    lcd.cursor_pos = (0, 0)
+    lcd.write_string("ManVal: " + ManVal + "%")
     button_state = GPIO.input(24)
     if(button_state == False):
         man = ManVal
-        lcd.clear()
-        lcd.cursor_pos = (0, 0)
-        lcd.write_string("ManVal: " + man + "%")
         GPIO.output(27, False)
         time.sleep(0.1)
         GPIO.output(27, True)
