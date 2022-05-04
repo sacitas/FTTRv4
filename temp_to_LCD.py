@@ -110,7 +110,7 @@ def man_mode():
     lcd.write_string("ManVal: " + man + "%")
     button_state = GPIO.input(24)
     if(button_state == False):
-        man = float(round(man, 0))
+        man = float(man)
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
         GPIO.output(27, False)
