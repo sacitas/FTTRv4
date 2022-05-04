@@ -37,15 +37,12 @@ try:
     time.sleep(2)
     while True:
         chan0 = AnalogIn(ads, ADS.P2)
-        S1 = chan0.value
-        S1 = str(S1)
         V1 = chan0.voltage
-        V1 = str(round(V1, 1))
+        man = (V1*100)/3.3
+        man = str(round(man, 2))
         lcd.clear()
         lcd.cursor_pos = (0, 0)
-        lcd.write_string("Pot: " + S1)
-        lcd.cursor_pos = (1, 0)
-        lcd.write_string("Volts: " + V1 + " V")
+        lcd.write_string("ManVal: " + man + "%")
     
         time.sleep(0.5)
 except KeyboardInterrupt:
