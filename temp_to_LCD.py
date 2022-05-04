@@ -79,7 +79,6 @@ def readConfig():
         Td = float(conf[3])
         auto = int(conf[4])
         man = float(conf[5])
-        man = str(man)
         SP = str(SP)
 
 
@@ -103,14 +102,13 @@ def man_mode():
 #   global SP, Kp, Ti, Td, auto, man  
     chan0 = AnalogIn(ads, ADS.P2)
     V1 = chan0.voltage
-    ManVal = (V1*100.5)/3.3
-    ManVal = str(round(ManVal, 0))
-    man = ManVal
+    man = float((V1*100.5)/3.3)
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-#   readConfig() 
+    readConfig() 
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
+    man = str(round(man, 0))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man + "%")
