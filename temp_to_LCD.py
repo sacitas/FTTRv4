@@ -74,22 +74,23 @@ def readConfig():
     global SP, Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
-        SP = str(conf[0])
+        SP = float(conf[0])
         Kp = float(conf[1])
         Ti = float(conf[2])
         Td = float(conf[3])
         auto = int(conf[4])
         man = float(conf[5])
-        SP = str(SP)
-        man = str(man)
 
 
 def auto_mode():
     global SP, Kp, Ti, Td, auto, man
     chan0 = AnalogIn(ads, ADS.P0)
     V1 = chan0.voltage
-    sp = (V1*120.5)/3.3
+    sp = (V1*121)/3.3
     sp = str(round(sp, 0))
+    lcd.clear()
+    lcd.cursor_pos = (0, 0)
+    lcd.write_string("SP: " + sp + " " + degree_sign + "C")
     button_state = GPIO.input(24)
     if(button_state == False):
         SP = sp
@@ -106,11 +107,13 @@ def auto_mode():
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     else:
         pass
+    readConfig()
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
+    SP = str(SP)
     lcd.clear()
     lcd.cursor_pos = (0, 0)
-    lcd.write_string("SP: " + sp + " " + degree_sign + "C")
+    lcd.write_string("SP: " + SP + " " + degree_sign + "C")
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
@@ -122,6 +125,9 @@ def man_mode():
     V1 = chan0.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
+    lcd.clear()
+    lcd.cursor_pos = (0, 0)
+    lcd.write_string("ManVal: " + ManVal + "%")
     button_state = GPIO.input(24)
     if(button_state == False):
         man = ManVal
@@ -138,11 +144,13 @@ def man_mode():
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     else:
         pass
+    readConfig()
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
+    man = str(man)
     lcd.clear()
     lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + ManVal + "%")
+    lcd.write_string("ManVal: " + man + "%")
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")   
 
