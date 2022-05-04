@@ -110,7 +110,7 @@ def auto_mode():
     temp0 = str(temp0)
     lcd.clear()
     lcd.cursor_pos = (0, 0)
-    lcd.write_string("SP: " + SP + " " + degree_sign + "C")
+    lcd.write_string("SP: " + sp + " " + degree_sign + "C")
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
