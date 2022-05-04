@@ -100,12 +100,14 @@ def auto_mode():
 
     
 def man_mode():
-    global SP, Kp, Ti, Td, auto, man  
+#   global SP, Kp, Ti, Td, auto, man  
     chan0 = AnalogIn(ads, ADS.P2)
     V1 = chan0.voltage
-    man = (V1*100.5)/3.3
-    man = str(round(man, 0))
-
+    ManVal = (V1*100.5)/3.3
+    ManVal = str(round(ManVal, 0))
+    man = ManVal
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
 #   readConfig() 
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
@@ -114,9 +116,6 @@ def man_mode():
     lcd.write_string("ManVal: " + man + "%")
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
-    with open ('pid.conf', 'w') as f:
-        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-    time.sleep(0.5)
     
 try:
     lcd.clear()
