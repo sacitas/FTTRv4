@@ -84,7 +84,7 @@ def readConfig():
 
 
 def auto_mode():
-#   global SP, Kp, Ti, Td, auto, man
+    global SP, Kp, Ti, Td, auto, man
     readConfig()
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
@@ -100,13 +100,13 @@ def auto_mode():
 
     
 def man_mode():
-#   global SP, Kp, Ti, Td, auto, man
-    readConfig()   
+    global SP, Kp, Ti, Td, auto, man  
     chan0 = AnalogIn(ads, ADS.P2)
     V1 = chan0.voltage
     man = (V1*100.5)/3.3
     man = str(round(man, 0))
- 
+
+#   readConfig() 
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     lcd.clear()
