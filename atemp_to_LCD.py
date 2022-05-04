@@ -38,7 +38,7 @@ try:
     while True:
         chan0 = AnalogIn(ads, ADS.P2)
         V1 = chan0.voltage
-        man = (V1*100)/3.3
+        man = (V1*100.5)/3.3
         man = str(round(man, 0))
         lcd.clear()
         lcd.cursor_pos = (0, 0)
