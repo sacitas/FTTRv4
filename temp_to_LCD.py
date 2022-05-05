@@ -126,7 +126,7 @@ def man_mode():
     isPressed1 = False
     isPressed2 = False
     if(GPIO.input(23)):
-        if(not isPressed1):
+        if(isPressed1):
             isPressed1 = True
             chan0 = AnalogIn(ads, ADS.P0)
             V1 = chan0.voltage
@@ -137,7 +137,7 @@ def man_mode():
             lcd.write_string("ManVal: " + ManVal + "%")
 
     elif(GPIO.input(24)):
-        if(not isPressed2):
+        if(isPressed2):
             isPressed2 = True
             man = ManVal
             GPIO.output(27, False)
