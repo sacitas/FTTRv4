@@ -118,32 +118,23 @@ def animate(i):
     #----Read-only entry for control value updating----
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
-    temp = tk.Entry(root, width = 7)
     temp.insert(0, temp0)
-    temp.config(state='readonly')
-    temp.place(x = 970, y = 415)
-    
    
     #--------Reads u_total file---------
     with open('u_total.csv', 'r') as p:
         U_total = p.readlines()[-1]
     #---Read only entry for U_total updating---
-    control = tk.Entry(root, width = 7)
     control.insert(0, U_total)
-    control.config(state='readonly')
-    control.place(x = 970, y = 455)
-    
+
+    #----Read-only entry for SP updating----
+    with open ('pid.conf', 'r+') as g:
+        conf = g.readline().split(',')
+        SP = float(conf[0])
+    S_P_.insert(0, SP)
     
     #-----Read-only entry for A0 and A1 updating----- 
-    A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
-    A0.config(state='readonly')
-    A0.place(x = 970, y = 535)
-
-    A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
-    A1.config(state='readonly')
-    A1.place(x = 970, y = 575)
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
@@ -297,12 +288,20 @@ root.update()
 SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: SetRegVals())
 SV.place(x = 970, y = 330, width=70, height=30)
 
-#-------Labels--------
+#-------Process value entry--------
+root.update()
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
 temp_label.place(x = 888, y = 405)
+temp = tk.Entry(root, width = 7)
+temp.config(state='readonly')
+temp.place(x = 970, y = 415)
 
+root.update()
 control_label = tk.Label(root, text = 'Control\n     value: ', font = ('calibre', 10))
 control_label.place(x = 888, y = 445)
+control = tk.Entry(root, width = 7)
+control.config(state='readonly')
+control.place(x = 970, y = 455)
 
 #-------Creates SP entry---------
 root.update()
@@ -313,14 +312,20 @@ S_P_.insert(0, SP)
 S_P_.config(state='readonly')
 S_P_.place(x = 970, y = 495)
 
-#-------Creates labels--------
+#-------Analog sensors entry--------
 root.update()
 A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
 A0_label.place(x = 890, y = 525)
+A0 = tk.Entry(root, width = 7)
+A0.config(state='readonly')
+A0.place(x = 970, y = 535)
 
 root.update()
 A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
 A1_label.place(x = 890, y = 565)
+A1 = tk.Entry(root, width = 7)
+A1.config(state='readonly')
+A1.place(x = 970, y = 575)
 
 #--------Labels for graph lines--------
 sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10, 'bold'), fg = '#4876FF')
