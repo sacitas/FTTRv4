@@ -138,8 +138,8 @@ def man_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
 
-    if(GPIO.event_detected(24)):
-        if not isPressed:
+    if(GPIO.input(24)==False):
+        if isPressed:
             isPressed = True
             GPIO.output(27, False)
             time.sleep(0.1)
