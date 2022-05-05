@@ -132,6 +132,7 @@ def man_mode():
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + ManVal + "%")
     else:
+        button1_state == True
         pass     
     if(button2_state == False):
         man = ManVal
