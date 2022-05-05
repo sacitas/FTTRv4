@@ -81,6 +81,9 @@ with open ('pid.conf', 'r+') as g:
     KP = float(conf[1])
     TI = float(conf[2])
     TD = float(conf[3])    
+
+frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highlightthickness=1)
+frame2.place(x=860, y=400)    
     
 root.update()
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
@@ -276,8 +279,7 @@ def SetRegVals():
 frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
 frame1.place(x=860, y=80)
 
-frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highlightthickness=1)
-frame2.place(x=860, y=400)
+
 
 #-------Create buttons-------
 root.update()
