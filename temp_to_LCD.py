@@ -10,9 +10,11 @@ import busio
 from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_ads1x15.ads1115 import Mode
 
+
 I2C = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(I2C)
-#ads.mode = Mode.CONTINUOUS
+ads.mode = Mode.CONTINUOUS
+chan1 = AnalogIn(ads, ADS.P1)
 
 
 SP = 0
@@ -89,8 +91,7 @@ def readConfig():
 
 def auto_mode():
     global SP, Kp, Ti, Td, auto, man
-    chan0 = AnalogIn(ads, ADS.P0)
-    V1 = chan0.voltage
+    V1 = chan1.voltage
     sp = (V1*121)/3.3
     sp = str(round(sp, 0))
     lcd.clear()
@@ -121,15 +122,13 @@ def auto_mode():
     lcd.write_string("SP: " + SP + " " + degree_sign + "C")
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
-     
-     
+       
 def man_mode():
-    isPressed = False
+    isPressed = False 
     global SP, Kp, Ti, Td, auto, man
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
-    chan0 = AnalogIn(ads, ADS.P0)
-    V1 = chan0.voltage
+    V1 = chan1.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
     lcd.clear()
@@ -139,7 +138,7 @@ def man_mode():
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
 
     if(GPIO.input(24)==False):
-        if isPressed:
+        if not isPressed:
             isPressed = True
             GPIO.output(27, False)
             time.sleep(0.1)
@@ -175,7 +174,7 @@ try:
             
         elif(auto == 0):
             GPIO.output(27, True)
-            GPIO.output(17, False)
+            GPIO.output(17, False)  
             man_mode()
 
             
