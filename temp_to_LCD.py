@@ -19,6 +19,7 @@ Ti = 0
 Td = 0
 auto = 0
 man = 0
+ManVal = 0
 
 degree_sign = u'\N{DEGREE SIGN}'
  
@@ -120,7 +121,7 @@ def auto_mode():
 
     
 def man_mode():
-    global SP, Kp, Ti, Td, auto, man
+    global SP, Kp, Ti, Td, auto, man, ManVal
     button1_state = GPIO.input(23)
     button2_state = GPIO.input(24)
     if(button1_state == False):
@@ -131,10 +132,7 @@ def man_mode():
         lcd.clear()
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + ManVal + "%")
-    else:
-        button1_state == True
-        pass     
-    if(button2_state == False):
+    elif(button2_state == False):
         man = ManVal
         GPIO.output(27, False)
         time.sleep(0.1)
@@ -148,6 +146,7 @@ def man_mode():
         lcd.clear()
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+        button1_state == True
     elif(button2_state == True):
         readConfig()
         temp0 = tmp.read_temp0()
