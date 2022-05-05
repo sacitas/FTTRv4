@@ -121,16 +121,17 @@ def auto_mode():
     
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
-    chan0 = AnalogIn(ads, ADS.P0)
-    V1 = chan0.voltage
-    ManVal = (V1*100.5)/3.3
-    ManVal = str(round(ManVal, 0))
-    lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + ManVal + "%")
-
-    button_state = GPIO.input(24)
-    if(button_state == False):
+    button1_state = GPIO.input(23)
+    if(button1_state == False):
+        chan0 = AnalogIn(ads, ADS.P0)
+        V1 = chan0.voltage
+        ManVal = (V1*100.5)/3.3
+        ManVal = str(round(ManVal, 0))
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("ManVal: " + ManVal + "%")
+    button2_state = GPIO.input(24)
+    elif(button2_state == False):
         man = ManVal
         GPIO.output(27, False)
         time.sleep(0.1)
