@@ -26,9 +26,9 @@ degree_sign = u'\N{DEGREE SIGN}'
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.add_event_detect(23, GPIO.RISING, bouncetime=250)
+GPIO.add_event_detect(23, GPIO.RISING, bouncetime=150)
 GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.add_event_detect(24, GPIO.RISING, bouncetime=250)
+GPIO.add_event_detect(24, GPIO.RISING, bouncetime=150)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 
@@ -120,19 +120,24 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
+isPressed1 = False
+isPressed2 = False
+isOn = False
 
 def man_mode():
-    isPressed1 = False
-    isPressed2 = False
     global SP, Kp, Ti, Td, auto, man, ManVal
-    if(GPIO.event_detected(23) and isPressed1 == False):
-        chan0 = AnalogIn(ads, ADS.P0)
-        V1 = chan0.voltage
-        ManVal = (V1*100.5)/3.3
-        ManVal = str(round(ManVal, 0))
-        lcd.clear()
-        lcd.cursor_pos = (0, 0)
-        lcd.write_string("ManVal: " + ManVal + "%")
+    if(GPIO.event_detected(23)):
+        if not isPressed1:
+            isPressed1 = True
+            isOn = not isOn
+            GPIO.output(17, isOn)
+            chan0 = AnalogIn(ads, ADS.P0)
+            V1 = chan0.voltage
+            ManVal = (V1*100.5)/3.3
+            ManVal = str(round(ManVal, 0))
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("ManVal: " + ManVal + "%")
         
     elif(GPIO.event_detected(24) and isPressed2 == False):
         isPressed1 = True
