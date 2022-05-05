@@ -12,6 +12,8 @@ from adafruit_ads1x15.ads1115 import Mode
 
 I2C = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(I2C)
+ads.mode = Mode.CONTINUOUS
+
 
 SP = 0
 Kp = 0
@@ -74,7 +76,7 @@ long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 
 def readConfig():
-    global SP, Kp, Ti, Td, auto, man
+#   global SP, Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
@@ -122,27 +124,18 @@ def auto_mode():
      
      
 def man_mode():
-    isPressed1 = False
-    isPressed2 = False
-    global SP, Kp, Ti, Td, auto, man, ManVal 
+    isPressed = False
+#   global SP, Kp, Ti, Td, auto, man, ManVal 
     chan0 = AnalogIn(ads, ADS.P0)
     V1 = chan0.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
-    
-    if(GPIO.input(23)==False):
-        if not isPressed1:
-            isPressed1 = True
-            lcd.clear()
-            lcd.cursor_pos = (0, 0)
-            lcd.write_string("ManVal: " + ManVal + "%")
         
-    elif(GPIO.input(24)==False):
-        isPressed1 = False
-        if not isPressed2:
-            isPressed2 = True
+    if(GPIO.event_detected(24)):
+        if not isPressed:
+            isPressed = True
             man = ManVal
             GPIO.output(27, False)
             time.sleep(0.1)
@@ -155,13 +148,15 @@ def man_mode():
             GPIO.output(27, False)
             with open ('pid.conf', 'w') as f:
                 f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("Manual value set")
+            time.sleep(2)
     else:
-        pass
-    readConfig() 
-    man = str(man)
+        isPressed = False
     lcd.clear()
     lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + man + "%")
+    lcd.write_string("ManVal: " + ManVal + "%")
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
     
