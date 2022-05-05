@@ -125,6 +125,7 @@ def auto_mode():
      
 def man_mode():
     isPressed = False
+    isOn = False
     global SP, Kp, Ti, Td, auto, man, ManVal
     readConfig()
     man = str(man)
@@ -143,9 +144,11 @@ def man_mode():
     if(GPIO.event_detected(23)):
         if not isPressed:
             isPressed = True
-            lcd.clear()
-            lcd.cursor_pos = (0, 0)
-            lcd.write_string("ManVal: " + ManVal + "%")
+            isOn = not isOn
+            if isOn:
+                lcd.clear()
+                lcd.cursor_pos = (0, 0)
+                lcd.write_string("ManVal: " + ManVal + "%")
     else:
         isPressed = False
     
