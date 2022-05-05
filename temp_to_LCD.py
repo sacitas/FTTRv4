@@ -76,7 +76,7 @@ long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 
 def readConfig():
-    global SP, Kp, Ti, Td, auto, man
+#   global SP, Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
@@ -125,8 +125,8 @@ def auto_mode():
      
 def man_mode():
     isPressed = False
-    isOn = False
-    global SP, Kp, Ti, Td, auto, man, ManVal
+    isOn = True
+#   global SP, Kp, Ti, Td, auto, man, ManVal
     readConfig()
     man = str(man)
     temp0 = tmp.read_temp0()
@@ -144,7 +144,6 @@ def man_mode():
     if(GPIO.event_detected(23)):
         if not isPressed:
             isPressed = True
-            isOn = not isOn
             if isOn:
                 lcd.clear()
                 lcd.cursor_pos = (0, 0)
