@@ -123,16 +123,21 @@ def auto_mode():
 
 def man_mode():
     global SP, Kp, Ti, Td, auto, man, ManVal
+    isPressed1 = False
+    isPressed2 = False
+    isOn = False
     if(GPIO.input(23)):
         if(not isPressed1):
             isPressed1 = True
-            chan0 = AnalogIn(ads, ADS.P0)
-            V1 = chan0.voltage
-            ManVal = (V1*100.5)/3.3
-            ManVal = str(round(ManVal, 0))
-            lcd.clear()
-            lcd.cursor_pos = (0, 0)
-            lcd.write_string("ManVal: " + ManVal + "%")
+            if(not isOn):
+                isOn = True
+                chan0 = AnalogIn(ads, ADS.P0)
+                V1 = chan0.voltage
+                ManVal = (V1*100.5)/3.3
+                ManVal = str(round(ManVal, 0))
+                lcd.clear()
+                lcd.cursor_pos = (0, 0)
+                lcd.write_string("ManVal: " + ManVal + "%")
     else:
         isPressed1 = False
       
@@ -170,8 +175,6 @@ try:
     lcd.write_string("Welcome!")
     time.sleep(2)
     while True:
-        isPressed1 = False
-        isPressed2 = False
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
             auto = int(conf[4])
