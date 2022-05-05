@@ -120,11 +120,11 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
-isPressed1 = False
-isPressed2 = False
-isOn = False
 
 def man_mode():
+    isPressed1 = False
+    isPressed2 = False
+    isOn = False
     global SP, Kp, Ti, Td, auto, man, ManVal
     if(GPIO.event_detected(23)):
         if not isPressed1:
