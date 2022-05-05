@@ -120,14 +120,14 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
-
-button1_state = GPIO.input(23)
-button2_state = GPIO.input(24)
     
 def man_mode():
     global SP, Kp, Ti, Td, auto, man, ManVal
     
+    button1_state = GPIO.input(23)
+    button2_state = GPIO.input(24)
     if(GPIO.event_detected(23)):
+        button1_state = False
         chan0 = AnalogIn(ads, ADS.P0)
         V1 = chan0.voltage
         ManVal = (V1*100.5)/3.3
@@ -136,6 +136,8 @@ def man_mode():
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + ManVal + "%")
     elif(GPIO.event_detected(24)):
+        button1_state = True
+        button2_state = False
         man = ManVal
         GPIO.output(27, False)
         time.sleep(0.1)
