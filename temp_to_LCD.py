@@ -139,11 +139,6 @@ def man_mode():
     V1 = chan0.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
-    lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + ManVal + "%")
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
     if(GPIO.event_detected(24)):
         if not isPressed:
             isPressed = True
@@ -162,7 +157,7 @@ def man_mode():
             lcd.clear()
             lcd.cursor_pos = (0, 0)
             lcd.write_string("Manual value set")
-            time.sleep(2)
+            time.sleep(1)
     else:
         isPressed = False
     
