@@ -131,7 +131,9 @@ def man_mode():
         lcd.clear()
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + ManVal + "%")
-    elif(button1_state == True and button2_state == False):
+    else:
+        pass     
+    if(button2_state == False):
         man = ManVal
         GPIO.output(27, False)
         time.sleep(0.1)
@@ -145,7 +147,7 @@ def man_mode():
         lcd.clear()
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-    elif(button1_state == True and button2_state == False):
+    elif(button2_state == True):
         readConfig()
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
