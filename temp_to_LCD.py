@@ -125,36 +125,41 @@ def man_mode():
     global SP, Kp, Ti, Td, auto, man, ManVal
     isPressed1 = False
     isPressed2 = False
+    isOn = False
     if(GPIO.input(23)):
         isPressed1 = True
-    elif(isPressed1):  
-        chan0 = AnalogIn(ads, ADS.P0)
-        V1 = chan0.voltage
-        ManVal = (V1*100.5)/3.3
-        ManVal = str(round(ManVal, 0))
-        lcd.clear()
-        lcd.cursor_pos = (0, 0)
-        lcd.write_string("ManVal: " + ManVal + "%")
-        time.sleep(15)
-        isPressed1 = False
+    elif(isPressed1):
+        isOn = not isOn
+        if isOn:
+            chan0 = AnalogIn(ads, ADS.P0)
+            V1 = chan0.voltage
+            ManVal = (V1*100.5)/3.3
+            ManVal = str(round(ManVal, 0))
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("ManVal: " + ManVal + "%")
+            time.sleep(15)
+            isPressed1 = False
 
     if(GPIO.input(24)):
         isPressed2 = True
-    elif(isPressed2):  
-        man = ManVal
-        GPIO.output(27, False)
-        time.sleep(0.1)
-        GPIO.output(27, True)
-        time.sleep(0.1)
-        GPIO.output(27, False)
-        time.sleep(0.1)
-        GPIO.output(27, True)
-        time.sleep(0.1)
-        GPIO.output(27, False)
-        with open ('pid.conf', 'w') as f:
-            f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-        time.sleep(2)
-        isPressed2 = False
+    elif(isPressed2):
+        isOn = not isOn
+        if isOn:
+            man = ManVal
+            GPIO.output(27, False)
+            time.sleep(0.1)
+            GPIO.output(27, True)
+            time.sleep(0.1)
+            GPIO.output(27, False)
+            time.sleep(0.1)
+            GPIO.output(27, True)
+            time.sleep(0.1)
+            GPIO.output(27, False)
+            with open ('pid.conf', 'w') as f:
+                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+            time.sleep(2)
+            isPressed2 = False
     
     readConfig()
     temp0 = tmp.read_temp0()
