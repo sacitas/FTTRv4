@@ -132,6 +132,7 @@ def man_mode():
         lcd.clear()
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + ManVal + "%")
+        time.sleep(10)
     elif(button2_state == False):
         man = ManVal
         GPIO.output(27, False)
