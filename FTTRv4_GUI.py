@@ -114,6 +114,14 @@ def animate(i):
     atemp1 = V2 / (11/1000)
     atemp1 = float(round(atemp1, 1))
     
+    
+    with open ('pid.conf', 'r+') as g:
+        conf = g.readline().split(',')
+        man = float(conf[5])
+    man_ent = tk.Entry(root, width=7)
+    man_ent.insert(0, man)
+    man_ent.place(x = 970, y = 290)
+    
     #----Read-only entry for control value updating----
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
@@ -122,6 +130,7 @@ def animate(i):
     temp.config(state='readonly')
     temp.place(x = 970, y = 415)
     
+   
     #--------Reads u_total file---------
     with open('u_total.csv', 'r') as p:
         U_total = p.readlines()[-1]
