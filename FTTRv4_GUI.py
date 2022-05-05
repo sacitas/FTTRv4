@@ -292,6 +292,7 @@ SV.place(x = 970, y = 330, width=70, height=30)
 root.update()
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
 temp_label.place(x = 888, y = 405)
+global temp
 temp = tk.Entry(root, width = 7)
 temp.config(state='readonly')
 temp.place(x = 970, y = 415)
