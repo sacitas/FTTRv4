@@ -122,7 +122,6 @@ def auto_mode():
      
 
 def man_mode():
-    isPressed1 = False
     global SP, Kp, Ti, Td, auto, man, ManVal
     chan0 = AnalogIn(ads, ADS.P0)
     V1 = chan0.voltage
@@ -130,11 +129,7 @@ def man_mode():
     ManVal = str(round(ManVal, 0))
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
-    lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + ManVal + "%")
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
+
         
     if(GPIO.event_detected(24)):
         man = ManVal
@@ -150,7 +145,11 @@ def man_mode():
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     else:
-        pass 
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("ManVal: " + ManVal + "%")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
   
     
 try:
