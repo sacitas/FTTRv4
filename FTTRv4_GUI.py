@@ -339,5 +339,5 @@ sensord3_c.place(x = 320, y = 580)
 sensord4_c = tk.Label(root, text = 'Sensor d4', font = ('calibre', 10, 'bold'), fg = '#708090')
 sensord4_c.place(x = 420, y = 580)
 
-#-----Mainloop------
+#---Mainloop---
 root.mainloop()
