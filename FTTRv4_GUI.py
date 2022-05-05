@@ -73,6 +73,13 @@ def savePlot():
     plt.savefig(f'{plot_filepath}.png')
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
+
+root.update()
+temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
+temp_label.place(x = 888, y = 405)
+temp = tk.Entry(root, width = 7)
+temp.config(state='readonly')
+temp.place(x = 970, y = 415)    
     
 #---Plot function to animate---
 def animate(i):
@@ -289,13 +296,7 @@ SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: S
 SV.place(x = 970, y = 330, width=70, height=30)
 
 #-------Process value entry--------
-root.update()
-temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
-temp_label.place(x = 888, y = 405)
-global temp
-temp = tk.Entry(root, width = 7)
-temp.config(state='readonly')
-temp.place(x = 970, y = 415)
+
 
 root.update()
 control_label = tk.Label(root, text = 'Control\n     value: ', font = ('calibre', 10))
