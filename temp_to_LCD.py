@@ -120,10 +120,10 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
-isPressed1 = False
-isPressed2 = False
      
 def man_mode():
+    isPressed1 = False
+    isPressed2 = False
     global SP, Kp, Ti, Td, auto, man, ManVal 
     chan0 = AnalogIn(ads, ADS.P0)
     V1 = chan0.voltage
