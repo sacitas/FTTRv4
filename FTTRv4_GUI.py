@@ -4,10 +4,12 @@ import time
 import datetime as dt
 import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import matplotlib.pyplot as plt 
 from matplotlib.animation import FuncAnimation
+import matplotlib.pyplot as plt 
 import pandas as pd
 import numpy as np
+
+#---Import FTTRv4 files---
 import FTTRv4_temp as tmp
 import FTTRv4_PID as PID
 
@@ -17,7 +19,6 @@ import busio
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_ads1x15.ads1115 import Mode
-
 
 
 #-----------Initialize ADC------------
