@@ -128,7 +128,6 @@ def man_mode():
     
     if(GPIO.event_detected(23)):
         if not isPressed1:
-            GPIO.output(17, isOn)
             chan0 = AnalogIn(ads, ADS.P0)
             V1 = chan0.voltage
             ManVal = (V1*100.5)/3.3
