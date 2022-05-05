@@ -115,13 +115,6 @@ def animate(i):
     atemp1 = float(round(atemp1, 1))
     
     
-    with open ('pid.conf', 'r+') as g:
-        conf = g.readline().split(',')
-        man = float(conf[5])
-    man_ent = tk.Entry(root, width=7)
-    man_ent.insert(0, man)
-    man_ent.place(x = 970, y = 290)
-    
     #----Read-only entry for control value updating----
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
@@ -140,15 +133,6 @@ def animate(i):
     control.config(state='readonly')
     control.place(x = 970, y = 455)
     
-    #----Reads config file, fetch SP----
-    with open ('pid.conf', 'r+') as g:
-        conf = g.readline().split(',')
-        SP = float(conf[0])
-    #---Read-only entry for SP updating---
-    SP_ent = tk.Entry(root, width=7)
-    SP_ent.insert(0, SP)
-    SP_ent.config(state='readonly')
-    SP_ent.place(x = 970, y = 90)
     
     #-----Read-only entry for A0 and A1 updating----- 
     A0 = tk.Entry(root, width = 7)
