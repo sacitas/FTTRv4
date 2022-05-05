@@ -114,7 +114,7 @@ def animate(i):
     atemp1 = V2 / (11/1000)
     atemp1 = float(round(atemp1, 1))
     
-    #----Read only entry for control value updating----
+    #----Read-only entry for control value updating----
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
     temp = tk.Entry(root, width = 7)
@@ -140,7 +140,7 @@ def animate(i):
     SP_ent.insert(0, SP)
     SP_ent.place(x = 970, y = 90)
     
-    #-----Read only entry for A0 and A1 updating----- 
+    #-----Read-only entry for A0 and A1 updating----- 
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
