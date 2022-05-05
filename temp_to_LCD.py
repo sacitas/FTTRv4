@@ -118,7 +118,7 @@ def auto_mode():
         lcd.clear()
         lcd.cursor_pos = (0, 0)
         lcd.write_string("SP set")
-        time.sleep(1)
+        time.sleep(0.5)
         
     else:
         isPressed1 = False
@@ -154,7 +154,7 @@ def man_mode():
             lcd.clear()
             lcd.cursor_pos = (0, 0)
             lcd.write_string("Manual value set")
-            time.sleep(1)
+            time.sleep(0.5)
     else:
         isPressed = False
     
