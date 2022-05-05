@@ -147,7 +147,7 @@ def man_mode():
         lcd.clear()
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-        button1_state == True
+        time.sleep(3)
     elif(button2_state == True):
         readConfig()
         temp0 = tmp.read_temp0()
