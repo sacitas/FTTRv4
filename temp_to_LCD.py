@@ -120,15 +120,14 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
-isPressed1 = False
-isPressed2 = False
 
 def man_mode():
     global SP, Kp, Ti, Td, auto, man, ManVal
-    
+    isPressed1 = False
+    isPressed2 = False
     if(GPIO.input(23)):
         if(not isPressed1):
-            isPressed = True
+            isPressed1 = True
             chan0 = AnalogIn(ads, ADS.P0)
             V1 = chan0.voltage
             ManVal = (V1*100.5)/3.3
@@ -156,6 +155,7 @@ def man_mode():
                 f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     else:
         isPressed2 = False 
+    
     readConfig()
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
