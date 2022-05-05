@@ -76,7 +76,7 @@ long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 
 def readConfig():
-#   global SP, Kp, Ti, Td, auto, man
+    global SP, Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
@@ -125,7 +125,9 @@ def auto_mode():
      
 def man_mode():
     isPressed = False
-#   global SP, Kp, Ti, Td, auto, man, ManVal 
+    global SP, Kp, Ti, Td, auto, man, ManVal
+    readConfig()
+    man = str(man)
     chan0 = AnalogIn(ads, ADS.P0)
     V1 = chan0.voltage
     ManVal = (V1*100.5)/3.3
@@ -134,7 +136,7 @@ def man_mode():
     temp0 = str(temp0)
     lcd.clear()
     lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + ManVal + "%")
+    lcd.write_string("ManVal: " + man + "%")
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
         
