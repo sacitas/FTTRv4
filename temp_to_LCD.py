@@ -126,6 +126,9 @@ def man_mode():
     isPressed2 = False
     isOn = False
     global SP, Kp, Ti, Td, auto, man, ManVal
+    
+
+    
     if(GPIO.event_detected(23)):
         if not isPressed1:
             isPressed1 = True
@@ -156,6 +159,7 @@ def man_mode():
         time.sleep(3)
         isPressed2 = True
     
+    else:
         readConfig()
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
@@ -164,8 +168,7 @@ def man_mode():
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + man + "%")
         lcd.cursor_pos = (1, 0)
-        lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
-    
+        lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")   
     
 try:
     lcd.clear()
