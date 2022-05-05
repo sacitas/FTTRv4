@@ -132,14 +132,15 @@ def man_mode():
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     
-    if(GPIO.event_detected(23)):
+    if(GPIO.input(23)==False):
         if not isPressed1:
             isPressed1 = True
             lcd.clear()
             lcd.cursor_pos = (0, 0)
             lcd.write_string("ManVal: " + ManVal + "%")
         
-    elif(GPIO.event_detected(24)):
+    elif(GPIO.input(24)==False):
+        isPressed1 = False
         if not isPressed2:
             isPressed2 = True
             man = ManVal
@@ -155,8 +156,7 @@ def man_mode():
             with open ('pid.conf', 'w') as f:
                 f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     else:
-        isPressed1 = False
-        isPressed2 = False
+        pass
     readConfig() 
     man = str(man)
     lcd.clear()
