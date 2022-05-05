@@ -158,6 +158,7 @@ def man_mode():
         isPressed1 = False
         isPressed2 = False
     readConfig() 
+    man = str(man)
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + man + "%")
