@@ -1,34 +1,31 @@
+import csv
+import os
+import time
+import datetime as dt
+import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt 
 from matplotlib.animation import FuncAnimation
-import datetime as dt
-import tkinter as tk
-from tkinter import ttk
 import pandas as pd
 import numpy as np
-import csv
-import os
 import FTTRv4_temp as tmp
 import FTTRv4_PID as PID
-#import Adafruit_ADS1x15
-import adafruit_ads1x15.ads1115 as ADS
+
+#------------ADC libraries-------------
 import board
 import busio
+import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_ads1x15.ads1115 import Mode
-import time
-from pathlib import Path
 
-#adc = Adafruit_ADS1x15.ADS1115()
 
-#GAIN = 1
 
+#-----------Initialize ADC------------
 i2c = busio.I2C(board.SCL, board.SDA)
-
 ads = ADS.ADS1115(i2c)
-
 ads.mode = Mode.CONTINUOUS
 
+#---------Degree symbol----------
 degree_sign = u'\N{DEGREE SIGN}'
 
 #---Initial values---
@@ -47,14 +44,13 @@ plot_filepath = ""
 
 
 #------Main GUI code-----
-root = tk.Tk()
-root.title("FTTRv4 GUI")
-root.configure(background = 'light grey')
+root = tk.Tk() #Initialize tkinter
+root.title("FTTRv4 GUI") #Title
+root.configure(background = 'light grey') #Window background
 root.geometry("1150x700") # Window size
-
 plt.style.use('fivethirtyeight')
 
-
+#------Function for plot filelocation------
 def init_time_plot():
     global ref_time  
     global plot_folder
@@ -70,7 +66,6 @@ def init_time_plot():
     plot_filepath = plot_folder + plot_filename
     
 
-
 #--------Save plot function--------
 def savePlot():
     init_time_plot()
@@ -78,7 +73,7 @@ def savePlot():
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
     
-#-------Plot function to animate--------
+#---Plot function to animate---
 def animate(i):
 
     #-----Reads csv file & collecting data-----
@@ -106,7 +101,7 @@ def animate(i):
     plt.yticks(fontsize=10)
     plt.tight_layout()
     
-    
+    #--------ADC reading---------
     chan0 = AnalogIn(ads, ADS.P0)
     chan1 = AnalogIn(ads, ADS.P1)
     S1 = chan0.value
@@ -118,17 +113,7 @@ def animate(i):
     atemp1 = V2 / (11/1000)
     atemp1 = float(round(atemp1, 1))
     
-    #S1 = adc.read_adc(0, gain = GAIN)
-    #V1 = S1*(5.0/65535)
-    #atemp0 = V1 / (7/1000)
-    #atemp0 = str(round(atemp0, 2))
-    #S2 = adc.read_adc(1, gain = GAIN)
-    #V2 = S2*(5.0/65535)
-    #atemp1 = V2 / (7/1000)
-    #atemp1 = str(round(atemp1, 2))
-    
-    
-    root.update()
+    #----Read only entry for control value updating----
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
     temp = tk.Entry(root, width = 7)
@@ -136,26 +121,34 @@ def animate(i):
     temp.config(state='readonly')
     temp.place(x = 970, y = 415)
     
-    
+    #--------Reads u_total file---------
     with open('u_total.csv', 'r') as p:
         U_total = p.readlines()[-1]
+    #---Read only entry for U_total updating---
     control = tk.Entry(root, width = 7)
     control.insert(0, U_total)
     control.config(state='readonly')
     control.place(x = 970, y = 455)
     
-    root.update()
+    #----Reads config file, fetch SP----
+    with open ('pid.conf', 'r+') as g:
+        conf = g.readline().split(',')
+        SP = float(conf[0])
+    #---Read only entry for SP updating---
+    SP_ent = tk.Entry(root, width=7)
+    SP_ent.insert(0, SP)
+    SP_ent.place(x = 970, y = 90)
+    
+    #-----Read only entry for A0 and A1 updating----- 
     A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
     A0.config(state='readonly')
     A0.place(x = 970, y = 535)
-    
-    root.update()
+
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
-    
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
@@ -165,7 +158,7 @@ canvas.draw()
 #------------------Animate function------------------
 ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 
-
+#----Auto/Manual switch function-----
 def switch():
     global sp, kp, ti, td, auto, man, is_on
     if is_on:
@@ -196,7 +189,6 @@ def switch():
         modeM_.place(x = 940, y = 10)
         
         is_on = True
-        
 
     #-----Gets values from input fields-----
     sp = SP_ent.get()
@@ -216,15 +208,13 @@ def switch():
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
  
-
+#----on/off image files for switch----
 on = tk.PhotoImage(file = "on.png")
 off = tk.PhotoImage(file = "off.png")
 
-#-------Setting regulator values-------
+#------Setting regulator values------
 def SetRegVals():  
-    
     global sp, kp, ti, td, auto, man
-
     #-----Gets values from input fields-----
     sp = SP_ent.get()
     sp = float(sp)
@@ -234,8 +224,6 @@ def SetRegVals():
     ti = float(ti)
     td = td_ent.get()
     td = float(td)
-    
-    #-----Gets value from input field-----
     man = man_ent.get()
     man = float(man)
     
@@ -243,12 +231,13 @@ def SetRegVals():
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
         
+    #-----Entry for SP updating-----    
     S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, sp)
     S_P_.config(state='readonly')
     S_P_.place(x = 970, y = 495)
 
-    
+#-------Reads config file--------    
 with open ('pid.conf', 'r+') as g:
     conf = g.readline().split(',')
     SP = float(conf[0])
@@ -256,26 +245,21 @@ with open ('pid.conf', 'r+') as g:
     TI = float(conf[2])
     TD = float(conf[3])
 
-
-root.update()
-MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
-MA.place(x = 930, y = 30)
-#mode_label = tk.Label(root, text = 'Auto on/off', font = ('calibre', 10))
-#mode_label.place(x = 900, y = 10)
-
-
-#-------Creates button-------
-root.update()
-S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
-S.place(x = 730, y = 590, width=120, heigh=31)
-
-
+#---------Create frames----------    
 frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
 frame1.place(x=860, y=80)
 
-
 frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highlightthickness=1)
 frame2.place(x=860, y=400)
+
+#-------Create buttons-------
+root.update()
+MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
+MA.place(x = 930, y = 30)
+
+root.update()
+S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
+S.place(x = 730, y = 590, width=120, heigh=31)
 
 #-------Create input fields--------
 root.update()
@@ -325,6 +309,7 @@ temp_label.place(x = 888, y = 405)
 control_label = tk.Label(root, text = 'Control\n     value: ', font = ('calibre', 10))
 control_label.place(x = 888, y = 445)
 
+#-------Creates SP entry---------
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
 S_P_label.place(x = 893, y = 495)
@@ -333,6 +318,7 @@ S_P_.insert(0, SP)
 S_P_.config(state='readonly')
 S_P_.place(x = 970, y = 495)
 
+#-------Creates labels--------
 root.update()
 A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
 A0_label.place(x = 890, y = 525)
@@ -341,6 +327,7 @@ root.update()
 A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
 A1_label.place(x = 890, y = 565)
 
+#--------Labels for graph lines--------
 sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10, 'bold'), fg = '#4876FF')
 sensord0_c.place(x = 20, y = 580)
 sensord1_c = tk.Label(root, text = 'Sensor d1', font = ('calibre', 10, 'bold'), fg = '#EE0000')
@@ -351,4 +338,6 @@ sensord3_c = tk.Label(root, text = 'Sensor d3', font = ('calibre', 10, 'bold'), 
 sensord3_c.place(x = 320, y = 580)
 sensord4_c = tk.Label(root, text = 'Sensor d4', font = ('calibre', 10, 'bold'), fg = '#708090')
 sensord4_c.place(x = 420, y = 580)
+
+#-----Mainloop------
 root.mainloop()
