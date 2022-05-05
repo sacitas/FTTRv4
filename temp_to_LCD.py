@@ -136,6 +136,7 @@ def man_mode():
             lcd.clear()
             lcd.cursor_pos = (0, 0)
             lcd.write_string("ManVal: " + ManVal + "%")
+            time.sleep(10)
     else:
         isPressed1 = False
     if(GPIO.event_detected(24)):
