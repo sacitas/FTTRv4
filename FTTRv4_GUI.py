@@ -43,7 +43,7 @@ plot_filename = ""
 plot_filepath = ""
 
 
-#------Main GUI code-----
+#-----Set up main GUI code-----
 root = tk.Tk() #Initialize tkinter
 root.title("FTTRv4 GUI") #Title
 root.configure(background = 'light grey') #Window background
