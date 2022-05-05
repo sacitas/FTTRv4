@@ -129,8 +129,8 @@ def man_mode():
     if(GPIO.input(23)):
         if(not isPressed1):
             isPressed1 = True
-            if(not isOn):
-                isOn = True
+            isOn = not isOn
+            if(isOn):
                 chan0 = AnalogIn(ads, ADS.P0)
                 V1 = chan0.voltage
                 ManVal = (V1*100.5)/3.3
@@ -139,23 +139,24 @@ def man_mode():
                 lcd.cursor_pos = (0, 0)
                 lcd.write_string("ManVal: " + ManVal + "%")
     else:
-        isPressed1 = False
-      
+        isPressed1 = False 
     if(GPIO.input(24)):
         if(not isPressed2):
             isPressed2 = True
-            man = ManVal
-            GPIO.output(27, False)
-            time.sleep(0.1)
-            GPIO.output(27, True)
-            time.sleep(0.1)
-            GPIO.output(27, False)
-            time.sleep(0.1)
-            GPIO.output(27, True)
-            time.sleep(0.1)
-            GPIO.output(27, False)
-            with open ('pid.conf', 'w') as f:
-                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+            isOn = not isOn
+            if(isOn):
+                man = ManVal
+                GPIO.output(27, False)
+                time.sleep(0.1)
+                GPIO.output(27, True)
+                time.sleep(0.1)
+                GPIO.output(27, False)
+                time.sleep(0.1)
+                GPIO.output(27, True)
+                time.sleep(0.1)
+                GPIO.output(27, False)
+                with open ('pid.conf', 'w') as f:
+                    f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     else:
         isPressed2 = False 
     
