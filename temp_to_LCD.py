@@ -76,7 +76,7 @@ long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 
 def readConfig():
-#   global SP, Kp, Ti, Td, auto, man
+    global SP, Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
