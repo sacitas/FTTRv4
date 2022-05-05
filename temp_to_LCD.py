@@ -132,6 +132,9 @@ def man_mode():
     V1 = chan0.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
+    man = ManVal
+    with open ('pid.conf', 'w') as f:
+        f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
     lcd.clear()
