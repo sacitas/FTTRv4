@@ -139,6 +139,15 @@ def man_mode():
     V1 = chan0.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
+    
+    if(GPIO.event_detected(23)):
+        while not isPressed:
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("ManVal: " + ManVal + "%")
+    else:
+        isPressed = False
+    
     if(GPIO.event_detected(24)):
         if not isPressed:
             isPressed = True
