@@ -172,6 +172,7 @@ def animate(i):
     #----Read-only entry for control value updating----
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
+    root.update()
     temp.insert(0, temp0)
    
     #--------Reads u_total file---------
