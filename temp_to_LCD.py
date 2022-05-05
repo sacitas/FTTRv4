@@ -156,15 +156,15 @@ def man_mode():
         time.sleep(3)
         isPressed2 = True
     
-    readConfig()
-    temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
-    man = str(man)
-    lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + man + "%")
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
+        readConfig()
+        temp0 = tmp.read_temp0()
+        temp0 = str(temp0)
+        man = str(man)
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("ManVal: " + man + "%")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
     
     
 try:
