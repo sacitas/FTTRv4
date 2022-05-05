@@ -74,59 +74,6 @@ def savePlot():
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
 
-#-------Reads config file--------    
-with open ('pid.conf', 'r+') as g:
-    conf = g.readline().split(',')
-    SP = float(conf[0])
-    KP = float(conf[1])
-    TI = float(conf[2])
-    TD = float(conf[3])    
-
-frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highlightthickness=1)
-frame2.place(x=860, y=400)    
-
-temp0 = tmp.read_temp0()
-temp0 = str(round(temp0, 2))
-
-root.update()
-temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
-temp_label.place(x = 888, y = 405)
-temp = tk.Entry(root, width = 7)
-temp.insert(0, temp0)
-temp.config(state='readonly')
-temp.place(x = 970, y = 415)
-
-root.update()
-control_label = tk.Label(root, text = 'Control\n     value: ', font = ('calibre', 10))
-control_label.place(x = 888, y = 445)
-control = tk.Entry(root, width = 7)
-control.config(state='readonly')
-control.place(x = 970, y = 455)
-
-#-------Creates SP entry---------
-root.update()
-S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 893, y = 495)
-S_P_ = tk.Entry(root, width=7)
-S_P_.insert(0, SP)
-S_P_.config(state='readonly')
-S_P_.place(x = 970, y = 495)
-
-#-------Analog sensors entry--------
-root.update()
-A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
-A0_label.place(x = 890, y = 525)
-A0 = tk.Entry(root, width = 7)
-A0.config(state='readonly')
-A0.place(x = 970, y = 535)
-
-root.update()
-A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
-A1_label.place(x = 890, y = 565)
-A1 = tk.Entry(root, width = 7)
-A1.config(state='readonly')
-A1.place(x = 970, y = 575)
-
     
 #---Plot function to animate---
 def animate(i):
@@ -167,29 +114,47 @@ def animate(i):
     V2 = chan1.voltage
     atemp1 = V2 / (11/1000)
     atemp1 = float(round(atemp1, 1))
-    
+
     
     #----Read-only entry for control value updating----
     temp0 = tmp.read_temp0()
     temp0 = str(round(temp0, 2))
-    root.update()
+    temp = tk.Entry(root, width = 7)
     temp.insert(0, temp0)
+    temp.config(state='readonly')
+    temp.place(x = 970, y = 415)
+ 
    
     #--------Reads u_total file---------
     with open('u_total.csv', 'r') as p:
         U_total = p.readlines()[-1]
     #---Read only entry for U_total updating---
+    control = tk.Entry(root, width = 7)
     control.insert(0, U_total)
+    control.config(state='readonly')
+    control.place(x = 970, y = 455)
 
     #----Read-only entry for SP updating----
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
+    S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, SP)
+    S_P_.config(state='readonly')
+    S_P_.place(x = 970, y = 495)
     
     #-----Read-only entry for A0 and A1 updating----- 
+    A0 = tk.Entry(root, width = 7)
     A0.insert(0, atemp0)
+    A0.config(state='readonly')
+    A0.place(x = 970, y = 535)
+    
+    
+    A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
+    A1.config(state='readonly')
+    A1.place(x = 970, y = 575)
+    
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
@@ -279,12 +244,21 @@ def SetRegVals():
     S_P_.place(x = 970, y = 495)
 
 
-
+#-------Reads config file--------    
+with open ('pid.conf', 'r+') as g:
+    conf = g.readline().split(',')
+    SP = float(conf[0])
+    KP = float(conf[1])
+    TI = float(conf[2])
+    TD = float(conf[3])
+    man = float(conf[5])
+    
 #---------Create frames----------    
 frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
 frame1.place(x=860, y=80)
 
-
+frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highlightthickness=1)
+frame2.place(x=860, y=400)    
 
 #-------Create buttons-------
 root.update()
@@ -328,7 +302,7 @@ root.update()
 man_label = tk.Label(root, text = 'Manual\n   value:', font = ('calibre', 10))
 man_label.place(x = 900, y = 280)
 man_ent = tk.Entry(root, width=7)
-man_ent.insert(0, "0")
+man_ent.insert(0, man)
 man_ent.place(x = 970, y = 290)
 
 #-------Creates button-------
@@ -338,8 +312,43 @@ SV.place(x = 970, y = 330, width=70, height=30)
 
 #-------Process value entry--------
 
+root.update()
+temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
+temp_label.place(x = 888, y = 405)
+temp = tk.Entry(root, width = 7)
+temp.config(state='readonly')
+temp.place(x = 970, y = 415)
 
+root.update()
+control_label = tk.Label(root, text = 'Control\n     value: ', font = ('calibre', 10))
+control_label.place(x = 888, y = 445)
+control = tk.Entry(root, width = 7)
+control.config(state='readonly')
+control.place(x = 970, y = 455)
 
+#-------Creates SP entry---------
+root.update()
+S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
+S_P_label.place(x = 893, y = 495)
+S_P_ = tk.Entry(root, width=7)
+S_P_.insert(0, SP)
+S_P_.config(state='readonly')
+S_P_.place(x = 970, y = 495)
+
+#-------Analog sensors entry--------
+root.update()
+A0_label = tk.Label(root, text = 'Analog\nsensor 0: ', font = ('calibre', 10))
+A0_label.place(x = 890, y = 525)
+A0 = tk.Entry(root, width = 7)
+A0.config(state='readonly')
+A0.place(x = 970, y = 535)
+
+root.update()
+A1_label = tk.Label(root, text = 'Analog\nsensor 1: ', font = ('calibre', 10))
+A1_label.place(x = 890, y = 565)
+A1 = tk.Entry(root, width = 7)
+A1.config(state='readonly')
+A1.place(x = 970, y = 575)
 
 #--------Labels for graph lines--------
 sensord0_c = tk.Label(root, text = 'Sensor d0', font = ('calibre', 10, 'bold'), fg = '#4876FF')
