@@ -120,44 +120,35 @@ def auto_mode():
     lcd.cursor_pos = (1, 0)
     lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
      
+isPressed1 = False
+isPressed2 = False
 
 def man_mode():
     global SP, Kp, Ti, Td, auto, man, ManVal
-    isPressed1 = False
-    isPressed2 = False
-    isOn = False
     if(GPIO.event_detected(23)):
-        if not isPressed1:
-            isPressed1 = True
-            isOn = True
-            chan0 = AnalogIn(ads, ADS.P0)
-            V1 = chan0.voltage
-            ManVal = (V1*100.5)/3.3
-            ManVal = str(round(ManVal, 0))
-            lcd.clear()
-            lcd.cursor_pos = (0, 0)
-            lcd.write_string("ManVal: " + ManVal + "%")
-    else:
-        isPressed1 = False
-        isOn = False
-    if(GPIO.event_detected(24)):
-        if not isPressed2:
-            isPressed2 = True
-            man = ManVal
-            GPIO.output(27, False)
-            time.sleep(0.1)
-            GPIO.output(27, True)
-            time.sleep(0.1)
-            GPIO.output(27, False)
-            time.sleep(0.1)
-            GPIO.output(27, True)
-            time.sleep(0.1)
-            GPIO.output(27, False)
-            with open ('pid.conf', 'w') as f:
-                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-            time.sleep(2)
-    else:        
-        isPressed2 = False
+        chan0 = AnalogIn(ads, ADS.P0)
+        V1 = chan0.voltage
+        ManVal = (V1*100.5)/3.3
+        ManVal = str(round(ManVal, 0))
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("ManVal: " + ManVal + "%")
+        isPressed1 = True
+    elif(GPIO.event_detected(24) and isPressed1 == True):
+        man = ManVal
+        GPIO.output(27, False)
+        time.sleep(0.1)
+        GPIO.output(27, True)
+        time.sleep(0.1)
+        GPIO.output(27, False)
+        time.sleep(0.1)
+        GPIO.output(27, True)
+        time.sleep(0.1)
+        GPIO.output(27, False)
+        with open ('pid.conf', 'w') as f:
+            f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+        isPressed2 = True
+        time.sleep(3)
     
     readConfig()
     temp0 = tmp.read_temp0()
