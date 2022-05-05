@@ -12,7 +12,7 @@ from adafruit_ads1x15.ads1115 import Mode
 
 I2C = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(I2C)
-ads.mode = Mode.CONTINUOUS
+#ads.mode = Mode.CONTINUOUS
 
 
 SP = 0
@@ -132,6 +132,11 @@ def man_mode():
     ManVal = str(round(ManVal, 0))
     temp0 = tmp.read_temp0()
     temp0 = str(temp0)
+    lcd.clear()
+    lcd.cursor_pos = (0, 0)
+    lcd.write_string("ManVal: " + ManVal + "%")
+    lcd.cursor_pos = (1, 0)
+    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
         
     if(GPIO.event_detected(24)):
         if not isPressed:
@@ -154,11 +159,6 @@ def man_mode():
             time.sleep(2)
     else:
         isPressed = False
-    lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("ManVal: " + ManVal + "%")
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
     
 try:
     lcd.clear()
