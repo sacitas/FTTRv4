@@ -90,16 +90,20 @@ def readConfig():
 
 
 def auto_mode():
+    isPressed1 = False
     global SP, Kp, Ti, Td, auto, man
+    temp0 = tmp.read_temp0()
+    temp0 = str(temp0)
     V1 = chan1.voltage
-    sp = (V1*121)/3.3
-    sp = str(round(sp, 0))
+    SP = (V1*121)/3.3
+    SP = str(round(SP, 0))
     lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
-    button_state = GPIO.input(24)
-    if(button_state == False):
-        SP = sp
+    lcd.cursor_pos = (1, 0)
+    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
+    if(GPIO.event_detected(24)):
+        isPressed1 = True
         GPIO.output(17, False)
         time.sleep(0.1)
         GPIO.output(17, True)
@@ -111,17 +115,13 @@ def auto_mode():
         GPIO.output(17, False)
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("SP set")
+        time.sleep(1)
+        
     else:
-        pass
-    readConfig()
-    temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
-    SP = str(SP)
-    lcd.clear()
-    lcd.cursor_pos = (0, 0)
-    lcd.write_string("SP: " + SP + " " + degree_sign + "C")
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C") 
+        isPressed1 = False
        
 def man_mode():
     isPressed = False 
