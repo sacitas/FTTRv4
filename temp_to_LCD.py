@@ -125,7 +125,7 @@ isPressed2 = False
 
 def man_mode():
     global SP, Kp, Ti, Td, auto, man, ManVal
-    if(GPIO.event_detected(23)):
+    if(GPIO.output(23) == False):
         chan0 = AnalogIn(ads, ADS.P0)
         V1 = chan0.voltage
         ManVal = (V1*100.5)/3.3
@@ -134,7 +134,7 @@ def man_mode():
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + ManVal + "%")
         isPressed1 = True
-    elif(GPIO.event_detected(24) and isPressed1 == True):
+    elif(GPIO.output(24) == False and isPressed1 == True):
         man = ManVal
         GPIO.output(27, False)
         time.sleep(0.1)
