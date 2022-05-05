@@ -130,7 +130,7 @@ def man_mode():
         if(not isPressed1):
             isPressed1 = True
             isOn = not isOn
-            if(isOn):
+            while isOn:
                 chan0 = AnalogIn(ads, ADS.P0)
                 V1 = chan0.voltage
                 ManVal = (V1*100.5)/3.3
