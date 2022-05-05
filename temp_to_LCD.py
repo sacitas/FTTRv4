@@ -126,7 +126,7 @@ def auto_mode():
 def man_mode():
     isPressed = False
     isOn = True
-#   global SP, Kp, Ti, Td, auto, man, ManVal
+    global SP, Kp, Ti, Td, auto, man
     readConfig()
     man = str(man)
     temp0 = tmp.read_temp0()
