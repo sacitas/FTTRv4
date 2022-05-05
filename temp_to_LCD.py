@@ -154,7 +154,6 @@ def man_mode():
     if(GPIO.event_detected(24)):
         if not isPressed:
             isPressed = True
-            man = ManVal
             GPIO.output(27, False)
             time.sleep(0.1)
             GPIO.output(27, True)
@@ -165,7 +164,7 @@ def man_mode():
             time.sleep(0.1)
             GPIO.output(27, False)
             with open ('pid.conf', 'w') as f:
-                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,ManVal))
             lcd.clear()
             lcd.cursor_pos = (0, 0)
             lcd.write_string("Manual value set")
