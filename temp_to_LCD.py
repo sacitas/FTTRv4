@@ -78,10 +78,9 @@ long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 
 def readConfig():
-    global SP, Kp, Ti, Td, auto, man
+    global Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
-        SP = float(conf[0])
         Kp = float(conf[1])
         Ti = float(conf[2])
         Td = float(conf[3])
@@ -113,6 +112,7 @@ def auto_mode():
         GPIO.output(17, True)
         time.sleep(0.1)
         GPIO.output(17, False)
+        readConfig()
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
         lcd.clear()
