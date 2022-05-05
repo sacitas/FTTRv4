@@ -84,11 +84,15 @@ with open ('pid.conf', 'r+') as g:
 
 frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highlightthickness=1)
 frame2.place(x=860, y=400)    
-    
+
+temp0 = tmp.read_temp0()
+temp0 = str(round(temp0, 2))
+
 root.update()
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
 temp_label.place(x = 888, y = 405)
 temp = tk.Entry(root, width = 7)
+temp.insert(0, temp0)
 temp.config(state='readonly')
 temp.place(x = 970, y = 415)
 
