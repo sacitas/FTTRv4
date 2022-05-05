@@ -135,7 +135,7 @@ def animate(i):
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
-    #---Read only entry for SP updating---
+    #---Read-only entry for SP updating---
     SP_ent = tk.Entry(root, width=7)
     SP_ent.insert(0, SP)
     SP_ent.place(x = 970, y = 90)
