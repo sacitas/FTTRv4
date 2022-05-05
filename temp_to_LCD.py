@@ -125,7 +125,7 @@ isPressed2 = False
 
 def man_mode():
     global SP, Kp, Ti, Td, auto, man, ManVal
-    if(GPIO.input(23) == False):
+    if(GPIO.event_detected(23) and isPressed1 == False):
         chan0 = AnalogIn(ads, ADS.P0)
         V1 = chan0.voltage
         ManVal = (V1*100.5)/3.3
@@ -133,9 +133,9 @@ def man_mode():
         lcd.clear()
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + ManVal + "%")
+        
+    elif(GPIO.event_detected(24) and isPressed2 == False):
         isPressed1 = True
-    elif(GPIO.input(24) == False and isPressed1 == True):
-        isPressed1 = False
         man = ManVal
         GPIO.output(27, False)
         time.sleep(0.1)
@@ -148,8 +148,8 @@ def man_mode():
         GPIO.output(27, False)
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-        isPressed2 = True
         time.sleep(3)
+        isPressed2 = True
     
     readConfig()
     temp0 = tmp.read_temp0()
