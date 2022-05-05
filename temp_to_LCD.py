@@ -122,6 +122,7 @@ def auto_mode():
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
     button1_state = GPIO.input(23)
+    button2_state = GPIO.input(24)
     if(button1_state == False):
         chan0 = AnalogIn(ads, ADS.P0)
         V1 = chan0.voltage
@@ -130,8 +131,7 @@ def man_mode():
         lcd.clear()
         lcd.cursor_pos = (0, 0)
         lcd.write_string("ManVal: " + ManVal + "%")
-    button2_state = GPIO.input(24)
-    elif(button2_state == False):
+    elif(button1_state == True and button2_state == False):
         man = ManVal
         GPIO.output(27, False)
         time.sleep(0.1)
@@ -145,7 +145,7 @@ def man_mode():
         lcd.clear()
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-    else:
+    elif(button1_state == True and button2_state == False):
         readConfig()
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
