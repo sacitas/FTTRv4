@@ -147,6 +147,7 @@ def animate(i):
     #---Read-only entry for SP updating---
     SP_ent = tk.Entry(root, width=7)
     SP_ent.insert(0, SP)
+    SP_ent.config(state='readonly')
     SP_ent.place(x = 970, y = 90)
     
     #-----Read-only entry for A0 and A1 updating----- 
