@@ -74,6 +74,14 @@ def savePlot():
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
 
+#-------Reads config file--------    
+with open ('pid.conf', 'r+') as g:
+    conf = g.readline().split(',')
+    SP = float(conf[0])
+    KP = float(conf[1])
+    TI = float(conf[2])
+    TD = float(conf[3])    
+    
 root.update()
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
 temp_label.place(x = 888, y = 405)
@@ -262,13 +270,7 @@ def SetRegVals():
     S_P_.config(state='readonly')
     S_P_.place(x = 970, y = 495)
 
-#-------Reads config file--------    
-with open ('pid.conf', 'r+') as g:
-    conf = g.readline().split(',')
-    SP = float(conf[0])
-    KP = float(conf[1])
-    TI = float(conf[2])
-    TD = float(conf[3])
+
 
 #---------Create frames----------    
 frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
