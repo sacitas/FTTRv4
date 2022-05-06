@@ -36,7 +36,7 @@ ti = 0
 td = 0
 auto = 0
 man = 0
-is_on = False
+is_on = True
 
 
 plot_folder = "plot/"
@@ -212,32 +212,6 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
-  
-    if (auto == 0):
-        MA.config(image = off)
-        SP_ent.config(state='readonly')
-        kp_ent.config(state='readonly')
-        ti_ent.config(state='readonly')
-        td_ent.config(state='readonly')
-        man_ent.config(state='normal')
-        modeA_ = tk.Entry(root, width=8)
-        modeA_.insert(0, "Manual")
-        modeA_.config(state='readonly')
-        modeA_.place(x = 940, y = 10)
-        
-    else:
-        MA.config(image = on)
-        SP_ent.config(state='normal')
-        kp_ent.config(state='normal')
-        ti_ent.config(state='normal')
-        td_ent.config(state='normal')
-        man_ent.config(state='readonly')
-        modeM_ = tk.Entry(root, width=8)
-        modeM_.insert(0, "Auto")
-        modeM_.config(state='readonly')
-        modeM_.place(x = 940, y = 10)
-       
-    
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
@@ -250,7 +224,8 @@ ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 #----Auto/Manual switch function-----
 def switch():
     global sp, kp, ti, td, auto, man, is_on
-    if not is_on:
+    root.update()
+    if  is_on and auto == 0:
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
@@ -263,7 +238,7 @@ def switch():
         modeA_.config(state='readonly')
         modeA_.place(x = 940, y = 10)
         
-        is_on = True
+        is_on = False
     else:
         auto = 1
         MA.config(image = on)
@@ -277,7 +252,7 @@ def switch():
         modeM_.config(state='readonly')
         modeM_.place(x = 940, y = 10)
         
-        is_on = False
+        is_on = True
 
     #-----Gets values from input fields-----
     sp = SP_ent.get()
@@ -335,7 +310,6 @@ frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highl
 frame2.place(x=860, y=400)    
 
 #-------Create buttons-------
-root.update()
 
 
 root.update()
