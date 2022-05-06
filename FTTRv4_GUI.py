@@ -330,7 +330,7 @@ control.place(x = 970, y = 455)
 #-------Creates SP entry---------
 root.update()
 S_P_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-S_P_label.place(x = 893, y = 495)
+S_P_label.place(x = 891, y = 495)
 S_P_ = tk.Entry(root, width=7)
 S_P_.insert(0, SP)
 S_P_.config(state='readonly')
