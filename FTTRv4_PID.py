@@ -17,8 +17,8 @@ fieldnames = ["U_total"]
 
 Ts = 1
 SP = 120
-K_p = 1
-T_i = 0
+K_p = 1.2
+T_i = 180
 T_d = 0
 N = 10
 
