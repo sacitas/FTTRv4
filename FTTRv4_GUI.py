@@ -103,6 +103,9 @@ def animate(i):
     plt.yticks(fontsize=10)
     plt.tight_layout()
     
+    
+
+    
     #--------ADC reading---------
     chan0 = AnalogIn(ads, ADS.P0)
     chan1 = AnalogIn(ads, ADS.P1)
@@ -138,6 +141,7 @@ def animate(i):
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
+        auto = int(conf[4])
         man = float(conf[5])
     S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, SP)
@@ -150,12 +154,19 @@ def animate(i):
     manVal.config(state='readonly')
     manVal.place(x = 970, y = 535)
     
-    
     A1 = tk.Entry(root, width = 7)
     A1.insert(0, atemp1)
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
+    text = tk.StringVar()
+    modeI_ = tk.Label(root, textvariable=text, font = ('calibre', 10))
+    modeI_.place(x = 940, y = 380)
+    
+    if(auto == 1):
+        text.set("Auto Mode Set")
+    else:
+        text.set("Manual Mode Set")
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
