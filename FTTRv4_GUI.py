@@ -36,7 +36,8 @@ ti = 0
 td = 0
 auto = 0
 man = 0
-is_on = True
+is_on1 = True
+is_on2 = True
 
 
 plot_folder = "plot/"
@@ -211,9 +212,9 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
-    global is_on
+    global is_on2
     
-    if is_on and auto == 0:
+    if is_on2 and auto == 0:
         MA.config(image = off)
         SP_ent.config(state='readonly')
         kp_ent.config(state='readonly')
@@ -225,7 +226,7 @@ def animate(i):
         modeA_.config(state='readonly')
         modeA_.place(x = 940, y = 10)
         
-        is_on = False
+        is_on2 = False
     else:
         MA.config(image = on)
         SP_ent.config(state='normal')
@@ -238,7 +239,7 @@ def animate(i):
         modeM_.config(state='readonly')
         modeM_.place(x = 940, y = 10)
         
-        is_on = True
+        is_on2 = True
     
 
 #----------------Plot window in GUI----------------
@@ -251,8 +252,8 @@ ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 
 #----Auto/Manual switch function-----
 def switch():
-    global sp, kp, ti, td, auto, man, is_on
-    if is_on:
+    global sp, kp, ti, td, auto, man, is_on1
+    if is_on1:
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
@@ -265,7 +266,7 @@ def switch():
         modeA_.config(state='readonly')
         modeA_.place(x = 940, y = 10)
         
-        is_on = False
+        is_on1 = False
     else:
         auto = 1
         MA.config(image = on)
@@ -279,7 +280,7 @@ def switch():
         modeM_.config(state='readonly')
         modeM_.place(x = 940, y = 10)
         
-        is_on = True
+        is_on1 = True
 
     #-----Gets values from input fields-----
     sp = SP_ent.get()
