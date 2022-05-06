@@ -5,16 +5,9 @@ import FTTRv4_temp as tmp
 import csv
 import pandas as pd
 
-# Parameters
-#Ts = float(input("Enter a samplingtime: "))
-#SP = float(input("Enter a setpoint: "))
-#K_p = float(input("Enter a K_p value: "))
-#T_i = float(input("Enter a T_i value: "))
-#T_d = float(input("Enter a T_d value: "))
-#N = float(input("Enter a filter (N) value: "))
-
 fieldnames = ["U_total"]
 
+# Parameters
 Ts = 1
 SP = 120
 K_p = 1.2
