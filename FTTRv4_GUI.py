@@ -168,7 +168,7 @@ ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 #----Auto/Manual switch function-----
 def switch():
     global sp, kp, ti, td, auto, man, is_on
-    if is_on:
+    if is_on and auto == 0:
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
