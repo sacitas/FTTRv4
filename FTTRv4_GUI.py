@@ -339,7 +339,7 @@ S_P_.place(x = 970, y = 495)
 #-------Analog sensors entry--------
 root.update()
 manVal_label = tk.Label(root, text = 'Manual\n    value: ', font = ('calibre', 10))
-manVal_label.place(x = 893, y = 525)
+manVal_label.place(x = 892, y = 525)
 manVal = tk.Entry(root, width = 7)
 manVal.insert(0, man)
 manVal.config(state='readonly')
