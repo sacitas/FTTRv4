@@ -73,7 +73,12 @@ def savePlot():
     plt.savefig(f'{plot_filepath}.png')
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
-
+    
+on = tk.PhotoImage(file = "on.png")
+off = tk.PhotoImage(file = "off.png")
+    
+MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
+MA.place(x = 930, y = 30)
     
 #---Plot function to animate---
 def animate(i):
@@ -246,8 +251,7 @@ def switch():
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
  
 #----on/off image files for switch----
-on = tk.PhotoImage(file = "on.png")
-off = tk.PhotoImage(file = "off.png")
+
 
 #------Setting regulator values------
 def SetRegVals():  
@@ -293,8 +297,7 @@ frame2.place(x=860, y=400)
 
 #-------Create buttons-------
 root.update()
-MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
-MA.place(x = 930, y = 30)
+
 
 root.update()
 S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
