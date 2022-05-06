@@ -162,6 +162,9 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
+    modeI_ = tk.Entry(root, width = 15)
+    modeI_.config(state='readonly')
+    modeI_.place(x = 910, y = 373)
     
     if(auto == 1):
         modeI_.insert(0, "Auto Mode Set")
