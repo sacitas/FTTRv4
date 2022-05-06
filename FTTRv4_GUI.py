@@ -138,6 +138,7 @@ def animate(i):
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
+        auto = int(conf[4])
         man = float(conf[5])
     S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, SP)
@@ -156,6 +157,35 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
+    global is_on, auto
+    
+    if is_on and auto == 0:
+        MA.config(image = off)
+        SP_ent.config(state='readonly')
+        kp_ent.config(state='readonly')
+        ti_ent.config(state='readonly')
+        td_ent.config(state='readonly')
+        man_ent.config(state='normal')
+        modeA_ = tk.Entry(root, width=8)
+        modeA_.insert(0, "Manual")
+        modeA_.config(state='readonly')
+        modeA_.place(x = 940, y = 10)
+        
+        is_on = False
+    else:
+        MA.config(image = on)
+        SP_ent.config(state='normal')
+        kp_ent.config(state='normal')
+        ti_ent.config(state='normal')
+        td_ent.config(state='normal')
+        man_ent.config(state='readonly')
+        modeM_ = tk.Entry(root, width=8)
+        modeM_.insert(0, "Auto")
+        modeM_.config(state='readonly')
+        modeM_.place(x = 940, y = 10)
+        
+        is_on = True
+    
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
@@ -168,7 +198,7 @@ ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 #----Auto/Manual switch function-----
 def switch():
     global sp, kp, ti, td, auto, man, is_on
-    if is_on and auto == 0:
+    if is_on:
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
