@@ -74,6 +74,8 @@ def savePlot():
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
     
+modeI_ = tk.Entry(root, width = 15)
+modeI_.place(x = 920, y = 373)
     
 #---Plot function to animate---
 def animate(i):
@@ -159,18 +161,11 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
-    text = tk.StringVar()
-    modeI_ = tk.Label(root, textvariable=text)
-    modeI_.place(x = 920, y = 373)
     
     if(auto == 1):
-        text.set("                                      ")
-        time.sleep(0.1)
-        text.set("Auto Mode Set")
+        modeI_.insert(0, "Auto Mode Set")
     else:
-        text.set("                            ")
-        time.sleep(0.1)
-        text.set("Manual Mode Set")
+        modeI_.insert(0, "Manual Mode Set")
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
