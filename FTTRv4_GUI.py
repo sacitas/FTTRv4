@@ -82,6 +82,7 @@ with open ('pid.conf', 'r+') as g:
     TI = float(conf[2])
     TD = float(conf[3])
     man = float(conf[5])
+
     
 on = tk.PhotoImage(file = "on.png")
 off = tk.PhotoImage(file = "off.png")
@@ -89,6 +90,8 @@ off = tk.PhotoImage(file = "off.png")
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
 MA.place(x = 930, y = 30)
 
+frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
+frame1.place(x=860, y=80)
 
 #-------Create input fields--------
 root.update()
@@ -328,8 +331,7 @@ def SetRegVals():
 
     
 #---------Create frames----------    
-frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
-frame1.place(x=860, y=80)
+
 
 frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highlightthickness=1)
 frame2.place(x=860, y=400)    
