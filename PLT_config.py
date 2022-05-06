@@ -1,4 +1,4 @@
-filename = '05_02_2022-17:40.csv'
+filename = '05_02_2022-17:40'
 
 sensors = {
     'sensor_0' : 'sensor_0',
@@ -7,8 +7,3 @@ sensors = {
     'sensor_3' : 'sensor_3',
     'sensor_4' : 'sensor_4'
 }
-
-
-
-
-
