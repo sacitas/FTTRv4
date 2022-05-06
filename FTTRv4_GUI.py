@@ -161,7 +161,7 @@ def animate(i):
     
     text = tk.StringVar()
     modeI_ = tk.Label(root, textvariable=text, font = ('calibre', 10))
-    modeI_.place(x = 940, y = 380)
+    modeI_.place(x = 920, y = 370)
     
     if(auto == 1):
         text.set("Auto Mode Set")
