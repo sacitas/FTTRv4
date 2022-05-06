@@ -294,7 +294,7 @@ ti_ent.place(x = 970, y = 190)
 
 root.update()
 td_label = tk.Label(root, text = 'Derivative\n         time:', font = ('calibre', 10))
-td_label.place(x = 883, y = 230)
+td_label.place(x = 881, y = 230)
 td_ent = tk.Entry(root, width=7)
 td_ent.insert(0, TD)
 td_ent.place(x = 970, y = 240)
