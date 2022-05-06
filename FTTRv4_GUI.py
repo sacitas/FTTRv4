@@ -74,9 +74,6 @@ def savePlot():
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
     
-modeI_ = tk.Entry(root, width = 15)
-modeI_.config(state='readonly')
-modeI_.place(x = 920, y = 373)
     
 #---Plot function to animate---
 def animate(i):
@@ -162,14 +159,19 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
-    modeI_ = tk.Entry(root, width = 15)
-    modeI_.config(state='readonly')
-    modeI_.place(x = 910, y = 373)
     
     if(auto == 1):
+        modeI_ = tk.Entry(root, width = 15)
         modeI_.insert(0, "Auto Mode Set")
+        modeI_.config(state='readonly')
+        modeI_.place(x = 905, y = 373)
+        
     else:
+        modeI_ = tk.Entry(root, width = 15)
         modeI_.insert(0, "Manual Mode Set")
+        modeI_.config(state='readonly')
+        modeI_.place(x = 905, y = 373)
+        
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
@@ -290,6 +292,11 @@ SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: S
 SV.place(x = 970, y = 330, width=70, height=30)
 
 #-------Create input fields--------
+root.update()
+modeI_ = tk.Entry(root, width = 15)
+modeI_.config(state='readonly')
+modeI_.place(x = 905, y = 373)
+
 root.update()
 SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
 SP_label.place(x = 894, y = 90)
