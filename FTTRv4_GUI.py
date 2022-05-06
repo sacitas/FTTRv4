@@ -74,11 +74,49 @@ def savePlot():
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
     
+    
 on = tk.PhotoImage(file = "on.png")
 off = tk.PhotoImage(file = "off.png")
     
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
 MA.place(x = 930, y = 30)
+
+
+#-------Create input fields--------
+root.update()
+SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
+SP_label.place(x = 894, y = 90)
+SP_ent = tk.Entry(root, width=7)
+SP_ent.insert(0, SP)
+SP_ent.place(x = 970, y = 90)
+
+root.update()
+kp_label = tk.Label(root, text = 'Proportional\n             gain:', font = ('calibre', 10))
+kp_label.place(x = 868, y = 130)
+kp_ent = tk.Entry(root, width=7)
+kp_ent.insert(0, KP)
+kp_ent.place(x = 970, y = 140)
+
+root.update()
+ti_label = tk.Label(root, text = 'Integral\n     time:', font = ('calibre', 10))
+ti_label.place(x = 897, y = 180)
+ti_ent = tk.Entry(root, width=7)
+ti_ent.insert(0, TI)
+ti_ent.place(x = 970, y = 190)
+
+root.update()
+td_label = tk.Label(root, text = 'Derivative\n         time:', font = ('calibre', 10))
+td_label.place(x = 881, y = 230)
+td_ent = tk.Entry(root, width=7)
+td_ent.insert(0, TD)
+td_ent.place(x = 970, y = 240)
+
+root.update()
+man_label = tk.Label(root, text = 'Manual\n   value:', font = ('calibre', 10))
+man_label.place(x = 900, y = 280)
+man_ent = tk.Entry(root, width=7)
+man_ent.insert(0, man)
+man_ent.place(x = 970, y = 290)
     
 #---Plot function to animate---
 def animate(i):
@@ -303,41 +341,7 @@ root.update()
 S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
 S.place(x = 730, y = 590, width=120, heigh=31)
 
-#-------Create input fields--------
-root.update()
-SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-SP_label.place(x = 894, y = 90)
-SP_ent = tk.Entry(root, width=7)
-SP_ent.insert(0, SP)
-SP_ent.place(x = 970, y = 90)
 
-root.update()
-kp_label = tk.Label(root, text = 'Proportional\n             gain:', font = ('calibre', 10))
-kp_label.place(x = 868, y = 130)
-kp_ent = tk.Entry(root, width=7)
-kp_ent.insert(0, KP)
-kp_ent.place(x = 970, y = 140)
-
-root.update()
-ti_label = tk.Label(root, text = 'Integral\n     time:', font = ('calibre', 10))
-ti_label.place(x = 897, y = 180)
-ti_ent = tk.Entry(root, width=7)
-ti_ent.insert(0, TI)
-ti_ent.place(x = 970, y = 190)
-
-root.update()
-td_label = tk.Label(root, text = 'Derivative\n         time:', font = ('calibre', 10))
-td_label.place(x = 881, y = 230)
-td_ent = tk.Entry(root, width=7)
-td_ent.insert(0, TD)
-td_ent.place(x = 970, y = 240)
-
-root.update()
-man_label = tk.Label(root, text = 'Manual\n   value:', font = ('calibre', 10))
-man_label.place(x = 900, y = 280)
-man_ent = tk.Entry(root, width=7)
-man_ent.insert(0, man)
-man_ent.place(x = 970, y = 290)
 
 #-------Creates button-------
 root.update()
