@@ -212,6 +212,7 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
+    global is_on
     if not is_on and auto == 0:
         MA.config(image = off)
         SP_ent.config(state='readonly')
