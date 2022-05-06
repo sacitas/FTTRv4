@@ -74,6 +74,14 @@ def savePlot():
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
     
+#-------Reads config file--------    
+with open ('pid.conf', 'r+') as g:
+    conf = g.readline().split(',')
+    SP = float(conf[0])
+    KP = float(conf[1])
+    TI = float(conf[2])
+    TD = float(conf[3])
+    man = float(conf[5])
     
 on = tk.PhotoImage(file = "on.png")
 off = tk.PhotoImage(file = "off.png")
@@ -317,14 +325,7 @@ def SetRegVals():
     S_P_.place(x = 970, y = 495)
 
 
-#-------Reads config file--------    
-with open ('pid.conf', 'r+') as g:
-    conf = g.readline().split(',')
-    SP = float(conf[0])
-    KP = float(conf[1])
-    TI = float(conf[2])
-    TD = float(conf[3])
-    man = float(conf[5])
+
     
 #---------Create frames----------    
 frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
