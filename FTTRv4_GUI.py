@@ -164,7 +164,7 @@ def animate(i):
     modeI_.place(x = 920, y = 373)
     
     if(auto == 1):
-        text.set("                            ")
+        text.set("                                      ")
         time.sleep(0.1)
         text.set("Auto Mode Set")
     else:
