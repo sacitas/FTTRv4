@@ -75,6 +75,7 @@ def savePlot():
     saved.place(x=730, y=620)
     
 modeI_ = tk.Entry(root, width = 15)
+modeI_.config(state='readonly')
 modeI_.place(x = 920, y = 373)
     
 #---Plot function to animate---
