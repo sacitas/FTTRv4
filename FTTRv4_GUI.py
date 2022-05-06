@@ -138,7 +138,7 @@ def animate(i):
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
-        manVal = float(conf[5])
+        man = float(conf[5])
     S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, SP)
     S_P_.config(state='readonly')
@@ -146,7 +146,7 @@ def animate(i):
     
     #-----Read-only entry for A0 and A1 updating----- 
     manVal = tk.Entry(root, width = 7)
-    manVal.insert(0, manVal)
+    manVal.insert(0, man)
     manVal.config(state='readonly')
     manVal.place(x = 970, y = 535)
     
@@ -341,6 +341,7 @@ root.update()
 manVal_label = tk.Label(root, text = 'Manual\n  value: ', font = ('calibre', 10))
 manVal_label.place(x = 890, y = 525)
 manVal = tk.Entry(root, width = 7)
+manVal.insert(0, man)
 manVal.config(state='readonly')
 manVal.place(x = 970, y = 535)
 
