@@ -136,6 +136,10 @@ def auto_mode():
         auto = 0
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Manual mode set")
+        time.sleep(0.5)
     else:
         isPressed2 = False 
        
