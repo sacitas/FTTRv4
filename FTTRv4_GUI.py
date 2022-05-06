@@ -74,61 +74,6 @@ def savePlot():
     saved = tk.Label(root, text='File location:\n/home/pi/FTTRv4/plot', font = ('calibre', 10))
     saved.place(x=730, y=620)
     
-#-------Reads config file--------    
-with open ('pid.conf', 'r+') as g:
-    conf = g.readline().split(',')
-    SP = float(conf[0])
-    KP = float(conf[1])
-    TI = float(conf[2])
-    TD = float(conf[3])
-    man = float(conf[5])
-
-    
-on = tk.PhotoImage(file = "on.png")
-off = tk.PhotoImage(file = "off.png")
-
-root.update()
-MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
-MA.place(x = 930, y = 30)
-
-frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
-frame1.place(x=860, y=80)
-
-#-------Create input fields--------
-root.update()
-SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-SP_label.place(x = 894, y = 90)
-SP_ent = tk.Entry(root, width=7)
-SP_ent.insert(0, SP)
-SP_ent.place(x = 970, y = 90)
-
-root.update()
-kp_label = tk.Label(root, text = 'Proportional\n             gain:', font = ('calibre', 10))
-kp_label.place(x = 868, y = 130)
-kp_ent = tk.Entry(root, width=7)
-kp_ent.insert(0, KP)
-kp_ent.place(x = 970, y = 140)
-
-root.update()
-ti_label = tk.Label(root, text = 'Integral\n     time:', font = ('calibre', 10))
-ti_label.place(x = 897, y = 180)
-ti_ent = tk.Entry(root, width=7)
-ti_ent.insert(0, TI)
-ti_ent.place(x = 970, y = 190)
-
-root.update()
-td_label = tk.Label(root, text = 'Derivative\n         time:', font = ('calibre', 10))
-td_label.place(x = 881, y = 230)
-td_ent = tk.Entry(root, width=7)
-td_ent.insert(0, TD)
-td_ent.place(x = 970, y = 240)
-
-root.update()
-man_label = tk.Label(root, text = 'Manual\n   value:', font = ('calibre', 10))
-man_label.place(x = 900, y = 280)
-man_ent = tk.Entry(root, width=7)
-man_ent.insert(0, man)
-man_ent.place(x = 970, y = 290)
     
 #---Plot function to animate---
 def animate(i):
@@ -193,7 +138,6 @@ def animate(i):
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
-        auto = int(conf[4])
         man = float(conf[5])
     S_P_ = tk.Entry(root, width=7)
     S_P_.insert(0, SP)
@@ -271,7 +215,6 @@ def switch():
     with open ('pid.conf', 'w') as f:
         f.write('%s,%s,%s,%s,%s,%s'%(sp,kp,ti,td,auto,man))
  
-#----on/off image files for switch----
 
 
 #------Setting regulator values------
@@ -300,30 +243,75 @@ def SetRegVals():
     S_P_.place(x = 970, y = 495)
 
 
-
+#-------Reads config file--------    
+with open ('pid.conf', 'r+') as g:
+    conf = g.readline().split(',')
+    SP = float(conf[0])
+    KP = float(conf[1])
+    TI = float(conf[2])
+    TD = float(conf[3])
+    man = float(conf[5])
     
 #---------Create frames----------    
-
-
+frame1 = tk.Frame(root, width=230, height=290, highlightbackground='grey', highlightthickness=1)
+frame1.place(x=860, y=80)
 frame2 = tk.Frame(root, width=230, height=220, highlightbackground='grey', highlightthickness=1)
 frame2.place(x=860, y=400)    
 
-#-------Create buttons-------
+#----on/off image files for switch----    
+on = tk.PhotoImage(file = "on.png")
+off = tk.PhotoImage(file = "off.png")
 
+#-------Create buttons-------
+root.update()
+MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
+MA.place(x = 930, y = 30)
 
 root.update()
 S = tk.Button(root, text = "Save plot", font = ('calibri', 12), command = lambda: savePlot())
 S.place(x = 730, y = 590, width=120, heigh=31)
 
-
-
-#-------Creates button-------
 root.update()
 SV = tk.Button(root, text = "APPLY", font = ('calibri', 12), command = lambda: SetRegVals())
 SV.place(x = 970, y = 330, width=70, height=30)
 
-#-------Process value entry--------
+#-------Create input fields--------
+root.update()
+SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
+SP_label.place(x = 894, y = 90)
+SP_ent = tk.Entry(root, width=7)
+SP_ent.insert(0, SP)
+SP_ent.place(x = 970, y = 90)
 
+root.update()
+kp_label = tk.Label(root, text = 'Proportional\n             gain:', font = ('calibre', 10))
+kp_label.place(x = 868, y = 130)
+kp_ent = tk.Entry(root, width=7)
+kp_ent.insert(0, KP)
+kp_ent.place(x = 970, y = 140)
+
+root.update()
+ti_label = tk.Label(root, text = 'Integral\n     time:', font = ('calibre', 10))
+ti_label.place(x = 897, y = 180)
+ti_ent = tk.Entry(root, width=7)
+ti_ent.insert(0, TI)
+ti_ent.place(x = 970, y = 190)
+
+root.update()
+td_label = tk.Label(root, text = 'Derivative\n         time:', font = ('calibre', 10))
+td_label.place(x = 881, y = 230)
+td_ent = tk.Entry(root, width=7)
+td_ent.insert(0, TD)
+td_ent.place(x = 970, y = 240)
+
+root.update()
+man_label = tk.Label(root, text = 'Manual\n   value:', font = ('calibre', 10))
+man_label.place(x = 900, y = 280)
+man_ent = tk.Entry(root, width=7)
+man_ent.insert(0, man)
+man_ent.place(x = 970, y = 290)
+
+#-------Process value entry--------
 root.update()
 temp_label = tk.Label(root, text = 'Process\n     value: ', font = ('calibre', 10))
 temp_label.place(x = 890, y = 405)
@@ -331,6 +319,7 @@ temp = tk.Entry(root, width = 7)
 temp.config(state='readonly')
 temp.place(x = 970, y = 415)
 
+#-------Control value entry---------
 root.update()
 control_label = tk.Label(root, text = 'Control\n    value: ', font = ('calibre', 10))
 control_label.place(x = 893, y = 445)
@@ -347,7 +336,7 @@ S_P_.insert(0, SP)
 S_P_.config(state='readonly')
 S_P_.place(x = 970, y = 495)
 
-#-------Analog sensors entry--------
+#------Read-only manual value entry-------
 root.update()
 manVal_label = tk.Label(root, text = 'Manual\n    value: ', font = ('calibre', 10))
 manVal_label.place(x = 892, y = 525)
@@ -356,6 +345,7 @@ manVal.insert(0, man)
 manVal.config(state='readonly')
 manVal.place(x = 970, y = 535)
 
+#-------Analog sensor entry--------
 root.update()
 A1_label = tk.Label(root, text = 'Analog\nsensor 1:', font = ('calibre', 10))
 A1_label.place(x = 889, y = 565)
