@@ -287,7 +287,7 @@ kp_ent.place(x = 970, y = 140)
 
 root.update()
 ti_label = tk.Label(root, text = 'Integral\n     time:', font = ('calibre', 10))
-ti_label.place(x = 895, y = 180)
+ti_label.place(x = 897, y = 180)
 ti_ent = tk.Entry(root, width=7)
 ti_ent.insert(0, TI)
 ti_ent.place(x = 970, y = 190)
