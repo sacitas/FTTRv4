@@ -322,7 +322,7 @@ temp.place(x = 970, y = 415)
 
 root.update()
 control_label = tk.Label(root, text = 'Control\n    value: ', font = ('calibre', 10))
-control_label.place(x = 890, y = 445)
+control_label.place(x = 892, y = 445)
 control = tk.Entry(root, width = 7)
 control.config(state='readonly')
 control.place(x = 970, y = 455)
