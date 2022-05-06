@@ -36,8 +36,7 @@ ti = 0
 td = 0
 auto = 0
 man = 0
-is_on1 = True
-is_on2 = True
+is_on = False
 
 
 plot_folder = "plot/"
@@ -87,7 +86,8 @@ with open ('pid.conf', 'r+') as g:
     
 on = tk.PhotoImage(file = "on.png")
 off = tk.PhotoImage(file = "off.png")
-    
+
+root.update()
 MA = tk.Button(root, image = off, bd = 0, command = lambda: switch())
 MA.place(x = 930, y = 30)
 
@@ -212,9 +212,7 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
-   
-    
-    if auto == 0:
+    if not is_on and auto == 0:
         MA.config(image = off)
         SP_ent.config(state='readonly')
         kp_ent.config(state='readonly')
@@ -226,6 +224,7 @@ def animate(i):
         modeA_.config(state='readonly')
         modeA_.place(x = 940, y = 10)
         
+        is_on = True
     else:
         MA.config(image = on)
         SP_ent.config(state='normal')
@@ -238,6 +237,7 @@ def animate(i):
         modeM_.config(state='readonly')
         modeM_.place(x = 940, y = 10)
         
+        is_on = False
     
 
 #----------------Plot window in GUI----------------
@@ -250,8 +250,8 @@ ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 
 #----Auto/Manual switch function-----
 def switch():
-    global sp, kp, ti, td, auto, man, is_on1
-    if is_on1:
+    global sp, kp, ti, td, auto, man, is_on
+    if is_on:
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
