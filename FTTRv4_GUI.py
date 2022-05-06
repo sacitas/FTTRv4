@@ -162,13 +162,13 @@ def animate(i):
     
     if(auto == 1):
         modeI_ = tk.Entry(root, width = 15)
-        modeI_.insert(0, "Auto Mode Set")
+        modeI_.insert(0, "     Auto Mode Set")
         modeI_.config(state='readonly')
         modeI_.place(x = 905, y = 373)
         
     else:
         modeI_ = tk.Entry(root, width = 15)
-        modeI_.insert(0, "Manual Mode Set")
+        modeI_.insert(0, "   Manual Mode Set")
         modeI_.config(state='readonly')
         modeI_.place(x = 905, y = 373)
         
