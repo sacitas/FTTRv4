@@ -159,14 +159,18 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
-    modeI_ = tk.Entry(root, width = 20)
-    modeI_.config(state='readonly')
+    text = tk.StringVar()
+    modeI_ = tk.Label(root, textvariable=text)
     modeI_.place(x = 920, y = 373)
     
     if(auto == 1):
-        modeI_.insert(0, "Auto Mode Set")
+        text.set("")
+        time.sleep(0.1)
+        text.set("Auto Mode Set")
     else:
-        modeI_.insert(0, "Manual Mode Set")
+        text.set("")
+        time.sleep(0.1)
+        text.set("Manual Mode Set")
 
 #----------------Plot window in GUI----------------
 canvas = FigureCanvasTkAgg(plt.gcf(), master=root)
