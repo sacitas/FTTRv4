@@ -273,7 +273,7 @@ S.place(x = 730, y = 590, width=120, heigh=31)
 #-------Create input fields--------
 root.update()
 SP_label = tk.Label(root, text = 'Setpoint:', font = ('calibre', 10))
-SP_label.place(x = 893, y = 90)
+SP_label.place(x = 894, y = 90)
 SP_ent = tk.Entry(root, width=7)
 SP_ent.insert(0, SP)
 SP_ent.place(x = 970, y = 90)
