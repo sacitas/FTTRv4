@@ -157,7 +157,7 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
-    global is_on, auto
+    global is_on
     
     if is_on and auto == 0:
         MA.config(image = off)
