@@ -251,7 +251,7 @@ ani = FuncAnimation(plt.gcf(), animate, interval=1000)
 #----Auto/Manual switch function-----
 def switch():
     global sp, kp, ti, td, auto, man, is_on
-    if is_on:
+    if not is_on:
         auto = 0
         MA.config(image = off)
         SP_ent.config(state='readonly')
@@ -264,7 +264,7 @@ def switch():
         modeA_.config(state='readonly')
         modeA_.place(x = 940, y = 10)
         
-        is_on1 = False
+        is_on = True
     else:
         auto = 1
         MA.config(image = on)
@@ -278,7 +278,7 @@ def switch():
         modeM_.config(state='readonly')
         modeM_.place(x = 940, y = 10)
         
-        is_on1 = True
+        is_on = False
 
     #-----Gets values from input fields-----
     sp = SP_ent.get()
