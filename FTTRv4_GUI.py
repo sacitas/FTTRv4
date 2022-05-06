@@ -212,9 +212,9 @@ def animate(i):
     A1.config(state='readonly')
     A1.place(x = 970, y = 575)
     
-    global is_on2
+   
     
-    if is_on2 and auto == 0:
+    if auto == 0:
         MA.config(image = off)
         SP_ent.config(state='readonly')
         kp_ent.config(state='readonly')
@@ -226,7 +226,6 @@ def animate(i):
         modeA_.config(state='readonly')
         modeA_.place(x = 940, y = 10)
         
-        is_on2 = False
     else:
         MA.config(image = on)
         SP_ent.config(state='normal')
@@ -239,7 +238,6 @@ def animate(i):
         modeM_.config(state='readonly')
         modeM_.place(x = 940, y = 10)
         
-        is_on2 = True
     
 
 #----------------Plot window in GUI----------------
