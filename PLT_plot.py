@@ -27,7 +27,7 @@ def plot(filename):
 
     plt.xlabel('Time [hh:mm:ss]')
     plt.ylabel('Temperature' + '[' + degree_sign + 'C]', fontsize=10)
-    plt.title(str(x[0]), fontsize = 15)
+    plt.title(str(filename), fontsize = 15)
     plt.ylim([0, 150])
     plt.xticks(rotation=45, ha='right', fontsize=8)
     plt.xticks(np.arange(0, len(x), 80))
