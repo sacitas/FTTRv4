@@ -75,7 +75,7 @@ long_string = 'Like and subscribe or I will delete your Minecraft account'
 
 
 def readConfig():
-    global Kp, Ti, Td, auto, man
+    global SP, Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
         conf = g.readline().split(',')
         SP = float(conf[0])
@@ -84,25 +84,22 @@ def readConfig():
         Td = float(conf[3])
         auto = int(conf[4])
         man = float(conf[5])
-
+        
 
 def auto_mode():
     isPressed1 = False
     isPressed2 = False
-    global SP, Kp, Ti, Td, auto, man
     chan1 = AnalogIn(ads, ADS.P1)
     V1 = chan1.voltage
     sp = (V1*121)/3.3
     sp = str(round(sp, 0))
-    temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
     lcd.clear()
-    lcd.cursor_pos = (0, 0)
+    #lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
-    time.sleep(0.1)
-    lcd.cursor_pos = (1, 0)
-    lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
-    time.sleep(0.1)
+    time.sleep(0.05)
+    #lcd.cursor_pos = (1, 0)
+    #lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
+    #time.sleep(0.1)
     if(GPIO.event_detected(24)):
         isPressed1 = True
         GPIO.output(17, False)
@@ -126,6 +123,7 @@ def auto_mode():
         lcd.cursor_pos = (0, 0)
         lcd.write_string("SP set")
         time.sleep(0.5)
+        showAll_A()
         
     else:
         isPressed1 = False
@@ -147,7 +145,21 @@ def auto_mode():
         time.sleep(0.5)
     else:
         isPressed2 = False 
-       
+
+def showAll_A():
+    global SP, Kp, Ti, Td, auto, man
+    
+    while True:
+        temp0 = tmp.read_temp0()
+        temp0 = str(temp0)
+        readConfig()
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("SP: " + SP + " " + degree_sign + "C")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
+        time.sleep(0.5) 
+      
 def man_mode():
     isPressed = False 
     global SP, Kp, Ti, Td, auto, man
