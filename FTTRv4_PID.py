@@ -10,9 +10,9 @@ fieldnames = ["U_total"]
 # Parameters
 Ts = 1
 SP = 120
-K_p = 1.2
+K_p = 1.1
 T_i = 180
-T_d = 0
+T_d = 13.5
 N = 10
 
 T_t = 0
@@ -97,12 +97,6 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
     # Proportional control
     U_p = K_p * e[0]
     
-    # Clamp P-term
-    if(U_p>100):
-        U_p = 100
-    elif(U_p<0):
-        U_p = 0
-    
     # Integral control with anti-windup (back calculation)
     if T_i == 0:
         U_i[0] = 0
@@ -117,12 +111,6 @@ def FTTR_PID(Ts, SP, PV, K_p, T_i, T_d, T_t, Tr_gain, U_total):
         
     # Derivative control 
     U_d[0] = beta*U_d[1] - K_p*(T_d/Ts)*(1-beta)*(PV[0]-PV[1])
-    
-    # Clamp D-term
-    if(U_d[0]>100):
-        U_d[0] = 100
-    elif(U_d[0]<0):
-        U_d[0] = 0
     
     # Total control
     U_total = U_p + U_i[0] + U_d[0]
