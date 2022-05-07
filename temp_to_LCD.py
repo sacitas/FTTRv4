@@ -146,6 +146,11 @@ def auto_mode():
 
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
+    readConfig()
+    if(auto == 0):
+        showAll_M()
+    else:
+        pass
     isPressed3 = False
     while isPressed3 == False:
         readConfig()
@@ -226,6 +231,11 @@ def man_mode():
 
 def showAll_M():
     global SP, Kp, Ti, Td, auto, man
+    readConfig()
+    if(auto == 1):
+        showAll_A()
+    else:
+        pass 
     isPressed4 = False
     while isPressed4 == False:
         readConfig()
