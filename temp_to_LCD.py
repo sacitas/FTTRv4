@@ -162,6 +162,10 @@ def showAll_A():
             auto_mode()
         else:
             isPressed3 = False
+        if(auto == 0):
+            showAll_M()
+        else:
+            pass 
       
 def man_mode():
     isPressed1 = False
@@ -237,7 +241,10 @@ def showAll_M():
             man_mode()
         else:
             isPressed4 = False  
-    
+        if(auto == 1):
+            showAll_A()
+        else:
+            pass 
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
