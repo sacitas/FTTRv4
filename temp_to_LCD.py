@@ -147,12 +147,8 @@ def auto_mode():
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
     readConfig()
-    if(auto == 0):
-        showAll_M()
-    else:
-        pass
     isPressed3 = False
-    while isPressed3 == False:
+    while (isPressed3 == False and auto == 1):
         readConfig()
         GPIO.output(17, True)
         GPIO.output(27, False)
