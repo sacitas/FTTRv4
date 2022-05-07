@@ -37,8 +37,6 @@ GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 GPIO.setup(18, GPIO.OUT)
 
-
-
 # constants to initialise the LCD
 lcdmode = 'i2c'
 cols = 20
@@ -107,19 +105,19 @@ def auto_mode():
     if(GPIO.event_detected(24)):
         isPressed1 = True
         GPIO.output(17, False)
-        GPIO.output(18, False)
-        time.sleep(0.1)
+        time.sleep(0.2)
         GPIO.output(17, True)
-        GPIO.output(18, True)
-        time.sleep(0.1)
+        GPIO.output(18, GPIO.HIGH)
+        time.sleep(0.2)
         GPIO.output(17, False)
-        GPIO.output(18, False)
-        time.sleep(0.1)
+        GPIO.output(18, GPIO.LOW)
+        time.sleep(0.2)
         GPIO.output(17, True)
-        GPIO.output(18, True)
-        time.sleep(0.1)
+        GPIO.output(18, GPIO.HIGH)
+        time.sleep(0.2)
         GPIO.output(17, False)
-        GPIO.output(18, False)
+        GPIO.output(18, GPIO.LOW)
+        time.sleep(0.2)
         readConfig()
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(sp,Kp,Ti,Td,auto,man))
