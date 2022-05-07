@@ -88,11 +88,6 @@ def readConfig():
 
 def auto_mode():
     global SP, Kp, Ti, Td, auto, man
-    readConfig()
-    if(auto == 0):
-        showAll_M()
-    else:
-        pass
     isPressed1 = False
     isPressed2 = False
     chan1 = AnalogIn(ads, ADS.P1)
@@ -148,7 +143,7 @@ def showAll_A():
     global SP, Kp, Ti, Td, auto, man
     readConfig()
     isPressed3 = False
-    while (isPressed3 == False and auto == 1):
+    while (isPressed3 == False):
         readConfig()
         GPIO.output(17, True)
         GPIO.output(27, False)
@@ -171,11 +166,6 @@ def showAll_A():
       
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
-    readConfig()
-    if(auto == 1):
-        showAll_A()
-    else:
-        pass 
     isPressed1 = False
     isPressed2 = False
     chan1 = AnalogIn(ads, ADS.P1)
@@ -227,15 +217,9 @@ def man_mode():
 
 def showAll_M():
     global SP, Kp, Ti, Td, auto, man
-    readConfig()
-    if(auto == 1):
-        showAll_A()
-    else:
-        pass 
     isPressed4 = False
     while isPressed4 == False:
         readConfig()
-
         GPIO.output(27, True)
         GPIO.output(17, False)
         temp0 = tmp.read_temp0()
@@ -261,19 +245,17 @@ try:
     time.sleep(2)
     lcd.clear()
     while True:
-        with open ('pid.conf', 'r+') as g:
-            conf = g.readline().split(',')
-            auto = int(conf[4])
-
+        global SP, Kp, Ti, Td, auto, man
+        readConfig()
         if(auto == 1): 
             GPIO.output(17, True)
             GPIO.output(27, False)
-            auto_mode()
+            showAll_A()
             
         elif(auto == 0):
             GPIO.output(27, True)
             GPIO.output(17, False)  
-            man_mode()
+            showAll_M()
 
             
 except KeyboardInterrupt:
