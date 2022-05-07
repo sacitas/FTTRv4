@@ -92,7 +92,7 @@ def auto_mode():
     while(isPressed1 == False):
         chan1 = AnalogIn(ads, ADS.P1)
         V1 = chan1.voltage
-        sp = (V1*121)/3.3
+        sp = (V1*121.5)/3.3
         sp = str(round(sp, 0))
         lcd.clear()
         lcd.write_string("SP: " + sp + " " + degree_sign + "C")
@@ -176,7 +176,7 @@ def man_mode():
     while(isPressed3 == False):
         chan1 = AnalogIn(ads, ADS.P1)
         V1 = chan1.voltage
-        ManVal = (V1*100.5)/3.3
+        ManVal = (V1*101)/3.3
         ManVal = str(round(ManVal, 0))
         lcd.clear()
         lcd.write_string("ManVal: " + ManVal + "%")
