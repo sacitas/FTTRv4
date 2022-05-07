@@ -94,9 +94,9 @@ def auto_mode():
     V1 = chan1.voltage
     sp = (V1*121)/3.3
     sp = str(round(sp, 0))
-    temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
-    lcd.clear()
+    #temp0 = tmp.read_temp0()
+    #temp0 = str(temp0)
+    
     #lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
     #lcd.cursor_pos = (1, 0)
