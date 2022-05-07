@@ -204,6 +204,7 @@ try:
     lcd.clear()
     lcd.write_string("Welcome!")
     time.sleep(2)
+    lcd.clear()
     while True:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
