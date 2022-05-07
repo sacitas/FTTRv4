@@ -97,7 +97,7 @@ def auto_mode():
     #temp0 = tmp.read_temp0()
     #temp0 = str(temp0)
     
-    #lcd.cursor_pos = (0, 0)
+    lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
     #lcd.cursor_pos = (1, 0)
     #lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
@@ -204,7 +204,6 @@ try:
     lcd.clear()
     lcd.write_string("Welcome!")
     time.sleep(2)
-    lcd.clear()
     while True:
         with open ('pid.conf', 'r+') as g:
             conf = g.readline().split(',')
