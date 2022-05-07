@@ -99,7 +99,7 @@ def auto_mode():
     lcd.clear()
     #lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
-    time.sleep(0.05)
+    time.sleep(0.1)
     #lcd.cursor_pos = (1, 0)
     #lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
     if(GPIO.event_detected(24)):
