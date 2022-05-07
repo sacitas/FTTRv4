@@ -95,27 +95,19 @@ def auto_mode():
     sp = (V1*121)/3.3
     sp = str(round(sp, 0))
     lcd.clear()
-    #lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
-    time.sleep(0.05)
-    #lcd.cursor_pos = (1, 0)
-    #lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
-    #time.sleep(0.1)
+    time.sleep(0.1)
     if(GPIO.event_detected(24)):
         isPressed1 = True
         GPIO.output(17, False)
         time.sleep(0.2)
         GPIO.output(17, True)
-        GPIO.output(12, GPIO.HIGH)
         time.sleep(0.2)
         GPIO.output(17, False)
-        GPIO.output(12, GPIO.LOW)
         time.sleep(0.2)
         GPIO.output(17, True)
-        GPIO.output(12, GPIO.HIGH)
         time.sleep(0.2)
         GPIO.output(17, False)
-        GPIO.output(12, GPIO.LOW)
         time.sleep(0.2)
         readConfig()
         with open ('pid.conf', 'w') as f:
@@ -151,6 +143,8 @@ def showAll_A():
     global SP, Kp, Ti, Td, auto, man
     isPressed3 = False
     while isPressed3 == False:
+        GPIO.output(17, True)
+        GPIO.output(27, False)
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
         readConfig()
@@ -170,41 +164,37 @@ def showAll_A():
             isPressed3 = False
       
 def man_mode():
-    isPressed = False 
+    isPressed1 = False
+    isPressed2 = False
     global SP, Kp, Ti, Td, auto, man
-    #temp0 = tmp.read_temp0()
-    #temp0 = str(temp0)
     chan1 = AnalogIn(ads, ADS.P1)
     V1 = chan1.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
     lcd.clear()
-    lcd.cursor_pos = (0, 0)
     lcd.write_string("ManVal: " + ManVal + "%")
-    #lcd.cursor_pos = (1, 0)
-    #lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
-
+    time.sleep(0.1)
     if(GPIO.event_detected(24)):
-        if not isPressed:
-            isPressed = True
-            GPIO.output(27, False)
-            time.sleep(0.1)
-            GPIO.output(27, True)
-            time.sleep(0.1)
-            GPIO.output(27, False)
-            time.sleep(0.1)
-            GPIO.output(27, True)
-            time.sleep(0.1)
-            GPIO.output(27, False)
-            readConfig()
-            with open ('pid.conf', 'w') as f:
-                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,ManVal))
-            lcd.clear()
-            lcd.cursor_pos = (0, 0)
-            lcd.write_string("Manual value set")
-            time.sleep(0.5)
+        isPressed1 = True
+        GPIO.output(27, False)
+        time.sleep(0.1)
+        GPIO.output(27, True)
+        time.sleep(0.1)
+        GPIO.output(27, False)
+        time.sleep(0.1)
+        GPIO.output(27, True)
+        time.sleep(0.1)
+        GPIO.output(27, False)
+        readConfig()
+        with open ('pid.conf', 'w') as f:
+            f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,ManVal))
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Manual value set")
+        time.sleep(0.5)
+        showAll_M()
     else:
-        isPressed = False
+        isPressed1 = False
     
     if(GPIO.event_detected(23)):
         isPressed2 = True
@@ -222,7 +212,31 @@ def man_mode():
         lcd.write_string("Auto mode set")
         time.sleep(0.5)
     else:
-        isPressed2 = False 
+        isPressed2 = False
+
+def showAll_M():
+    global SP, Kp, Ti, Td, auto, man
+    isPressed4 = False
+    while isPressed4 == False:
+        GPIO.output(27, True)
+        GPIO.output(17, False)
+        temp0 = tmp.read_temp0()
+        temp0 = str(temp0)
+        readConfig()
+        man = str(man)
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("ManVal: " + man + "%")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
+        time.sleep(0.5)
+        
+        if(GPIO.event_detected(23)):
+            isPressed4 = True
+            time.sleep(0.5)
+            man_mode()
+        else:
+            isPressed4 = False  
     
 try:
     lcd.clear()
