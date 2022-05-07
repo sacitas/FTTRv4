@@ -16,10 +16,10 @@ I2C = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(I2C)
 ads.mode = Mode.CONTINUOUS
 
-redLed = 27
-buzzer = 12
-btn1 = 23
-GPIO.setmode(GPIO.BCM)
+redLed = 13
+buzzer = 32
+btn1 = 16
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(redLed, GPIO.OUT)
 GPIO.setup(buzzer, GPIO.OUT)
 GPIO.setup(btn1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
