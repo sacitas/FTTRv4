@@ -169,7 +169,6 @@ def showAll_A():
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
     isPressed1 = False
-    isPressed2 = False
     while(isPressed1 == False):
         chan1 = AnalogIn(ads, ADS.P1)
         V1 = chan1.voltage
@@ -203,6 +202,7 @@ def man_mode():
 
 def showAll_M():
     global SP, Kp, Ti, Td, auto, man
+    isPressed2 = False
     isPressed4 = False
     while isPressed4 == False:
         readConfig()
