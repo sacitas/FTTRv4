@@ -89,7 +89,6 @@ def readConfig():
 def auto_mode():
     global SP, Kp, Ti, Td, auto, man
     isPressed1 = False
-    isPressed2 = False
     while(isPressed1 == False):
         chan1 = AnalogIn(ads, ADS.P1)
         V1 = chan1.voltage
@@ -122,27 +121,11 @@ def auto_mode():
         else:
             isPressed1 = False
     
-        if(GPIO.event_detected(23)):
-            isPressed2 = True
-            GPIO.output(17, False)
-            time.sleep(0.1)
-            GPIO.output(17, True)
-            time.sleep(0.1)
-            GPIO.output(17, False)
-            readConfig()
-            auto = 0
-            with open ('pid.conf', 'w') as f:
-                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-            lcd.clear()
-            lcd.cursor_pos = (0, 0)
-            lcd.write_string("Manual mode set")
-            time.sleep(0.5)
-        else:
-            isPressed2 = False 
 
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
     readConfig()
+    isPressed2 = False
     isPressed3 = False
     while (isPressed3 == False):
         readConfig()
@@ -164,6 +147,24 @@ def showAll_A():
             auto_mode()
         else:
             isPressed3 = False
+        
+        if(GPIO.event_detected(23)):
+            isPressed2 = True
+            GPIO.output(17, False)
+            time.sleep(0.1)
+            GPIO.output(17, True)
+            time.sleep(0.1)
+            GPIO.output(17, False)
+            readConfig()
+            auto = 0
+            with open ('pid.conf', 'w') as f:
+                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("Manual mode set")
+            time.sleep(0.5)
+        else:
+            isPressed2 = False 
       
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
@@ -198,24 +199,7 @@ def man_mode():
             showAll_M()
         else:
             isPressed1 = False
-    
-        if(GPIO.event_detected(23)):
-            isPressed2 = True
-            GPIO.output(27, False)
-            time.sleep(0.2)
-            GPIO.output(27, True)
-            time.sleep(0.2)
-            GPIO.output(27, False)
-            readConfig()
-            auto = 1
-            with open ('pid.conf', 'w') as f:
-                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
-            lcd.clear()
-            lcd.cursor_pos = (0, 0)
-            lcd.write_string("Auto mode set")
-            time.sleep(0.5)
-        else:
-            isPressed2 = False
+  
 
 def showAll_M():
     global SP, Kp, Ti, Td, auto, man
@@ -241,6 +225,23 @@ def showAll_M():
         else:
             isPressed4 = False  
           
+        if(GPIO.event_detected(23)):
+            isPressed2 = True
+            GPIO.output(27, False)
+            time.sleep(0.2)
+            GPIO.output(27, True)
+            time.sleep(0.2)
+            GPIO.output(27, False)
+            readConfig()
+            auto = 1
+            with open ('pid.conf', 'w') as f:
+                f.write('%s,%s,%s,%s,%s,%s'%(SP,Kp,Ti,Td,auto,man))
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("Auto mode set")
+            time.sleep(0.5)
+        else:
+            isPressed2 = False  
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
