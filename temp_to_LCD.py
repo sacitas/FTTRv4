@@ -153,6 +153,11 @@ def showAll_A():
         
         if(GPIO.event_detected(24)):
             isPressed2 = True
+            GPIO.output(17, False)
+            GPIO.output(27, False)
+            time.sleep(0.2)
+            GPIO.output(27, True)
+            time.sleep(0.2)
             GPIO.output(27, False)
             time.sleep(0.2)
             GPIO.output(27, True)
@@ -235,6 +240,11 @@ def showAll_M():
           
         if(GPIO.event_detected(24)):
             isPressed5 = True
+            GPIO.output(27, False)
+            GPIO.output(17, False)
+            time.sleep(0.2)
+            GPIO.output(17, True)
+            time.sleep(0.2)
             GPIO.output(17, False)
             time.sleep(0.2)
             GPIO.output(17, True)
