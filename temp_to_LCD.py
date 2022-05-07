@@ -96,7 +96,7 @@ def auto_mode():
     sp = str(round(sp, 0))
     #temp0 = tmp.read_temp0()
     #temp0 = str(temp0)
-    
+    lcd.clear()
     lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
     #lcd.cursor_pos = (1, 0)
