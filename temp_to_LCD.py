@@ -245,7 +245,6 @@ try:
     time.sleep(2)
     lcd.clear()
     while True:
-        global SP, Kp, Ti, Td, auto, man
         readConfig()
         if(auto == 1): 
             GPIO.output(17, True)
