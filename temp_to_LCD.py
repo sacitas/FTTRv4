@@ -145,9 +145,13 @@ def showAll_A():
     while isPressed3 == False:
         GPIO.output(17, True)
         GPIO.output(27, False)
+        readConfig()
+        if(auto == 0):
+            showAll_M()
+        else:
+            pass 
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
-        readConfig()
         SP = str(SP)
         lcd.clear()
         lcd.cursor_pos = (0, 0)
@@ -162,10 +166,6 @@ def showAll_A():
             auto_mode()
         else:
             isPressed3 = False
-        if(auto == 0):
-            showAll_M()
-        else:
-            pass 
       
 def man_mode():
     isPressed1 = False
@@ -224,9 +224,13 @@ def showAll_M():
     while isPressed4 == False:
         GPIO.output(27, True)
         GPIO.output(17, False)
+        readConfig()
+        if(auto == 1):
+            showAll_A()
+        else:
+            pass 
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
-        readConfig()
         man = str(man)
         lcd.clear()
         lcd.cursor_pos = (0, 0)
@@ -241,10 +245,7 @@ def showAll_M():
             man_mode()
         else:
             isPressed4 = False  
-        if(auto == 1):
-            showAll_A()
-        else:
-            pass 
+          
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
