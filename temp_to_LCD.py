@@ -88,6 +88,11 @@ def readConfig():
 
 def auto_mode():
     global SP, Kp, Ti, Td, auto, man
+    readConfig()
+    if(auto == 0):
+        showAll_M()
+    else:
+        pass
     isPressed1 = False
     isPressed2 = False
     chan1 = AnalogIn(ads, ADS.P1)
@@ -144,10 +149,6 @@ def showAll_A():
     isPressed3 = False
     while isPressed3 == False:
         readConfig()
-        if(auto == 0):
-            showAll_M()
-        else:
-            pass 
         GPIO.output(17, True)
         GPIO.output(27, False)
         temp0 = tmp.read_temp0()
@@ -168,6 +169,11 @@ def showAll_A():
             isPressed3 = False
       
 def man_mode():
+    readConfig()
+    if(auto == 1):
+        showAll_A()
+    else:
+        pass 
     isPressed1 = False
     isPressed2 = False
     global SP, Kp, Ti, Td, auto, man
@@ -223,10 +229,7 @@ def showAll_M():
     isPressed4 = False
     while isPressed4 == False:
         readConfig()
-        if(auto == 1):
-            showAll_A()
-        else:
-            pass 
+
         GPIO.output(27, True)
         GPIO.output(17, False)
         temp0 = tmp.read_temp0()
