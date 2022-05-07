@@ -163,6 +163,7 @@ def showAll_A():
             lcd.cursor_pos = (0, 0)
             lcd.write_string("Manual mode set")
             time.sleep(0.5)
+            showAll_M()
         else:
             isPressed2 = False 
       
@@ -240,6 +241,7 @@ def showAll_M():
             lcd.cursor_pos = (0, 0)
             lcd.write_string("Auto mode set")
             time.sleep(0.5)
+            showAll_A()
         else:
             isPressed5 = False  
 try:
