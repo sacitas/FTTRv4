@@ -14,7 +14,7 @@ from adafruit_ads1x15.ads1115 import Mode
 
 I2C = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(I2C)
-#ads.mode = Mode.CONTINUOUS
+ads.mode = Mode.CONTINUOUS
 
 redLed = 27
 buzzer = 12
@@ -50,8 +50,8 @@ try:
     time.sleep(2)
     while True:
         isPressed = False
-        chan0 = AnalogIn(ads, ADS.P2)
-        V1 = chan0.voltage
+        chan1 = AnalogIn(ads, ADS.P1)
+        V1 = chan1.voltage
         man = (V1*100.5)/3.3
         man = str(round(man, 0))
         lcd.clear()
@@ -64,7 +64,7 @@ try:
             GPIO.output(buzzer, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(redLed, False)
-            GPIO.output(buzzer, GPIO.HIGH)
+            GPIO.output(buzzer, GPIO.LOW)
         else:
             isPressed = False  
 except KeyboardInterrupt:
@@ -72,3 +72,4 @@ except KeyboardInterrupt:
     lcd.write_string("Goodbye!")
     time.sleep(2)
     lcd.close(clear = True)
+    GPIO.cleanup()
