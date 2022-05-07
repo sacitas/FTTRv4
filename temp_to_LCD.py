@@ -149,6 +149,7 @@ def auto_mode():
 
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
+    isPressed2 = False
     while True:
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
@@ -159,7 +160,14 @@ def showAll_A():
         lcd.write_string("SP: " + SP + " " + degree_sign + "C")
         lcd.cursor_pos = (1, 0)
         lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")
-        time.sleep(0.5) 
+        time.sleep(0.5)
+        
+        if(GPIO.event_detected(23)):
+            isPressed2 = True
+            time.sleep(0.5)
+            auto_mode()
+        else:
+            isPressed2 = False 
       
 def man_mode():
     isPressed = False 
