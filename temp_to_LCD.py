@@ -150,7 +150,7 @@ def auto_mode():
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
     isPressed3 = False
-    while True:
+    while isPressed3 == False:
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
         readConfig()
@@ -167,7 +167,7 @@ def showAll_A():
             time.sleep(0.5)
             auto_mode()
         else:
-            isPressed3 = False 
+            isPressed3 = False
       
 def man_mode():
     isPressed = False 
