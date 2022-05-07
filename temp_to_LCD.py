@@ -149,7 +149,7 @@ def auto_mode():
 
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
-    
+    SP = str(SP)
     while True:
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
