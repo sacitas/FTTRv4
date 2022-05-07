@@ -100,15 +100,15 @@ def auto_mode():
         if(GPIO.event_detected(24)):
             isPressed1 = True
             GPIO.output(17, False)
-            time.sleep(0.2)
+            time.sleep(0.1)
             GPIO.output(17, True)
-            time.sleep(0.2)
+            time.sleep(0.1)
             GPIO.output(17, False)
-            time.sleep(0.2)
+            time.sleep(0.1)
             GPIO.output(17, True)
-            time.sleep(0.2)
+            time.sleep(0.1)
             GPIO.output(17, False)
-            time.sleep(0.2)
+            time.sleep(0.1)
             readConfig()
             with open ('pid.conf', 'w') as f:
                 f.write('%s,%s,%s,%s,%s,%s'%(sp,Kp,Ti,Td,auto,man))
@@ -153,11 +153,11 @@ def showAll_A():
         
         if(GPIO.event_detected(24)):
             isPressed2 = True
-            GPIO.output(17, False)
-            time.sleep(0.1)
-            GPIO.output(17, True)
-            time.sleep(0.1)
-            GPIO.output(17, False)
+            GPIO.output(27, False)
+            time.sleep(0.2)
+            GPIO.output(27, True)
+            time.sleep(0.2)
+            GPIO.output(27, False)
             readConfig()
             auto = 0
             with open ('pid.conf', 'w') as f:
@@ -235,11 +235,11 @@ def showAll_M():
           
         if(GPIO.event_detected(24)):
             isPressed5 = True
-            GPIO.output(27, False)
+            GPIO.output(17, False)
             time.sleep(0.2)
-            GPIO.output(27, True)
+            GPIO.output(17, True)
             time.sleep(0.2)
-            GPIO.output(27, False)
+            GPIO.output(17, False)
             readConfig()
             auto = 1
             with open ('pid.conf', 'w') as f:
