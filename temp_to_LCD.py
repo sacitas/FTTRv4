@@ -169,6 +169,7 @@ def showAll_A():
             isPressed3 = False
       
 def man_mode():
+    global SP, Kp, Ti, Td, auto, man
     readConfig()
     if(auto == 1):
         showAll_A()
@@ -176,7 +177,6 @@ def man_mode():
         pass 
     isPressed1 = False
     isPressed2 = False
-    global SP, Kp, Ti, Td, auto, man
     chan1 = AnalogIn(ads, ADS.P1)
     V1 = chan1.voltage
     ManVal = (V1*100.5)/3.3
