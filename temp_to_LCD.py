@@ -35,6 +35,7 @@ GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.add_event_detect(24, GPIO.RISING, bouncetime=150)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
 
 
 
@@ -106,14 +107,19 @@ def auto_mode():
     if(GPIO.event_detected(24)):
         isPressed1 = True
         GPIO.output(17, False)
+        GPIO.putput(18, GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(17, True)
+        GPIO.putput(18, GPIO.HIGH)
         time.sleep(0.1)
         GPIO.output(17, False)
+        GPIO.putput(18, GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(17, True)
+        GPIO.putput(18, GPIO.HIGH)
         time.sleep(0.1)
         GPIO.output(17, False)
+        GPIO.putput(18, GPIO.LOW)
         readConfig()
         with open ('pid.conf', 'w') as f:
             f.write('%s,%s,%s,%s,%s,%s'%(sp,Kp,Ti,Td,auto,man))
