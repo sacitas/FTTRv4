@@ -176,7 +176,7 @@ def man_mode():
     while(isPressed3 == False):
         chan1 = AnalogIn(ads, ADS.P1)
         V1 = chan1.voltage
-        ManVal = (V1*101)/3.3
+        ManVal = (V1*101.5)/3.3
         ManVal = str(round(ManVal, 0))
         lcd.clear()
         lcd.write_string("ManVal: " + ManVal + "%")
