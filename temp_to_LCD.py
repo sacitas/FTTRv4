@@ -87,6 +87,7 @@ def readConfig():
         
 
 def auto_mode():
+    global SP, Kp, Ti, Td, auto, man
     isPressed1 = False
     isPressed2 = False
     chan1 = AnalogIn(ads, ADS.P1)
