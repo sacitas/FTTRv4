@@ -91,14 +91,14 @@ def auto_mode():
     isPressed1 = False
     isPressed2 = False
     global SP, Kp, Ti, Td, auto, man
-    #temp0 = tmp.read_temp0()
-    #temp0 = str(temp0)
-    
+    temp0 = tmp.read_temp0()
+    temp0 = str(temp0)
     V1 = chan1.voltage
     sp = (V1*121)/3.3
     sp = str(round(sp, 0))
     lcd.clear()
-    lcd.cursor_pos = (0, 0)
+    time.sleep(0.1)
+    #lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
     #lcd.cursor_pos = (1, 0)
     #lcd.write_string("PV: " + temp0 + " " + degree_sign + "C")  
@@ -150,8 +150,8 @@ def auto_mode():
 def man_mode():
     isPressed = False 
     global SP, Kp, Ti, Td, auto, man
-    temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
+    #temp0 = tmp.read_temp0()
+    #temp0 = str(temp0)
     V1 = chan1.voltage
     ManVal = (V1*100.5)/3.3
     ManVal = str(round(ManVal, 0))
