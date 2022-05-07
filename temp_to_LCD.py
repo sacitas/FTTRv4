@@ -35,7 +35,7 @@ GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.add_event_detect(24, GPIO.RISING, bouncetime=150)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
 
 # constants to initialise the LCD
 lcdmode = 'i2c'
