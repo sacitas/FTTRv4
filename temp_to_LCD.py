@@ -125,9 +125,9 @@ def auto_mode():
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
     readConfig()
+    isPressed1 = False
     isPressed2 = False
-    isPressed3 = False
-    while (isPressed3 == False):
+    while (isPressed1 == False):
         readConfig()
         GPIO.output(17, True)
         GPIO.output(27, False)
@@ -142,13 +142,13 @@ def showAll_A():
         time.sleep(0.5)
         
         if(GPIO.event_detected(23)):
-            isPressed3 = True
+            isPressed1 = True
             time.sleep(0.5)
             auto_mode()
         else:
-            isPressed3 = False
+            isPressed1 = False
         
-        if(GPIO.event_detected(23)):
+        if(GPIO.event_detected(24)):
             isPressed2 = True
             GPIO.output(17, False)
             time.sleep(0.1)
@@ -168,8 +168,8 @@ def showAll_A():
       
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
-    isPressed1 = False
-    while(isPressed1 == False):
+    isPressed3 = False
+    while(isPressed3 == False):
         chan1 = AnalogIn(ads, ADS.P1)
         V1 = chan1.voltage
         ManVal = (V1*100.5)/3.3
@@ -178,7 +178,7 @@ def man_mode():
         lcd.write_string("ManVal: " + ManVal + "%")
         time.sleep(0.1)
         if(GPIO.event_detected(24)):
-            isPressed1 = True
+            isPressed3 = True
             GPIO.output(27, False)
             time.sleep(0.1)
             GPIO.output(27, True)
@@ -197,13 +197,13 @@ def man_mode():
             time.sleep(0.5)
             showAll_M()
         else:
-            isPressed1 = False
+            isPressed3 = False
   
 
 def showAll_M():
     global SP, Kp, Ti, Td, auto, man
-    isPressed2 = False
     isPressed4 = False
+    isPressed5 = False
     while isPressed4 == False:
         readConfig()
         GPIO.output(27, True)
@@ -225,8 +225,8 @@ def showAll_M():
         else:
             isPressed4 = False  
           
-        if(GPIO.event_detected(23)):
-            isPressed2 = True
+        if(GPIO.event_detected(24)):
+            isPressed5 = True
             GPIO.output(27, False)
             time.sleep(0.2)
             GPIO.output(27, True)
@@ -241,7 +241,7 @@ def showAll_M():
             lcd.write_string("Auto mode set")
             time.sleep(0.5)
         else:
-            isPressed2 = False  
+            isPressed5 = False  
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
