@@ -14,7 +14,6 @@ from adafruit_ads1x15.ads1115 import Mode
 I2C = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(I2C)
 ads.mode = Mode.CONTINUOUS
-chan1 = AnalogIn(ads, ADS.P1)
 
 SP = 0
 Kp = 0
@@ -91,13 +90,13 @@ def auto_mode():
     isPressed1 = False
     isPressed2 = False
     global SP, Kp, Ti, Td, auto, man
-    temp0 = tmp.read_temp0()
-    temp0 = str(temp0)
+    chan1 = AnalogIn(ads, ADS.P1)
     V1 = chan1.voltage
     sp = (V1*121)/3.3
     sp = str(round(sp, 0))
+    temp0 = tmp.read_temp0()
+    temp0 = str(temp0)
     lcd.clear()
-    time.sleep(0.1)
     #lcd.cursor_pos = (0, 0)
     lcd.write_string("SP: " + sp + " " + degree_sign + "C")
     #lcd.cursor_pos = (1, 0)
