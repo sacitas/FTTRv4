@@ -142,14 +142,14 @@ def auto_mode():
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
     isPressed3 = False
+    readConfig()
+    if(auto == 0):
+        showAll_M()
+    else:
+        pass 
     while isPressed3 == False:
         GPIO.output(17, True)
         GPIO.output(27, False)
-        readConfig()
-        if(auto == 0):
-            showAll_M()
-        else:
-            pass 
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
         SP = str(SP)
@@ -221,14 +221,14 @@ def man_mode():
 def showAll_M():
     global SP, Kp, Ti, Td, auto, man
     isPressed4 = False
+    readConfig()
+    if(auto == 1):
+        showAll_A()
+    else:
+        pass 
     while isPressed4 == False:
         GPIO.output(27, True)
         GPIO.output(17, False)
-        readConfig()
-        if(auto == 1):
-            showAll_A()
-        else:
-            pass 
         temp0 = tmp.read_temp0()
         temp0 = str(temp0)
         man = str(man)
