@@ -90,13 +90,14 @@ def auto_mode():
     global SP, Kp, Ti, Td, auto, man
     isPressed1 = False
     isPressed2 = False
-    chan1 = AnalogIn(ads, ADS.P1)
-    V1 = chan1.voltage
-    sp = (V1*121)/3.3
-    sp = str(round(sp, 0))
-    lcd.clear()
-    lcd.write_string("SP: " + sp + " " + degree_sign + "C")
-    time.sleep(0.1)
+    while(isPressed1 == False):
+        chan1 = AnalogIn(ads, ADS.P1)
+        V1 = chan1.voltage
+        sp = (V1*121)/3.3
+        sp = str(round(sp, 0))
+        lcd.clear()
+        lcd.write_string("SP: " + sp + " " + degree_sign + "C")
+        time.sleep(0.1)
     if(GPIO.event_detected(24)):
         isPressed1 = True
         GPIO.output(17, False)
@@ -168,13 +169,14 @@ def man_mode():
     global SP, Kp, Ti, Td, auto, man
     isPressed1 = False
     isPressed2 = False
-    chan1 = AnalogIn(ads, ADS.P1)
-    V1 = chan1.voltage
-    ManVal = (V1*100.5)/3.3
-    ManVal = str(round(ManVal, 0))
-    lcd.clear()
-    lcd.write_string("ManVal: " + ManVal + "%")
-    time.sleep(0.1)
+    while(isPressed1 == False):
+        chan1 = AnalogIn(ads, ADS.P1)
+        V1 = chan1.voltage
+        ManVal = (V1*100.5)/3.3
+        ManVal = str(round(ManVal, 0))
+        lcd.clear()
+        lcd.write_string("ManVal: " + ManVal + "%")
+        time.sleep(0.1)
     if(GPIO.event_detected(24)):
         isPressed1 = True
         GPIO.output(27, False)
