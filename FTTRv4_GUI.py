@@ -107,16 +107,17 @@ def animate(i):
 
     
     #--------ADC reading---------
-    chan0 = AnalogIn(ads, ADS.P0)
-    chan1 = AnalogIn(ads, ADS.P1)
-    S1 = chan0.value
-    V1 = chan0.voltage
-    atemp0 = V1 / (11/1000)
-    atemp0 = float(round(atemp0, 1))
-    S2 = chan1.value
-    V2 = chan1.voltage
-    atemp1 = V2 / (11/1000)
-    atemp1 = float(round(atemp1, 1))
+    #--Optional for analog temp reading--
+    #chan0 = AnalogIn(ads, ADS.P0)
+    #chan1 = AnalogIn(ads, ADS.P1)
+    #S1 = chan0.value
+    #V1 = chan0.voltage
+    #atemp0 = V1 / (11/1000)
+    #atemp0 = float(round(atemp0, 1))
+    #S2 = chan1.value
+    #V2 = chan1.voltage
+    #atemp1 = V2 / (11/1000)
+    #atemp1 = float(round(atemp1, 1))
 
     
     #----Read-only entry for control value updating----
