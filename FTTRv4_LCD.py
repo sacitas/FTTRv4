@@ -1,20 +1,24 @@
+import time
 import RPi.GPIO as GPIO
 from RPLCD import i2c
-import time
 
-import FTTRv4_temp as tmp
-
-import adafruit_ads1x15.ads1115 as ADS
+#---ADC-libraries---
 import board
 import busio
+import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_ads1x15.ads1115 import Mode
 
+#----Import _temp code----
+import FTTRv4_temp as tmp
 
+
+#-----------Initialize I2C-----------
 I2C = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(I2C)
 ads.mode = Mode.CONTINUOUS
 
+#--Initial values--
 SP = 0
 Kp = 0
 Ti = 0
@@ -23,9 +27,10 @@ auto = 0
 man = 0
 ManVal = 0
 
+#---------Degree symbol---------
 degree_sign = u'\N{DEGREE SIGN}'
  
-
+#---Setup buttons and leds---
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.add_event_detect(23, GPIO.RISING, bouncetime=150)
@@ -35,34 +40,35 @@ GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.OUT)
 GPIO.setup(12, GPIO.OUT)
 
-# constants to initialise the LCD
+#---Constants to initialize LCD---
 lcdmode = 'i2c'
 cols = 20
 rows = 4
 charmap = 'A00'
 i2c_expander = 'PCF8574'
 
-# Generally 27 is the address;Find yours using: i2cdetect -y 1 
+#--LCD I2C address and port-- 
 address = 0x27 
-port = 1 # 0 on an older Raspberry Pi
+port = 1
 
-
-# Initialise the LCD
+#--------Initialize the LCD--------
 lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap,
                   cols=cols, rows=rows)
 
+#---The first line on LCD in long string-mode---
 framebuffer = [
     'Orbit NTNU',
     '',
 ]
 
+#------Function for writing long string to LCD------
 def write_to_lcd(lcd, framebuffer, num_cols):
     lcd.home()
     for row in framebuffer:
         lcd.write_string(row.ljust(num_cols)[:num_cols])
         lcd.write_string('\r\n')
 
-
+#-------Function for looping string on LCD---------
 def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.1):
     padding = ' ' * num_cols
     s = padding + string + padding
@@ -71,9 +77,10 @@ def loop_string(string, lcd, framebuffer, row, num_cols, delay=0.1):
         write_to_lcd(lcd, framebuffer, num_cols)
         time.sleep(delay)
 
+#---The long string---        
 long_string = 'Like and subscribe or I will delete your Minecraft account'
 
-
+#-----Reads the config file-----
 def readConfig():
     global SP, Kp, Ti, Td, auto, man
     with open ('pid.conf', 'r+') as g:
@@ -85,7 +92,7 @@ def readConfig():
         auto = int(conf[4])
         man = float(conf[5])
         
-
+#---Auto mode---
 def auto_mode():
     global SP, Kp, Ti, Td, auto, man
     isPressed1 = False
@@ -121,7 +128,7 @@ def auto_mode():
         else:
             isPressed1 = False
     
-
+#---Read-only auto mode---
 def showAll_A():
     global SP, Kp, Ti, Td, auto, man
     isPressed1 = False
@@ -174,7 +181,8 @@ def showAll_A():
             showAll_M()
         else:
             isPressed2 = False 
-      
+    
+#---Manual mode---    
 def man_mode():
     global SP, Kp, Ti, Td, auto, man
     isPressed3 = False
@@ -208,7 +216,7 @@ def man_mode():
         else:
             isPressed3 = False
   
-
+#---Read-only manual mode---
 def showAll_M():
     global SP, Kp, Ti, Td, auto, man
     isPressed4 = False
@@ -261,6 +269,8 @@ def showAll_M():
             showAll_A()
         else:
             isPressed5 = False  
+
+#---Try/except to run from start---          
 try:
     lcd.clear()
     lcd.write_string("Welcome!")
@@ -277,12 +287,11 @@ try:
             GPIO.output(27, True)
             GPIO.output(17, False)  
             showAll_M()
-
             
 except KeyboardInterrupt:
-    lcd.clear()
-#   loop_string(long_string, lcd, framebuffer, 1, 16)
-    lcd.write_string("Goodbye")
+    lcd.clear()  
+#   loop_string(long_string, lcd, framebuffer, 1, 16)    #Uncomment for long string
+    lcd.write_string("Goodbye")                          #Comment for long string
     time.sleep(2)
     lcd.close(clear = True)
     GPIO.cleanup()
