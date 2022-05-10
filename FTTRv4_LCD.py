@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 from RPLCD import i2c
 import time
-import pandas as pd
+
 import FTTRv4_temp as tmp
 
 import adafruit_ads1x15.ads1115 as ADS
