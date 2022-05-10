@@ -1,15 +1,20 @@
+#------Import _config------
 import PLT_config as config
+
+#----------Libraries-----------
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+#--------Degree symbol---------
 degree_sign = u'\N{DEGREE SIGN}'
 
-
+#--Plot function--
 def plot(filename):
-
+    
     path_to_file = 'temp/' + filename + '.csv'
-
+    
+    #--------Reads temp file--------
     data = pd.read_csv(path_to_file)
     x = data["x"]
     temp0 = data["dtemp0"]
@@ -17,14 +22,15 @@ def plot(filename):
     temp2 = data["dtemp2"]
     temp3 = data["dtemp3"]
     temp4 = data["dtemp4"]
-
     
+    #----Plot all temperature readings----
     plt.plot(x, temp0, label = config.sensors['sensor_0'], linewidth = 1.5, color = '#4876FF')
     plt.plot(x, temp1, label = config.sensors['sensor_1'], linewidth = 1.5, color = '#EE0000')
     plt.plot(x, temp2, label = config.sensors['sensor_2'], linewidth = 1.5, color = 'orange')
     plt.plot(x, temp3, label = config.sensors['sensor_3'], linewidth = 1.5, color = '#008B45')
     plt.plot(x, temp4, label = config.sensors['sensor_4'], linewidth = 1.5, color = '#708090')
 
+    #-------Plot settings--------
     plt.xlabel('Time [hh:mm:ss]')
     plt.ylabel('Temperature' + '[' + degree_sign + 'C]', fontsize=10)
     plt.title(str(filename), fontsize = 15)
