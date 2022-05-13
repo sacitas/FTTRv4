@@ -1,15 +1,18 @@
 import os
+import csv
 import glob
 from time import sleep
-import csv
 import datetime as dt
 
 
+#---Setup DS18B20 sensors---
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
- 
+
+#---Directory for temp-sensors---
 base_dir = '/sys/bus/w1/devices/'
 
+#--Temperature data file location--
 temp_folder = "temp/"
 temp_filename = ""
 temp_filepath = ""
@@ -17,7 +20,7 @@ temp_filepath = ""
 
 fieldnames = ["x", "dtemp0", "dtemp1", "dtemp2", "dtemp3", "dtemp4"]
 
-
+#---Function for temp filelocation---
 def init_time():
     global ref_time
     global temp_filename
@@ -34,7 +37,7 @@ def init_time():
     temp_filepath = temp_folder + temp_filename
     
     
-
+#---Reads raw temperature data---
 def read_temp_raw(n):
     device_folder = glob.glob(base_dir + '28*')[n]
     device_file = device_folder + '/w1_slave'
@@ -43,7 +46,7 @@ def read_temp_raw(n):
     f.close()
     return lines
 
-
+#---Converts temp to Celsius---
 def convert_temp(n):
     lines = read_temp_raw(n)
 
@@ -61,7 +64,7 @@ def convert_temp(n):
 
         return temp_c
 
-
+#---Reads temperature functions---
 def read_temp():
     temps = []
 
@@ -76,7 +79,7 @@ def read_temp0():
 
     return temps0[0]
 
-
+#---Creating temperature files for plotting---
 def create_tmpFile_live():
     with open('temp_read.csv', 'w') as live_csv:
         csv_writer = csv.DictWriter(live_csv, fieldnames=fieldnames)
@@ -86,7 +89,8 @@ def create_tmpFile():
     with open(f'{temp_filepath}.csv', 'w') as data_csv:
         csv_writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
         csv_writer.writeheader()
-
+     
+#---Writes to temperature files---
 def write_tmp():
     x = dt.datetime.now().strftime('%H:%M:%S')
   
