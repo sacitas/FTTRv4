@@ -290,8 +290,8 @@ try:
             
 except KeyboardInterrupt:
     lcd.clear()  
-#   loop_string(long_string, lcd, framebuffer, 1, 16)    #Uncomment for long string
-    lcd.write_string("Goodbye")                          #Comment for long string
+    loop_string(long_string, lcd, framebuffer, 1, 16)    #Uncomment for long string
+#   lcd.write_string("Goodbye")                          #Comment for long string
     time.sleep(2)
     lcd.close(clear = True)
     GPIO.cleanup()
